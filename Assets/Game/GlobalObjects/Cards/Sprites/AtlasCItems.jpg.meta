@@ -70,7 +70,7 @@ TextureImporter:
   swizzle: 50462976
   cookieLightType: 0
   platformSettings:
-  - serializedVersion: 4
+  - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 8192
     resizeAlgorithm: 0
@@ -83,7 +83,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
+  - serializedVersion: 3
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_0
+      name: AtlasCItems_0
       rect:
         serializedVersion: 2
         x: 0
@@ -110,19 +110,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 4836f218b9574bfa0800000000000000
-      internalID: -5785870310516497532
+      spriteID: 50c29f2aa9a0ba244b0426451646ceac
+      internalID: -1850489010
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_1
+      name: AtlasCItems_1
       rect:
         serializedVersion: 2
         x: 806
@@ -132,19 +131,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f04383b0545f95f4facc36df8ea57383
-      internalID: 152643845
+      spriteID: bfc5d163f8be1de4491621505a0d69a7
+      internalID: 159077041
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_2
+      name: AtlasCItems_2
       rect:
         serializedVersion: 2
         x: 1612
@@ -154,19 +152,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 11bcc4ae9d12aa64dba791ed3dbc0258
-      internalID: 744196134
+      spriteID: cda2d6ab2a8bbc74caa8d1cd0fad6c8f
+      internalID: 1081500962
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_3
+      name: AtlasCItems_3
       rect:
         serializedVersion: 2
         x: 2418
@@ -176,19 +173,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e3577258f5ae97b4595300d5bad0b9e0
-      internalID: 1567588571
+      spriteID: 9a21db25cc0249949818d8f6fe55f37e
+      internalID: -632280461
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_4
+      name: AtlasCItems_4
       rect:
         serializedVersion: 2
         x: 3224
@@ -198,19 +194,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4da6231c25bad044fbd52ebc8725da7f
-      internalID: 430532949
+      spriteID: 8b39529b1d0bc5549b28bc73708a000c
+      internalID: -874875301
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_5
+      name: AtlasCItems_5
       rect:
         serializedVersion: 2
         x: 4030
@@ -220,19 +215,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1e90781fbcb413a4aaa5435668935ac4
-      internalID: 184975090
+      spriteID: d41102889a382ee43a0be85cdcb5fa6b
+      internalID: -325339574
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_6
+      name: AtlasCItems_6
       rect:
         serializedVersion: 2
         x: 4836
@@ -242,19 +236,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4a9b2353130df304090e0d66468e133d
-      internalID: 1798040217
+      spriteID: 05396956034b87449b006423a013530c
+      internalID: -513166385
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_7
+      name: AtlasCItems_7
       rect:
         serializedVersion: 2
         x: 5642
@@ -264,19 +257,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bdd6f91eea849f145b395865b27b017b
-      internalID: -1276957565
+      spriteID: fdb7e2bd08511ec4795f31aeb5f87875
+      internalID: -793947397
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_8
+      name: AtlasCItems_8
       rect:
         serializedVersion: 2
         x: 6448
@@ -286,19 +278,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: afcfb2863272bdb47b5c2da77784204d
-      internalID: 441345301
+      spriteID: d522464e4f018b54d8be73447d7b8afd
+      internalID: 1882642627
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_9
+      name: AtlasCItems_9
       rect:
         serializedVersion: 2
         x: 7254
@@ -308,19 +299,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b4be659395b4db144907209b73eb6a9e
-      internalID: -1134733771
+      spriteID: 55a80b2aa4a9cdf4d99e7c8e9e2bd398
+      internalID: 131972147
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_10
+      name: AtlasCItems_10
       rect:
         serializedVersion: 2
         x: 0
@@ -330,19 +320,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e25fd2afd3be17547accfed4a36031d5
-      internalID: 190724498
+      spriteID: 10488e2fde05fca4abb2f97178e0a303
+      internalID: 450141973
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_11
+      name: AtlasCItems_11
       rect:
         serializedVersion: 2
         x: 806
@@ -352,19 +341,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b4305617c8ff49c4399d5f5ad662f5f3
-      internalID: -407929079
+      spriteID: 7fa3d03ff4a3c62418be066f5aeab98f
+      internalID: -424305580
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_12
+      name: AtlasCItems_12
       rect:
         serializedVersion: 2
         x: 1612
@@ -374,19 +362,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 357ba37d0d7f22a4ca7a46c58bcc674c
-      internalID: 1685844755
+      spriteID: b64106f6e91f15845aa0b563e541aa82
+      internalID: -103767834
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_13
+      name: AtlasCItems_13
       rect:
         serializedVersion: 2
         x: 2418
@@ -396,19 +383,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 50642ec2f1fd3734da75669d8e88e77b
-      internalID: -1509859961
+      spriteID: 339701baa49615b448c8c0f96da6d2b6
+      internalID: -629404465
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_14
+      name: AtlasCItems_14
       rect:
         serializedVersion: 2
         x: 3224
@@ -418,19 +404,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 230a28f8999d4444c8724eea64c95efe
-      internalID: -1843843207
+      spriteID: dd34c1234a763464a905098e18893e73
+      internalID: 531969798
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_15
+      name: AtlasCItems_15
       rect:
         serializedVersion: 2
         x: 4030
@@ -440,19 +425,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eaad61faf6ef5254baf6a4d8f79596bc
-      internalID: -401943159
+      spriteID: 45d62160f75c1b54ab5639273b89f82d
+      internalID: -1996600014
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_16
+      name: AtlasCItems_16
       rect:
         serializedVersion: 2
         x: 4836
@@ -462,19 +446,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b4f6633037efafa4e88e7bed8f14f667
-      internalID: 1923717730
+      spriteID: 527f90396d990a6459b77168f01594c3
+      internalID: -1813862967
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_17
+      name: AtlasCItems_17
       rect:
         serializedVersion: 2
         x: 5642
@@ -484,19 +467,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d6c61b8bd2629b64781214e957398919
-      internalID: 2039505090
+      spriteID: 6cf2abfd2236bfb409f2f5c7942239f4
+      internalID: 522321653
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_18
+      name: AtlasCItems_18
       rect:
         serializedVersion: 2
         x: 6448
@@ -506,19 +488,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7e9d60f872de91f468eddfc4ae4b26f3
-      internalID: -1673211640
+      spriteID: e1d9c975bb88ab7418f5093ca0266e1c
+      internalID: -947467982
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_19
+      name: AtlasCItems_19
       rect:
         serializedVersion: 2
         x: 7254
@@ -528,19 +509,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c12ecf3269ec6994dad65b0f463bf7fc
-      internalID: 646049911
+      spriteID: 286385b183eff9641b368bc738816c98
+      internalID: 1815619084
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_20
+      name: AtlasCItems_20
       rect:
         serializedVersion: 2
         x: 0
@@ -550,19 +530,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aff7f1ce22d260f4cb18a5df86d7b374
-      internalID: -2122113644
+      spriteID: 13bed7ad623ad6d41ba4ecd53c84cf66
+      internalID: -543606379
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_21
+      name: AtlasCItems_21
       rect:
         serializedVersion: 2
         x: 806
@@ -572,19 +551,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 55f4981ef4bc4b14b83ef8df60982a44
-      internalID: 1297808047
+      spriteID: 14e99bdb28ab72a488a980ad3ccb0a55
+      internalID: 247717324
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_22
+      name: AtlasCItems_22
       rect:
         serializedVersion: 2
         x: 1612
@@ -594,19 +572,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 389afa0927f2073458eae9defd9a94a4
-      internalID: -809557093
+      spriteID: 2f4be4093ce63ec48957832cf77c5d03
+      internalID: -2004969226
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_23
+      name: AtlasCItems_23
       rect:
         serializedVersion: 2
         x: 2418
@@ -616,19 +593,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 202108104c397d74e885acdfda4c356e
-      internalID: -426499963
+      spriteID: 37c7cf5cf87f68a4d8a9c6a52bef163c
+      internalID: 1674298563
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_24
+      name: AtlasCItems_24
       rect:
         serializedVersion: 2
         x: 3224
@@ -638,19 +614,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cd2b0fcbbf53e32438fa04471813b7f7
-      internalID: -1632741815
+      spriteID: ccf4683558ac9d14ba250a3ec20244f8
+      internalID: -1542054278
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_25
+      name: AtlasCItems_25
       rect:
         serializedVersion: 2
         x: 4030
@@ -660,19 +635,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 98a65baa93a2736409709a286245a197
-      internalID: 796424186
+      spriteID: 6ff3bc482d0e038459a293c778afd784
+      internalID: -1957112558
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_26
+      name: AtlasCItems_26
       rect:
         serializedVersion: 2
         x: 4836
@@ -682,19 +656,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3d060ece4a028c24a9baf64c02a46236
-      internalID: -1581158359
+      spriteID: b0834444b0484cc43990bde44873c1e2
+      internalID: -878549121
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_27
+      name: AtlasCItems_27
       rect:
         serializedVersion: 2
         x: 5642
@@ -704,19 +677,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5ce3443f983047c42b310759f38dde44
-      internalID: 2119295277
+      spriteID: d52a2501e947f894aaf4214c1256edf5
+      internalID: 366730684
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_28
+      name: AtlasCItems_28
       rect:
         serializedVersion: 2
         x: 6448
@@ -726,19 +698,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ca4da1ddbcf86454680691ec2bd3a153
-      internalID: -853276517
+      spriteID: 71fe2e742f0ab5544b08814ddbb99dc6
+      internalID: -498241088
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_29
+      name: AtlasCItems_29
       rect:
         serializedVersion: 2
         x: 7254
@@ -748,19 +719,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8aa968e31b4a8494ea37423aabd7e493
-      internalID: 1426238069
+      spriteID: 10bc96dc8dbace8419373a7504acda41
+      internalID: -834622976
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_30
+      name: AtlasCItems_30
       rect:
         serializedVersion: 2
         x: 0
@@ -770,19 +740,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 529d96598740f0c45b47f405bbc6c8bf
-      internalID: -1692678901
+      spriteID: 71fb91ee3cb4fce419e35ac242af1616
+      internalID: 54025889
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_31
+      name: AtlasCItems_31
       rect:
         serializedVersion: 2
         x: 806
@@ -792,19 +761,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 190e377afdaf57b478680a07ebc4e015
-      internalID: 1872856775
+      spriteID: 59a67f8eeab1d1b4b82801927545571a
+      internalID: -4327153
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_32
+      name: AtlasCItems_32
       rect:
         serializedVersion: 2
         x: 1612
@@ -814,19 +782,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b6669ffe425107549b53cd8f0e3f42f6
-      internalID: -1253475298
+      spriteID: b89387cc4c09f574cbf67d193c347adf
+      internalID: 58034196
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_33
+      name: AtlasCItems_33
       rect:
         serializedVersion: 2
         x: 2418
@@ -836,19 +803,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 755e3c43d7df497429787fcf8bfb18e3
-      internalID: -571943900
+      spriteID: 8cfbc6ac9df12a44fa5fe057b2ba25a1
+      internalID: 1645888193
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_34
+      name: AtlasCItems_34
       rect:
         serializedVersion: 2
         x: 3224
@@ -858,19 +824,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2692f9981ff5e824c9a5d1e86b6f89e2
-      internalID: -2108384447
+      spriteID: 55f995b3bde2c4144bc3057e80ae7979
+      internalID: 2129008822
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_35
+      name: AtlasCItems_35
       rect:
         serializedVersion: 2
         x: 4030
@@ -880,19 +845,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f8278b6c1af7f214886fae265f4f42ec
-      internalID: 117678399
+      spriteID: 7f69b556e19e3fa4fa8512c21ab609c1
+      internalID: -1947277433
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_36
+      name: AtlasCItems_36
       rect:
         serializedVersion: 2
         x: 4836
@@ -902,19 +866,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2b60342d1837b3a42a3c7f4cdb9ac610
-      internalID: -196216460
+      spriteID: 672b6139916675943b79ab0096d6d826
+      internalID: 161535105
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_37
+      name: AtlasCItems_37
       rect:
         serializedVersion: 2
         x: 5642
@@ -924,19 +887,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 589c21b758396de44bb15bcac0da888b
-      internalID: 1728141900
+      spriteID: 64ce6782ed89ff944b7aebc6bdd62bff
+      internalID: -137273201
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_38
+      name: AtlasCItems_38
       rect:
         serializedVersion: 2
         x: 6448
@@ -946,19 +908,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7ba1596be013f094c93c52f3c37a410d
-      internalID: -262466107
+      spriteID: 982ec58967cb73d4eb3c07c133350a8a
+      internalID: -2012111626
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_39
+      name: AtlasCItems_39
       rect:
         serializedVersion: 2
         x: 7254
@@ -968,19 +929,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6997fec2592e9b644a2752d0a1669d78
-      internalID: 398061877
+      spriteID: 73d10aeb1c30610419c638feefce77bb
+      internalID: -1863158263
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_40
+      name: AtlasCItems_40
       rect:
         serializedVersion: 2
         x: 0
@@ -990,19 +950,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5fea7fefbd1f0b74d9b5a6108c22f437
-      internalID: 1808021755
+      spriteID: cecaed326ad447d42b7d8ae8725055e2
+      internalID: -607527801
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_41
+      name: AtlasCItems_41
       rect:
         serializedVersion: 2
         x: 806
@@ -1012,19 +971,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9216f205f8532bb44a3c553bb517af23
-      internalID: 983441957
+      spriteID: 5f8f973d38257ca498398f85f5199f00
+      internalID: 1710484664
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_42
+      name: AtlasCItems_42
       rect:
         serializedVersion: 2
         x: 1612
@@ -1034,19 +992,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4ac1c1a9ac0cad4408e7d8b057983e6c
-      internalID: 1240378811
+      spriteID: cd6fb8c8b9a945b4ea6c5d2aec31fe93
+      internalID: 1607215471
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_43
+      name: AtlasCItems_43
       rect:
         serializedVersion: 2
         x: 2418
@@ -1056,19 +1013,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 03e7b8b1a9072dc4a962ae28b140775c
-      internalID: -577285629
+      spriteID: 0e9e5bdb0e4c09f44bb590823c5217d5
+      internalID: 1296640103
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_44
+      name: AtlasCItems_44
       rect:
         serializedVersion: 2
         x: 3224
@@ -1078,19 +1034,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2c572ddccd695ce4897469a86d67f876
-      internalID: 774367240
+      spriteID: 15794f1ef14a82241bccff720222662b
+      internalID: -792038001
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_45
+      name: AtlasCItems_45
       rect:
         serializedVersion: 2
         x: 4030
@@ -1100,19 +1055,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3c1966b79a0353945ba8527d99020945
-      internalID: 1469707006
+      spriteID: ab74178103804b4408c566bf4715db0d
+      internalID: -660853146
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_46
+      name: AtlasCItems_46
       rect:
         serializedVersion: 2
         x: 4836
@@ -1122,19 +1076,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: def753218194e0944a9059a04ee97e8b
-      internalID: 382605121
+      spriteID: aa43f8d5f61ca3a4f8d5c9247efe94d2
+      internalID: 1470207945
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_47
+      name: AtlasCItems_47
       rect:
         serializedVersion: 2
         x: 5642
@@ -1144,19 +1097,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4f77c9ad0161e1d4385bc557d31e8023
-      internalID: -1894657146
+      spriteID: 43457e776f3641544a22d353f4829457
+      internalID: -128758663
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_48
+      name: AtlasCItems_48
       rect:
         serializedVersion: 2
         x: 6448
@@ -1166,19 +1118,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 49b521f019c94c245981b84b37483974
-      internalID: -614055353
+      spriteID: 35ddfdb187f46394abaf6f7894ad5792
+      internalID: 1403602348
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_49
+      name: AtlasCItems_49
       rect:
         serializedVersion: 2
         x: 7254
@@ -1188,19 +1139,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3e76ed7aa9abee94aa998f1c498ea332
-      internalID: -230800221
+      spriteID: eb0ecfb65cb2eb447b2a878951ba430e
+      internalID: 507060581
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_50
+      name: AtlasCItems_50
       rect:
         serializedVersion: 2
         x: 0
@@ -1210,19 +1160,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 22189897ae1e3c044bef51158ec13e83
-      internalID: 1015342268
+      spriteID: 1298e61a291408f4a98cbfef40851755
+      internalID: 613805841
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_51
+      name: AtlasCItems_51
       rect:
         serializedVersion: 2
         x: 806
@@ -1232,19 +1181,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dccd11b86c431cb42b8706104d405426
-      internalID: -1942903223
+      spriteID: e92318b6113cba04688c2f26064cb4a0
+      internalID: 2114372777
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_52
+      name: AtlasCItems_52
       rect:
         serializedVersion: 2
         x: 1612
@@ -1254,19 +1202,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a6b3d04e71eca724dbc1fb5ef5cec84a
-      internalID: -1184032253
+      spriteID: ea186e0a4613bc24db68389461ccd1bc
+      internalID: 1247138013
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_53
+      name: AtlasCItems_53
       rect:
         serializedVersion: 2
         x: 2418
@@ -1276,19 +1223,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a402bb18e0802dd47839ec537667e27e
-      internalID: 1245330168
+      spriteID: 4f7b80007885e1d40bba44a3671908b7
+      internalID: -1062341443
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_54
+      name: AtlasCItems_54
       rect:
         serializedVersion: 2
         x: 3224
@@ -1298,19 +1244,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 75a3b7aeb5969a14bb77e55301e113a2
-      internalID: -574039969
+      spriteID: b644b6cc9dae57e4abddfa0235ebfe3a
+      internalID: 356429671
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_55
+      name: AtlasCItems_55
       rect:
         serializedVersion: 2
         x: 4030
@@ -1320,19 +1265,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 50caea534b9e541469ad2066a1666031
-      internalID: 582215969
+      spriteID: 7bd02148caaad0242a72e28a925bb61e
+      internalID: -1114102292
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_56
+      name: AtlasCItems_56
       rect:
         serializedVersion: 2
         x: 4836
@@ -1342,19 +1286,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 50a46da154612094093ad54b7a28361b
-      internalID: 310493555
+      spriteID: 02f37083c814ebd40810b5b62856eed5
+      internalID: -1486122482
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_57
+      name: AtlasCItems_57
       rect:
         serializedVersion: 2
         x: 5642
@@ -1364,19 +1307,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 184262183e64aef42ac12a1b4f402c33
-      internalID: 434286288
+      spriteID: bececcabed7cf2b4798ca7656beb470a
+      internalID: -652722860
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_58
+      name: AtlasCItems_58
       rect:
         serializedVersion: 2
         x: 6448
@@ -1386,19 +1328,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 11881431e553b3e4989721af383cdca3
-      internalID: 454018773
+      spriteID: 202583b56d72c1346b1fbff1fbb5545c
+      internalID: -1249200547
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_59
+      name: AtlasCItems_59
       rect:
         serializedVersion: 2
         x: 7254
@@ -1408,19 +1349,17 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 34724fa8b57232146bbd5065421fe7ac
-      internalID: 1812970966
+      spriteID: 5ae0741872f0ae74896af4a268af1faa
+      internalID: 892957976
       vertices: []
       indices: 
       edges: []
       weights: []
     outline: []
-    customData: 
     physicsShape: []
     bones: []
     spriteID: 576f1b2871853cb4f8a6074e0baef8d9
@@ -1430,69 +1369,67 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    spriteCustomMetadata:
-      entries: []
     nameFileIdTable:
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_0: -5785870310516497532
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_1: 152643845
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_10: 190724498
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_11: -407929079
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_12: 1685844755
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_13: -1509859961
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_14: -1843843207
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_15: -401943159
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_16: 1923717730
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_17: 2039505090
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_18: -1673211640
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_19: 646049911
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_2: 744196134
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_20: -2122113644
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_21: 1297808047
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_22: -809557093
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_23: -426499963
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_24: -1632741815
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_25: 796424186
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_26: -1581158359
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_27: 2119295277
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_28: -853276517
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_29: 1426238069
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_3: 1567588571
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_30: -1692678901
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_31: 1872856775
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_32: -1253475298
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_33: -571943900
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_34: -2108384447
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_35: 117678399
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_36: -196216460
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_37: 1728141900
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_38: -262466107
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_39: 398061877
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_4: 430532949
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_40: 1808021755
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_41: 983441957
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_42: 1240378811
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_43: -577285629
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_44: 774367240
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_45: 1469707006
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_46: 382605121
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_47: -1894657146
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_48: -614055353
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_49: -230800221
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_5: 184975090
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_50: 1015342268
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_51: -1942903223
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_52: -1184032253
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_53: 1245330168
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_54: -574039969
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_55: 582215969
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_56: 310493555
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_57: 434286288
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_58: 454018773
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_59: 1812970966
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_6: 1798040217
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_7: -1276957565
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_8: 441345301
-      httpssteamusercontentaakamaihdnetugc24246984564065644945325362D3A5BF66591127822B251ACAF947C0709_9: -1134733771
+      AtlasCItems_0: -1850489010
+      AtlasCItems_1: 159077041
+      AtlasCItems_10: 450141973
+      AtlasCItems_11: -424305580
+      AtlasCItems_12: -103767834
+      AtlasCItems_13: -629404465
+      AtlasCItems_14: 531969798
+      AtlasCItems_15: -1996600014
+      AtlasCItems_16: -1813862967
+      AtlasCItems_17: 522321653
+      AtlasCItems_18: -947467982
+      AtlasCItems_19: 1815619084
+      AtlasCItems_2: 1081500962
+      AtlasCItems_20: -543606379
+      AtlasCItems_21: 247717324
+      AtlasCItems_22: -2004969226
+      AtlasCItems_23: 1674298563
+      AtlasCItems_24: -1542054278
+      AtlasCItems_25: -1957112558
+      AtlasCItems_26: -878549121
+      AtlasCItems_27: 366730684
+      AtlasCItems_28: -498241088
+      AtlasCItems_29: -834622976
+      AtlasCItems_3: -632280461
+      AtlasCItems_30: 54025889
+      AtlasCItems_31: -4327153
+      AtlasCItems_32: 58034196
+      AtlasCItems_33: 1645888193
+      AtlasCItems_34: 2129008822
+      AtlasCItems_35: -1947277433
+      AtlasCItems_36: 161535105
+      AtlasCItems_37: -137273201
+      AtlasCItems_38: -2012111626
+      AtlasCItems_39: -1863158263
+      AtlasCItems_4: -874875301
+      AtlasCItems_40: -607527801
+      AtlasCItems_41: 1710484664
+      AtlasCItems_42: 1607215471
+      AtlasCItems_43: 1296640103
+      AtlasCItems_44: -792038001
+      AtlasCItems_45: -660853146
+      AtlasCItems_46: 1470207945
+      AtlasCItems_47: -128758663
+      AtlasCItems_48: 1403602348
+      AtlasCItems_49: 507060581
+      AtlasCItems_5: -325339574
+      AtlasCItems_50: 613805841
+      AtlasCItems_51: 2114372777
+      AtlasCItems_52: 1247138013
+      AtlasCItems_53: -1062341443
+      AtlasCItems_54: 356429671
+      AtlasCItems_55: -1114102292
+      AtlasCItems_56: -1486122482
+      AtlasCItems_57: -652722860
+      AtlasCItems_58: -1249200547
+      AtlasCItems_59: 892957976
+      AtlasCItems_6: -513166385
+      AtlasCItems_7: -793947397
+      AtlasCItems_8: 1882642627
+      AtlasCItems_9: 131972147
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

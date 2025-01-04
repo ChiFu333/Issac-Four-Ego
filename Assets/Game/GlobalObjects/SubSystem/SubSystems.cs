@@ -1,34 +1,34 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using System.Threading.Tasks;
+using Unity.Mathematics;
 
 public class SubSystems : MonoBehaviour
 {
     public static SubSystems Inst;
-    public static Action<Card> OnSelected;
     public bool IsSelectingSomething = false;
+    private bool ForceQuit = false;
     public void Awake()
     {
         Inst = this;
     }
-    public void SelectCardByType<T>(Player initiator, string zoneName) where T : Card
+    public async Task<T> SelectCardByType<T>(string zoneName) where T : Card
     {
+        Player initiator = TurnManager.Inst.GetPriorPlayer();
         IsSelectingSomething = true;
-        StartCoroutine(SelectingCard<T>(initiator, zoneName));
         Console.WriteText("Выбери карту");
-    }
-    public void SelectShopCard(Player initiator)
-    {
-        
-    }
-    //Ввести понятие зоны, что только в таких штуках можно искать.
-    public IEnumerator SelectingCard<T>(Player initiator, string zoneName) where T : Card
-    {
         while (true)
         {
-            yield return null;
+            await Task.Yield();
+            if(ForceQuit)
+            {
+                IsSelectingSomething = false;
+                ForceQuit = false;
+                Console.WriteText("Действие отменено");
+                return null;
+            }   
             if (Input.GetMouseButtonDown(0))
             {
                 Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -40,6 +40,7 @@ public class SubSystems : MonoBehaviour
                     {
                         Dictionary<string, bool> rightBool = new Dictionary<string, bool>()
                         {
+                            {"InPlay", true},
                             {"MyHand", hit.collider.transform.parent.parent == initiator.transform},
                             {"Shop", hit.collider.transform.parent == Shop.Inst.transform}
                         };
@@ -47,14 +48,16 @@ public class SubSystems : MonoBehaviour
                         if(rightBool[zoneName])
                         {
                             IsSelectingSomething = false;
-                            OnSelected?.Invoke(hit.collider.GetComponent<T>());
-                            OnSelected = null;
                             TurnManager.Inst.RestorePrior();
-                            yield break;
+                            return hit.collider.GetComponent<T>();
                         }
                     }
                 }
             }
         }
+    }
+    public void CancelSelecting()
+    {
+        ForceQuit = true;
     }
 }

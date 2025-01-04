@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using UnityEngine.Animations;
 using DG.Tweening;
 using Unity.VisualScripting;
 
@@ -15,11 +14,14 @@ public class Player : MonoBehaviour
     private int BaseHP;
     public int LootPlayMax = 1;
     public int LootCanPlay;
+    public int ShopPrice = 10;
+    public int BuyCount = 1;
     //Объекты
     public CharacterCard CharacterCard;
     public ItemCard CharacterItemCard;
     public Hand Hand;
-    public List<ItemCard> Items = new List<ItemCard>();
+    public List<Card> Items = new List<Card>();
+    public List<Card> Curses = new List<Card>();
     //Всякие события
     public event Action OnTurnStart;  
     public event Action OnTurnEnd;
@@ -47,10 +49,16 @@ public class Player : MonoBehaviour
     }
     public void StartTurn()
     {
+        SetBaseStats();
+        SetPassiveItems();
+
         RechargeAllCards();
+        LootCanPlay = LootPlayMax;
+
         OnTurnStart?.Invoke();
         Hand.AddCard(Card.CreateCard<LootCard>(GameMaster.Inst.LootDeck.TakeOneCard(),TurnManager.Inst.ActivePlayer == TurnManager.Inst.Players[0]));
-        LootCanPlay = LootPlayMax;
+
+        UIOnDeck.Inst.UpdateTexts();
     }
     public void EndTurn()
     {
@@ -62,7 +70,7 @@ public class Player : MonoBehaviour
         CharacterItemCard.Recharge();
         for(int i = 0; i < Items.Count; i++)
         {
-            Items[i]?.Recharge();
+            (Items[i] as ItemCard)?.Recharge();
         }
     }
     public void PlayCard(LootCard c)
@@ -78,21 +86,38 @@ public class Player : MonoBehaviour
         }
     }
     public void AddItem(Card c)
-    {
+    { 
         for(int i = 0; i < Items.Count; i++)
         {
             if(Items[i] == null) 
             {
-                Items[i] = c as ItemCard;
+                Items[i] = c;
                 c.transform.parent = transform;
                 c.transform.DOMove(CardPlaces.Inst.PlayersPos[TurnManager.Inst.PriorId][i+2].position, GameMaster.CARDSPEED);
                 return;
             }
         }
-        Items.Add(c as ItemCard);
+        Items.Add(c);
         c.transform.parent = transform;
         c.transform.DOMove(CardPlaces.Inst.PlayersPos[TurnManager.Inst.PriorId][Items.Count+1].position, GameMaster.CARDSPEED);
         c.transform.localScale = CardPlaces.Inst.PlayersPos[TurnManager.Inst.PriorId][Items.Count+1].lossyScale;
+        
+        if((c.data as ItemCardData) != null)
+        {
+            List<ItemEffect> effects = (c.data as ItemCardData).Effects;
+            for(int j = 0; j < effects.Count; j++)
+            {
+                if(effects[j].Type == ItemEffectType.Passive && effects[j].Effect.Who == Who.Me)
+                {
+                    effects[j].Effect.Result.Invoke();
+                    UIOnDeck.Inst.UpdateTexts();
+                }
+            }
+        }
+        else if((c.data as LootCardData) != null)
+        {
+
+        }  
     }
     public void Death()
     {
@@ -103,5 +128,46 @@ public class Player : MonoBehaviour
     public Player GetMyPlayer()
     {
         return GetComponentInParent<Player>();
+    }
+    public void FullHeal()
+    {
+        Hp = BaseHP;
+        UIOnDeck.Inst.UpdateTexts();
+    }
+    public void SetBaseStats()
+    {
+        BuyCount = 1;
+        ShopPrice = 10;
+        LootPlayMax = 1;
+    }
+    public void SetPassiveItems()
+    {
+        List<ItemCardData> datas = new List<ItemCardData>
+        {
+            CharacterItemCard.data as ItemCardData
+        };
+        for(int i = 0; i < Items.Count; i++)
+        {
+            if(Items[i].data as ItemCardData)
+            {
+                datas.Add(Items[i].data as ItemCardData);
+            }
+            else
+            {
+                datas.Add(null);
+            }
+        }
+        for(int i = 0; i < datas.Count; i++)
+        {
+            List<ItemEffect> effects = datas[i]?.Effects;
+            for(int j = 0; j < effects?.Count; j++)
+            {
+                if(effects[j]?.Type == ItemEffectType.Passive && effects[j]?.Effect.Who == Who.Me)
+                {
+                    effects[j]?.Effect.Result.Invoke();
+                    UIOnDeck.Inst.UpdateTexts();
+                }
+            }
+        }
     }
 }

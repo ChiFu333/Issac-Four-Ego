@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class GameMaster : MonoBehaviour
 {
+    //Constants
+    public const int PLAYERCOUNT = 4;
+    public const float CARDSPEED = 0.4f;
     public static GameMaster Inst;
     
     [Header("Decks")]
@@ -19,9 +22,6 @@ public class GameMaster : MonoBehaviour
     public CardListSO CharacterList;
     public CardListSO MonsterList;
     public CardListSO EventList;
-    //Constants
-    public const int PLAYERCOUNT = 2;
-    public const float CARDSPEED = 0.4f;
     public void Awake()
     {
         Inst = this;

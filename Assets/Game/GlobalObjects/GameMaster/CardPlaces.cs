@@ -23,6 +23,7 @@ public class CardPlaces : MonoBehaviour
     public List<Transform> ThirdPlayer;
     public List<Transform> FourthPlayer;
     public List<List<Transform>> PlayersPos;
+    public List<Transform> PlayersCurses;
     public void Awake()
     {
         Inst = this;

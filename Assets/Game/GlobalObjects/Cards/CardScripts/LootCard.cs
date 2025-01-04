@@ -13,7 +13,14 @@ public class LootCard : Card
     public void PlayCard()
     {
         LootCardData d = data as LootCardData;
-        d.actionToPlay.Invoke();
+        if(d.LootEffect.Type == LootEffectType.Play)
+        {
+            foreach(Effect l in d.LootEffect.Effects) l.Result.Invoke();
+        }
+        else if(d.LootEffect.Type == LootEffectType.Trinket)
+        {
+            TurnManager.Inst.GetPriorPlayer().AddItem(GetComponent<LootCard>());
+        }
         Console.WriteText("Разыграна карта лута");
     }
 }

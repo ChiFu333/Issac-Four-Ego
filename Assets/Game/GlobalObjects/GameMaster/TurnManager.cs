@@ -17,6 +17,7 @@ public class TurnManager : MonoBehaviour
     public void Init()
     {
         InitAllPlayers();
+        ActivePlayer = Players[id];
         
         UIOnDeck.Inst.UpdateTexts();
         
@@ -32,6 +33,7 @@ public class TurnManager : MonoBehaviour
     public void SwitchTurn()
     {
         ActivePlayer.EndTurn();
+        HealEveryone();
 
         id++;
         id %= Players.Count;
@@ -71,6 +73,17 @@ public class TurnManager : MonoBehaviour
 
             Players[i].Init(c, it, ha);
         }
+        for(int j = GameMaster.PLAYERCOUNT; j < 4; j++)
+        {
+            foreach(Transform t in CardPlaces.Inst.PlayersPos[j])
+            {
+                t.gameObject.SetActive(false);
+            }
+            CardPlaces.Inst.PlayersCurses[j*2].gameObject.SetActive(false);
+            CardPlaces.Inst.PlayersCurses[j*2+1].gameObject.SetActive(false);  
+            CardPlaces.Inst.Hands[j].gameObject.SetActive(false);
+            UIOnDeck.Inst.PlayerText[j].gameObject.SetActive(false);
+        }
         Destroy(g);
     }
     public void GiveStartResources()
@@ -107,5 +120,12 @@ public class TurnManager : MonoBehaviour
     public void RestorePrior()
     {
         PriorId = id;
+    }
+    public void HealEveryone()
+    {
+        for(int i = 0; i < Players.Count; i++)
+        {
+            Players[i].FullHeal();
+        }
     }
 }

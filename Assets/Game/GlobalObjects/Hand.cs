@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using DG.Tweening;
+using Sirenix.Serialization;
 using UnityEngine;
 
 public class Hand : MonoBehaviour
@@ -34,8 +35,10 @@ public class Hand : MonoBehaviour
         UpdateCardPositions();
 
         card.PlayCard();
-
-        card.transform.DOMove(CardPlaces.Inst.LootStash.position, GameMaster.CARDSPEED).onComplete = () => GameMaster.Inst.LootStash.PutOneCardUp(card);
+        if((card.data as LootCardData).LootEffect.Type == LootEffectType.Play)
+        {
+            card.transform.DOMove(CardPlaces.Inst.LootStash.position, GameMaster.CARDSPEED).onComplete = () => GameMaster.Inst.LootStash.PutOneCardUp(card);
+        }
     }
     public void UpdateCardPositions()
     {

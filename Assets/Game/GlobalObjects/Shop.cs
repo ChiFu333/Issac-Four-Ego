@@ -30,27 +30,28 @@ public class Shop : MonoBehaviour
             ItemsInSlots[i].transform.DOMove(CardPlaces.Inst.ShopSlots[ActiveSlotsCounts-i-1].position,GameMaster.CARDSPEED);
         }
     }
-    public void Buy()
+    public async void Buy()
     {
-        SubSystems.Inst.SelectCardByType<ItemCard>(TurnManager.Inst.GetPriorPlayer(), "Shop");
-        SubSystems.OnSelected = (Card c) => 
+        if(TurnManager.Inst.ActivePlayer.BuyCount > 0)
         {
-            if(c != null)
+            Card c = await SubSystems.Inst.SelectCardByType<ItemCard>("Shop");
+        if(c != null)
+        {
+            if(TurnManager.Inst.GetPriorPlayer().Coins >= TurnManager.Inst.ActivePlayer.ShopPrice)
             {
-                if(TurnManager.Inst.GetPriorPlayer().Coins >= 10)
-                {
-                    Console.WriteText("Куплен предмет");
-                    TurnManager.Inst.GetPriorPlayer().AddItem(c);
-                    TurnManager.Inst.GetPriorPlayer().Coins -= 10;
-                    ItemsInSlots.Remove(c);
-                    RestockSlots();
-                    UIOnDeck.Inst.UpdateTexts();
-                }
-                else
-                {
-                    Console.WriteText("Нехватает деньги");
-                }
+                Console.WriteText("Куплен предмет");
+                TurnManager.Inst.GetPriorPlayer().AddItem(c);
+                TurnManager.Inst.GetPriorPlayer().Coins -= TurnManager.Inst.ActivePlayer.ShopPrice;
+                TurnManager.Inst.GetPriorPlayer().BuyCount -= 1;
+                ItemsInSlots.Remove(c);
+                RestockSlots();
+                UIOnDeck.Inst.UpdateTexts();
             }
-        };
+            else
+            {
+                Console.WriteText("Нехватает деньги");
+            }
+        }
+        } 
     }
 }

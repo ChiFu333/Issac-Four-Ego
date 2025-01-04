@@ -16,9 +16,10 @@ public class UIOnDeck : MonoBehaviour
     public void UpdateTexts()
     {
         List<Player> players = TurnManager.Inst.Players;
-        for(int i = 0; i < 2; i++)
+        for(int i = 0; i < GameMaster.PLAYERCOUNT; i++)
         {
             PlayerText[i].text = "хп: " + players[i].Hp + "    сила: " + players[i].Attack + "    кеш: " + players[i].Coins + "¢    карт лута: "+ players[i].LootCount +"    души: "+ players[i].Souls;
         }
+        ShopText.text = "Цена: " + TurnManager.Inst.ActivePlayer.ShopPrice + "¢    кол-во покупок: " + TurnManager.Inst.ActivePlayer.BuyCount;
     }
 }

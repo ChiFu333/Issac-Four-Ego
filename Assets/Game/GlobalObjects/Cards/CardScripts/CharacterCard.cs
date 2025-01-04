@@ -7,21 +7,18 @@ public class CharacterCard : ItemCard
         base.Init(d, isFaceUp);
         IsFlippable = true;
     }
-    public override void PlayFlipEffect()
+    public override async void PlayFlipEffect()
     {
         if(!IsFlipped)
         {
-            Flip();
             TurnManager.Inst.SetPrior(GetMyPlayer());
-            SubSystems.Inst.SelectCardByType<LootCard>(GetMyPlayer(),"MyHand");
-            SubSystems.OnSelected = (Card c) => 
+            Card c = await SubSystems.Inst.SelectCardByType<LootCard>("MyHand");
+            if(c != null)
             {
-                if(c != null)
-                {
-                    GetComponentInParent<Player>().LootCanPlay++;
-                    GetComponentInParent<Player>().PlayCard(c as LootCard);
-                }
-            };
+                Flip();
+                GetComponentInParent<Player>().LootCanPlay++;
+                GetComponentInParent<Player>().PlayCard(c as LootCard);
+            }
         }
     }
 }
