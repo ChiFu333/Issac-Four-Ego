@@ -158,3 +158,18 @@ MonoBehaviour:
     IsRecursive: 1
     SmallIcon: {fileID: 2800000, guid: b8e8a328d6527a14783473666c1f8a08, type: 3}
     LargeIcon: {fileID: 2800000, guid: 010e6d817952d434197d318f48b2f16a, type: 3}
+  - Type: 1
+    Key: Assets/Engine
+    IsRecursive: 0
+    SmallIcon: {fileID: 2800000, guid: 8f45cff1df9688244b1fa6e2da91e05f, type: 3}
+    LargeIcon: {fileID: 2800000, guid: 15c3471930a7ff44aa9a30bc21a5ea06, type: 3}
+  - Type: 1
+    Key: Assets/GameData
+    IsRecursive: 0
+    SmallIcon: {fileID: 2800000, guid: 97efd597cd18c564aadb45280476b23a, type: 3}
+    LargeIcon: {fileID: 2800000, guid: 650a564eae901434e86dcb456fcc046a, type: 3}
+  - Type: 1
+    Key: Assets/GameSystems
+    IsRecursive: 0
+    SmallIcon: {fileID: 2800000, guid: 483d693b3f9d5704b89409016b40bc74, type: 3}
+    LargeIcon: {fileID: 2800000, guid: fac7470563f79024ebc244b39080448d, type: 3}

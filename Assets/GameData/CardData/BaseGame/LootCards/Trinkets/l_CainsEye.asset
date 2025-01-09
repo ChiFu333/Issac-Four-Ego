@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1a0b3bd61671c64d884e73e63ebbc35, type: 3}
+  m_Name: l_CainsEye
+  m_EditorClassIdentifier: 
+  <title>k__BackingField: 
+  <face>k__BackingField: {fileID: 94867311, guid: 387f31fd93282dd4eacb94f6ce9d5a8b, type: 3}
+  <back>k__BackingField: {fileID: 21300000, guid: 9aae75ebd6b98d54db8572420c8a2693, type: 3}
+  <lootEffect>k__BackingField:
+    Type: 0
+    Effects: []
