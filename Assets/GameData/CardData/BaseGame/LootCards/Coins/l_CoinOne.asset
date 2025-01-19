@@ -16,22 +16,24 @@ MonoBehaviour:
   <face>k__BackingField: {fileID: -1529079491, guid: 1442f9d7a5ccf1e4495c292cfc08ca8f, type: 3}
   <back>k__BackingField: {fileID: 21300000, guid: 9aae75ebd6b98d54db8572420c8a2693, type: 3}
   <lootEffect>k__BackingField:
-    Type: 0
-    Effects:
-    - When: 0
-      Who: 2
-      Result:
-        m_PersistentCalls:
-          m_Calls:
-          - m_Target: {fileID: 11400000, guid: 9370dbb7973ed7240b796fd6beb3d5e6, type: 2}
-            m_TargetAssemblyTypeName: CardTweaks, Assembly-CSharp
-            m_MethodName: AddCoins
-            m_Mode: 3
-            m_Arguments:
-              m_ObjectArgument: {fileID: 0}
-              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-              m_IntArgument: 1
-              m_FloatArgument: 0
-              m_StringArgument: 
-              m_BoolArgument: 0
-            m_CallState: 2
+    type: 0
+    effects:
+    - when: 0
+      type: 0
+      effectActions:
+      - target: 1
+        result:
+          m_PersistentCalls:
+            m_Calls:
+            - m_Target: {fileID: 11400000, guid: 9370dbb7973ed7240b796fd6beb3d5e6, type: 2}
+              m_TargetAssemblyTypeName: CardTweaks, Assembly-CSharp
+              m_MethodName: AddCoins
+              m_Mode: 3
+              m_Arguments:
+                m_ObjectArgument: {fileID: 0}
+                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+                m_IntArgument: 1
+                m_FloatArgument: 0
+                m_StringArgument: 
+                m_BoolArgument: 0
+              m_CallState: 2

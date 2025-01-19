@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameMaster : MonoBehaviour
 {
     //Constants
-    public const int PLAYERCOUNT = 4;
+    public const int PLAYERCOUNT = 3;
     public const float CARDSPEED = 0.4f;
     public static GameMaster inst { get; private set; }
     //Systems

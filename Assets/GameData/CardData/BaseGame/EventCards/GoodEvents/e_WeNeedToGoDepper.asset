@@ -12,5 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43ba8b0b90d75d746a843b4a83fb683a, type: 3}
   m_Name: e_WeNeedToGoDepper
   m_EditorClassIdentifier: 
-  face: {fileID: 1157465463, guid: de0b45a183741ac49a1d424c688fb240, type: 3}
-  back: {fileID: -1796203524, guid: de0b45a183741ac49a1d424c688fb240, type: 3}
+  <title>k__BackingField: 
+  <face>k__BackingField: {fileID: 0}
+  <back>k__BackingField: {fileID: -1796203524, guid: de0b45a183741ac49a1d424c688fb240, type: 3}
+  <eventEffect>k__BackingField:
+    type: 0
+    effects: []

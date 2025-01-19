@@ -16,5 +16,8 @@ MonoBehaviour:
   <face>k__BackingField: {fileID: -1352804807, guid: 387f31fd93282dd4eacb94f6ce9d5a8b, type: 3}
   <back>k__BackingField: {fileID: 21300000, guid: 9aae75ebd6b98d54db8572420c8a2693, type: 3}
   <lootEffect>k__BackingField:
-    Type: 0
-    Effects: []
+    type: 0
+    effects:
+    - when: 0
+      type: 0
+      effectActions: []

@@ -2,10 +2,11 @@ using System;
 using System.Collections;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Analytics;
 
 public class ItemCard : Card
 {
-    [field: SerializeField] public bool IsFlippable { get; private set; }
+    [field: SerializeField] public bool IsFlippable { get; protected set; }
     [field: SerializeField] public bool IsFlipped { get; private set; }
     public override void Init(CardData d, bool isFaceUp)
     {
@@ -19,7 +20,7 @@ public class ItemCard : Card
     }
     public virtual void PlayFlipEffect()
     {
-        if(!IsFlipped && IsFlippable) 
+        if(!SubSystems.inst.isSelectingSomething &&!IsFlipped && IsFlippable && transform.parent != GameMaster.inst.shop.transform) 
         {
             Flip();
             InvokeFlipEffect();
@@ -29,8 +30,8 @@ public class ItemCard : Card
     {
         if(IsFlippable)
         {
-            transform.DORotate(new Vector3(0,0,-90), GameMaster.CARDSPEED);
             IsFlipped = true;
+            transform.DORotate(new Vector3(0,0,-90), GameMaster.CARDSPEED);
         }        
     }
     public void Recharge()
@@ -40,34 +41,23 @@ public class ItemCard : Card
     }
     private async void InvokeFlipEffect()
     {
-        ItemCardData d = (ItemCardData)data;
-        Effect eff = null;
-
-        for(int i  = 0; i < d.effects.Count; i++)
+        ItemCardData d = GetData<ItemCardData>();
+        foreach(ItemEffect itemEffect in d.effects)
         {
-            if(d.effects[i].type == ItemEffectType.Flip) 
+            switch(itemEffect.type)
             {
-                eff = d.effects[i].effect;
+                case ItemEffectType.Flip:
+                {
+                    foreach(Effect eff in itemEffect.effects)
+                    {
+                        GameMaster.inst.turnManager.cardTarget = this;
+                        await eff.PlayActions();
+                    }
+                } break;
             }
         }
-        if(eff == null) return;
 
-        Player p = null;
-        switch(eff.target)
-        {
-            case Target.YouSelectPlayer:
-                CharacterCard c = await SubSystems.Inst.SelectCardByType<CharacterCard>("InPlay");
-                p = c.GetMyPlayer();
-            break;
-        }
-        switch(eff.when)
-        {
-            case When.Now:
-                GameMaster.inst.turnManager.SetPrior(p);
-                eff.result.Invoke();
-                GameMaster.inst.turnManager.RestorePrior();
-                Console.WriteText("Эффект разыгран");
-            break;
-        }
+        GameMaster.inst.turnManager.RestorePrior();
+        Console.WriteText("Использован предмет");
     }
 }

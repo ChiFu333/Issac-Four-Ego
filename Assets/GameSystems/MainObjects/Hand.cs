@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using DG.Tweening;
-using Sirenix.Serialization;
 using UnityEngine;
 
 public class Hand : MonoBehaviour
@@ -12,7 +12,7 @@ public class Hand : MonoBehaviour
     [field: SerializeField] public List<Card> cards { get; private set; } = new List<Card>();
     public void AddCard(Card card)
     {
-        card.Renderer.sortingLayerName = "HandCards"; //Слой для рук!!
+        card.render.sortingLayerName = "HandCards"; //Слой для рук!!
         cards.Add(card);
         AddMoveUpAndDownTweens(card);
         card.transform.SetParent(transform);
@@ -22,29 +22,32 @@ public class Hand : MonoBehaviour
     }
     public void PlayCard(LootCard card)
     {
-        card.Collider.enabled = false;
+        card.PlayCard();
+        ExitCardFromHand(card);
+        card.MoveTo(CardPlaces.inst.lootStash, null, () => GameMaster.inst.lootStash.PutOneCardUp(card));
+    }
+    public void DiscardCard(LootCard card)
+    {
+        ExitCardFromHand(card);
+        card.MoveTo(CardPlaces.inst.lootStash, null, () => GameMaster.inst.lootStash.PutOneCardUp(card));
+    }
+    private void ExitCardFromHand(LootCard card)
+    {
         card.MouseDown -= MoveUp;
         card.MouseExit -= MoveDown;
         card.transform.DOKill();
         card.transform.localPosition = new Vector3(card.transform.localPosition.x, UPMOVE);
 
         cards.Remove(card);
-        card.transform.SetParent(null);
         
         UIOnDeck.inst.UpdateTexts();
         UpdateCardPositions();
-
-        card.PlayCard();
-        if((card.data as LootCardData).lootEffect.Type == LootEffectType.Play)
-        {
-            card.transform.DOMove(CardPlaces.inst.lootStash.position, GameMaster.CARDSPEED).onComplete = () => GameMaster.inst.lootStash.PutOneCardUp(card);
-        }
     }
     private void UpdateCardPositions()
     {
         for(int i = 0; i < cards.Count; i++)
         {
-            cards[i].Renderer.sortingOrder = i;
+            cards[i].render.sortingOrder = i;
         }
 
         for(int i = 0; i < cards.Count; i++)
@@ -52,7 +55,7 @@ public class Hand : MonoBehaviour
             float delCard = ((cards.Count - 1) * deltaCard / 2f) > MAXLENGTH/2 ? MAXLENGTH / (cards.Count - 1): deltaCard;
             float dStart = -(cards.Count - 1) * delCard / 2f;
             cards[i].transform.DOLocalMove(new Vector3(dStart + i * delCard, 0), GameMaster.CARDSPEED);
-            cards[i].ChangeColliderSize(new Vector2(delCard/Card.CARDSIZE, Card.CARDPIXELSIZE.y + UPMOVE/Card.CARDSIZE));
+            cards[i].Collider.size = new Vector2(delCard/Card.CARDSIZE, Card.CARDPIXELSIZE.y + UPMOVE/Card.CARDSIZE);
             cards[i].Collider.offset = new Vector2(0, -UPMOVE/2 /Card.CARDSIZE);
         }
     }
@@ -64,7 +67,7 @@ public class Hand : MonoBehaviour
     private void MoveUp(Card c)
     {
         c.transform.DOLocalMoveY(UPMOVE, 0.3f);
-        c.Renderer.sortingOrder = 100;
+        c.render.sortingOrder = 1000;
     }
     private void MoveDown(Card c)
     {
@@ -73,7 +76,7 @@ public class Hand : MonoBehaviour
         {
             if(cards[i] == c) 
             {
-                c.Renderer.sortingOrder = i;
+                c.render.sortingOrder = i;
                 break;
             }
         }

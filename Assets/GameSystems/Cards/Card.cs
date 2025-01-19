@@ -1,13 +1,13 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
-
+using DG.Tweening;
 public class Card : MonoBehaviour
 {
     public const float CARDSIZE = 0.28f;
     public static Vector2 CARDPIXELSIZE = new Vector2(4.03f, 5.62f);
-    [field: SerializeField] public CardData data { get; private set; }
-    [field: SerializeField] public SpriteRenderer Renderer { get; private set; }
+    [field: SerializeField] private CardData data;
+    [field: SerializeField] public SpriteRenderer render { get; private set; }
     [field: SerializeField] public BoxCollider2D Collider { get; private set; }
     public event Action<Card> MouseClicked;
     public event Action<Card> MouseDown; 
@@ -16,12 +16,20 @@ public class Card : MonoBehaviour
     {
         data = d;
 
-        Renderer = gameObject.AddComponent<SpriteRenderer>();
-        Renderer.sortingOrder = 3;
-        Renderer.sprite = isFaceUp ? data.face : data.back;
+        render = gameObject.AddComponent<SpriteRenderer>();
+        render.sortingOrder = 3;
+        render.sprite = isFaceUp ? data.face : data.back;
 
         Collider = gameObject.AddComponent<BoxCollider2D>();
-        ChangeColliderSize(CARDPIXELSIZE);
+        Collider.size = CARDPIXELSIZE;
+    }
+    public Player GetMyPlayer()
+    {
+        return GetComponentInParent<Player>();
+    }
+    public T GetData<T>() where T : CardData
+    {
+        return data as T;
     }
     public void OnMouseEnter()
     {
@@ -33,11 +41,7 @@ public class Card : MonoBehaviour
     }
     public void OnMouseDown()
     {
-        if(!SubSystems.Inst.IsSelectingSomething) MouseClicked?.Invoke(this);
-    }
-    public void ChangeColliderSize(Vector2 s)
-    {
-        Collider.size = s;
+        if(!SubSystems.inst.isSelectingSomething) MouseClicked?.Invoke(this);
     }
     public void DestroyMe()
     {
@@ -60,8 +64,18 @@ public class Card : MonoBehaviour
         c.Init(data, isFaceUp);
         return (T)c;
     }
-    public Player GetMyPlayer()
+    public void MoveTo(Transform target, Transform parent, Action afterComplete = null)
     {
-        return GetComponentInParent<Player>();
+        Collider.enabled = false;
+        int order = render.sortingOrder;
+        render.sortingOrder = 1000;
+        transform.DOScale(target.lossyScale, GameMaster.CARDSPEED);
+        transform.DOMove(target.position,GameMaster.CARDSPEED).onComplete += () => 
+        {
+            afterComplete?.Invoke();
+            render.sortingOrder = order;
+            Collider.enabled = true;
+        };
+        transform.parent = parent;
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class LootCard : Card
@@ -7,20 +8,30 @@ public class LootCard : Card
         base.Init(d, isFaceUp);
         MouseClicked += (Card c) => 
         {
+            GameMaster.inst.turnManager.SetPrior(GetMyPlayer());
             GetMyPlayer().PlayCard(this);
         };
     }
-    public void PlayCard()
+    public async void PlayCard()
     {
-        LootCardData d = data as LootCardData;
-        if(d.lootEffect.Type == LootEffectType.Trinket)
+        LootCardData d = GetData<LootCardData>();
+        switch(d.lootEffect.type)
         {
-             GameMaster.inst.turnManager.priorPlayer.AddItem(GetComponent<LootCard>());
+            case LootEffectType.Trinket:
+            {
+                GameMaster.inst.turnManager.priorPlayer.AddItem(GetComponent<LootCard>());
+            } break;
+            case LootEffectType.Play:
+            {
+                foreach(Effect eff in d.lootEffect.effects)
+                {
+                    GameMaster.inst.turnManager.cardTarget = this;
+                    await eff.PlayActions();
+                }
+            } break;
         }
-        else if(d.lootEffect.Type == LootEffectType.Play)
-        {
-            
-        }
+
+        GameMaster.inst.turnManager.RestorePrior();
         Console.WriteText("Разыграна карта лута");
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CardDeck : MonoBehaviour
 { 
-    public List<CardData> cards { get; private set; }
+    [field: SerializeField] public List<CardData> cards { get; private set; }
     private bool isFaceUp { get; set; } = false;
     private SpriteRenderer faceRenderer;
     public void InitDeck(List<CardData> list, bool isFaceUp)
@@ -44,7 +44,7 @@ public class CardDeck : MonoBehaviour
         {
             if(i == 0) 
             {
-                templ.Add(c.data);
+                templ.Add(c.GetData<CardData>());
             }
             else
             {

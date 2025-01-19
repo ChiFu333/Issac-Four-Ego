@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using DG.Tweening;
+using UnityEngine.Rendering;
 
 public class TurnManager : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class TurnManager : MonoBehaviour
     public Player activePlayer { get => players[id];}
     public Player priorPlayer { get => players[priorId];}
     [field: SerializeField] public int priorId { get; private set; } = 0;
+    public Card cardTarget;
     private int id = 0;
     public void Init()
     {
@@ -20,18 +22,22 @@ public class TurnManager : MonoBehaviour
         GiveStartResources();
         activePlayer.StartTurn();
     }
-    public void SwitchTurn()
+    public async void SwitchTurn()
     {
-        activePlayer.EndTurn();
+        if(!SubSystems.inst.isSelectingSomething)
+        {
+            await activePlayer.EndTurn();
 
-        id++;
-        id %= players.Count;
+            id++;
+            id %= players.Count;
 
-        HealEveryone();
-
-        priorId = id;
-        activePlayer.StartTurn();
+            HealEveryone();
+            GameMaster.inst.monsterZone.RestoreAllStats();
+            priorId = id;
+            activePlayer.StartTurn();
+        }
     }
+        
     private void InitAllPlayers()
     {
         GameObject g = new GameObject();
@@ -52,17 +58,8 @@ public class TurnManager : MonoBehaviour
             ha.transform.localScale = CardPlaces.inst.hands[i].lossyScale;
 
             SetPrior(player);
-            //Дать ему карту персонажу
-            CharacterCardData ccd = (CharacterCardData)GameMaster.inst.characterDeck.TakeOneCard();
-            CharacterCard c = Card.CreateCard<CharacterCard>(ccd);
-            c.transform.DOMove(CardPlaces.inst.playersPos[i][0].position,GameMaster.CARDSPEED);
-            c.transform.localScale = CardPlaces.inst.playersPos[i][0].lossyScale;
-            c.Flip();
-
-            ItemCard it = Card.CreateCard<ItemCard>(ccd.characterItemData); 
-            it.Flip();
-
-            players[i].Init(c, it, ha);
+            //Инициировать персонажей
+            players[i].Init(ha);
         }
         RestorePrior();
         for(int j = GameMaster.PLAYERCOUNT; j < 4; j++)
@@ -87,7 +84,7 @@ public class TurnManager : MonoBehaviour
                 LootCard c = Card.CreateCard<LootCard>(GameMaster.inst.lootDeck.TakeOneCard());
                 players[i].TakeOneCard(c);
             }
-            players[i].ChangeMoney(3);
+            players[i].AddMoney(3);
         }
     }
     public bool IsMyTurn()
@@ -113,7 +110,16 @@ public class TurnManager : MonoBehaviour
     {
         for(int i = 0; i < players.Count; i++)
         {
+            players[i].HealHp(100);
             players[i].SetBaseStats();
         }
+    }
+    public int GetMyId(Player p)
+    {
+        for(int i = 0; i < GameMaster.PLAYERCOUNT; i++)
+        {
+            if(players[i] == p) return i;
+        }
+        return -1;
     }
 }

@@ -12,6 +12,108 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43ba8b0b90d75d746a843b4a83fb683a, type: 3}
   m_Name: e_GoldChest1
   m_EditorClassIdentifier: 
-  id: 0
-  face: {fileID: 1585512629, guid: de0b45a183741ac49a1d424c688fb240, type: 3}
-  back: {fileID: -1796203524, guid: de0b45a183741ac49a1d424c688fb240, type: 3}
+  <title>k__BackingField: 
+  <face>k__BackingField: {fileID: 1585512629, guid: de0b45a183741ac49a1d424c688fb240, type: 3}
+  <back>k__BackingField: {fileID: -1796203524, guid: de0b45a183741ac49a1d424c688fb240, type: 3}
+  <eventEffect>k__BackingField:
+    type: 0
+    effects:
+    - when: 0
+      type: 2
+      effectActions:
+      - target: 1
+        result:
+          m_PersistentCalls:
+            m_Calls:
+            - m_Target: {fileID: 11400000, guid: 9370dbb7973ed7240b796fd6beb3d5e6, type: 2}
+              m_TargetAssemblyTypeName: CardTweaks, Assembly-CSharp
+              m_MethodName: AddTreasure
+              m_Mode: 3
+              m_Arguments:
+                m_ObjectArgument: {fileID: 0}
+                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+                m_IntArgument: 1
+                m_FloatArgument: 0
+                m_StringArgument: 
+                m_BoolArgument: 0
+              m_CallState: 2
+      - target: 1
+        result:
+          m_PersistentCalls:
+            m_Calls:
+            - m_Target: {fileID: 11400000, guid: 9370dbb7973ed7240b796fd6beb3d5e6, type: 2}
+              m_TargetAssemblyTypeName: CardTweaks, Assembly-CSharp
+              m_MethodName: AddTreasure
+              m_Mode: 3
+              m_Arguments:
+                m_ObjectArgument: {fileID: 0}
+                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+                m_IntArgument: 1
+                m_FloatArgument: 0
+                m_StringArgument: 
+                m_BoolArgument: 0
+              m_CallState: 2
+      - target: 1
+        result:
+          m_PersistentCalls:
+            m_Calls:
+            - m_Target: {fileID: 11400000, guid: 9370dbb7973ed7240b796fd6beb3d5e6, type: 2}
+              m_TargetAssemblyTypeName: CardTweaks, Assembly-CSharp
+              m_MethodName: AddLootCard
+              m_Mode: 3
+              m_Arguments:
+                m_ObjectArgument: {fileID: 0}
+                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+                m_IntArgument: 1
+                m_FloatArgument: 0
+                m_StringArgument: 
+                m_BoolArgument: 0
+              m_CallState: 2
+      - target: 1
+        result:
+          m_PersistentCalls:
+            m_Calls:
+            - m_Target: {fileID: 11400000, guid: 9370dbb7973ed7240b796fd6beb3d5e6, type: 2}
+              m_TargetAssemblyTypeName: CardTweaks, Assembly-CSharp
+              m_MethodName: AddLootCard
+              m_Mode: 3
+              m_Arguments:
+                m_ObjectArgument: {fileID: 0}
+                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+                m_IntArgument: 1
+                m_FloatArgument: 0
+                m_StringArgument: 
+                m_BoolArgument: 0
+              m_CallState: 2
+      - target: 1
+        result:
+          m_PersistentCalls:
+            m_Calls:
+            - m_Target: {fileID: 11400000, guid: 9370dbb7973ed7240b796fd6beb3d5e6, type: 2}
+              m_TargetAssemblyTypeName: CardTweaks, Assembly-CSharp
+              m_MethodName: AddLootCard
+              m_Mode: 3
+              m_Arguments:
+                m_ObjectArgument: {fileID: 0}
+                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+                m_IntArgument: 2
+                m_FloatArgument: 0
+                m_StringArgument: 
+                m_BoolArgument: 0
+              m_CallState: 2
+      - target: 1
+        result:
+          m_PersistentCalls:
+            m_Calls:
+            - m_Target: {fileID: 11400000, guid: 9370dbb7973ed7240b796fd6beb3d5e6, type: 2}
+              m_TargetAssemblyTypeName: CardTweaks, Assembly-CSharp
+              m_MethodName: AddLootCard
+              m_Mode: 3
+              m_Arguments:
+                m_ObjectArgument: {fileID: 0}
+                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+                m_IntArgument: 2
+                m_FloatArgument: 0
+                m_StringArgument: 
+                m_BoolArgument: 0
+              m_CallState: 2
