@@ -21,7 +21,7 @@ MonoBehaviour:
     - when: 0
       type: 0
       effectActions:
-      - target: 1
+      - target: 2
         result:
           m_PersistentCalls:
             m_Calls:

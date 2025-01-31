@@ -64,11 +64,11 @@ public class Card : MonoBehaviour
         c.Init(data, isFaceUp);
         return (T)c;
     }
-    public void MoveTo(Transform target, Transform parent, Action afterComplete = null)
+    public void MoveTo(Transform target, Transform parent, Action afterComplete = null, bool changeOrder = true)
     {
         Collider.enabled = false;
         int order = render.sortingOrder;
-        render.sortingOrder = 1000;
+        if(changeOrder) render.sortingOrder = 1000;
         transform.DOScale(target.lossyScale, GameMaster.CARDSPEED);
         transform.DOMove(target.position,GameMaster.CARDSPEED).onComplete += () => 
         {
@@ -76,6 +76,19 @@ public class Card : MonoBehaviour
             render.sortingOrder = order;
             Collider.enabled = true;
         };
-        transform.parent = parent;
+        if(parent != null) transform.parent = parent;
+    }
+    public void MoveTo(Vector3 target, Transform parent, Action afterComplete = null, bool changeOrder = true)
+    {
+        Collider.enabled = false;
+        int order = render.sortingOrder;
+        if(changeOrder) render.sortingOrder = 1000;
+        transform.DOMove(target, GameMaster.CARDSPEED).onComplete += () => 
+        {
+            afterComplete?.Invoke();
+            render.sortingOrder = order;
+            Collider.enabled = true;
+        };
+        if(parent != null) transform.parent = parent;
     }
 }

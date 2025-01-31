@@ -8,8 +8,6 @@ using UnityEngine.TextCore.Text;
 
 public class Player : MonoBehaviour
 {
-    public event Action onTurnStart;  
-    public event Action onTurnEnd;
     public Card GetMyCard() => characterCard;
 
     #region [ Init & Turns ]
@@ -34,42 +32,17 @@ public class Player : MonoBehaviour
         lootPlayCount = 0;
         souls = characterCard.GetData<CharacterCardData>().startSouls;
     }
-    public void StartTurn()
-    {
-        SetBaseStats();
-        SetPassiveItems();
-
-        ChangeAllPlayerItemCharge(true);
-        lootPlayCount = lootPlayMax;
-
-        onTurnStart?.Invoke();
-        hand.AddCard(Card.CreateCard<LootCard>(GameMaster.inst.lootDeck.TakeOneCard(),true));
-
-        UIOnDeck.inst.UpdateTexts();
-    }
-    public async Task EndTurn()
-    {
-        onTurnEnd?.Invoke();
-        if(lootCount > 10)
-        {
-            for(int i = 0; i < lootCount - 10; i++) 
-            {
-                Console.WriteText("Сбрось до 10 карт лута");
-                LootCard c = await SubSystems.inst.SelectCardByType<LootCard>("MyHand"); 
-                DiscardCard(c);
-            }
-        }
-    }
     public void SetBaseStats()
     {
         HpMax = characterCard.GetData<CharacterCardData>().hp;
+        attack = characterCard.GetData<CharacterCardData>().attack;
         preventHp = 0;
         shopPrice = 10;
         cubeModificator = 0;
 
-        lootPlayCount = GameMaster.inst.turnManager.activePlayer == this ? lootPlayMax : 0;
-        buyCount = GameMaster.inst.turnManager.activePlayer == this ? buyMax : 0;
-        attackCount = GameMaster.inst.turnManager.activePlayer == this ? attackMax : 0;
+        lootPlayCount = 0;
+        buyCount = 0;
+        attackCount = 0;
     }
     
     #endregion
@@ -85,7 +58,7 @@ public class Player : MonoBehaviour
             hpMax += delta;
             if(delta > 0)
             {
-                hp += delta;
+                HealHp(delta);
             }
             else if(delta < 0)
             {
@@ -96,6 +69,7 @@ public class Player : MonoBehaviour
     }
     private int hpMax;
     [field: SerializeField, HorizontalGroup("HP")] public int preventHp { get; private set; }
+    public bool isDead { get; set; } = false;
     public void AddHp(int count) 
     {
         HpMax += count;
@@ -120,12 +94,13 @@ public class Player : MonoBehaviour
         if(hp <= 0) 
         {
             hp = 0;
-            Die();
+            if(!isDead) StackSystem.inst.PushPrimalEffect(PrimalEffect.Kill, GetMyCard());
         }
         return;
     }
-    public void HealHp(int count)
+    public void HealHp(int count, bool throughDeath = false)
     {
+        if(hp == 0 && !throughDeath) return;
         if(hp + count > HpMax)
             hp = HpMax;
         else
@@ -138,7 +113,7 @@ public class Player : MonoBehaviour
             return false;
         else
             hp -= count;
-        if(hp == 0) Die();
+        if(hp == 0 && !isDead) StackSystem.inst.PushPrimalEffect(PrimalEffect.Kill, GetMyCard());;
         UIOnDeck.inst.UpdateTexts();
         return true;
     }
@@ -147,18 +122,9 @@ public class Player : MonoBehaviour
         preventHp += count;
         UIOnDeck.inst.UpdateTexts();
     }
-    public void Die()
+    public async Task StartDieSubphase()
     {
-        //Отменяет все действия, там атаку
-        //Вызывает состояние оплаты смерти, игрок выбирает всё-всё
-        //Закончить ход;
-        hp = 0;
-        UIOnDeck.inst.UpdateTexts();
-        Console.WriteText("Игрок умер");
-        //if(GameMaster.inst.turnManager.activePlayer == this) GameMaster.inst.monsterZone.CancelAttack();
-        characterCard.Flip();
-        ChangeAllPlayerItemCharge(false);
-        if(GameMaster.inst.turnManager.activePlayer == this) GameMaster.inst.turnManager.SwitchTurn();
+        await GameMaster.inst.phaseSystem.StartPlayerDie(this);
     }
     #endregion
     
@@ -182,11 +148,11 @@ public class Player : MonoBehaviour
     public int lootCount { get => hand.cards.Count;}
     [field: SerializeField, HorizontalGroup("Loot")] public int lootPlayCount { get; set; }
     [field: SerializeField, HorizontalGroup("Loot")] public int lootPlayMax { get; set; } = 1;
-    public void TakeOneCard(LootCard card)
+    public void TakeOneLootCard(LootCard card)
     {
         hand.AddCard(card);
     }
-    public void PlayCard(LootCard c)
+    public void PlayLootCard(LootCard c)
     {
         if(lootPlayCount > 0) 
         {
@@ -257,15 +223,33 @@ public class Player : MonoBehaviour
             {
                 Items[i] = c;
                 c.MoveTo(CardPlaces.inst.playersPos[GameMaster.inst.turnManager.GetMyId(this)][i+1], transform);
+                PutCardTrigger(c);
                 return;
             }
         }
         Items.Add(c);
         c.MoveTo(CardPlaces.inst.playersPos[GameMaster.inst.turnManager.GetMyId(this)][Items.Count], transform);
+        PutCardTrigger(c);
     }
     public void SetPassiveItems()
     {
-
+        for(int i = 0; i < Items.Count; i++)
+        {
+            if(Items[i] != null) PutCardTrigger(Items[i]);
+        }
+    }
+    private void PutCardTrigger(Card c)
+    {
+        StackEffect triggeredEffect = null;
+        if(c is LootCard lootItem)
+        {
+            triggeredEffect = new CardStackEffect(lootItem.GetData<LootCardData>().GetTrinketEffect(), c);
+        }
+        else if(c is ItemCard itemCard && itemCard.GetData<ItemCardData>().GetPassiveEffect() != null)
+        {
+            triggeredEffect = new CardStackEffect(itemCard.GetData<ItemCardData>().GetPassiveEffect(), c);
+        }
+        TriggersSystem.PutTrigger(triggeredEffect, GameMaster.inst.turnManager.GetMyId(this) + 1);
     }
     #endregion
     
@@ -284,6 +268,18 @@ public class Player : MonoBehaviour
         }
         Curses.Add(c);
         c.MoveTo(CardPlaces.inst.playersCurses[GameMaster.inst.turnManager.GetMyId(this)][Curses.Count-1], transform);
+    }
+    public void DestroyCurse(Card c)
+    {
+        for(int i = 0; i < Curses.Count; i++)
+        {
+            if(Curses[i] == c) 
+            {
+                Curses[i] = null;
+                break;
+            }
+        }
+        (c as EventCard).DiscardCard();
     }
     #endregion
     

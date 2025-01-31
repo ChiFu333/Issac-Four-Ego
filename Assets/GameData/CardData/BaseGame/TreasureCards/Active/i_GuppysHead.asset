@@ -16,4 +16,12 @@ MonoBehaviour:
   <face>k__BackingField: {fileID: 1153060107, guid: f3db82cdd7d649140bb3794cad90a600, type: 3}
   <back>k__BackingField: {fileID: 21300000, guid: 15ae65790c5bd214e9e5077916bf9ab8, type: 3}
   <isStartFlipped>k__BackingField: 0
-  <effects>k__BackingField: []
+  <effects>k__BackingField:
+  - type: 4
+    value: 0
+    count: 0
+    effect:
+      <when>k__BackingField: 0
+      <diceValue>k__BackingField: 0
+      <type>k__BackingField: 0
+      <effectActions>k__BackingField: []

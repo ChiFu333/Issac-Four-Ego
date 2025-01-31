@@ -2,6 +2,8 @@ using UnityEngine;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
+using System.Collections;
 public class MonsterCard : Card
 {
     [field: SerializeField, HorizontalGroup("HP")] public int hp { get; private set; }
@@ -51,7 +53,7 @@ public class MonsterCard : Card
         if(hp <= 0) 
         {
             hp = 0;
-            Die();
+            StackSystem.inst.PushPrimalEffect(PrimalEffect.Kill, this);
         }
     }
     public void AddHp(int count) => hp += count;
@@ -68,14 +70,9 @@ public class MonsterCard : Card
         UIOnDeck.inst.UpdateMonsterUI();
     }
     public void AddAttack(int count) => attack += count;
-    public async void Die()
+    public async Task StartMonsterDieSubphase()
     {
-        //GameMaster.inst.monsterZone.CancelAttack();
-        Console.WriteText("Монстр Убит");
-
-        await GetData<MonsterCardData>().reward.PlayActions();
-
-        GameMaster.inst.monsterZone.RemoveMonster(this);
+        await GameMaster.inst.phaseSystem.StartEnemyDie(this);
     }
     public void SetBaseStats()
     {

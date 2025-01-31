@@ -20,35 +20,20 @@ MonoBehaviour:
   - type: 0
     value: 0
     count: 0
-    effects:
-    - when: 0
-      type: 1
-      effectActions:
-      - target: 0
-        result:
-          m_PersistentCalls:
-            m_Calls:
-            - m_Target: {fileID: 11400000, guid: 9370dbb7973ed7240b796fd6beb3d5e6, type: 2}
-              m_TargetAssemblyTypeName: CardTweaks, Assembly-CSharp
-              m_MethodName: ChangeCubeCount
-              m_Mode: 3
-              m_Arguments:
-                m_ObjectArgument: {fileID: 0}
-                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-                m_IntArgument: 1
-                m_FloatArgument: 0
-                m_StringArgument: 
-                m_BoolArgument: 0
-              m_CallState: 2
-            - m_Target: {fileID: 11400000, guid: 9370dbb7973ed7240b796fd6beb3d5e6, type: 2}
-              m_TargetAssemblyTypeName: CardTweaks, Assembly-CSharp
-              m_MethodName: ChangeCubeCount
-              m_Mode: 3
-              m_Arguments:
-                m_ObjectArgument: {fileID: 0}
-                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-                m_IntArgument: 2
-                m_FloatArgument: 0
-                m_StringArgument: 
-                m_BoolArgument: 0
-              m_CallState: 2
+    effect:
+      <when>k__BackingField: 0
+      <diceValue>k__BackingField: 0
+      <type>k__BackingField: 1
+      <effectActions>k__BackingField:
+      - <subActions>k__BackingField:
+        - <connection>k__BackingField: 0
+          <target>k__BackingField: 0
+          <actionType>k__BackingField: 23
+          count: 1
+          targetCardBefore: {fileID: 0}
+      - <subActions>k__BackingField:
+        - <connection>k__BackingField: 0
+          <target>k__BackingField: 0
+          <actionType>k__BackingField: 23
+          count: 2
+          targetCardBefore: {fileID: 0}

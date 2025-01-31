@@ -2,15 +2,16 @@ using UnityEngine;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine.Rendering;
+using System.Threading.Tasks;
 
 public class TurnManager : MonoBehaviour
 {
     [field: SerializeField] public List<Player> players { get; private set; } = new List<Player>();
     public Player activePlayer { get => players[id];}
-    public Player priorPlayer { get => players[priorId];}
+    public Player priorPlayer() => players[priorId];
     [field: SerializeField] public int priorId { get; private set; } = 0;
-    public Card cardTarget;
-    private int id = 0;
+    public int id { get; private set; } = 0;
+    
     public void Init()
     {
         InitAllPlayers();
@@ -20,24 +21,22 @@ public class TurnManager : MonoBehaviour
     public void StartGame()
     {
         GiveStartResources();
-        activePlayer.StartTurn();
+        HealEveryone();
+        GameMaster.inst.phaseSystem.StartStartTurn();
     }
-    public async void SwitchTurn()
+    public void SwitchTurn()
     {
-        if(!SubSystems.inst.isSelectingSomething)
-        {
-            await activePlayer.EndTurn();
+        id++;
+        id %= players.Count;
 
-            id++;
-            id %= players.Count;
-
-            HealEveryone();
-            GameMaster.inst.monsterZone.RestoreAllStats();
-            priorId = id;
-            activePlayer.StartTurn();
-        }
+        priorId = id;
+        GameMaster.inst.phaseSystem.StartStartTurn();
     }
+    public void EndTurn()
+    {
         
+        _ = GameMaster.inst.phaseSystem.StartEndPhase();
+    }
     private void InitAllPlayers()
     {
         GameObject g = new GameObject();
@@ -52,6 +51,7 @@ public class TurnManager : MonoBehaviour
 
             //Создать ему руку
             GameObject h = new GameObject("Hand");
+            if(i != 0) h.transform.Rotate(0, 0, 180);
             Hand ha = h.AddComponent<Hand>();
             ha.transform.position = CardPlaces.inst.hands[i].position;
             ha.transform.parent = players[i].transform;
@@ -82,7 +82,7 @@ public class TurnManager : MonoBehaviour
             for(int j = 0; j < 3; j++)
             {
                 LootCard c = Card.CreateCard<LootCard>(GameMaster.inst.lootDeck.TakeOneCard());
-                players[i].TakeOneCard(c);
+                players[i].TakeOneLootCard(c);
             }
             players[i].AddMoney(3);
         }
@@ -110,7 +110,7 @@ public class TurnManager : MonoBehaviour
     {
         for(int i = 0; i < players.Count; i++)
         {
-            players[i].HealHp(100);
+            players[i].HealHp(100, true);
             players[i].SetBaseStats();
         }
     }
@@ -122,4 +122,12 @@ public class TurnManager : MonoBehaviour
         }
         return -1;
     }
+}
+public enum Phase 
+{
+    Start, Action, End
+}
+public enum SubPhase 
+{
+    None, Shop, Attack, PlayerDie, MonsterDie
 }

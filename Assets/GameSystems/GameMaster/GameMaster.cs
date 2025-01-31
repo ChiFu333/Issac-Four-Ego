@@ -12,13 +12,15 @@ public class GameMaster : MonoBehaviour
     [field: SerializeField] public Shop shop { get; private set; }
     [field: SerializeField] public MonsterZone monsterZone { get; private set; }
     [field: SerializeField] public TurnManager turnManager { get; private set; }
+    [field: SerializeField] public PhaseSystem phaseSystem { get; private set; }
+    [field: SerializeField] public DeckBuilder deckBuilder { get; private set; }
     //Decks
     [HideInInspector] public CardDeck characterDeck;
     [HideInInspector] public CardDeck lootDeck, lootStash;
     [HideInInspector] public CardDeck shopDeck;
     [HideInInspector] public CardDeck monsterDeck, monsterStash;
     [Header("CardLists")]
-    [SerializeField] private CardListSO lootDeckList;
+    private CardListSO lootDeckList;
     [SerializeField] private CardListSO shopDeckList;
     [SerializeField] private CardListSO characterList;
     [SerializeField] private CardListSO monsterList;
@@ -27,6 +29,7 @@ public class GameMaster : MonoBehaviour
     public void Awake()
     {
         inst = this;
+        lootDeckList = deckBuilder.GetLootList();
         lootStashList = ScriptableObject.CreateInstance<CardListSO>();
         monsterStashList = ScriptableObject.CreateInstance<CardListSO>();
     }

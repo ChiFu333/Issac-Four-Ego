@@ -15,6 +15,16 @@ MonoBehaviour:
   <title>k__BackingField: 
   <face>k__BackingField: {fileID: -2013536715, guid: 1442f9d7a5ccf1e4495c292cfc08ca8f, type: 3}
   <back>k__BackingField: {fileID: 21300000, guid: 9aae75ebd6b98d54db8572420c8a2693, type: 3}
-  <lootEffect>k__BackingField:
-    Type: 0
-    Effects: []
+  <lootEffects>k__BackingField:
+  - type: 0
+    effect:
+      <when>k__BackingField: 0
+      <diceValue>k__BackingField: 0
+      <type>k__BackingField: 0
+      <effectActions>k__BackingField:
+      - <subActions>k__BackingField:
+        - <connection>k__BackingField: 0
+          <target>k__BackingField: 13
+          <actionType>k__BackingField: 27
+          count: 0
+          targetCardBefore: {fileID: 0}

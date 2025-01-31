@@ -12,28 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac38ceafb90cbd946b6ee137f2540274, type: 3}
   m_Name: i_BobsBrain
   m_EditorClassIdentifier: 
-  face: {fileID: -64200638, guid: f3db82cdd7d649140bb3794cad90a600, type: 3}
-  back: {fileID: -1784596468, guid: be1dfe936de1fb541af8a36e2e06787b, type: 3}
-  IsStartFlipped: 0
-  Effects:
-  - Type: 2
-    Value: 0
-    Count: 0
-    Effect:
-      When: 1
-      Who: 1
-      Result:
-        m_PersistentCalls:
-          m_Calls:
-          - m_Target: {fileID: 11400000, guid: 9370dbb7973ed7240b796fd6beb3d5e6, type: 2}
-            m_TargetAssemblyTypeName: CardTweaks, Assembly-CSharp
-            m_MethodName: GetAdditionalLootPlay
-            m_Mode: 3
-            m_Arguments:
-              m_ObjectArgument: {fileID: 0}
-              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-              m_IntArgument: 1
-              m_FloatArgument: 0
-              m_StringArgument: 
-              m_BoolArgument: 0
-            m_CallState: 2
+  <title>k__BackingField: 
+  <face>k__BackingField: {fileID: -64200638, guid: f3db82cdd7d649140bb3794cad90a600, type: 3}
+  <back>k__BackingField: {fileID: -960122869, guid: f3db82cdd7d649140bb3794cad90a600, type: 3}
+  <isStartFlipped>k__BackingField: 0
+  <effects>k__BackingField: []

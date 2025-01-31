@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
-using DG.Tweening;
-using JetBrains.Annotations;
+using System.Threading.Tasks;
 using UnityEngine;
+using Unity.Mathematics;
+using UnityEngine.Timeline;
 
 public class MonsterZone : MonoBehaviour
 {
     [field: SerializeField] public int activeSlotsCount { get; private set; } = 2;
     [field: SerializeField] public List<Card> monstersInSlots { get; private set; } = new List<Card>();
-    private bool cancelAttackTrigger = false;
+    public MonsterCard currentEnemy { get; set; }
     public void Init()
     {
         for(int j = 0; j < activeSlotsCount; j++)
@@ -45,66 +46,38 @@ public class MonsterZone : MonoBehaviour
         UIOnDeck.inst.UpdateMonsterUI();
         foreach(Card c in monstersInSlots) if(c is EventCard eventC) eventC.PlayEvent();
     }
-    public async void Attack()
+    public async void StartAttackSubPhase()
     {
         if(GameMaster.inst.turnManager.activePlayer.attackCount <= 0) return;
-        GameMaster.inst.turnManager.activePlayer.attackCount--;
-        UIOnDeck.inst.UpdateAddInfo();
-        Console.WriteText("Выбери цель атаки");
-        MonsterCard c = await SubSystems.inst.SelectCardByType<MonsterCard>("MonsterZone");
-        if(c == null) return;
-
-        Console.WriteText("Атака начата");
-        
-        while(true)
-        {
-            if(cancelAttackTrigger)
-            {
-                cancelAttackTrigger = false;
-                UIOnDeck.inst.UpdateCubeUI(0);
-                break;
-            }
-            int cube = await CubeManager.inst.ThrowDice();
-            if(cube >= c.dodge)
-            {
-                Console.WriteText("Попал по монстру!");
-                if(c.hp + c.preventHp - GameMaster.inst.turnManager.activePlayer.attack <= 0) 
-                {
-                    c.Damage(GameMaster.inst.turnManager.activePlayer.attack);
-                    break;
-                }
-                else
-                    c.Damage(GameMaster.inst.turnManager.activePlayer.attack);
-            }
-            else
-            {
-                Console.WriteText("Монстр бьёт!");
-                
-                if(GameMaster.inst.turnManager.activePlayer.hp + GameMaster.inst.turnManager.activePlayer.preventHp - c.attack <= 0) 
-                {
-                    GameMaster.inst.turnManager.activePlayer.Damage(c.attack);
-                    break;
-                }
-                else
-                    GameMaster.inst.turnManager.activePlayer.Damage(c.attack);
-            }
-            UIOnDeck.inst.UpdateTexts();
-            UIOnDeck.inst.UpdateMonsterUI();
-        }
+        GameMaster.inst.turnManager.activePlayer.attackCount -= 1;
+        await GameMaster.inst.phaseSystem.StartFighting();
     }
-    public void CancelAttack()
+    public async Task EndAttack()
     {
-        cancelAttackTrigger = true;
+        await GameMaster.inst.phaseSystem.EndAttack();
     }
-    public void RemoveMonster(Card c, bool ToStash = true)
+    public void IncreaseZone(int count)
+    {
+        activeSlotsCount = math.min(activeSlotsCount + count, 4); 
+        RestockSlots();
+    }
+    public async Task RemoveMonster(Card c)
     {
         monstersInSlots[monstersInSlots.IndexOf(c)] = null;
-        RestockSlots();
-        if(ToStash) c.MoveTo(CardPlaces.inst.monsterStash, null, () => GameMaster.inst.monsterStash.PutOneCardUp(c));
+        bool trigger = false;
+        c.MoveTo(GameMaster.inst.turnManager.activePlayer.hand.transform.TransformPoint(new Vector3(0, Hand.UPMOVE * 3f)), null, () => 
+        {
+            trigger = true;
+        });
+        while(!trigger) await Task.Yield();
     }
     public void RestoreAllStats()
     {
         foreach(MonsterCard c in monstersInSlots) c.SetBaseStats();
         UIOnDeck.inst.UpdateMonsterUI();
+    }
+    public async Task StashSlot(Card c, bool canStashAttackedMonster = false)
+    {
+        await RemoveMonster(c);
     }
 }

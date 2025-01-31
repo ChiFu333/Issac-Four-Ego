@@ -15,105 +15,46 @@ MonoBehaviour:
   <title>k__BackingField: 
   <face>k__BackingField: {fileID: -1979498533, guid: de0b45a183741ac49a1d424c688fb240, type: 3}
   <back>k__BackingField: {fileID: -1796203524, guid: de0b45a183741ac49a1d424c688fb240, type: 3}
-  <eventEffect>k__BackingField:
-    type: 0
+  <eventEffects>k__BackingField:
+  - type: 0
     effects:
-    - when: 0
-      type: 2
-      effectActions:
-      - target: 1
-        result:
-          m_PersistentCalls:
-            m_Calls:
-            - m_Target: {fileID: 11400000, guid: 9370dbb7973ed7240b796fd6beb3d5e6, type: 2}
-              m_TargetAssemblyTypeName: CardTweaks, Assembly-CSharp
-              m_MethodName: AddTreasure
-              m_Mode: 3
-              m_Arguments:
-                m_ObjectArgument: {fileID: 0}
-                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-                m_IntArgument: 1
-                m_FloatArgument: 0
-                m_StringArgument: 
-                m_BoolArgument: 0
-              m_CallState: 2
-      - target: 1
-        result:
-          m_PersistentCalls:
-            m_Calls:
-            - m_Target: {fileID: 11400000, guid: 9370dbb7973ed7240b796fd6beb3d5e6, type: 2}
-              m_TargetAssemblyTypeName: CardTweaks, Assembly-CSharp
-              m_MethodName: AddTreasure
-              m_Mode: 3
-              m_Arguments:
-                m_ObjectArgument: {fileID: 0}
-                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-                m_IntArgument: 1
-                m_FloatArgument: 0
-                m_StringArgument: 
-                m_BoolArgument: 0
-              m_CallState: 2
-      - target: 1
-        result:
-          m_PersistentCalls:
-            m_Calls:
-            - m_Target: {fileID: 11400000, guid: 9370dbb7973ed7240b796fd6beb3d5e6, type: 2}
-              m_TargetAssemblyTypeName: CardTweaks, Assembly-CSharp
-              m_MethodName: AddCoins
-              m_Mode: 3
-              m_Arguments:
-                m_ObjectArgument: {fileID: 0}
-                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-                m_IntArgument: 5
-                m_FloatArgument: 0
-                m_StringArgument: 
-                m_BoolArgument: 0
-              m_CallState: 2
-      - target: 1
-        result:
-          m_PersistentCalls:
-            m_Calls:
-            - m_Target: {fileID: 11400000, guid: 9370dbb7973ed7240b796fd6beb3d5e6, type: 2}
-              m_TargetAssemblyTypeName: CardTweaks, Assembly-CSharp
-              m_MethodName: AddCoins
-              m_Mode: 3
-              m_Arguments:
-                m_ObjectArgument: {fileID: 0}
-                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-                m_IntArgument: 5
-                m_FloatArgument: 0
-                m_StringArgument: 
-                m_BoolArgument: 0
-              m_CallState: 2
-      - target: 1
-        result:
-          m_PersistentCalls:
-            m_Calls:
-            - m_Target: {fileID: 11400000, guid: 9370dbb7973ed7240b796fd6beb3d5e6, type: 2}
-              m_TargetAssemblyTypeName: CardTweaks, Assembly-CSharp
-              m_MethodName: AddCoins
-              m_Mode: 3
-              m_Arguments:
-                m_ObjectArgument: {fileID: 0}
-                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-                m_IntArgument: 7
-                m_FloatArgument: 0
-                m_StringArgument: 
-                m_BoolArgument: 0
-              m_CallState: 2
-      - target: 1
-        result:
-          m_PersistentCalls:
-            m_Calls:
-            - m_Target: {fileID: 11400000, guid: 9370dbb7973ed7240b796fd6beb3d5e6, type: 2}
-              m_TargetAssemblyTypeName: CardTweaks, Assembly-CSharp
-              m_MethodName: AddCoins
-              m_Mode: 3
-              m_Arguments:
-                m_ObjectArgument: {fileID: 0}
-                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-                m_IntArgument: 7
-                m_FloatArgument: 0
-                m_StringArgument: 
-                m_BoolArgument: 0
-              m_CallState: 2
+    - <when>k__BackingField: 0
+      <diceValue>k__BackingField: 0
+      <type>k__BackingField: 2
+      <effectActions>k__BackingField:
+      - <subActions>k__BackingField:
+        - <connection>k__BackingField: 0
+          <target>k__BackingField: 1
+          <actionType>k__BackingField: 5
+          count: 1
+          targetCardBefore: {fileID: 0}
+      - <subActions>k__BackingField:
+        - <connection>k__BackingField: 0
+          <target>k__BackingField: 1
+          <actionType>k__BackingField: 5
+          count: 1
+          targetCardBefore: {fileID: 0}
+      - <subActions>k__BackingField:
+        - <connection>k__BackingField: 0
+          <target>k__BackingField: 1
+          <actionType>k__BackingField: 0
+          count: 5
+          targetCardBefore: {fileID: 0}
+      - <subActions>k__BackingField:
+        - <connection>k__BackingField: 0
+          <target>k__BackingField: 1
+          <actionType>k__BackingField: 0
+          count: 5
+          targetCardBefore: {fileID: 0}
+      - <subActions>k__BackingField:
+        - <connection>k__BackingField: 0
+          <target>k__BackingField: 1
+          <actionType>k__BackingField: 0
+          count: 7
+          targetCardBefore: {fileID: 0}
+      - <subActions>k__BackingField:
+        - <connection>k__BackingField: 0
+          <target>k__BackingField: 1
+          <actionType>k__BackingField: 0
+          count: 7
+          targetCardBefore: {fileID: 0}

@@ -18,7 +18,7 @@ public class ItemCard : Card
             PlayFlipEffect();
         };
     }
-    public virtual void PlayFlipEffect()
+    public void PlayFlipEffect()
     {
         if(!SubSystems.inst.isSelectingSomething &&!IsFlipped && IsFlippable && transform.parent != GameMaster.inst.shop.transform) 
         {
@@ -41,21 +41,12 @@ public class ItemCard : Card
     }
     private async void InvokeFlipEffect()
     {
+        GameMaster.inst.turnManager.SetPrior(GetMyPlayer());
         ItemCardData d = GetData<ItemCardData>();
-        foreach(ItemEffect itemEffect in d.effects)
-        {
-            switch(itemEffect.type)
-            {
-                case ItemEffectType.Flip:
-                {
-                    foreach(Effect eff in itemEffect.effects)
-                    {
-                        GameMaster.inst.turnManager.cardTarget = this;
-                        await eff.PlayActions();
-                    }
-                } break;
-            }
-        }
+        
+        CardStackEffect csf = new CardStackEffect(await GetData<ItemCardData>().GetFlipEffect(), this);
+        await csf.Init();
+        StackSystem.inst.PushEffect(csf);
 
         GameMaster.inst.turnManager.RestorePrior();
         Console.WriteText("Использован предмет");

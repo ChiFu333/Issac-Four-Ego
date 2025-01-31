@@ -13,8 +13,23 @@ MonoBehaviour:
   m_Name: e_XLFloor
   m_EditorClassIdentifier: 
   <title>k__BackingField: 
-  <face>k__BackingField: {fileID: 0}
+  <face>k__BackingField: {fileID: -741607436, guid: 83fe639c6bffdef4aba5e1e7f4840f32, type: 3}
   <back>k__BackingField: {fileID: -1796203524, guid: de0b45a183741ac49a1d424c688fb240, type: 3}
-  <eventEffect>k__BackingField:
-    type: 0
-    effects: []
+  <eventEffects>k__BackingField:
+  - type: 0
+    effects:
+    - <when>k__BackingField: 0
+      <diceValue>k__BackingField: 0
+      <type>k__BackingField: 0
+      <effectActions>k__BackingField:
+      - <subActions>k__BackingField:
+        - <connection>k__BackingField: 0
+          <target>k__BackingField: 0
+          <actionType>k__BackingField: 30
+          count: 1
+          targetCardBefore: {fileID: 0}
+        - <connection>k__BackingField: 2
+          <target>k__BackingField: 1
+          <actionType>k__BackingField: 12
+          count: 1
+          targetCardBefore: {fileID: 0}

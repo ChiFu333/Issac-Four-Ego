@@ -1,37 +1,51 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class LootCard : Card
 {
+    private bool itemTrigger = false;
+    public bool isItem = false;
     public override void Init(CardData d, bool isFaceUp = true)
     {
         base.Init(d, isFaceUp);
-        MouseClicked += (Card c) => 
-        {
-            GameMaster.inst.turnManager.SetPrior(GetMyPlayer());
-            GetMyPlayer().PlayCard(this);
-        };
+        MouseClicked += ClickToPlay;
     }
     public async void PlayCard()
     {
-        LootCardData d = GetData<LootCardData>();
-        switch(d.lootEffect.type)
-        {
-            case LootEffectType.Trinket:
-            {
-                GameMaster.inst.turnManager.priorPlayer.AddItem(GetComponent<LootCard>());
-            } break;
-            case LootEffectType.Play:
-            {
-                foreach(Effect eff in d.lootEffect.effects)
-                {
-                    GameMaster.inst.turnManager.cardTarget = this;
-                    await eff.PlayActions();
-                }
-            } break;
-        }
-
+        Effect e = GetData<LootCardData>().GetPlayEffect();
+        
+        CardStackEffect eff = new CardStackEffect(e, this);
+    
+        await eff.Init();
+        //Тут можно попробовать сделать прерывание типо не назначил цель - и пофиг.
+        StackSystem.inst.PushEffect(eff);
         GameMaster.inst.turnManager.RestorePrior();
+
         Console.WriteText("Разыграна карта лута");
+    }
+    public void TurnIntoItem()
+    {
+        itemTrigger = true;
+        isItem = true;
+        MouseClicked -= ClickToPlay;
+    }
+    public void DiscardCard()
+    {
+        if(!itemTrigger)
+        {
+            MoveTo(CardPlaces.inst.lootStash, null, () => GameMaster.inst.lootStash.PutOneCardUp(this));
+        } 
+        else
+        {
+            itemTrigger = false;
+        }
+    }
+    private void ClickToPlay(Card c)
+    {
+        GameMaster.inst.turnManager.SetPrior(GetMyPlayer());
+        GetMyPlayer().PlayLootCard(this);
     }
 }

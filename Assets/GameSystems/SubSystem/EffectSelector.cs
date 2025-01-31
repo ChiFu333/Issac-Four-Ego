@@ -18,9 +18,10 @@ public class EffectSelector : MonoBehaviour
         inst = this;
         panel = inst.transform.GetChild(0).gameObject;
     }
-    public async Task<int> SelectEffect(int allCount)
+    public async Task<int> SelectEffect(Sprite source, int allCount)
     {
-        cardImage.sprite = GameMaster.inst.turnManager.cardTarget.GetData<CardData>().face;
+        if(allCount == 1 || allCount == 0) return -1;
+        cardImage.sprite = source;
         selectableId = -1;
         for(int i = 0; i < selectButtons.Count; i++)
         {

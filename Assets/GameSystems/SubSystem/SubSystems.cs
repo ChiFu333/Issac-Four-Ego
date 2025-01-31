@@ -15,8 +15,9 @@ public class SubSystems : MonoBehaviour
     }
     public async Task<T> SelectCardByType<T>(string zoneName) where T : Card
     {
-        Player initiator = GameMaster.inst.turnManager.priorPlayer;
+        Player initiator = GameMaster.inst.turnManager.priorPlayer();
         isSelectingSomething = true;
+        UIOnDeck.inst.ChangeButtonsActive();
         while (true)
         {
             await Task.Yield();
@@ -38,7 +39,7 @@ public class SubSystems : MonoBehaviour
                         Dictionary<string, bool> rightBool = new Dictionary<string, bool>()
                         {
                             {"InPlay", true},
-                            {"MyHand", hit.collider.transform.parent.parent == initiator.transform},
+                            {"MyHand", hit.collider.transform.parent.parent == initiator?.transform},
                             {"Shop", hit.collider.transform.parent == GameMaster.inst.shop.transform},
                             {"MonsterZone", hit.collider.transform.parent == GameMaster.inst.monsterZone.transform}
                         };
@@ -46,6 +47,7 @@ public class SubSystems : MonoBehaviour
                         if(rightBool[zoneName])
                         {
                             QuitSelecting();
+                            UIOnDeck.inst.ChangeButtonsActive();
                             return hit.collider.GetComponent<T>();
                         }
                     }
@@ -55,8 +57,9 @@ public class SubSystems : MonoBehaviour
     }
     public async Task<Card> SelectCardByTypes<T1,T2>(string zoneName) where T1 : Card where T2 : Card
     {
-        Player initiator = GameMaster.inst.turnManager.priorPlayer;
+        Player initiator = GameMaster.inst.turnManager.priorPlayer();
         isSelectingSomething = true;
+        UIOnDeck.inst.ChangeButtonsActive();
         while (true)
         {
             await Task.Yield();
@@ -86,6 +89,7 @@ public class SubSystems : MonoBehaviour
                         if(rightBool[zoneName])
                         {
                             QuitSelecting();
+                            UIOnDeck.inst.ChangeButtonsActive();
                             return hit.collider.GetComponent<Card>();
                         }
                     }

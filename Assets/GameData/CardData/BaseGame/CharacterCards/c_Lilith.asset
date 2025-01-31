@@ -16,7 +16,19 @@ MonoBehaviour:
   <face>k__BackingField: {fileID: 2009449551, guid: e70436442109f024faac0a9151a80679, type: 3}
   <back>k__BackingField: {fileID: 1926533658, guid: e70436442109f024faac0a9151a80679, type: 3}
   <isStartFlipped>k__BackingField: 0
-  <effects>k__BackingField: []
+  <effects>k__BackingField:
+  - type: 0
+    value: 0
+    count: 0
+    effect:
+      <when>k__BackingField: 0
+      <type>k__BackingField: 0
+      <effectActions>k__BackingField:
+      - <subActions>k__BackingField:
+        - <connection>k__BackingField: 0
+          <target>k__BackingField: 2
+          <actionType>k__BackingField: 11
+          count: 1
   <characterItemData>k__BackingField: {fileID: 11400000, guid: bb6f9f69089d00440bfe70d93012207b, type: 2}
   <hp>k__BackingField: 2
   <attack>k__BackingField: 1

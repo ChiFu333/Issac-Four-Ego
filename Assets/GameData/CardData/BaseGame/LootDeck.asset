@@ -1,0 +1,165 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 897aabb98a58f7749afe3e3a450db906, type: 3}
+  m_Name: LootDeck
+  m_EditorClassIdentifier: 
+  <cardsList>k__BackingField:
+  - <data>k__BackingField: {fileID: 11400000, guid: 20013e1254319044caef3047e972671a, type: 2}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 11400000, guid: 3fc1f85284b12414f89a1189ea0a1e8c, type: 2}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 11400000, guid: 0b7fce29e7fdf6247a80e9fe9717725a, type: 2}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 11400000, guid: 4504ae19d77ed4e44a3fb3b425cf3f29, type: 2}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 11400000, guid: 857ce2581948451498e24f6885affbdc, type: 2}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 11400000, guid: 3aa50ef7dfbf7e34eb21da78931caf3b, type: 2}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 11400000, guid: dd5af24f79b56064bbf4e3ebc11e811b, type: 2}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 11400000, guid: 9bb62797bde1a364d942267dbded6f7c, type: 2}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 11400000, guid: 5c285806f0b3ca14fb569a1c5e5402cf, type: 2}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 11400000, guid: 4aa047d63968a5943b7164e7c3eb4c74, type: 2}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 100
+  - <data>k__BackingField: {fileID: 11400000, guid: b2e2914781be7984285fbad26fe8731f, type: 2}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 11400000, guid: a46cd62c9e85dcb43a01d0185ef59a95, type: 2}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 11400000, guid: 45bc0d4a5fdef3d4f9795e24334baca1, type: 2}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 11400000, guid: b5b9f901f48c1544fa4c0a92c32b92df, type: 2}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 11400000, guid: 5df942f5f8e48964787c0c3b751540bf, type: 2}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 11400000, guid: 15f440c06caa2a64b935cb8c44b97653, type: 2}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 11400000, guid: 6f686da64b076284f93d75b25a47243f, type: 2}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 11400000, guid: 1f0669c6249e20e469cd035c733803fa, type: 2}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 11400000, guid: e5cea8bba5bfe1d409c76f716f8a81cf, type: 2}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 11400000, guid: e225f092ad9183b4e894b882522260c9, type: 2}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 11400000, guid: 416d8cbf361ab414fa4d5654b4b2242b, type: 2}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 11400000, guid: b318dee3625e75447ae206f054780c63, type: 2}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 11400000, guid: 8272ba830b7fd8641920316b6e7d2ede, type: 2}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 11400000, guid: e6f18491445f0cd44b3f706bd749fc1f, type: 2}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 11400000, guid: b6ba90777e018a342a69ebfa4bf3a40e, type: 2}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 11400000, guid: 505ce9cd0ff929d409d2f65c71b6a1a7, type: 2}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 11400000, guid: 0ffc0d0c07ee0fa4c8cdc3eaa299b4ae, type: 2}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 11400000, guid: aa44fcf616090f24f8aa70a3804edc1e, type: 2}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 11400000, guid: 15992e907b21c5e499eeaf4f31259321, type: 2}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 100
+  - <data>k__BackingField: {fileID: 11400000, guid: eed5344259141d048a95ef6b9a83f23a, type: 2}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 11400000, guid: 5ef7157f9da59c646908c400f5ecd56c, type: 2}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 11400000, guid: 9c8f978225f234a49a4d67c8cf48798a, type: 2}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 11400000, guid: 79303e8cb03ed3c4bae892e90ce48fa5, type: 2}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 11400000, guid: 20ade1ad87556ae4a8711f86d42a2695, type: 2}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 11400000, guid: ba3bdc502a167424d92224d3ef146618, type: 2}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 11400000, guid: 868bbf7fb7d762643b7e6735901726ae, type: 2}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 11400000, guid: 00e32de12d539ca499dbfc8d1da9dca1, type: 2}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 11400000, guid: 17d9718c8d53a0c4b9f943ef0e79fb4f, type: 2}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 11400000, guid: 3059c61c70b1cb048b568ea1a1f66666, type: 2}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 11400000, guid: bf91a925b47639441a684f8745839404, type: 2}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 11400000, guid: 4495ceb8bdba50a4fb5e13cf7176b573, type: 2}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 11400000, guid: 9e7e79fc955cd9b47acc5ee9f3b88f76, type: 2}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 11400000, guid: 70dcd112a7d85d241a6703c5de29ac87, type: 2}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 11400000, guid: 52e6f61c20255524e830efcbc28168c6, type: 2}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 11400000, guid: 7e24c2dc134a91d4384e247416531414, type: 2}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 11400000, guid: b469dd99386bdc942aa7bb8ce724d656, type: 2}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 11400000, guid: 78e8bac06c3450b45a412849abf0c47f, type: 2}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 11400000, guid: 3e276c1665553684aa18f51e69318281, type: 2}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 11400000, guid: 40ad12241196e0548913e56af82f94c1, type: 2}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 11400000, guid: 900c60726585c7143927cc7a61ee21ed, type: 2}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1

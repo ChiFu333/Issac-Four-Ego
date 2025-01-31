@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using DG.Tweening;
+using Unity.Mathematics;
 using UnityEngine;
+using System.Threading.Tasks;
+using Unity.VisualScripting;
 
 public class Shop : MonoBehaviour
 {
@@ -27,25 +30,18 @@ public class Shop : MonoBehaviour
             itemsInSlots[i].MoveTo(CardPlaces.inst.shopSlots[activeSlotsCount-i-1], transform);
         }
     }
-    public async void Buy()
+    public void IncreaseShop(int count)
+    {
+        activeSlotsCount = math.min(activeSlotsCount + count, 4); 
+        RestockSlots();
+    }
+    public void StartShopSubPhase()
     {
         if(GameMaster.inst.turnManager.activePlayer.buyCount <= 0) return;
-
-        Card c = await SubSystems.inst.SelectCardByType<ItemCard>("Shop");
-        if(c == null) return;
-
-        if(GameMaster.inst.turnManager.activePlayer.PermitBuy())
-        {
-            GameMaster.inst.turnManager.activePlayer.buyCount -= 1;
-            UIOnDeck.inst.UpdateAddInfo();
-            InstBuy(c);
-        }
-        else
-        {
-            Console.WriteText("Нехватает денег");
-        }
+        GameMaster.inst.turnManager.activePlayer.buyCount -= 1;
+        _ = GameMaster.inst.phaseSystem.StartBuying();   
     }
-    private void InstBuy(Card itemToBuy)
+    public void InstBuy(Card itemToBuy)
     {
         Console.WriteText("Куплен предмет");
         itemsInSlots[itemsInSlots.IndexOf(itemToBuy)] = null;

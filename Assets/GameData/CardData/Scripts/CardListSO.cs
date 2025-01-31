@@ -4,4 +4,8 @@ using UnityEngine;
 public class CardListSO : ScriptableObject
 {
     [field: SerializeField] public List<CardData> list { get; private set; }
+    public void Init()
+    {
+        list = new List<CardData>();
+    }
 }

@@ -8,7 +8,7 @@ public class Hand : MonoBehaviour
 {
     public float deltaCard = Card.CARDPIXELSIZE.x * Card.CARDSIZE; // 1.13 и 0.28 для стандарта Card.CARDSIZE.x * GameMaster.CARDSIZE;
     private const float MAXLENGTH =  6.5f;
-    private const float UPMOVE = 0.4f;
+    public const float UPMOVE = 0.4f;
     [field: SerializeField] public List<Card> cards { get; private set; } = new List<Card>();
     public void AddCard(Card card)
     {
@@ -22,21 +22,21 @@ public class Hand : MonoBehaviour
     }
     public void PlayCard(LootCard card)
     {
-        card.PlayCard();
         ExitCardFromHand(card);
-        card.MoveTo(CardPlaces.inst.lootStash, null, () => GameMaster.inst.lootStash.PutOneCardUp(card));
+        card.PlayCard();    
     }
     public void DiscardCard(LootCard card)
     {
         ExitCardFromHand(card);
-        card.MoveTo(CardPlaces.inst.lootStash, null, () => GameMaster.inst.lootStash.PutOneCardUp(card));
+        card.DiscardCard();
     }
     private void ExitCardFromHand(LootCard card)
     {
         card.MouseDown -= MoveUp;
         card.MouseExit -= MoveDown;
         card.transform.DOKill();
-        card.transform.localPosition = new Vector3(card.transform.localPosition.x, UPMOVE);
+        
+        card.MoveTo(transform.TransformPoint(new Vector3(0, UPMOVE * 1.5f)), null);
 
         cards.Remove(card);
         
@@ -54,7 +54,10 @@ public class Hand : MonoBehaviour
         {
             float delCard = ((cards.Count - 1) * deltaCard / 2f) > MAXLENGTH/2 ? MAXLENGTH / (cards.Count - 1): deltaCard;
             float dStart = -(cards.Count - 1) * delCard / 2f;
-            cards[i].transform.DOLocalMove(new Vector3(dStart + i * delCard, 0), GameMaster.CARDSPEED);
+            float localXPos = dStart + i * delCard;
+
+            cards[i].MoveTo(transform.TransformPoint(new Vector3(localXPos, 0)), null, null, false);
+            
             cards[i].Collider.size = new Vector2(delCard/Card.CARDSIZE, Card.CARDPIXELSIZE.y + UPMOVE/Card.CARDSIZE);
             cards[i].Collider.offset = new Vector2(0, -UPMOVE/2 /Card.CARDSIZE);
         }
