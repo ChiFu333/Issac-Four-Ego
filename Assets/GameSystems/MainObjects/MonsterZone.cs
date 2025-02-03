@@ -18,9 +18,9 @@ public class MonsterZone : MonoBehaviour
             monstersInSlots.Add(c);
         }
 
-        RestockSlots(); 
+        _ = RestockSlots(); 
     }
-    public void RestockSlots()
+    public async Task RestockSlots()
     {
         for(int i = 0; i < activeSlotsCount; i++)
         {
@@ -39,12 +39,30 @@ public class MonsterZone : MonoBehaviour
                 monstersInSlots[i] = c;
             }
         }
+        bool trigger = false;
         for(int j = 0; j < activeSlotsCount; j++)
         {
-            monstersInSlots[j].MoveTo(CardPlaces.inst.monsterSlots[j], transform);
+            if(j + 1 == activeSlotsCount)
+            {
+                monstersInSlots[j].MoveTo(CardPlaces.inst.monsterSlots[j], transform, () => trigger = true);
+            }
+            else
+            {
+                monstersInSlots[j].MoveTo(CardPlaces.inst.monsterSlots[j], transform);
+            }
         }
+        while(!trigger) await Task.Yield();
         UIOnDeck.inst.UpdateMonsterUI();
-        foreach(Card c in monstersInSlots) if(c is EventCard eventC) eventC.PlayEvent();
+    }
+    public async Task CheckEvents()
+    {
+        List<EventCard> events = new List<EventCard>();
+        foreach(Card c in monstersInSlots) if(c is EventCard eventC) events.Add(eventC);
+        
+        for(int i = 0; i < events.Count; i++)
+        {
+            if(events[i] != null) await GameMaster.inst.phaseSystem.StartEventPlay(events[i]);
+        }
     }
     public async void StartAttackSubPhase()
     {
@@ -59,17 +77,11 @@ public class MonsterZone : MonoBehaviour
     public void IncreaseZone(int count)
     {
         activeSlotsCount = math.min(activeSlotsCount + count, 4); 
-        RestockSlots();
+        _ = RestockSlots();
     }
-    public async Task RemoveMonster(Card c)
+    public void RemoveMonster(Card c)
     {
-        monstersInSlots[monstersInSlots.IndexOf(c)] = null;
-        bool trigger = false;
-        c.MoveTo(GameMaster.inst.turnManager.activePlayer.hand.transform.TransformPoint(new Vector3(0, Hand.UPMOVE * 3f)), null, () => 
-        {
-            trigger = true;
-        });
-        while(!trigger) await Task.Yield();
+        if(monstersInSlots.IndexOf(c) != -1) monstersInSlots[monstersInSlots.IndexOf(c)] = null;
     }
     public void RestoreAllStats()
     {
@@ -78,6 +90,7 @@ public class MonsterZone : MonoBehaviour
     }
     public async Task StashSlot(Card c, bool canStashAttackedMonster = false)
     {
-        await RemoveMonster(c);
+        RemoveMonster(c);
+        await c.DiscardCard();
     }
 }

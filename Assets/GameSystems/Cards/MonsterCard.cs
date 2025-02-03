@@ -34,7 +34,7 @@ public class MonsterCard : Card
         base.Init(d, isFaceUp);
         SetBaseStats();
     }
-    public void Damage(int count)
+    public async Task Damage(int count)
     {
         int damageCount = count;
         if(hp == 0) return;
@@ -53,7 +53,7 @@ public class MonsterCard : Card
         if(hp <= 0) 
         {
             hp = 0;
-            StackSystem.inst.PushPrimalEffect(PrimalEffect.Kill, this);
+            await StackSystem.inst.PushPrimalEffect(PrimalEffect.Kill, this);
         }
     }
     public void AddHp(int count) => hp += count;
@@ -81,5 +81,9 @@ public class MonsterCard : Card
         HealHp(HpMax);
         dodge = GetData<MonsterCardData>().dodge;
         attack = GetData<MonsterCardData>().attack;
+    }
+    public override async Task DiscardCard()
+    {
+        await DiscardCard<MonsterCard>();
     }
 }

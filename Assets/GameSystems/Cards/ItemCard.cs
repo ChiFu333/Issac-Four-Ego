@@ -3,6 +3,7 @@ using System.Collections;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Analytics;
+using System.Threading.Tasks;
 
 public class ItemCard : Card
 {
@@ -45,10 +46,13 @@ public class ItemCard : Card
         ItemCardData d = GetData<ItemCardData>();
         
         CardStackEffect csf = new CardStackEffect(await GetData<ItemCardData>().GetFlipEffect(), this);
-        await csf.Init();
-        StackSystem.inst.PushEffect(csf);
+        await StackSystem.inst.PushEffect(csf);
 
         GameMaster.inst.turnManager.RestorePrior();
         Console.WriteText("Использован предмет");
+    }
+    public override async Task DiscardCard()
+    {
+        await DiscardCard<ItemCard>();
     }
 }

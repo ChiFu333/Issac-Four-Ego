@@ -75,7 +75,7 @@ public class Player : MonoBehaviour
         HpMax += count;
         UIOnDeck.inst.UpdateTexts();
     }
-    public void Damage(int count)
+    public async Task Damage(int count)
     {
         int damageCount = count;
         if(hp == 0) return;
@@ -94,7 +94,7 @@ public class Player : MonoBehaviour
         if(hp <= 0) 
         {
             hp = 0;
-            if(!isDead) StackSystem.inst.PushPrimalEffect(PrimalEffect.Kill, GetMyCard());
+            if(!isDead) await StackSystem.inst.PushPrimalEffect(PrimalEffect.Kill, GetMyCard());
         }
         return;
     }
@@ -107,13 +107,13 @@ public class Player : MonoBehaviour
             hp += count;
         UIOnDeck.inst.UpdateTexts();
     }
-    public bool PayHp(int count)
+    public async Task<bool> PayHp(int count)
     {
         if(hp - count < 0)
             return false;
         else
             hp -= count;
-        if(hp == 0 && !isDead) StackSystem.inst.PushPrimalEffect(PrimalEffect.Kill, GetMyCard());;
+        if(hp == 0 && !isDead) await StackSystem.inst.PushPrimalEffect(PrimalEffect.Kill, GetMyCard());;
         UIOnDeck.inst.UpdateTexts();
         return true;
     }
@@ -156,7 +156,7 @@ public class Player : MonoBehaviour
     {
         if(lootPlayCount > 0) 
         {
-            hand.PlayCard(c);
+            _ = hand.PlayCard(c);
             lootPlayCount--;
         }
         else
@@ -164,9 +164,9 @@ public class Player : MonoBehaviour
             Console.WriteText("Ты не можешь играть лут");
         }
     }
-    public void DiscardCard(LootCard c) 
+    public async Task DiscardCard(LootCard c) 
     { 
-        hand.DiscardCard(c); 
+        await hand.DiscardCard(c); 
     }
     #endregion
     
@@ -237,6 +237,10 @@ public class Player : MonoBehaviour
         {
             if(Items[i] != null) PutCardTrigger(Items[i]);
         }
+        for(int i = 0; i < Curses.Count; i++)
+        {
+            if(Curses[i] != null) PutCardTrigger(Curses[i]);
+        }
     }
     private void PutCardTrigger(Card c)
     {
@@ -248,6 +252,10 @@ public class Player : MonoBehaviour
         else if(c is ItemCard itemCard && itemCard.GetData<ItemCardData>().GetPassiveEffect() != null)
         {
             triggeredEffect = new CardStackEffect(itemCard.GetData<ItemCardData>().GetPassiveEffect(), c);
+        }
+        else if(c is EventCard eventCard && eventCard.GetData<EventCardData>().GetPassiveEffect() != null)
+        {
+            triggeredEffect = new CardStackEffect(eventCard.GetData<EventCardData>().GetPassiveEffect(), c);
         }
         TriggersSystem.PutTrigger(triggeredEffect, GameMaster.inst.turnManager.GetMyId(this) + 1);
     }
@@ -263,23 +271,32 @@ public class Player : MonoBehaviour
             {
                 Curses[i] = c;
                 c.MoveTo(CardPlaces.inst.playersCurses[GameMaster.inst.turnManager.GetMyId(this)][i], transform);
+                PutCardTrigger(c);
                 return;
             }
         }
         Curses.Add(c);
         c.MoveTo(CardPlaces.inst.playersCurses[GameMaster.inst.turnManager.GetMyId(this)][Curses.Count-1], transform);
+        PutCardTrigger(c);
     }
-    public void DestroyCurse(Card c)
+    public async Task<bool> DestroyCurse(Card c)
     {
+        bool t = false;
         for(int i = 0; i < Curses.Count; i++)
         {
             if(Curses[i] == c) 
             {
                 Curses[i] = null;
+                t = true;
                 break;
             }
         }
-        (c as EventCard).DiscardCard();
+        if(t)
+        {
+            await (c as EventCard).DiscardCard();
+            return true;
+        }
+        return false;
     }
     #endregion
     

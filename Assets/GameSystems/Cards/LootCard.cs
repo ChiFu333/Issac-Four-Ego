@@ -19,9 +19,7 @@ public class LootCard : Card
         
         CardStackEffect eff = new CardStackEffect(e, this);
     
-        await eff.Init();
-        //Тут можно попробовать сделать прерывание типо не назначил цель - и пофиг.
-        StackSystem.inst.PushEffect(eff);
+        await StackSystem.inst.PushEffect(eff);
         GameMaster.inst.turnManager.RestorePrior();
 
         Console.WriteText("Разыграна карта лута");
@@ -32,11 +30,11 @@ public class LootCard : Card
         isItem = true;
         MouseClicked -= ClickToPlay;
     }
-    public void DiscardCard()
+    public override async Task DiscardCard()
     {
         if(!itemTrigger)
         {
-            MoveTo(CardPlaces.inst.lootStash, null, () => GameMaster.inst.lootStash.PutOneCardUp(this));
+            await DiscardCard<LootCard>();
         } 
         else
         {

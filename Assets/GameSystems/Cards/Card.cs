@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 using DG.Tweening;
+using System.Threading.Tasks;
 public class Card : MonoBehaviour
 {
     public const float CARDSIZE = 0.28f;
@@ -23,6 +24,7 @@ public class Card : MonoBehaviour
         Collider = gameObject.AddComponent<BoxCollider2D>();
         Collider.size = CARDPIXELSIZE;
     }
+    protected float speed = GameMaster.CARDSPEED;
     public Player GetMyPlayer()
     {
         return GetComponentInParent<Player>();
@@ -69,8 +71,8 @@ public class Card : MonoBehaviour
         Collider.enabled = false;
         int order = render.sortingOrder;
         if(changeOrder) render.sortingOrder = 1000;
-        transform.DOScale(target.lossyScale, GameMaster.CARDSPEED);
-        transform.DOMove(target.position,GameMaster.CARDSPEED).onComplete += () => 
+        transform.DOScale(target.lossyScale, speed);
+        transform.DOMove(target.position, speed).onComplete += () => 
         {
             afterComplete?.Invoke();
             render.sortingOrder = order;
@@ -83,12 +85,51 @@ public class Card : MonoBehaviour
         Collider.enabled = false;
         int order = render.sortingOrder;
         if(changeOrder) render.sortingOrder = 1000;
-        transform.DOMove(target, GameMaster.CARDSPEED).onComplete += () => 
+        transform.DOMove(target, speed).onComplete += () => 
         {
             afterComplete?.Invoke();
             render.sortingOrder = order;
             Collider.enabled = true;
         };
         if(parent != null) transform.parent = parent;
+    }
+    protected async Task DiscardCard<T>()
+    {
+        Dictionary<Type, CardDeck> posToDiscardCard = new Dictionary<Type, CardDeck>
+        {
+            {typeof(LootCard), GameMaster.inst.lootStash},
+            {typeof(ItemCard), GameMaster.inst.shopStash},
+            {typeof(EventCard), GameMaster.inst.monsterStash},
+            {typeof(MonsterCard), GameMaster.inst.monsterStash},
+        };
+        bool trigger = false;
+        MoveTo(posToDiscardCard[typeof(T)].transform, null, () =>
+        {
+            posToDiscardCard[typeof(T)].PutOneCardUp(this);
+            trigger = true;
+        });
+        while(!trigger) await Task.Yield();
+    }
+    public virtual async Task DiscardCard()
+    {
+        Debug.Log("NO CARD TYPE TO DISCARD");
+        await Task.Yield();
+    }
+    public async Task PutCardNearHand(Hand h)
+    {
+        bool trigger = false;
+        if(this is LootCard) speed = GameMaster.CARDSPEED / 2.5f;
+        MoveTo(h.transform.TransformPoint(new Vector3(0, Hand.UPMOVE * 3f)), null, () => 
+        {
+            trigger = true;
+            speed = GameMaster.CARDSPEED;
+        });
+        while(!trigger) await Task.Yield();
+    }
+    public async Task Shake()
+    {
+        bool trigger = false;
+        transform.DOShakeRotation(0.5f, strength: 55, randomnessMode: ShakeRandomnessMode.Harmonic).onComplete = () => trigger = true;
+        while(!trigger) await Task.Yield();
     }
 }

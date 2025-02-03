@@ -1,30 +1,28 @@
 using UnityEngine;
 using DG.Tweening;
+using System.Threading.Tasks;
 public class EventCard : Card
 {
+    public bool isCurse = false;
+    private bool curseTrigger = false;
     public override void Init(CardData d, bool isFaceUp = true)
     {
         base.Init(d, isFaceUp);
     }
-    public async void PlayEvent()
+    public override async Task DiscardCard()
     {
-        /*
-        EventCardData d = GetData<EventCardData>();
-        if(d.eventEffect.type == EventEffectType.Curse)
+        if(!curseTrigger)
         {
-            await d.eventEffect.GiveCurse(this);
-            await GameMaster.inst.monsterZone.RemoveMonster(this, false);
-        }
-        else if(d.eventEffect.type == EventEffectType.Play)
+            await DiscardCard<EventCard>();
+        } 
+        else
         {
-            await d.eventEffect.PlayAction();
-            await GameMaster.inst.monsterZone.RemoveMonster(this);
+            curseTrigger = false;
         }
-        */
     }
-    public void DiscardCard()
+    public void TurnIntoCurse()
     {
-        EventCardData d = GetData<EventCardData>();
-        MoveTo(CardPlaces.inst.monsterStash, null, () => GameMaster.inst.monsterStash.PutOneCardUp(this));
+        isCurse = true;
+        //curseTrigger = true;
     }
 }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1a0b3bd61671c64d884e73e63ebbc35, type: 3}
   m_Name: l_14Temperance
   m_EditorClassIdentifier: 
-  <title>k__BackingField: 
+  <title>k__BackingField: "\u0423\u043C\u0435\u0440\u0435\u043D\u043D\u043E\u0441\u0442\u044C"
   <face>k__BackingField: {fileID: -501348199, guid: 387f31fd93282dd4eacb94f6ce9d5a8b, type: 3}
   <back>k__BackingField: {fileID: 21300000, guid: 9aae75ebd6b98d54db8572420c8a2693, type: 3}
   <lootEffects>k__BackingField:
@@ -28,7 +28,7 @@ MonoBehaviour:
           <actionType>k__BackingField: 15
           count: 1
           targetCardBefore: {fileID: 0}
-        - <connection>k__BackingField: 0
+        - <connection>k__BackingField: 2
           <target>k__BackingField: 2
           <actionType>k__BackingField: 0
           count: 4
@@ -39,7 +39,7 @@ MonoBehaviour:
           <actionType>k__BackingField: 15
           count: 2
           targetCardBefore: {fileID: 0}
-        - <connection>k__BackingField: 0
+        - <connection>k__BackingField: 2
           <target>k__BackingField: 2
           <actionType>k__BackingField: 0
           count: 8

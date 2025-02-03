@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05bd5715e8d687e46bb33e466d4d29c9, type: 3}
   m_Name: TakeDamage
   m_EditorClassIdentifier: 
+  <title>k__BackingField: 
   <face>k__BackingField: {fileID: 102871774, guid: 910fe19c53219a8479567876607c4628, type: 3}
+  <back>k__BackingField: {fileID: 102871774, guid: 910fe19c53219a8479567876607c4628, type: 3}
   <action>k__BackingField:
     <subActions>k__BackingField:
     - <connection>k__BackingField: 0

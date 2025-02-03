@@ -202,7 +202,6 @@ using UnityEngine.InputSystem.Interactions;
                 StackSystem.inst.cardTarget = GameMaster.inst.monsterZone.monstersInSlots[i];
                 await PlayAction();
             }
-            GameMaster.inst.monsterZone.RestockSlots();
         }
         /*
         else if(targetCard != null)
@@ -245,19 +244,7 @@ public enum EventEffectType { Play, Curse };
 [Serializable] public class EventEffect
 {
     public EventEffectType type;
-    public List<Effect> effects;
-    public async Task GiveCurse(Card c)
-    {
-        if(type == EventEffectType.Curse)
-        {
-            Card t = await SubSystems.inst.SelectCardByType<CharacterCard>("InPlay");
-            t.GetMyPlayer().AddCurse(c);
-        }
-    }
-    public async Task PlayAction()
-    {
-        foreach(Effect effect in effects) await effect.PlayEffect(-1);
-    }
+    public Effect effect;
 }
 
 

@@ -18,9 +18,16 @@ MonoBehaviour:
   <hp>k__BackingField: 2
   <dodge>k__BackingField: 3
   <attack>k__BackingField: 1
-  <reward>k__BackingField:
-    when: 0
-    target: 0
-    result:
-      m_PersistentCalls:
-        m_Calls: []
+  <monsterEffects>k__BackingField:
+  - type: 0
+    effect:
+      <when>k__BackingField: 0
+      <diceValue>k__BackingField: 0
+      <type>k__BackingField: 0
+      <effectActions>k__BackingField:
+      - <subActions>k__BackingField:
+        - <connection>k__BackingField: 0
+          <target>k__BackingField: 1
+          <actionType>k__BackingField: 2
+          count: 5
+          targetCardBefore: {fileID: 0}

@@ -20,23 +20,22 @@ public class Hand : MonoBehaviour
         UpdateCardPositions();
         UIOnDeck.inst.UpdateTexts();
     }
-    public void PlayCard(LootCard card)
+    public async Task PlayCard(LootCard card)
     {
         ExitCardFromHand(card);
+        await card.PutCardNearHand(this);
         card.PlayCard();    
     }
-    public void DiscardCard(LootCard card)
+    public async Task DiscardCard(LootCard card)
     {
         ExitCardFromHand(card);
-        card.DiscardCard();
+        await card.DiscardCard();
     }
     private void ExitCardFromHand(LootCard card)
     {
         card.MouseDown -= MoveUp;
         card.MouseExit -= MoveDown;
         card.transform.DOKill();
-        
-        card.MoveTo(transform.TransformPoint(new Vector3(0, UPMOVE * 1.5f)), null);
 
         cards.Remove(card);
         

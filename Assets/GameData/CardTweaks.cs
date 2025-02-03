@@ -35,12 +35,13 @@ public class CardTweaks : ScriptableObject
     }
     public static async Task<bool> DiscardLootCard(int count)
     {
+        Console.WriteText("Сбрось лут");
         if(StackSystem.inst.cardTarget.GetMyPlayer().lootCount == 0) return false;
         for(int i = 0; i < count; i++) 
         {
             if(StackSystem.inst.cardTarget.GetMyPlayer().lootCount == 0) break;
             LootCard c = await SubSystems.inst.SelectCardByType<LootCard>("MyHand"); 
-            StackSystem.inst.cardTarget.GetMyPlayer().DiscardCard(c);
+            await StackSystem.inst.cardTarget.GetMyPlayer().DiscardCard(c);
         }
         return true;
     }
@@ -97,25 +98,25 @@ public class CardTweaks : ScriptableObject
         UIOnDeck.inst.UpdateMonsterUI();
         return Task.FromResult(true);
     }
-    public static Task<bool> Damage(int count)
+    public static async Task<bool> Damage(int count)
     {
         if(StackSystem.inst.cardTarget is CharacterCard player)
         {
-            player.GetMyPlayer().Damage(count);
+            await player.GetMyPlayer().Damage(count);
         }
         else if(StackSystem.inst.cardTarget is MonsterCard monster)
         {
-            monster.Damage(count);
+            await monster.Damage(count);
         }
         UIOnDeck.inst.UpdateTexts();
         UIOnDeck.inst.UpdateMonsterUI();
-        return Task.FromResult(true);
+        return (true);
     }
     public static async Task<bool> Kill(int count)
     {
         if(StackSystem.inst.cardTarget is CharacterCard player)
         {
-            player.GetMyPlayer().PayHp(player.GetMyPlayer().HpMax);
+            await player.GetMyPlayer().PayHp(player.GetMyPlayer().HpMax);
         }
         else if(StackSystem.inst.cardTarget is MonsterCard monster)
         {
@@ -152,19 +153,19 @@ public class CardTweaks : ScriptableObject
         }
         else if(StackSystem.inst.cardTarget is MonsterCard monster)
         {
-            monster.StartMonsterDieSubphase();
+            await monster.StartMonsterDieSubphase();
         }
         return true;
     }
-    public static Task<bool> RequestDamage(int count)
+    public static async Task<bool> RequestDamage(int count)
     {
-        StackSystem.inst.PushPrimalEffect(PrimalEffect.Damage, StackSystem.inst.cardTarget, count);
-        return Task.FromResult(true);
+        await StackSystem.inst.PushPrimalEffect(PrimalEffect.Damage, StackSystem.inst.cardTarget, count);
+        return true;
     }
-    public static Task<bool> RequestKill(int count)
+    public static async Task<bool> RequestKill(int count)
     {
-        StackSystem.inst.PushPrimalEffect(PrimalEffect.Kill, StackSystem.inst.cardTarget);
-        return Task.FromResult(true);;
+        await StackSystem.inst.PushPrimalEffect(PrimalEffect.Kill, StackSystem.inst.cardTarget);
+        return true;
     }
     //Кнопки и действия
     public static Task<bool> GetDiscount(int count)
@@ -176,7 +177,7 @@ public class CardTweaks : ScriptableObject
     public void Agree()
     {
         if(StackSystem.inst.stack.Count == 0) StackSystem.inst.prioreNow = false;
-        StackSystem.inst.AgreeEffect();
+        _ = StackSystem.inst.AgreeEffect();
     }
     public static Task<bool> Buy(int count)
     {
@@ -223,10 +224,10 @@ public class CardTweaks : ScriptableObject
         StackSystem.inst.GetCubeInStack(false)?.ChangeToCount(count);
         return Task.FromResult(true);
     }
-    public static Task<bool> DestroyCurse(int count)
+    public async static Task<bool> DestroyCurse(int count)
     {
-        StackSystem.inst.cardTarget.GetMyPlayer().DestroyCurse(StackSystem.inst.cardTarget);
-        return Task.FromResult(true);
+        bool b = await StackSystem.inst.cardTarget.GetMyPlayer().DestroyCurse(StackSystem.inst.cardTarget);
+        return b;
     }
     public static async Task<bool> StashMonster(int count)
     {
@@ -245,6 +246,15 @@ public class CardTweaks : ScriptableObject
         loot.TurnIntoItem();
         StackSystem.inst.cardTarget.GetMyPlayer().AddItem(StackSystem.inst.cardTarget);
         return Task.FromResult(true);
+    }
+    public async static Task<bool> TurnAndGiveCurse(int no)
+    {
+        EventCard eve = StackSystem.inst.cardTarget as EventCard;
+        eve.TurnIntoCurse();
+        Console.WriteText("Отдай кому-то проклятие");
+        CharacterCard t = await SubSystems.inst.SelectCardByType<CharacterCard>("InPlay");
+        t.GetMyPlayer().AddCurse(eve);
+        return true;
     }
     public static Task<bool> IncreaseShop(int count)
     {
@@ -300,6 +310,7 @@ public class CardTweaks : ScriptableObject
         {ActionType.AcceptDeath, AcceptDeath},
         {ActionType.EndTurn, EndTurn},
         {ActionType.CancelEverythingInStack, CancelEverythingInStack},
+        {ActionType.TurnIntoCurseAndGive, TurnAndGiveCurse},
     };
 }
 public enum ActionType
@@ -336,5 +347,6 @@ public enum ActionType
     IncreaseMonsterZone = 30,
     AcceptDeath = 31,
     EndTurn = 32,
-    CancelEverythingInStack = 33
+    CancelEverythingInStack = 33,
+    TurnIntoCurseAndGive = 34,
 }

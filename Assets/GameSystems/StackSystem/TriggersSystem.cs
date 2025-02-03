@@ -102,10 +102,10 @@ public class TriggeredEvent
         {
             return;
         }
-        for(int i = 0; i < triggeredStackEffects.Count; i++)
+        int c = triggeredStackEffects.Count;
+        for(int i = 0; i < c; i++)
         {
-            await triggeredStackEffects[i].Init();
-            StackSystem.inst.PushEffect(triggeredStackEffects[i]);
+            await StackSystem.inst.PushEffect(triggeredStackEffects[i]);
         }
     }
     public void RemoveEffect(StackEffect eff)

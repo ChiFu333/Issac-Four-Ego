@@ -6,28 +6,31 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using System;
 using System.Linq;
+using Microsoft.Win32.SafeHandles;
+using UnityEditor.XR;
 
 public class StackSystem : MonoBehaviour
 {
     public static StackSystem inst;
     public Stack<StackEffect> stack = new Stack<StackEffect>();
-    public Card cardTarget;             
+    public Card cardTarget;
     public bool prioreNow = false;
     public List<PrimalCardData> primalCards; //заявка на покупку, заявка на атаку, получение урона, смерть
     public List<CubeCardData> cubeCards;
-    public void Awake() { inst = this;}
-    public void PushEffect(StackEffect effect)
+    public void Awake() { inst = this; }
+    public async Task PushEffect(StackEffect effect)
     {
+        await effect.Init();    
         stack.Push(effect);
-        UpdateUI();      
+        UpdateUI();
     }
     public async Task AgreeEffect()
     {
-        if(stack.Count > 0)
+        if (stack.Count > 0)
         {
             StackEffect effect = stack.Peek();
             await effect.PlayStackEffect();
-            
+
             UpdateUI();
             //if(stack.Count > 0 && stack.Peek() is CubeStackEffect cubeEff && cubeEff.endedValue) AgreeEffect();
         }
@@ -36,22 +39,22 @@ public class StackSystem : MonoBehaviour
     {
         UIOnDeck.inst.UpdateStack();
     }
-    public void PushPrimalEffect(PrimalEffect type, Card t, int effCount = 1, bool fight = false)
+    public async Task PushPrimalEffect(PrimalEffect type, Card t, int effCount = 1, bool fight = false)
     {
         StackEffect eff = new PrimalStackEffect(type, t, effCount, fight);
-        PushEffect(eff);
+        await PushEffect(eff);
     }
-    public void PushCubeEffect(int value, bool isEnded, bool fight, List<StackEffect> list = null)
+    public async Task PushCubeEffect(int value, bool isEnded, bool fight, List<StackEffect> list = null)
     {
-        StackEffect eff = new CubeStackEffect(cubeCards[value-1], isEnded, fight, list);
-        PushEffect(eff);
+        StackEffect eff = new CubeStackEffect(cubeCards[value - 1], isEnded, fight, list);
+        await PushEffect(eff);
     }
     public CubeStackEffect GetCubeInStack(bool isEnded)
     {
         StackEffect[] st = stack.ToArray();
-        for(int i = st.Length - 1; i >= 0; i--)
+        for (int i = st.Length - 1; i >= 0; i--)
         {
-            if(st[i] is CubeStackEffect cubeEff)
+            if (st[i] is CubeStackEffect cubeEff)
             {
                 return cubeEff.endedValue == isEnded ? cubeEff : null;
             }
@@ -61,12 +64,31 @@ public class StackSystem : MonoBehaviour
     public void GivePrior() => prioreNow = true;
     public async Task CancelEverythingInStack()
     {
-        for(int i = 0; i < stack.Count; i++)
+        bool t = false;
+        int count = stack.Count;
+        List<StackEffect> sfl = new List<StackEffect>();
+        for (int i = 0; i < count; i++)
         {
-            StackEffect effect = stack.Pop();
-            await effect.RemoveMeFromStack();
+            sfl.Add(stack.Pop());
+        }
+        UpdateUI();
+        for(int i = 0; i < count; i++)
+        {
+            if (sfl[i] is CardStackEffect cardEff && cardEff.source is LootCard lootCard && !lootCard.isItem) await lootCard.DiscardCard();
+            else if (sfl[i] is CardStackEffect cardEff2 && cardEff2.source is EventCard eventCard && !eventCard.isCurse) 
+            {
+                await eventCard.DiscardCard();
+                t = true;
+            }
+        }
+        if(t) await GameMaster.inst.monsterZone.RestockSlots();
+        if(t) 
+        {
+            Debug.Log("Проверяю ивенты из стека");
+            _ = GameMaster.inst.monsterZone.CheckEvents();
         }
         prioreNow = false;
+        
     }
     public async Task PushAndAgree(StackEffect effect)
     {
@@ -77,33 +99,37 @@ public class StackSystem : MonoBehaviour
 
 public abstract class StackEffect
 {
-    public async virtual Task Init() { await Task.Yield();}
+    public async virtual Task Init() { await Task.Yield(); }
     public abstract Task PlayStackEffect();
     public abstract Sprite GetSprite(bool sourceSprite);
-    public Task RemoveMeFromStack()
+    public async Task RemoveMeFromStack()
     {
-        StackEffect[] st = StackSystem.inst.stack.ToArray();
-        st.Reverse();
+        Stack<StackEffect> s = StackSystem.inst.stack;
+        StackEffect[] st = s.ToArray();
         int idx = Array.IndexOf(st.ToArray(), this);
         Stack<StackEffect> b = new Stack<StackEffect>();
-        for (int i = 0; i < st.Length; i++)
+        for (int i = st.Length -1; i >= 0; i--)
         {
-            if(i != idx)
+            if (i != idx)
             {
                 b.Push(st[i]);
             }
         }
+
+        int slotToFade = st.Length - 1 - idx; 
+
+
         StackSystem.inst.stack = b;
+        await Task.Yield();
         StackSystem.inst.UpdateUI();
-        return Task.CompletedTask;
     }
 }
 public class CardStackEffect : StackEffect
 {
-    public Card source {get; private set;}
-    public Effect effect {get; private set;}
+    public Card source { get; private set; }
+    public Effect effect { get; private set; }
     private int manageEffect = -1;
-    public bool triggeredEffect {get; private set;} = false;
+    public bool triggeredEffect { get; private set; } = false;
     public CardStackEffect(Effect eff, Card s, bool trigge = false)
     {
         effect = eff;
@@ -112,7 +138,7 @@ public class CardStackEffect : StackEffect
     }
     public async override Task Init()
     {
-        if(effect.type != EffectType.Roll)
+        if (effect.type != EffectType.Roll)
         {
             manageEffect = await EffectSelector.inst.SelectEffect(source.GetData<CardData>().face, effect.effectActions.Count);
         }
@@ -120,31 +146,33 @@ public class CardStackEffect : StackEffect
     }
     public async override Task PlayStackEffect()
     {
+        if (source is EventCard eve && !eve.isCurse && !triggeredEffect)
+        {
+            GameMaster.inst.monsterZone.RemoveMonster(eve);
+            await eve.PutCardNearHand(GameMaster.inst.turnManager.activePlayer.hand);
+            if(eve.GetData<EventCardData>().isCurse) eve.TurnIntoCurse();
+        }
         await RemoveMeFromStack();
-        if(effect.type == EffectType.Roll)
+        if (effect.type == EffectType.Roll)
         {
             List<StackEffect> effs = new List<StackEffect>();
-            for(int i = 0; i < 6; i++)
+            for (int i = 0; i < 6; i++)
             {
                 List<EffectAction> temp = new List<EffectAction>
                 {
                     effect.effectActions[i]
                 };
-                effs.Add(new CardStackEffect(new Effect(When.Now, 0, EffectType.Common, temp),source, true));
+                effs.Add(new CardStackEffect(new Effect(When.Now, 0, EffectType.Common, temp), source, true));
             }
-            StackSystem.inst.PushCubeEffect(CubeManager.inst.ThrowDice(), false, false, effs);
+            await StackSystem.inst.PushCubeEffect(UnityEngine.Random.Range(1, 7), false, false, effs);
         }
-        else if(effect.type == EffectType.YouSelectOne || effect.type == EffectType.Common)
+        else if (effect.type == EffectType.YouSelectOne || effect.type == EffectType.Common)
         {
             await effect.PlayEffect(manageEffect);
         }
-        if(!triggeredEffect)
-        {
-            if(source is LootCard lootCard && !lootCard.isItem)
-            {
-                lootCard.DiscardCard();
-            }
-        }
+        Debug.Log(source != null ? source.name : "NULL!!");
+        if (source is LootCard lootCard && !lootCard.isItem) await lootCard.DiscardCard();
+        //if(source is EventCard) await GameMaster.inst.monsterZone.RestockSlots();
     }
     public override Sprite GetSprite(bool sourceSprite)
     {
@@ -169,21 +197,22 @@ public class PrimalStackEffect : StackEffect
     }
     public async override Task PlayStackEffect()
     {
-        await RemoveMeFromStack();
-        for(int i = 0; i < count; i++)
+        if(type == (int)PrimalEffect.Kill) await RemoveMeFromStack();
+        for (int i = 0; i < count; i++)
         {
             await data.action.SetTargets(target);
             await data.action.PlaySubActions();
         }
+        if(type != (int)PrimalEffect.Kill) await RemoveMeFromStack();
     }
     public override Sprite GetSprite(bool sourceSprite)
     {
         return sourceSprite ? data.face : target?.render.sprite;
     }
 }
-public enum PrimalEffect { BuyRequest, AttackRequest, Damage, Kill}
+public enum PrimalEffect { Damage, Kill }
 public class CubeStackEffect : StackEffect
-{ 
+{
     public bool fightCube;
     public bool endedValue;
     private CubeCardData data;
@@ -199,30 +228,30 @@ public class CubeStackEffect : StackEffect
     }
     public override async Task PlayStackEffect()
     {
-        if(!endedValue)
+        if (!endedValue)
         {
-            if(isNewValue)
+            if (isNewValue)
             {
                 isNewValue = false;
                 await TriggersSystem.diceWouldRoll[data.value - 1]?.PlayTriggeredEffects();
-                if(TriggersSystem.diceWouldRoll[data.value - 1].triggeredStackEffects.Count != 0) return;
+                if (TriggersSystem.diceWouldRoll[data.value - 1].triggeredStackEffects.Count != 0) return;
             }
-            
+
             endedValue = true;
         }
         else
         {
-            if(myDiceTrigger != null) TriggersSystem.diceRolls[data.value - 1].AddStackEffect(myDiceTrigger[data.value -1]);
+            if (myDiceTrigger != null) TriggersSystem.diceRolls[data.value - 1].AddStackEffect(myDiceTrigger[data.value - 1]);
             await TriggersSystem.diceRolls[data.value - 1]?.PlayTriggeredEffects();
-            if(myDiceTrigger != null) TriggersSystem.diceRolls[data.value - 1].RemoveEffect(myDiceTrigger[data.value -1]);
+            if (myDiceTrigger != null) TriggersSystem.diceRolls[data.value - 1].RemoveEffect(myDiceTrigger[data.value - 1]);
             await RemoveMeFromStack();
         }
     }
     public void RethrowDice()
     {
-        if(!endedValue)
+        if (!endedValue)
         {
-            data = StackSystem.inst.cubeCards[CubeManager.inst.ThrowDice()-1];
+            data = StackSystem.inst.cubeCards[UnityEngine.Random.Range(1, 7) - 1];
             isNewValue = true;
             StackSystem.inst.UpdateUI();
         }
@@ -231,20 +260,20 @@ public class CubeStackEffect : StackEffect
     {
         int result = data.value;
         result += count;
-        if(result < 1) result = 1;
-        if(result > 6) result = 6;
-        data = StackSystem.inst.cubeCards[result-1];
+        if (result < 1) result = 1;
+        if (result > 6) result = 6;
+        data = StackSystem.inst.cubeCards[result - 1];
         isNewValue = true;
         StackSystem.inst.UpdateUI();
     }
-    public void ChangeToCount(int count) 
+    public void ChangeToCount(int count)
     {
-        data = StackSystem.inst.cubeCards[count-1];
+        data = StackSystem.inst.cubeCards[count - 1];
         isNewValue = true;
         StackSystem.inst.UpdateUI();
     }
     public override Sprite GetSprite(bool sourceSprite)
     {
-        return sourceSprite ? !endedValue ? data.face : data.end : null;//myDiceTrigger?[0].source?.GetData<CardData>().face;
+        return sourceSprite ? !endedValue ? data.face : data.back : null;//myDiceTrigger?[0].source?.GetData<CardData>().face;
     }
 }

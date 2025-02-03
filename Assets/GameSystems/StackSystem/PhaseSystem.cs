@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
+using Unity.Burst.Intrinsics;
 
 public class PhaseSystem : MonoBehaviour
 {
@@ -68,6 +69,7 @@ public class PhaseSystem : MonoBehaviour
     {
         currentPhase = Phase.End;
         UIOnDeck.inst.ChangeButtonsActive();
+        EndBuying();
         UIOnDeck.inst.UpdatePhase("Фаза: конец хода");
         
         while(subphases != 0 || StackSystem.inst.stack.Count != 0) await Task.Yield();
@@ -85,11 +87,12 @@ public class PhaseSystem : MonoBehaviour
 
         #region Step2
         UIOnDeck.inst.UpdatePhase("Фаза: конец хода (шаг 2)");
-        for(int i = 0; i < GameMaster.inst.turnManager.activePlayer.lootCount - 10; i++) 
+        int count = GameMaster.inst.turnManager.activePlayer.lootCount - 10;
+        for(int i = 0; i < count; i++) 
         {
             Console.WriteText("Сбрось до 10 карт лута");
             LootCard c = await SubSystems.inst.SelectCardByType<LootCard>("MyHand"); 
-            GameMaster.inst.turnManager.activePlayer.DiscardCard(c);
+            await GameMaster.inst.turnManager.activePlayer.DiscardCard(c);
         }
         #endregion Step2
 
@@ -126,8 +129,6 @@ public class PhaseSystem : MonoBehaviour
         
         while(tempSubphase != subphases || StackSystem.inst.stack.Count > tempStackCount) 
         {
-            Debug.Log("Iff: " + (tempSubphase));
-            Debug.Log("Ifs: " + (subphases));
             await Task.Yield();
         }
         tempStackCount = StackSystem.inst.stack.Count;
@@ -142,7 +143,7 @@ public class PhaseSystem : MonoBehaviour
         {
             Console.WriteText("Сбрось лут");
             GameMaster.inst.turnManager.SetPrior(p);
-            p.DiscardCard(await SubSystems.inst.SelectCardByType<LootCard>("MyHand"));
+            await p.DiscardCard(await SubSystems.inst.SelectCardByType<LootCard>("MyHand"));
             GameMaster.inst.turnManager.RestorePrior();
         }
         p.AddMoney(-1);
@@ -165,7 +166,7 @@ public class PhaseSystem : MonoBehaviour
     }
     public async Task StartEnemyDie(MonsterCard c)
     {
-        subphases++;
+        subphases += 1;
         int tempSubphase = subphases;
         int tempStackCount = StackSystem.inst.stack.Count;
         //p.isDead = true;
@@ -175,7 +176,8 @@ public class PhaseSystem : MonoBehaviour
         await Task.Delay(500);
 
         #region Step1
-        await GameMaster.inst.monsterZone.RemoveMonster(c);
+        GameMaster.inst.monsterZone.RemoveMonster(c);
+        await c.PutCardNearHand(GameMaster.inst.turnManager.activePlayer.hand);
         #endregion Step1
 
         #region Step2
@@ -186,27 +188,29 @@ public class PhaseSystem : MonoBehaviour
         #endregion Step2
 
         #region Step3
+        await c.Shake();
         await StackSystem.inst.PushAndAgree(new CardStackEffect(c.GetData<MonsterCardData>().GetRewardEffect(), c));
         #endregion Step3
 
         #region Step4
         //Способности после смерти монстра, тут как обычно
         StackSystem.inst.GivePrior();
-        while(tempSubphase != subphases || StackSystem.inst.stack.Count > tempStackCount /*|| StackSystem.inst.prioreNow*/) await Task.Yield();
+        while(tempSubphase > subphases || StackSystem.inst.stack.Count > tempStackCount /*|| StackSystem.inst.prioreNow*/) 
+        {
+            await Task.Yield();
+            Debug.Log("1IF: " + (tempSubphase > subphases) + "2IF: " + (StackSystem.inst.stack.Count > tempStackCount));
+            Debug.Log("1temp: " + tempSubphase + " 2sub:" + subphases);
+        }
         tempStackCount = StackSystem.inst.stack.Count;
         #endregion Step4
         
-        await Task.Delay(500);
-
-        bool trigger = false;
-        c.MoveTo(CardPlaces.inst.monsterStash, null, () => 
-        {
-            GameMaster.inst.monsterStash.PutOneCardUp(c);
-            trigger = true;
-        });
-        while(!trigger) await Task.Yield();
-        GameMaster.inst.monsterZone.RestockSlots();
-        subphases--;
+        await c.DiscardCard();
+        Debug.Log("beforeRestock");
+        await GameMaster.inst.monsterZone.RestockSlots();
+        _ = GameMaster.inst.monsterZone.CheckEvents();
+        Debug.Log("afterRestock");
+        subphases -= 1;
+        Debug.Log("endedMonsterDie");
         UIOnDeck.inst.ChangeButtonsActive();
     }
     public async Task StartFighting()
@@ -222,7 +226,7 @@ public class PhaseSystem : MonoBehaviour
         {
             await Task.Yield();
             Debug.Log("Halo");
-            if(currentPhase != Phase.Action) { await EndAttack(); subphases--; return; }
+            if(currentPhase != Phase.Action) { await EndAttack(); subphases--; UIOnDeck.inst.ChangeButtonsActive(); return; }
         }
         #endregion Step1
 
@@ -235,7 +239,7 @@ public class PhaseSystem : MonoBehaviour
         #region StepRepeat
         while(GameMaster.inst.monsterZone.currentEnemy != null && GameMaster.inst.monsterZone.currentEnemy.hp != 0 && GameMaster.inst.turnManager.activePlayer.hp != 0)
         {
-            if(currentPhase != Phase.Action) { await EndAttack(); subphases--; return; }
+            if(currentPhase != Phase.Action) { await EndAttack(); subphases--; UIOnDeck.inst.ChangeButtonsActive(); return; }
             
             List<StackEffect> additionTrigger = new List<StackEffect>();
             for(int i = 0; i < 6; i++)
@@ -252,19 +256,20 @@ public class PhaseSystem : MonoBehaviour
                 additionTrigger.Add(eff); 
             }
             
-            StackSystem.inst.PushCubeEffect(CubeManager.inst.ThrowDice(), false, true, additionTrigger);
+            await StackSystem.inst.PushCubeEffect(UnityEngine.Random.Range(1, 7), false, true, additionTrigger);
             
-            if(currentPhase != Phase.Action) { await EndAttack(); subphases--; return; }
+            if(currentPhase != Phase.Action) { await EndAttack(); subphases--; UIOnDeck.inst.ChangeButtonsActive(); return; }
             while(subphases != 1 || StackSystem.inst.stack.Count != 0) 
             {
                 await Task.Yield();
-                if(currentPhase != Phase.Action) { await EndAttack(); subphases--; return; }
+                if(currentPhase != Phase.Action) { await EndAttack(); subphases--; UIOnDeck.inst.ChangeButtonsActive(); return; }
             }
         }
         #endregion StepRepeat
         
         await EndAttack();
         subphases--;
+        UIOnDeck.inst.ChangeButtonsActive();
     }
     public async Task EndAttack()
     {
@@ -281,7 +286,6 @@ public class PhaseSystem : MonoBehaviour
             }
         }
         GameMaster.inst.monsterZone.currentEnemy = null;
-        UIOnDeck.inst.ChangeButtonsActive();
         //if(currentPhase == Phase.End) await StartEndPhase();   
     }
     private bool isBuying = false;
@@ -330,6 +334,39 @@ public class PhaseSystem : MonoBehaviour
         {
             isBuying = false;
         }
+    }
+    public async Task StartEventPlay(EventCard c)
+    {
+        string nameBefore = c.name;
+        subphases += 1;
+        int tempSubphase = subphases;
+        int tempStackCount = StackSystem.inst.stack.Count;
+        UIOnDeck.inst.UpdateAddInfo();
+        UIOnDeck.inst.ChangeButtonsActive();
+        
+        //#region Step1
+        Console.WriteText("Событие!");
+        
+        CardStackEffect eff = new CardStackEffect(c.GetData<EventCardData>().GetPlayEffect(), c);
+        await eff.Init();
+        await StackSystem.inst.PushEffect(eff);
+        
+        StackSystem.inst.GivePrior();
+        while(tempSubphase > subphases || StackSystem.inst.stack.Count > tempStackCount /*|| StackSystem.inst.prioreNow*/) 
+        {
+            await Task.Yield();
+            
+            //Debug.Log("1IF: " + (tempSubphase >= subphases) + "2IF: " + (StackSystem.inst.stack.Count > tempStackCount));
+        }
+        //#endregion Step1
+        
+        if(c != null && !c.isCurse) await c.DiscardCard();
+        await GameMaster.inst.monsterZone.RestockSlots();
+        Debug.Log("Проверяю ивенты из фазы игры события, сейчас событие: " + nameBefore);
+        _ = GameMaster.inst.monsterZone.CheckEvents();
+        subphases -= 1;
+        Debug.Log("endedEvent");
+        UIOnDeck.inst.ChangeButtonsActive();
     }
 }
 

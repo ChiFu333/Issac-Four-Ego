@@ -17,11 +17,12 @@ public class GameMaster : MonoBehaviour
     //Decks
     [HideInInspector] public CardDeck characterDeck;
     [HideInInspector] public CardDeck lootDeck, lootStash;
-    [HideInInspector] public CardDeck shopDeck;
+    [HideInInspector] public CardDeck shopDeck, shopStash;
     [HideInInspector] public CardDeck monsterDeck, monsterStash;
     [Header("CardLists")]
     private CardListSO lootDeckList;
     [SerializeField] private CardListSO shopDeckList;
+    [SerializeField] private CardListSO shopStashList;
     [SerializeField] private CardListSO characterList;
     [SerializeField] private CardListSO monsterList;
     [SerializeField] private CardListSO eventList;
@@ -32,6 +33,7 @@ public class GameMaster : MonoBehaviour
         lootDeckList = deckBuilder.GetLootList();
         lootStashList = ScriptableObject.CreateInstance<CardListSO>();
         monsterStashList = ScriptableObject.CreateInstance<CardListSO>();
+        shopStashList = ScriptableObject.CreateInstance<CardListSO>();
     }
     public void Start()
     {
@@ -41,7 +43,7 @@ public class GameMaster : MonoBehaviour
         InitDeck(out lootStash, lootStashList, true);
 
         InitDeck(out shopDeck, shopDeckList, false);
-        //InitDeck(out ShopDeck, ShopDeckList, true);
+        InitDeck(out shopStash, shopStashList, true);
         
         InitDeck(out monsterDeck, monsterList, false);
         InitDeck(out monsterStash, monsterStashList, true);
@@ -58,18 +60,26 @@ public class GameMaster : MonoBehaviour
         {
             {lootDeckList, CardPlaces.inst.lootDeck.position},
             {lootStashList, CardPlaces.inst.lootStash.position},
+            
             {shopDeckList, CardPlaces.inst.shopDeck.position},
-            {monsterStashList, CardPlaces.inst.monsterStash.position},
+            {shopStashList, CardPlaces.inst.shopStash.position},
+            
             {monsterList, CardPlaces.inst.monsterDeck.position},
+            {monsterStashList, CardPlaces.inst.monsterStash.position},
+
             {characterList, new Vector3(-10, 0, 0)}
         };
         Dictionary<CardListSO, string> deckName = new Dictionary<CardListSO, string>
         {
             {lootDeckList, "LootDeck"},
             {lootStashList, "LootStash"},
+
             {shopDeckList, "ShopDeck"},
-            {monsterStashList, "MonsterStash"},
+            {shopStashList, "ShopStash"},
+            
             {monsterList, "MonsterDeck"},
+            {monsterStashList, "MonsterStash"},
+            
             {characterList, "CharacterDeck"}
         };
         GameObject g = new GameObject(deckName[list]);
