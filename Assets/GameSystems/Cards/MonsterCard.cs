@@ -32,7 +32,10 @@ public class MonsterCard : Card
     public override void Init(CardData d, bool isFaceUp = true)
     {
         base.Init(d, isFaceUp);
-        SetBaseStats();
+        hpMax = GetData<MonsterCardData>().hp;
+        dodge = GetData<MonsterCardData>().dodge;
+        attack = GetData<MonsterCardData>().attack;
+        //SetBaseStats();
     }
     public async Task Damage(int count)
     {
@@ -78,7 +81,7 @@ public class MonsterCard : Card
     {
         preventHp = 0;
         HpMax = GetData<MonsterCardData>().hp;
-        HealHp(HpMax);
+        HealHp(100);
         dodge = GetData<MonsterCardData>().dodge;
         attack = GetData<MonsterCardData>().attack;
     }

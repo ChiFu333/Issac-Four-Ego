@@ -28,8 +28,7 @@ public class CardTweaks : ScriptableObject
         for(int i = 0; i < count; i++) 
         {
             await Task.Delay(1000/count < 200 ? 1000/count : 200); 
-            StackSystem.inst.cardTarget.GetMyPlayer().hand.AddCard(Card.CreateCard<LootCard>(GameMaster.inst.lootDeck.TakeOneCard(), true));
-            
+            StackSystem.inst.cardTarget.GetMyPlayer().hand.AddCard(GameMaster.inst.lootDeck.TakeOneCard()); 
         }
         return true;
     }
@@ -61,8 +60,8 @@ public class CardTweaks : ScriptableObject
     {
         for(int i = 0; i < count; i++) 
         {
-            CardData d = GameMaster.inst.shopDeck.TakeOneCard();
-            StackSystem.inst.cardTarget.GetMyPlayer().AddItem(Card.CreateCard<ItemCard>(d, true));
+            ItemCard c = (ItemCard)GameMaster.inst.shopDeck.TakeOneCard();
+            StackSystem.inst.cardTarget.GetMyPlayer().AddItem(c);
         }
         return Task.FromResult(true);
     }

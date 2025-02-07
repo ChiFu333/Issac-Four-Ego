@@ -68,10 +68,7 @@ public class TurnManager : MonoBehaviour
             {
                 t.gameObject.SetActive(false);
             }
-            CardPlaces.inst.playersCurses[j][0].gameObject.SetActive(false);
-            CardPlaces.inst.playersCurses[j][1].gameObject.SetActive(false);
-            CardPlaces.inst.hands[j].gameObject.SetActive(false);
-            UIOnDeck.inst.playerText[j].gameObject.SetActive(false);
+            CardPlaces.inst.playersTransformToDeconstruct[j].gameObject.SetActive(false);
         }
         Destroy(g);
     }
@@ -81,7 +78,7 @@ public class TurnManager : MonoBehaviour
         {
             for(int j = 0; j < 3; j++)
             {
-                LootCard c = Card.CreateCard<LootCard>(GameMaster.inst.lootDeck.TakeOneCard());
+                LootCard c = (LootCard)GameMaster.inst.lootDeck.TakeOneCard();
                 players[i].TakeOneLootCard(c);
             }
             players[i].AddMoney(3);

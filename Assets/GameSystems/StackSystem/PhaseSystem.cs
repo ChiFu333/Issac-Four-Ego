@@ -41,7 +41,7 @@ public class PhaseSystem : MonoBehaviour
         #region Step3
         Console.WriteText("Эффекты после взятия лута");
         UIOnDeck.inst.UpdatePhase("Фаза: начало хода (шаг 3)");
-        GameMaster.inst.turnManager.activePlayer.TakeOneLootCard(Card.CreateCard<LootCard>(GameMaster.inst.lootDeck.TakeOneCard(),true));
+        GameMaster.inst.turnManager.activePlayer.TakeOneLootCard((LootCard)GameMaster.inst.lootDeck.TakeOneCard());
 
         StackSystem.inst.GivePrior();
         while(subphases != 0 || StackSystem.inst.stack.Count != 0 || StackSystem.inst.prioreNow) 
@@ -106,6 +106,128 @@ public class PhaseSystem : MonoBehaviour
         #endregion Step3
 
         GameMaster.inst.turnManager.SwitchTurn();
+    }
+    private bool isBuying = false;
+    public async Task StartBuying()
+    {
+        subphases++;
+        isBuying = true;
+        Console.WriteText("Приоритет перед покупкой");
+        UIOnDeck.inst.ChangeButtonsActive();
+
+        StackSystem.inst.GivePrior();
+        while(subphases != 1 || StackSystem.inst.stack.Count != 0 || StackSystem.inst.prioreNow) 
+        {
+            await Task.Yield();
+            if(!isBuying) 
+            {
+                subphases--;
+                UIOnDeck.inst.ChangeButtonsActive();
+                return;
+            }
+        }
+        if(!isBuying) 
+        {
+            subphases--;
+            UIOnDeck.inst.ChangeButtonsActive();
+            return;
+        }
+        Console.WriteText("Выбери предмет на покупку");        
+        Card c = await SubSystems.inst.SelectCardByType<ItemCard>("Shop");
+        //здесь эффекты после выбора цели
+        if(GameMaster.inst.turnManager.activePlayer.PermitBuy())
+        {
+            UIOnDeck.inst.UpdateAddInfo();
+            GameMaster.inst.shop.InstBuy(c);
+        }
+        else
+        {
+            Console.WriteText("Нехватает денег");
+        }
+        subphases--;
+        UIOnDeck.inst.ChangeButtonsActive();
+    }
+    public async Task StartFighting()
+    {
+        subphases++;
+        UIOnDeck.inst.UpdateAddInfo();
+        UIOnDeck.inst.ChangeButtonsActive();
+        
+        #region Step1
+        Console.WriteText("Приоритет перед атакой");
+        StackSystem.inst.GivePrior();
+        while(subphases != 1 || StackSystem.inst.stack.Count != 0 || StackSystem.inst.prioreNow) 
+        {
+            await Task.Yield();
+            Debug.Log("Halo");
+            if(currentPhase != Phase.Action) { await EndAttack(); subphases--; UIOnDeck.inst.ChangeButtonsActive(); return; }
+        }
+        #endregion Step1
+
+        #region Step2
+        Console.WriteText("Выбери цель атаки");
+        GameMaster.inst.monsterZone.currentEnemy = await SubSystems.inst.SelectCardByType<MonsterCard>("MonsterZone");
+        Console.WriteText("Атака начата!");
+        #endregion Step2
+
+        #region StepRepeat
+        while(GameMaster.inst.monsterZone.currentEnemy != null && GameMaster.inst.monsterZone.currentEnemy.hp != 0 && GameMaster.inst.turnManager.activePlayer.hp != 0)
+        {
+            if(currentPhase != Phase.Action) { await EndAttack(); subphases--; UIOnDeck.inst.ChangeButtonsActive(); return; }
+            
+            List<StackEffect> additionTrigger = new List<StackEffect>();
+            for(int i = 0; i < 6; i++)
+            {
+                StackEffect eff = null;
+                if(i+1 >= GameMaster.inst.monsterZone.currentEnemy.dodge)
+                {
+                    eff = new PrimalStackEffect(PrimalEffect.Damage, GameMaster.inst.monsterZone.currentEnemy, GameMaster.inst.turnManager.activePlayer.attack, true);
+                }
+                else
+                {
+                    eff = new PrimalStackEffect(PrimalEffect.Damage, GameMaster.inst.turnManager.activePlayer.GetMyCard(), GameMaster.inst.monsterZone.currentEnemy.attack, true);
+                }
+                additionTrigger.Add(eff); 
+            }
+            
+            await StackSystem.inst.PushCubeEffect(UnityEngine.Random.Range(1, 7), false, true, additionTrigger);
+            
+            if(currentPhase != Phase.Action) { await EndAttack(); subphases--; UIOnDeck.inst.ChangeButtonsActive(); return; }
+            while(subphases != 1 || StackSystem.inst.stack.Count != 0) 
+            {
+                await Task.Yield();
+                if(currentPhase != Phase.Action) { await EndAttack(); subphases--; UIOnDeck.inst.ChangeButtonsActive(); return; }
+            }
+        }
+        #endregion StepRepeat
+        
+        await EndAttack();
+        subphases--;
+        UIOnDeck.inst.ChangeButtonsActive();
+    }
+    public async Task EndAttack()
+    {
+        StackEffect[] st = StackSystem.inst.stack.ToArray();
+        for(int i = st.Length - 1; i >= 0; i--)
+        {
+            if(st[i] is CubeStackEffect eff && eff.fightCube)
+            {
+                await eff.RemoveMeFromStack();
+            }
+            else if(st[i] is PrimalStackEffect pse && pse.type == (int)PrimalEffect.Damage && pse.fightDamage)
+            {
+                await pse.RemoveMeFromStack();
+            }
+        }
+        GameMaster.inst.monsterZone.currentEnemy = null;
+        //if(currentPhase == Phase.End) await StartEndPhase();   
+    }
+    public void EndBuying()
+    {
+        if(isBuying)
+        {
+            isBuying = false;
+        }
     }
     public async Task StartPlayerDie(Player p)
     {
@@ -205,140 +327,13 @@ public class PhaseSystem : MonoBehaviour
         #endregion Step4
         
         await c.DiscardCard();
-        Debug.Log("beforeRestock");
         await GameMaster.inst.monsterZone.RestockSlots();
-        _ = GameMaster.inst.monsterZone.CheckEvents();
-        Debug.Log("afterRestock");
-        subphases -= 1;
-        Debug.Log("endedMonsterDie");
+        CheckEventsAndPlay();
         UIOnDeck.inst.ChangeButtonsActive();
     }
-    public async Task StartFighting()
+    public async Task StartEventPlay(EventCard c, bool smoothGo)
     {
-        subphases++;
-        UIOnDeck.inst.UpdateAddInfo();
-        UIOnDeck.inst.ChangeButtonsActive();
-        
-        #region Step1
-        Console.WriteText("Приоритет перед атакой");
-        StackSystem.inst.GivePrior();
-        while(subphases != 1 || StackSystem.inst.stack.Count != 0 || StackSystem.inst.prioreNow) 
-        {
-            await Task.Yield();
-            Debug.Log("Halo");
-            if(currentPhase != Phase.Action) { await EndAttack(); subphases--; UIOnDeck.inst.ChangeButtonsActive(); return; }
-        }
-        #endregion Step1
-
-        #region Step2
-        Console.WriteText("Выбери цель атаки");
-        GameMaster.inst.monsterZone.currentEnemy = await SubSystems.inst.SelectCardByType<MonsterCard>("MonsterZone");
-        Console.WriteText("Атака начата!");
-        #endregion Step2
-
-        #region StepRepeat
-        while(GameMaster.inst.monsterZone.currentEnemy != null && GameMaster.inst.monsterZone.currentEnemy.hp != 0 && GameMaster.inst.turnManager.activePlayer.hp != 0)
-        {
-            if(currentPhase != Phase.Action) { await EndAttack(); subphases--; UIOnDeck.inst.ChangeButtonsActive(); return; }
-            
-            List<StackEffect> additionTrigger = new List<StackEffect>();
-            for(int i = 0; i < 6; i++)
-            {
-                StackEffect eff = null;
-                if(i+1 >= GameMaster.inst.monsterZone.currentEnemy.dodge)
-                {
-                    eff = new PrimalStackEffect(PrimalEffect.Damage, GameMaster.inst.monsterZone.currentEnemy, GameMaster.inst.turnManager.activePlayer.attack, true);
-                }
-                else
-                {
-                    eff = new PrimalStackEffect(PrimalEffect.Damage, GameMaster.inst.turnManager.activePlayer.GetMyCard(), GameMaster.inst.monsterZone.currentEnemy.attack, true);
-                }
-                additionTrigger.Add(eff); 
-            }
-            
-            await StackSystem.inst.PushCubeEffect(UnityEngine.Random.Range(1, 7), false, true, additionTrigger);
-            
-            if(currentPhase != Phase.Action) { await EndAttack(); subphases--; UIOnDeck.inst.ChangeButtonsActive(); return; }
-            while(subphases != 1 || StackSystem.inst.stack.Count != 0) 
-            {
-                await Task.Yield();
-                if(currentPhase != Phase.Action) { await EndAttack(); subphases--; UIOnDeck.inst.ChangeButtonsActive(); return; }
-            }
-        }
-        #endregion StepRepeat
-        
-        await EndAttack();
-        subphases--;
-        UIOnDeck.inst.ChangeButtonsActive();
-    }
-    public async Task EndAttack()
-    {
-        StackEffect[] st = StackSystem.inst.stack.ToArray();
-        for(int i = st.Length - 1; i >= 0; i--)
-        {
-            if(st[i] is CubeStackEffect eff && eff.fightCube)
-            {
-                await eff.RemoveMeFromStack();
-            }
-            else if(st[i] is PrimalStackEffect pse && pse.type == (int)PrimalEffect.Damage && pse.fightDamage)
-            {
-                await pse.RemoveMeFromStack();
-            }
-        }
-        GameMaster.inst.monsterZone.currentEnemy = null;
-        //if(currentPhase == Phase.End) await StartEndPhase();   
-    }
-    private bool isBuying = false;
-    public async Task StartBuying()
-    {
-        subphases++;
-        isBuying = true;
-        Console.WriteText("Приоритет перед покупкой");
-        UIOnDeck.inst.ChangeButtonsActive();
-
-        StackSystem.inst.GivePrior();
-        while(subphases != 1 || StackSystem.inst.stack.Count != 0 || StackSystem.inst.prioreNow) 
-        {
-            await Task.Yield();
-            if(!isBuying) 
-            {
-                subphases--;
-                UIOnDeck.inst.ChangeButtonsActive();
-                return;
-            }
-        }
-        if(!isBuying) 
-        {
-            subphases--;
-            UIOnDeck.inst.ChangeButtonsActive();
-            return;
-        }
-        Console.WriteText("Выбери предмет на покупку");        
-        Card c = await SubSystems.inst.SelectCardByType<ItemCard>("Shop");
-        //здесь эффекты после выбора цели
-        if(GameMaster.inst.turnManager.activePlayer.PermitBuy())
-        {
-            UIOnDeck.inst.UpdateAddInfo();
-            GameMaster.inst.shop.InstBuy(c);
-        }
-        else
-        {
-            Console.WriteText("Нехватает денег");
-        }
-        subphases--;
-        UIOnDeck.inst.ChangeButtonsActive();
-    }
-    public void EndBuying()
-    {
-        if(isBuying)
-        {
-            isBuying = false;
-        }
-    }
-    public async Task StartEventPlay(EventCard c)
-    {
-        string nameBefore = c.name;
-        subphases += 1;
+        if(!smoothGo) subphases += 1;
         int tempSubphase = subphases;
         int tempStackCount = StackSystem.inst.stack.Count;
         UIOnDeck.inst.UpdateAddInfo();
@@ -356,17 +351,23 @@ public class PhaseSystem : MonoBehaviour
         {
             await Task.Yield();
             
-            //Debug.Log("1IF: " + (tempSubphase >= subphases) + "2IF: " + (StackSystem.inst.stack.Count > tempStackCount));
+            Debug.Log("1IF: " + (tempSubphase > subphases) + "2IF: " + (StackSystem.inst.stack.Count > tempStackCount));
+            Debug.Log("Temp: " + tempSubphase + " Now: " + subphases);
         }
         //#endregion Step1
-        
-        if(c != null && !c.isCurse) await c.DiscardCard();
+
         await GameMaster.inst.monsterZone.RestockSlots();
-        Debug.Log("Проверяю ивенты из фазы игры события, сейчас событие: " + nameBefore);
-        _ = GameMaster.inst.monsterZone.CheckEvents();
-        subphases -= 1;
-        Debug.Log("endedEvent");
+        CheckEventsAndPlay();
         UIOnDeck.inst.ChangeButtonsActive();
     }
+    private void CheckEventsAndPlay()
+    {
+        List<EventCard> events = GameMaster.inst.monsterZone.CheckEvents();
+        if(events.Count == 0) subphases -= 1;
+        else
+        {
+            subphases += events.Count - 1; //тут прикол
+            _ = StartEventPlay(events[0], true);
+        }
+    }
 }
-

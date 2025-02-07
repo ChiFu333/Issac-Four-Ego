@@ -17,33 +17,47 @@ public class CardPlaces : MonoBehaviour
     [field: SerializeField, HorizontalGroup("shop")] public Transform shopStash { get; private set; }
     public List<Transform> shopSlots = new List<Transform>(4);
     [Header("Players")]
-    [field: SerializeField] public List<Transform> hands { get; private set; }
-    [field: SerializeField] private List<Transform> firstPlayer;
-    [field: SerializeField] private List<Transform> secondPlayer;
-    [field: SerializeField] private List<Transform> thirdPlayer;
-    [field: SerializeField] private List<Transform> fourthPlayer;
+    public List<Transform> hands { get; private set; }
     [field: SerializeField] public List<List<Transform>> playersPos { get; private set; }
-    [field: SerializeField] private List<Transform> firstPlayerCurses;
-    [field: SerializeField] private List<Transform> secondPlayerCurses;
-    [field: SerializeField] private List<Transform> thirdPlayerCurses;
-    [field: SerializeField] private List<Transform> fourthPlayerCurses;
     [field: SerializeField] public List<List<Transform>> playersCurses { get; private set; }
+    [field: SerializeField] public List<Transform> playersTransformToDeconstruct { get; private set; }
     public void Awake()
     {
         inst = this;
+    }
+    public void Init()
+    {
+        
+        hands = new List<Transform>()
+        {
+            playersTransformToDeconstruct[0].GetChild(4),
+            playersTransformToDeconstruct[1].GetChild(4),
+            playersTransformToDeconstruct[2].GetChild(4),
+            playersTransformToDeconstruct[3].GetChild(4),
+        };
         playersPos = new List<List<Transform>>()
         {
-            firstPlayer,
-            secondPlayer,
-            thirdPlayer,
-            inst.fourthPlayer
+            GetChildList(playersTransformToDeconstruct[0].GetChild(0)),
+            GetChildList(playersTransformToDeconstruct[1].GetChild(0)),
+            GetChildList(playersTransformToDeconstruct[2].GetChild(0)),
+            GetChildList(playersTransformToDeconstruct[3].GetChild(0)),
         };
         playersCurses = new List<List<Transform>>()
         {
-            firstPlayerCurses,
-            secondPlayerCurses,
-            thirdPlayerCurses,
-            fourthPlayerCurses
+            GetChildList(playersTransformToDeconstruct[0].GetChild(1)),
+            GetChildList(playersTransformToDeconstruct[1].GetChild(1)),
+            GetChildList(playersTransformToDeconstruct[2].GetChild(1)),
+            GetChildList(playersTransformToDeconstruct[3].GetChild(1)),
         };
+
+    }
+    private List<Transform> GetChildList(Transform parent)
+    {
+        List<Transform> childList = new List<Transform>();
+        for (int i = 0; i < parent.childCount; i++)
+        {
+            childList.Add(parent.GetChild(i));
+        }
+        return childList;
     }
 }

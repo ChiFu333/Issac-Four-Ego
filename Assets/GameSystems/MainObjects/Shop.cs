@@ -13,7 +13,7 @@ public class Shop : MonoBehaviour
     {
         for(int j = 0; j < activeSlotsCount; j++)
         {
-            ItemCard c = Card.CreateCard<ItemCard>(GameMaster.inst.shopDeck.TakeOneCard());
+            ItemCard c = (ItemCard)GameMaster.inst.shopDeck.TakeOneCard();
             itemsInSlots.Add(c);
         }
 
@@ -23,7 +23,7 @@ public class Shop : MonoBehaviour
     {
         for(int i = 0; i < activeSlotsCount; i++)
         {
-            if(itemsInSlots[i] == null) itemsInSlots[i] = Card.CreateCard<ItemCard>(GameMaster.inst.shopDeck.TakeOneCard());
+            if(itemsInSlots[i] == null) itemsInSlots[i] = (ItemCard)GameMaster.inst.shopDeck.TakeOneCard();
         }
         for(int i = itemsInSlots.Count-1; i >= 0; i--)
         {

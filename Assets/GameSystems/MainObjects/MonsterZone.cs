@@ -14,10 +14,10 @@ public class MonsterZone : MonoBehaviour
     {
         for(int j = 0; j < activeSlotsCount; j++)
         {
-            MonsterCard c = Card.CreateCard<MonsterCard>(GameMaster.inst.monsterDeck.TakeOneCard());
+            MonsterCard c = (MonsterCard)GameMaster.inst.monsterDeck.TakeOneCard();
             monstersInSlots.Add(c);
         }
-
+        RestoreAllStats();
         _ = RestockSlots(); 
     }
     public async Task RestockSlots()
@@ -26,16 +26,7 @@ public class MonsterZone : MonoBehaviour
         {
             if(monstersInSlots[i] == null)
             {
-                Card c = null;
-                CardData d = GameMaster.inst.monsterDeck.TakeOneCard();
-                if(d is MonsterCardData monster)
-                {
-                    c = Card.CreateCard<MonsterCard>(monster);
-                }
-                else if(d is EventCardData eventC)
-                {
-                    c = Card.CreateCard<EventCard>(eventC);
-                }
+                Card c = GameMaster.inst.monsterDeck.TakeOneCard();
                 monstersInSlots[i] = c;
             }
         }
@@ -54,15 +45,11 @@ public class MonsterZone : MonoBehaviour
         while(!trigger) await Task.Yield();
         UIOnDeck.inst.UpdateMonsterUI();
     }
-    public async Task CheckEvents()
+    public List<EventCard> CheckEvents()
     {
         List<EventCard> events = new List<EventCard>();
-        foreach(Card c in monstersInSlots) if(c is EventCard eventC) events.Add(eventC);
-        
-        for(int i = 0; i < events.Count; i++)
-        {
-            if(events[i] != null) await GameMaster.inst.phaseSystem.StartEventPlay(events[i]);
-        }
+        foreach(Card c in monstersInSlots) if(c is EventCard eventC) events.Add(eventC); 
+        return events;
     }
     public async void StartAttackSubPhase()
     {

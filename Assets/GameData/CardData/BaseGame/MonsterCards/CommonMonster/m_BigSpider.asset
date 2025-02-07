@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 130fc3c7b45f91c42a90cd66a8569fba, type: 3}
   m_Name: m_BigSpider
   m_EditorClassIdentifier: 
-  <title>k__BackingField: "\u0411\u043E\u043B\u044C\u0448\u043E\u0439 \u043F\u0430\u0443\u043A"
+  <title>k__BackingField: Ffsd
   <face>k__BackingField: {fileID: -1896628746, guid: 83fe639c6bffdef4aba5e1e7f4840f32, type: 3}
   <back>k__BackingField: {fileID: 1470927315, guid: 83fe639c6bffdef4aba5e1e7f4840f32, type: 3}
   <hp>k__BackingField: 3

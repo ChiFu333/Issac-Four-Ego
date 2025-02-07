@@ -15,14 +15,14 @@ public class Player : MonoBehaviour
     public Hand hand { get; private set; }
     public void Init(Hand hand)
     {
-        characterCard = Card.CreateCard<CharacterCard>((CharacterCardData)GameMaster.inst.characterDeck.TakeOneCard());
+        characterCard = (CharacterCard)GameMaster.inst.characterDeck.TakeOneCard();
         characterCard.MoveTo(CardPlaces.inst.playersPos[GameMaster.inst.turnManager.GetMyId(this)][0], transform);
         characterCard.Flip();
 
         ItemCard it = Card.CreateCard<ItemCard>(characterCard.GetData<CharacterCardData>().characterItemData); 
+        it.SetActive(true);
         AddItem(it);
         it.Flip();
-
         
         this.hand = hand;
 
@@ -216,7 +216,7 @@ public class Player : MonoBehaviour
         }
     }
     public void AddItem(Card c)
-    { 
+    {
         for(int i = 0; i < Items.Count; i++)
         {
             if(Items[i] == null) 

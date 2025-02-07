@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using DG.Tweening;
 using System.Threading.Tasks;
+using UnityEngine.Animations;
 public class Card : MonoBehaviour
 {
     public const float CARDSIZE = 0.28f;
@@ -16,15 +17,23 @@ public class Card : MonoBehaviour
     public virtual void Init(CardData d, bool isFaceUp = true)
     {
         data = d;
-
+        gameObject.SetActive(false);
         render = gameObject.AddComponent<SpriteRenderer>();
         render.sortingOrder = 3;
         render.sprite = isFaceUp ? data.face : data.back;
 
         Collider = gameObject.AddComponent<BoxCollider2D>();
         Collider.size = CARDPIXELSIZE;
+
+        SetActive(false);
+        gameObject.SetActive(true);
     }
     protected float speed = GameMaster.CARDSPEED;
+    public void SetActive(bool active)
+    {
+        render.enabled = active;
+        Collider.enabled = active;
+    }
     public Player GetMyPlayer()
     {
         return GetComponentInParent<Player>();
@@ -44,10 +53,6 @@ public class Card : MonoBehaviour
     public void OnMouseDown()
     {
         if(!SubSystems.inst.isSelectingSomething) MouseClicked?.Invoke(this);
-    }
-    public void DestroyMe()
-    {
-        Destroy(gameObject);
     }
     public static T CreateCard<T>(CardData data, bool isFaceUp = true) where T : Card
     {
@@ -74,9 +79,9 @@ public class Card : MonoBehaviour
         transform.DOScale(target.lossyScale, speed);
         transform.DOMove(target.position, speed).onComplete += () => 
         {
-            afterComplete?.Invoke();
             render.sortingOrder = order;
             Collider.enabled = true;
+            afterComplete?.Invoke();
         };
         if(parent != null) transform.parent = parent;
     }
@@ -87,14 +92,16 @@ public class Card : MonoBehaviour
         if(changeOrder) render.sortingOrder = 1000;
         transform.DOMove(target, speed).onComplete += () => 
         {
-            afterComplete?.Invoke();
+            
             render.sortingOrder = order;
             Collider.enabled = true;
+            afterComplete?.Invoke();
         };
         if(parent != null) transform.parent = parent;
     }
     protected async Task DiscardCard<T>()
     {
+        transform.parent = null;
         Dictionary<Type, CardDeck> posToDiscardCard = new Dictionary<Type, CardDeck>
         {
             {typeof(LootCard), GameMaster.inst.lootStash},
@@ -107,6 +114,7 @@ public class Card : MonoBehaviour
         {
             posToDiscardCard[typeof(T)].PutOneCardUp(this);
             trigger = true;
+            SetActive(false);
         });
         while(!trigger) await Task.Yield();
     }
@@ -129,7 +137,8 @@ public class Card : MonoBehaviour
     public async Task Shake()
     {
         bool trigger = false;
-        transform.DOShakeRotation(0.5f, strength: 55, randomnessMode: ShakeRandomnessMode.Harmonic).onComplete = () => trigger = true;
+        transform.DOPunchScale(Vector3.one * 0.1f, 0.3f, elasticity: 0.1f);
+        transform.DOPunchRotation(new Vector3(0,0,20), 0.3f, elasticity: 0.1f).onComplete = () => trigger = true;
         while(!trigger) await Task.Yield();
     }
 }

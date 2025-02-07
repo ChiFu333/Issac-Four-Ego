@@ -78,14 +78,7 @@ public class StackSystem : MonoBehaviour
             else if (sfl[i] is CardStackEffect cardEff2 && cardEff2.source is EventCard eventCard && !eventCard.isCurse) 
             {
                 await eventCard.DiscardCard();
-                t = true;
             }
-        }
-        if(t) await GameMaster.inst.monsterZone.RestockSlots();
-        if(t) 
-        {
-            Debug.Log("Проверяю ивенты из стека");
-            _ = GameMaster.inst.monsterZone.CheckEvents();
         }
         prioreNow = false;
         
@@ -172,7 +165,7 @@ public class CardStackEffect : StackEffect
         }
         Debug.Log(source != null ? source.name : "NULL!!");
         if (source is LootCard lootCard && !lootCard.isItem) await lootCard.DiscardCard();
-        //if(source is EventCard) await GameMaster.inst.monsterZone.RestockSlots();
+        if(source is EventCard eventCard && !eventCard.isCurse) await eventCard.DiscardCard();
     }
     public override Sprite GetSprite(bool sourceSprite)
     {

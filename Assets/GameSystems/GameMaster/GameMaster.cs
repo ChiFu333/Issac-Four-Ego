@@ -22,11 +22,10 @@ public class GameMaster : MonoBehaviour
     [Header("CardLists")]
     private CardListSO lootDeckList;
     [SerializeField] private CardListSO shopDeckList;
-    [SerializeField] private CardListSO shopStashList;
     [SerializeField] private CardListSO characterList;
     [SerializeField] private CardListSO monsterList;
     [SerializeField] private CardListSO eventList;
-    private CardListSO lootStashList, monsterStashList;
+    private CardListSO lootStashList, monsterStashList, shopStashList;
     public void Awake()
     {
         inst = this;
@@ -37,16 +36,18 @@ public class GameMaster : MonoBehaviour
     }
     public void Start()
     {
-        InitDeck(out characterDeck, characterList, false);
-
-        InitDeck(out lootDeck, lootDeckList, false);
-        InitDeck(out lootStash, lootStashList, true);
-
-        InitDeck(out shopDeck, shopDeckList, false);
-        InitDeck(out shopStash, shopStashList, true);
+        CardPlaces.inst.Init();
         
-        InitDeck(out monsterDeck, monsterList, false);
-        InitDeck(out monsterStash, monsterStashList, true);
+        InitDeck<CharacterCard>(out characterDeck, characterList, false);
+
+        InitDeck<LootCard>(out lootDeck, lootDeckList, false);
+        InitDeck<LootCard>(out lootStash, lootStashList, true);
+
+        InitDeck<ItemCard>(out shopDeck, shopDeckList, false);
+        InitDeck<ItemCard>(out shopStash, shopStashList, true);
+
+        InitDeck<MonsterCard>(out monsterDeck, monsterList, false);        
+        InitDeck<MonsterCard>(out monsterStash, monsterStashList, true);
 
         InitShopNMonsterPlaces(); 
 
@@ -54,7 +55,7 @@ public class GameMaster : MonoBehaviour
 
         turnManager.Init();
     }
-    private void InitDeck(out CardDeck deck,CardListSO list, bool IsFaceUp)
+    private void InitDeck<T>(out CardDeck deck,CardListSO list, bool IsFaceUp) where T : Card
     {
         Dictionary<CardListSO, Vector3> posDictionary = new Dictionary<CardListSO,Vector3>
         {
@@ -87,12 +88,12 @@ public class GameMaster : MonoBehaviour
         g.transform.localScale = Vector3.one * Card.CARDSIZE;
         g.transform.parent = transform;
         deck = g.AddComponent<CardDeck>();
-        deck.InitDeck(list.list, IsFaceUp);
+        deck.InitDeck<T>(list.list, IsFaceUp);
         deck.Shuffle();
     }
     private void AddListInDeck(CardDeck deck,CardListSO list)
     {
-        deck.AddAndShuffle(list.list);
+        deck.AddAndShuffle<EventCard>(list.list); //ВООБЩЕ КРИВАЯ ШТУКА !!!
         deck.Shuffle();
     }
     private void InitShopNMonsterPlaces()

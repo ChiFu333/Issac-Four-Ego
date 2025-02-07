@@ -13,6 +13,7 @@ public class EventCard : Card
     {
         if(!curseTrigger)
         {
+            GameMaster.inst.monsterZone.RemoveMonster(this);
             await DiscardCard<EventCard>();
         } 
         else
