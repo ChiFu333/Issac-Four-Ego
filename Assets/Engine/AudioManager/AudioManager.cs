@@ -6,7 +6,7 @@ public class AudioManager : MonoBehaviour {
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioSource soundsSource;
     [SerializeField] private AudioClip musicClip;
-
+    [SerializeField] private List<AudioClip> sounds;
     private float musicVolume;
     private float soundVolume;
     private void Awake() {
@@ -28,9 +28,8 @@ public class AudioManager : MonoBehaviour {
         soundsSource.volume = soundVolume;
     }
 
-    public void Play(AudioClip clip) {
-        if (clip == null) return;
-        soundsSource.PlayOneShot(clip);
+    public void Play(Sounds s) {
+        soundsSource.PlayOneShot(sounds[(int)s]);
     }
 
     public void PlayMusic(AudioClip clip) {
@@ -41,4 +40,8 @@ public class AudioManager : MonoBehaviour {
     public void StopMusic() {
         musicSource.Stop();
     }
+}
+public enum Sounds
+{
+    CardTaked
 }

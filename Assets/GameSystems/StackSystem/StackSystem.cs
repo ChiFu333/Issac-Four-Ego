@@ -64,7 +64,6 @@ public class StackSystem : MonoBehaviour
     public void GivePrior() => prioreNow = true;
     public async Task CancelEverythingInStack()
     {
-        bool t = false;
         int count = stack.Count;
         List<StackEffect> sfl = new List<StackEffect>();
         for (int i = 0; i < count; i++)

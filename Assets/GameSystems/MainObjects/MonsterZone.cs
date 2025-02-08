@@ -17,7 +17,6 @@ public class MonsterZone : MonoBehaviour
             MonsterCard c = (MonsterCard)GameMaster.inst.monsterDeck.TakeOneCard();
             monstersInSlots.Add(c);
         }
-        RestoreAllStats();
         _ = RestockSlots(); 
     }
     public async Task RestockSlots()
@@ -43,6 +42,7 @@ public class MonsterZone : MonoBehaviour
             }
         }
         while(!trigger) await Task.Yield();
+        RestoreAllStats();
         UIOnDeck.inst.UpdateMonsterUI();
     }
     public List<EventCard> CheckEvents()

@@ -13,8 +13,9 @@ public class Player : MonoBehaviour
     #region [ Init & Turns ]
     public CharacterCard characterCard { get; private set; }
     public Hand hand { get; private set; }
-    public void Init(Hand hand)
+    public async Task Init(Hand hand)
     {
+        //bool t = false;
         characterCard = (CharacterCard)GameMaster.inst.characterDeck.TakeOneCard();
         characterCard.MoveTo(CardPlaces.inst.playersPos[GameMaster.inst.turnManager.GetMyId(this)][0], transform);
         characterCard.Flip();
@@ -31,6 +32,7 @@ public class Player : MonoBehaviour
         coins = 0;
         lootPlayCount = 0;
         souls = characterCard.GetData<CharacterCardData>().startSouls;
+        await Task.Delay(100);
     }
     public void SetBaseStats()
     {

@@ -21,7 +21,7 @@ public class PhaseSystem : MonoBehaviour
         UIOnDeck.inst.UpdatePhase("Фаза: начало хода (шаг 1)");
         await Task.Delay(500);
         GameMaster.inst.turnManager.activePlayer.ChangeAllPlayerItemCharge(true);
-        await Task.Delay(1000);
+        await Task.Delay(500);
         #endregion Step1
 
         #region Step2

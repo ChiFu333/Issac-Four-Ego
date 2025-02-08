@@ -12,15 +12,14 @@ public class TurnManager : MonoBehaviour
     [field: SerializeField] public int priorId { get; private set; } = 0;
     public int id { get; private set; } = 0;
     
-    public void Init()
+    public async void Init()
     {
-        InitAllPlayers();
+        await InitAllPlayers();
         UIOnDeck.inst.UpdateTexts();
         StartGame();
     }
     public void StartGame()
     {
-        GiveStartResources();
         HealEveryone();
         GameMaster.inst.phaseSystem.StartStartTurn();
     }
@@ -37,9 +36,13 @@ public class TurnManager : MonoBehaviour
         
         _ = GameMaster.inst.phaseSystem.StartEndPhase();
     }
-    private void InitAllPlayers()
+    private async Task InitAllPlayers()
     {
         GameObject g = new GameObject();
+        for(int j = GameMaster.PLAYERCOUNT; j < 4; j++)
+        {
+            CardPlaces.inst.playersTransformToDeconstruct[j].gameObject.SetActive(false);
+        }
         for(int i = 0; i < GameMaster.PLAYERCOUNT; i++)
         {
             
@@ -59,30 +62,18 @@ public class TurnManager : MonoBehaviour
 
             SetPrior(player);
             //Инициировать персонажей
-            players[i].Init(ha);
-        }
-        RestorePrior();
-        for(int j = GameMaster.PLAYERCOUNT; j < 4; j++)
-        {
-            foreach(Transform t in CardPlaces.inst.playersPos[j])
-            {
-                t.gameObject.SetActive(false);
-            }
-            CardPlaces.inst.playersTransformToDeconstruct[j].gameObject.SetActive(false);
-        }
-        Destroy(g);
-    }
-    private void GiveStartResources()
-    {
-        for(int i = 0; i < players.Count; i++)
-        {
+            await players[i].Init(ha);
             for(int j = 0; j < 3; j++)
             {
                 LootCard c = (LootCard)GameMaster.inst.lootDeck.TakeOneCard();
                 players[i].TakeOneLootCard(c);
+                await Task.Delay(100);
             }
             players[i].AddMoney(3);
         }
+        RestorePrior();
+        
+        Destroy(g);
     }
     public bool IsMyTurn()
     {
@@ -123,8 +114,4 @@ public class TurnManager : MonoBehaviour
 public enum Phase 
 {
     Start, Action, End
-}
-public enum SubPhase 
-{
-    None, Shop, Attack, PlayerDie, MonsterDie
 }

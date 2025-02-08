@@ -12,6 +12,7 @@ public class Hand : MonoBehaviour
     [field: SerializeField] public List<Card> cards { get; private set; } = new List<Card>();
     public void AddCard(Card card)
     {
+        AudioManager.inst.Play(Sounds.CardTaked);
         card.render.sortingLayerName = "HandCards"; //Слой для рук!!
         cards.Add(card);
         AddMoveUpAndDownTweens(card);

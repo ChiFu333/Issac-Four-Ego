@@ -30,7 +30,7 @@ MonoBehaviour:
     <count>k__BackingField: 1
   - <data>k__BackingField: {fileID: 11400000, guid: 3aa50ef7dfbf7e34eb21da78931caf3b, type: 2}
     <willAdd>k__BackingField: 1
-    <count>k__BackingField: 100
+    <count>k__BackingField: 1
   - <data>k__BackingField: {fileID: 11400000, guid: dd5af24f79b56064bbf4e3ebc11e811b, type: 2}
     <willAdd>k__BackingField: 1
     <count>k__BackingField: 1
@@ -42,7 +42,7 @@ MonoBehaviour:
     <count>k__BackingField: 1
   - <data>k__BackingField: {fileID: 11400000, guid: 4aa047d63968a5943b7164e7c3eb4c74, type: 2}
     <willAdd>k__BackingField: 1
-    <count>k__BackingField: 1
+    <count>k__BackingField: 1000
   - <data>k__BackingField: {fileID: 11400000, guid: b2e2914781be7984285fbad26fe8731f, type: 2}
     <willAdd>k__BackingField: 1
     <count>k__BackingField: 1
