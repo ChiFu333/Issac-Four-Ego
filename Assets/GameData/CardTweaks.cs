@@ -2,7 +2,6 @@ using System;
 using System.Threading.Tasks;
 using UnityEngine;
 using System.Threading;
-using Unity.VisualScripting;
 using System.Collections.Generic;
 using UnityEngine.InputSystem.Interactions;
 using TreeEditor;
@@ -19,7 +18,7 @@ public class CardTweaks : ScriptableObject
     }
     public static Task<bool> StealFromHim(int count)
     {
-        GameMaster.inst.turnManager.priorPlayer().StealMoney(count, StackSystem.inst.cardTarget.GetMyPlayer());
+        G.Players.priorPlayer.StealMoney(count, StackSystem.inst.cardTarget.GetMyPlayer());
         UIOnDeck.inst.UpdateTexts();
         return Task.FromResult(true);
     }
@@ -28,7 +27,7 @@ public class CardTweaks : ScriptableObject
         for(int i = 0; i < count; i++) 
         {
             await Task.Delay(1000/count < 200 ? 1000/count : 200); 
-            StackSystem.inst.cardTarget.GetMyPlayer().hand.AddCard(GameMaster.inst.lootDeck.TakeOneCard()); 
+            StackSystem.inst.cardTarget.GetMyPlayer().hand.AddCard(G.Decks.lootDeck.TakeOneCard()); 
         }
         return true;
     }
@@ -39,20 +38,20 @@ public class CardTweaks : ScriptableObject
         for(int i = 0; i < count; i++) 
         {
             if(StackSystem.inst.cardTarget.GetMyPlayer().lootCount == 0) break;
-            LootCard c = await SubSystems.inst.SelectCardByType<LootCard>("MyHand"); 
+            Entity c = await SubSystems.inst.SelectCardByType("MyHand"); 
             await StackSystem.inst.cardTarget.GetMyPlayer().DiscardCard(c);
         }
         return true;
     }
     public static Task<bool> AddAttack(int count)
     {
-        if(StackSystem.inst.cardTarget is CharacterCard player)
+        if(StackSystem.inst.cardTarget.GetTag<CardTypeTag>().cardType == CardType.characterCard)
         {
-            player.GetMyPlayer().AddAttack(count);
+            StackSystem.inst.cardTarget.GetMyPlayer().AddAttack(count);
         }
-        else if(StackSystem.inst.cardTarget is MonsterCard monster)
+        else if(StackSystem.inst.cardTarget.GetTag<CardTypeTag>().cardType == CardType.monsterCard)
         {
-            monster.AddAttack(count);
+           //StackSystem.inst.cardTarget.AddAttack(count);
         }
         return Task.FromResult(true);
     }
@@ -60,7 +59,7 @@ public class CardTweaks : ScriptableObject
     {
         for(int i = 0; i < count; i++) 
         {
-            ItemCard c = (ItemCard)GameMaster.inst.shopDeck.TakeOneCard();
+            Entity c = G.Decks.shopDeck.TakeOneCard();
             StackSystem.inst.cardTarget.GetMyPlayer().AddItem(c);
         }
         return Task.FromResult(true);
@@ -73,25 +72,25 @@ public class CardTweaks : ScriptableObject
     //Хп, урон и смерти
     public static Task<bool> AddHp(int count)
     {
-        if(StackSystem.inst.cardTarget is CharacterCard player)
+        if(StackSystem.inst.cardTarget.GetTag<CardTypeTag>().cardType == CardType.characterCard)
         {
-            player.GetMyPlayer().AddHp(count);
+            StackSystem.inst.cardTarget.GetMyPlayer().AddHp(count);
         }
-        else if(StackSystem.inst.cardTarget is MonsterCard monster)
+        else if(StackSystem.inst.cardTarget.GetTag<CardTypeTag>().cardType == CardType.monsterCard)
         {
-            monster.ChangePreventHp(count);
+            //StackSystem.inst.cardTarget.ChangePreventHp(count);
         }
         return Task.FromResult(true);
     }
     public static Task<bool> AddPreventHp(int count)
     {
-        if(StackSystem.inst.cardTarget is CharacterCard player)
+        if(StackSystem.inst.cardTarget.GetTag<CardTypeTag>().cardType == CardType.characterCard)
         {
-            player.GetMyPlayer().AddPreventHp(count);
+            StackSystem.inst.cardTarget.GetMyPlayer().AddPreventHp(count);
         }
-        else if(StackSystem.inst.cardTarget is MonsterCard monster)
+        else if(StackSystem.inst.cardTarget.GetTag<CardTypeTag>().cardType == CardType.monsterCard)
         {
-            monster.ChangePreventHp(count);
+            //StackSystem.inst.cardTarget.monster.ChangePreventHp(count);
         }
         UIOnDeck.inst.UpdateTexts();
         UIOnDeck.inst.UpdateMonsterUI();
@@ -99,13 +98,13 @@ public class CardTweaks : ScriptableObject
     }
     public static async Task<bool> Damage(int count)
     {
-        if(StackSystem.inst.cardTarget is CharacterCard player)
+        if(StackSystem.inst.cardTarget.GetTag<CardTypeTag>().cardType == CardType.characterCard)
         {
-            await player.GetMyPlayer().Damage(count);
+            await StackSystem.inst.cardTarget.GetMyPlayer().Damage(count);
         }
-        else if(StackSystem.inst.cardTarget is MonsterCard monster)
+        else if(StackSystem.inst.cardTarget.GetTag<CardTypeTag>().cardType == CardType.monsterCard)
         {
-            await monster.Damage(count);
+            StackSystem.inst.cardTarget.GetTag<Characteristics>().ChangeHp(StackSystem.inst.cardTarget.GetTag<Characteristics>().health - count);
         }
         UIOnDeck.inst.UpdateTexts();
         UIOnDeck.inst.UpdateMonsterUI();
@@ -113,13 +112,13 @@ public class CardTweaks : ScriptableObject
     }
     public static async Task<bool> Kill(int count)
     {
-        if(StackSystem.inst.cardTarget is CharacterCard player)
+        if(StackSystem.inst.cardTarget.GetTag<CardTypeTag>().cardType == CardType.characterCard)
         {
-            await player.GetMyPlayer().PayHp(player.GetMyPlayer().HpMax);
+            await StackSystem.inst.cardTarget.GetMyPlayer().PayHp(StackSystem.inst.cardTarget.GetMyPlayer().HpMax);
         }
-        else if(StackSystem.inst.cardTarget is MonsterCard monster)
+        else if(StackSystem.inst.cardTarget.GetTag<CardTypeTag>().cardType == CardType.monsterCard)
         {
-            await monster.StartMonsterDieSubphase();
+            //await StackSystem.inst.cardTarget.monster.StartMonsterDieSubphase();
         }
         return (true);
     }
@@ -138,21 +137,21 @@ public class CardTweaks : ScriptableObject
     //Заявки
     public void RequestBuy()
     {
-        GameMaster.inst.shop.StartShopSubPhase();
+        G.shop.StartShopSubPhase();
     }
     public void RequestAttack()
     {
-        GameMaster.inst.monsterZone.StartAttackSubPhase();
+        G.monsterZone.StartAttackSubPhase();
     }
     public static async Task<bool> AcceptDeath(int no)
     {
-        if(StackSystem.inst.cardTarget is CharacterCard player)
+        if(StackSystem.inst.cardTarget.GetTag<CardTypeTag>().cardType == CardType.characterCard)
         {
-            await player.GetMyPlayer().StartDieSubphase();
+            await StackSystem.inst.cardTarget.GetMyPlayer().StartDieSubphase();
         }
-        else if(StackSystem.inst.cardTarget is MonsterCard monster)
+        else if(StackSystem.inst.cardTarget.GetTag<CardTypeTag>().cardType == CardType.monsterCard)
         {
-            await monster.StartMonsterDieSubphase();
+            //await StackSystem.inst.cardTarget.monster.StartMonsterDieSubphase();
         }
         return true;
     }
@@ -182,14 +181,14 @@ public class CardTweaks : ScriptableObject
     {
         if(!SubSystems.inst.isSelectingSomething) 
         {
-            GameMaster.inst.shop.StartShopSubPhase();
+            G.shop.StartShopSubPhase();
             return Task.FromResult(true);
         }
         return Task.FromResult(false);
     }
     public static Task<bool> Attack(int count)
     {
-        GameMaster.inst.monsterZone.StartAttackSubPhase();
+        G.monsterZone.StartAttackSubPhase();
         return Task.FromResult(true);
     }
     public static void CancelSelect(int count)
@@ -204,8 +203,8 @@ public class CardTweaks : ScriptableObject
     }
     public static Task<bool> RechargeItem(int count)
     {
-        ItemCard card = (ItemCard)StackSystem.inst.cardTarget;
-        card.Recharge();
+        Entity card = StackSystem.inst.cardTarget;
+        card.GetTag<Tappable>().Recharge();
         return Task.FromResult(true);
     }
     public static Task<bool> ChangeAllPlayerItemCharge(int boolLike)
@@ -230,7 +229,7 @@ public class CardTweaks : ScriptableObject
     }
     public static async Task<bool> StashMonster(int count)
     {
-        await GameMaster.inst.monsterZone.StashSlot(StackSystem.inst.cardTarget);
+        await G.monsterZone.StashSlot(StackSystem.inst.cardTarget);
         return true;
     }
     public static async Task<bool> CancelTopStackEffect(int count)
@@ -241,28 +240,30 @@ public class CardTweaks : ScriptableObject
     }
     public static Task<bool> TurnIntoItem(int no)
     {
-        LootCard loot = StackSystem.inst.cardTarget as LootCard;
-        loot.TurnIntoItem();
+        Entity loot = StackSystem.inst.cardTarget;
+        //loot.TurnIntoItem();
         StackSystem.inst.cardTarget.GetMyPlayer().AddItem(StackSystem.inst.cardTarget);
         return Task.FromResult(true);
     }
     public async static Task<bool> TurnAndGiveCurse(int no)
     {
+        /*
         EventCard eve = StackSystem.inst.cardTarget as EventCard;
         eve.TurnIntoCurse();
         Console.WriteText("Отдай кому-то проклятие");
         CharacterCard t = await SubSystems.inst.SelectCardByType<CharacterCard>("InPlay");
         t.GetMyPlayer().AddCurse(eve);
+        return true;*/
         return true;
     }
     public static Task<bool> IncreaseShop(int count)
     {
-        GameMaster.inst.shop.IncreaseShop(count);
+        G.shop.IncreaseShop(count);
         return Task.FromResult(true);
     }
     public static Task<bool> IncreaseMonsterZone(int count)
     {
-        GameMaster.inst.monsterZone.IncreaseZone(count);
+        G.monsterZone.IncreaseZone(count);
         return Task.FromResult(true);
     }
     public static Task<bool> EndTurn(int no)

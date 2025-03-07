@@ -34,7 +34,7 @@ using UnityEngine.InputSystem.Interactions;
             await effectActions[id].PlaySubActions();
         }
     }
-    public async Task SetTargets(Card source, int id = -1)
+    public async Task SetTargets(Entity source, int id = -1)
     {
         if(id == -1)
         {
@@ -77,7 +77,7 @@ using UnityEngine.InputSystem.Interactions;
             }
         }
     }
-    public async Task SetTargets(Card source)
+    public async Task SetTargets(Entity source)
     {
         for(int i = 0; i < subActions.Count; i++)
         {
@@ -93,12 +93,12 @@ using UnityEngine.InputSystem.Interactions;
     [field: SerializeField, HorizontalGroup("Row2"), Space] public ActionType actionType {get; private set;} 
     [field: SerializeField, HorizontalGroup("Row2"), Space] public int count;
     public Func<int, Task<bool>> actionDelegate {get; private set;}
-    public Card targetCard {get; private set;}    
-    [field: HideInInspector] public Card targetCardBefore;
-    public async Task SetTarget(Card source)
+    public Entity targetCard {get; private set;}    
+    [field: HideInInspector] public Entity targetCardBefore;
+    public async Task SetTarget(Entity source)
     {
         actionDelegate = CardTweaks.GetDelegate[actionType];
-        Card t = null;
+        Entity t = null;
         switch(target)
         {
             case Target.None:
@@ -107,11 +107,11 @@ using UnityEngine.InputSystem.Interactions;
             } break;
             case Target.PlayerMe:
             {
-                t = GameMaster.inst.turnManager.priorPlayer().GetMyCard();
+                t = G.Players.priorPlayer.GetMyCard();
             } break;
             case Target.PlayerActive:
             {
-                t = GameMaster.inst.turnManager.activePlayer.GetMyCard();
+                t = G.Players.activePlayer.GetMyCard();
             } break;
             case Target.SelectedTarget:
             {
@@ -124,19 +124,19 @@ using UnityEngine.InputSystem.Interactions;
             case Target.PlayerYouSelect:
             {
                 Console.WriteText("Выбери игрока");
-                t = await SubSystems.inst.SelectCardByType<CharacterCard>("InPlay");
+                t = await SubSystems.inst.SelectCardByType("InPlay");
                 Console.WriteText("Выбор сделан");
             } break;
             case Target.YouSelectMonster:
             {
                 Console.WriteText("Выбери монстра");
-                t = await SubSystems.inst.SelectCardByType<MonsterCard>("InPlay");
+                t = await SubSystems.inst.SelectCardByType("InPlay");
                 Console.WriteText("Выбор сделан");
             } break;
             case Target.YouSelectDamagable:
             {
                 Console.WriteText("Выбери существо");
-                t = await SubSystems.inst.SelectCardByTypes<CharacterCard, MonsterCard>("InPlay");
+                //t = await SubSystems.inst.SelectCardByTypes<CharacterCard, MonsterCard>("InPlay");
                 Console.WriteText("Выбор сделан");
             } break;
             case Target.YouSelectActiveItem:
@@ -144,8 +144,8 @@ using UnityEngine.InputSystem.Interactions;
                 Console.WriteText("Выбери предмет");
                 while(true)
                 {
-                    ItemCard c = await SubSystems.inst.SelectCardByType<ItemCard>("InPlay");
-                    if(c is not CharacterCard && c.IsFlippable)
+                    Entity c = await SubSystems.inst.SelectCardByType("InPlay");
+                    if(/*c is not CharacterCard && c.IsFlippable*/true)
                     {
                         t = c;
                         break;
@@ -158,8 +158,8 @@ using UnityEngine.InputSystem.Interactions;
                 Console.WriteText("Выбери проклятье");
                 while(true)
                 {
-                    EventCard c = await SubSystems.inst.SelectCardByType<EventCard>("InPlay");
-                    if(c.GetData<EventCardData>().isCurse)
+                    Entity c = await SubSystems.inst.SelectCardByType("InPlay");
+                    if(/*c.GetData<EventCardData>().isCurse*/true)
                     {
                         t = c;
                         break;
@@ -172,10 +172,10 @@ using UnityEngine.InputSystem.Interactions;
                 StackEffect eff = StackSystem.inst.stack.Peek();
                 if(eff is CardStackEffect cardData)
                 {
-                    if(!cardData.triggeredEffect && (cardData.source is LootCard || cardData.source as ItemCard))
+                    if(/*!cardData.triggeredEffect && (cardData.source is LootCard || cardData.source as ItemCard)*/true)
                     {
                         //изменить данные в стеке на карты, чтобы можно было 
-                        t = GameMaster.inst.turnManager.priorPlayer().GetMyCard();
+                        t = G.Players.priorPlayer.GetMyCard();
                     }
                 }
             } break;
@@ -190,16 +190,16 @@ using UnityEngine.InputSystem.Interactions;
         {
             for(int i = 0; i < GameMaster.PLAYERCOUNT; i++)
             {
-                StackSystem.inst.cardTarget = GameMaster.inst.turnManager.priorPlayer().GetMyCard();
+                StackSystem.inst.cardTarget = G.Players.priorPlayer.GetMyCard();
                 await PlayAction();
-                GameMaster.inst.turnManager.SetPrior(GameMaster.inst.turnManager.players[(GameMaster.inst.turnManager.priorId + 1) % GameMaster.PLAYERCOUNT]);
+                G.Players.SetPrior(G.Players.players[(G.Players.priorId + 1) % GameMaster.PLAYERCOUNT]);
             }
         }
         else if(target == Target.EveryMonster)
         {
-            for(int i = 0; i < GameMaster.inst.monsterZone.monstersInSlots.Count; i++)
+            for(int i = 0; i < G.monsterZone.monstersInSlots.Count; i++)
             {
-                StackSystem.inst.cardTarget = GameMaster.inst.monsterZone.monstersInSlots[i];
+                StackSystem.inst.cardTarget = G.monsterZone.monstersInSlots[i];
                 await PlayAction();
             }
         }

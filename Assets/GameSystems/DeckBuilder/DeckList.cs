@@ -10,7 +10,7 @@ public class DeckList : ScriptableObject
 }
 [Serializable] public class CardInstance
 {
-    [field: SerializeField, HorizontalGroup("CardInst")] public CardData data { get; private set; }
+    [field: SerializeField, HorizontalGroup("CardInst")] public GameObject data { get; private set; }
     [field: SerializeField, HorizontalGroup("CardInst")] public bool willAdd { get; private set; } = true;
     [field: SerializeField, HorizontalGroup("CardInst")] public int count { get; private set; } = 1;
 }

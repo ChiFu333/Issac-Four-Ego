@@ -9,8 +9,8 @@ public class Hand : MonoBehaviour
     public float deltaCard = Card.CARDPIXELSIZE.x * Card.CARDSIZE; // 1.13 и 0.28 для стандарта Card.CARDSIZE.x * GameMaster.CARDSIZE;
     private const float MAXLENGTH =  6.5f;
     public const float UPMOVE = 0.4f;
-    [field: SerializeField] public List<Card> cards { get; private set; } = new List<Card>();
-    public void AddCard(Card card)
+    [field: SerializeField] public List<Entity> cards { get; private set; } = new List<Entity>();
+    public void AddCard(Entity card)
     {
         AudioManager.inst.Play(Sounds.CardTaked);
         card.render.sortingLayerName = "HandCards"; //Слой для рук!!
@@ -19,20 +19,28 @@ public class Hand : MonoBehaviour
         card.transform.SetParent(transform);
         card.transform.localScale = Vector3.one * Card.CARDSIZE;
         UpdateCardPositions();
-        UIOnDeck.inst.UpdateTexts();
+        UIOnDeck.inst.UpdateTexts(G.Players.GetPlayerId(GetComponentInParent<Player>()));
     }
-    public async Task PlayCard(LootCard card)
+    public async Task PlayCard(Entity card)
     {
         ExitCardFromHand(card);
         await card.PutCardNearHand(this);
-        card.PlayCard();    
+        
+        Effect e = card.GetTag<PlayEffect>().effect;
+        
+        CardStackEffect eff = new CardStackEffect(e, card);
+    
+        await StackSystem.inst.PushEffect(eff);
+        G.Players.RestorePrior();
+
+        Console.WriteText("Разыграна карта лута");
     }
-    public async Task DiscardCard(LootCard card)
+    public async Task DiscardCard(Entity card)
     {
         ExitCardFromHand(card);
-        await card.DiscardCard();
+        await card.DiscardEntity();
     }
-    private void ExitCardFromHand(LootCard card)
+    private void ExitCardFromHand(Entity card)
     {
         card.MouseDown -= MoveUp;
         card.MouseExit -= MoveDown;
@@ -62,17 +70,17 @@ public class Hand : MonoBehaviour
             cards[i].Collider.offset = new Vector2(0, -UPMOVE/2 /Card.CARDSIZE);
         }
     }
-    private void AddMoveUpAndDownTweens(Card c)
+    private void AddMoveUpAndDownTweens(Entity c)
     {
         c.MouseDown += MoveUp;
         c.MouseExit += MoveDown;
     }
-    private void MoveUp(Card c)
+    private void MoveUp(Entity c)
     {
         c.transform.DOLocalMoveY(UPMOVE, 0.3f);
         c.render.sortingOrder = 1000;
     }
-    private void MoveDown(Card c)
+    private void MoveDown(Entity c)
     {
         c.transform.DOLocalMoveY(0, 0.3f);
         for(int i = 0; i < cards.Count; i++)

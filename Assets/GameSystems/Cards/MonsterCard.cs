@@ -56,7 +56,7 @@ public class MonsterCard : Card
         if(hp <= 0) 
         {
             hp = 0;
-            await StackSystem.inst.PushPrimalEffect(PrimalEffect.Kill, this);
+            //await StackSystem.inst.PushPrimalEffect(PrimalEffect.Kill, this);
         }
     }
     public void AddHp(int count) => hp += count;
@@ -75,7 +75,7 @@ public class MonsterCard : Card
     public void AddAttack(int count) => attack += count;
     public async Task StartMonsterDieSubphase()
     {
-        await GameMaster.inst.phaseSystem.StartEnemyDie(this);
+        //await GameMaster.inst.phaseSystem.StartEnemyDie(this);
     }
     public void SetBaseStats()
     {

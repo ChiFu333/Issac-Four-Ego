@@ -3,53 +3,52 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 public class CardPlaces : MonoBehaviour
 {
-    public static CardPlaces inst { get; private set; }
-    [field: SerializeField] public Vector3 otherPos { get; private set; } = new Vector3(-10, 0, 0);
+    [field: SerializeField] private Vector3 otherPos = new Vector3(-10, 0, 0);
     [Header("Loot")]
-    [field: SerializeField, HorizontalGroup("loot")] public Transform lootDeck { get; private set; }
-    [field: SerializeField, HorizontalGroup("loot")] public Transform lootStash { get; private set; }
+    [field: SerializeField] private Transform lootDeck;
+    [field: SerializeField] private Transform lootStash;
     [Header("Monster")]
-    [field: SerializeField, HorizontalGroup("monster")] public Transform monsterDeck { get; private set; }
-    [field: SerializeField, HorizontalGroup("monster")] public Transform monsterStash { get; private set; }
-    [field: SerializeField] public List<Transform> monsterSlots { get; private set; } = new List<Transform>(4);
+    [field: SerializeField] private Transform monsterDeck;
+    [field: SerializeField] private Transform monsterStash;
+    [field: SerializeField] private List<Transform> monsterSlots = new List<Transform>(4);
     [Header("Shop")]
-    [field: SerializeField, HorizontalGroup("shop")] public Transform shopDeck { get; private set; }
-    [field: SerializeField, HorizontalGroup("shop")] public Transform shopStash { get; private set; }
-    public List<Transform> shopSlots = new List<Transform>(4);
+    [field: SerializeField] private Transform shopDeck;
+    [field: SerializeField] private Transform shopStash;
+    [field: SerializeField] private List<Transform> shopSlots = new List<Transform>(4);
     [Header("Players")]
-    public List<Transform> hands { get; private set; }
-    [field: SerializeField] public List<List<Transform>> playersPos { get; private set; }
-    [field: SerializeField] public List<List<Transform>> playersCurses { get; private set; }
-    [field: SerializeField] public List<Transform> playersTransformToDeconstruct { get; private set; }
-    public void Awake()
-    {
-        inst = this;
-    }
+    [field: SerializeField] private List<Transform> playersTransformToDeconstruct;
     public void Init()
     {
-        
-        hands = new List<Transform>()
+        G.CardPlaces.lootDeck = lootDeck;
+        G.CardPlaces.lootStash = lootStash;
+        G.CardPlaces.monsterDeck = monsterDeck;
+        G.CardPlaces.monsterStash = monsterStash;
+        G.CardPlaces.monsterSlots = monsterSlots;
+        G.CardPlaces.shopDeck = shopDeck;
+        G.CardPlaces.shopStash = shopStash;
+        G.CardPlaces.shopSlots = shopSlots;
+        G.CardPlaces.hands = new List<Transform>()
         {
             playersTransformToDeconstruct[0].GetChild(4),
             playersTransformToDeconstruct[1].GetChild(4),
             playersTransformToDeconstruct[2].GetChild(4),
             playersTransformToDeconstruct[3].GetChild(4),
         };
-        playersPos = new List<List<Transform>>()
+        G.CardPlaces.playersPos = new List<List<Transform>>()
         {
             GetChildList(playersTransformToDeconstruct[0].GetChild(0)),
             GetChildList(playersTransformToDeconstruct[1].GetChild(0)),
             GetChildList(playersTransformToDeconstruct[2].GetChild(0)),
             GetChildList(playersTransformToDeconstruct[3].GetChild(0)),
         };
-        playersCurses = new List<List<Transform>>()
+        G.CardPlaces.playersCurses = new List<List<Transform>>()
         {
             GetChildList(playersTransformToDeconstruct[0].GetChild(1)),
             GetChildList(playersTransformToDeconstruct[1].GetChild(1)),
             GetChildList(playersTransformToDeconstruct[2].GetChild(1)),
             GetChildList(playersTransformToDeconstruct[3].GetChild(1)),
         };
-
+        G.CardPlaces.playersTransformToDeconstruct = playersTransformToDeconstruct;
     }
     private List<Transform> GetChildList(Transform parent)
     {
@@ -59,5 +58,25 @@ public class CardPlaces : MonoBehaviour
             childList.Add(parent.GetChild(i));
         }
         return childList;
+    }
+}
+
+public static partial class G
+{
+    public static class CardPlaces
+    {
+        public static Vector3 otherPos = new Vector3(-10, 0, 0);
+        public static Transform lootDeck;
+        public static Transform lootStash;
+        public static Transform monsterDeck;
+        public static Transform monsterStash;
+        public static List<Transform> monsterSlots;
+        public static Transform shopDeck;
+        public static Transform shopStash;
+        public static List<Transform> shopSlots;
+        public static List<Transform> hands;
+        public static List<List<Transform>> playersPos;
+        public static List<List<Transform>> playersCurses;
+        public static List<Transform> playersTransformToDeconstruct;
     }
 }

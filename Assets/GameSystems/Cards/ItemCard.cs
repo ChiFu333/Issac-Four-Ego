@@ -21,7 +21,7 @@ public class ItemCard : Card
     }
     public void PlayFlipEffect()
     {
-        if(!SubSystems.inst.isSelectingSomething &&!IsFlipped && IsFlippable && transform.parent != GameMaster.inst.shop.transform) 
+        if(!SubSystems.inst.isSelectingSomething &&!IsFlipped && IsFlippable && transform.parent != G.shop.transform) 
         {
             Flip();
             InvokeFlipEffect();
@@ -42,14 +42,16 @@ public class ItemCard : Card
     }
     private async void InvokeFlipEffect()
     {
-        GameMaster.inst.turnManager.SetPrior(GetMyPlayer());
+        /*
+        G.Players.SetPrior(GetMyPlayer());
         ItemCardData d = GetData<ItemCardData>();
         
         CardStackEffect csf = new CardStackEffect(await GetData<ItemCardData>().GetFlipEffect(), this);
         await StackSystem.inst.PushEffect(csf);
 
-        GameMaster.inst.turnManager.RestorePrior();
+        G.Players.RestorePrior();
         Console.WriteText("Использован предмет");
+        */
     }
     public override async Task DiscardCard()
     {

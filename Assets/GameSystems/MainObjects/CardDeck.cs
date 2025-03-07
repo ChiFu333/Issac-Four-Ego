@@ -1,37 +1,36 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using NUnit.Framework;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class CardDeck : MonoBehaviour
 { 
-    [field: SerializeField] public List<Card> cards { get; private set; }
+    [field: SerializeField] public List<Entity> cards { get; private set; }
     private bool isFaceUp { get; set; } = false;
     private SpriteRenderer faceRenderer;
-    public void InitDeck<T>(List<CardData> list, bool isFaceUp) where T : Card
+    public void InitDeck(List<GameObject> list, bool isFaceUp)
     {
         this.isFaceUp = isFaceUp;
         faceRenderer = gameObject.AddComponent<SpriteRenderer>();
         faceRenderer.sortingOrder = 5;
-        cards = new List<Card>(0);
+        cards = new List<Entity>(0);
         
         if(list != null)
         {
             for(int i = 0; i < list.Count; i++)
             {
-                Card c = Card.CreateCard<T>(list[i], true);
+                Entity c = Entity.CreateEntity(list[i], true);
                 cards.Add(c);
                 c.transform.parent = transform;
             }
         }
         UpdateFace();
     }
-    public Card TakeOneCard()
+    public Entity TakeOneCard()
     {
         if(cards.Count != 0)
         {
-            Card c = cards[0];
+            Entity c = cards[0];
             cards.RemoveAt(0);
             UpdateFace();
             c.SetActive(true);
@@ -42,11 +41,11 @@ public class CardDeck : MonoBehaviour
             return null;
         }
     }
-    public void PutOneCardUp(Card c) //временная перегрузка
+    public void PutOneCardUp(Entity c) //временная перегрузка
     {
         c.SetActive(false);
         c.transform.parent = transform;
-        List<Card> templ = new List<Card>();
+        List<Entity> templ = new List<Entity>();
         for(int i = 0; i < cards.Count+1; i++)
         {
             if(i == 0) 
@@ -81,14 +80,14 @@ public class CardDeck : MonoBehaviour
         }
         else
         {
-            faceRenderer.sprite = isFaceUp ? cards[0].GetData<CardData>().face : cards[0].GetData<CardData>().back;
+            faceRenderer.sprite = isFaceUp ? cards[0].GetTag<CardSpritesData>().front : cards[0].GetTag<CardSpritesData>().back;
         }
     }
-    public void AddAndShuffle<T>(List<CardData> list) where T : Card
+    public void AddAndShuffle<T>(List<GameObject> list) where T : Card
     {
-        foreach(CardData d in list)
+        foreach(GameObject d in list)
         {
-            Card c = Card.CreateCard<T>(d, true);
+            Entity c = Entity.CreateEntity(d, true);
             cards.Add(c);
             c.transform.parent = transform;
         }

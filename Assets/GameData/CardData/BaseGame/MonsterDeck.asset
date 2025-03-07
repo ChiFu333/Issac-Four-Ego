@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 897aabb98a58f7749afe3e3a450db906, type: 3}
+  m_Name: MonsterDeck
+  m_EditorClassIdentifier: 
+  <cardsList>k__BackingField:
+  - <data>k__BackingField: {fileID: 2131199908606620548, guid: 46768d9c3afa7514f903471f3347f057, type: 3}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 30

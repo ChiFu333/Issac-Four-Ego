@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine;
 
@@ -21,10 +20,11 @@ public class UIOnDeck : MonoBehaviour
         inst = this;
     }
 
-    public void UpdateTexts()
+    public void UpdateTexts(int id = -1)
     {
-        List<Player> players = GameMaster.inst.turnManager.players;
-        for(int i = 0; i < players.Count; i++)
+        List<Player> players = G.Players.players;
+        int count = id != -1 ? id : players.Count;
+        for(int i = 0; i < count; i++)
         {
             string hp = "<color=#E34444>☻: " + players[i].hp;
             string addHp = players[i].preventHp == 0 ? "" : "<color=#94EEEE>("+players[i].preventHp+")</color>";
@@ -34,20 +34,23 @@ public class UIOnDeck : MonoBehaviour
             string money = "  <color=#E3C034>кеш: " + players[i].coins +"¢</color>";
             string loots = "  <color=#94EEEE>карт лута: " + players[i].lootCount + "</color>";
 
-            playerText[i].text = hp  + endHp + addHp + power + money + loots + "  души: " + players[i].souls + (players[i] == GameMaster.inst.turnManager.activePlayer ? " (!)" : "");
+            playerText[i].text = hp  + endHp + addHp + power + money + loots + "  души: " + players[i].souls + (players[i] == G.Players.activePlayer ? " (!)" : "");
         }
         UpdateAddInfo();
     }
     public void UpdateMonsterUI()
     {
-        for(int i = 0; i < GameMaster.inst.monsterZone.monstersInSlots.Count; i++)
+        for(int i = 0; i < G.monsterZone.monstersInSlots.Count; i++)
         {
-            if(GameMaster.inst.monsterZone.monstersInSlots[i] is MonsterCard m)
+            if(G.monsterZone.monstersInSlots[i].GetTag<CardTypeTag>().cardType == CardType.monsterCard)
             {
+                Entity m = G.monsterZone.monstersInSlots[i];
+                /*
                 string hp = "<color=#E34444>☻: " + m.hp;
                 string addHp = m.preventHp == 0 ? "" : "<color=#94EEEE>("+m.preventHp+")</color>";
                 string endHp = "/" + m.HpMax+ "</color>";
                 monstersHpCounters[i].text = hp + endHp + addHp;
+                */
             }
             else
             {
@@ -55,15 +58,15 @@ public class UIOnDeck : MonoBehaviour
             }
             
         }
-        for(int i = GameMaster.inst.monsterZone.monstersInSlots.Count; i < 4; i++)
+        for(int i = G.monsterZone.monstersInSlots.Count; i < 4; i++)
         {
             monstersHpCounters[i].text = "";
         }
     }
     public void UpdateAddInfo()
     {
-        attackText.text = "кол-во атак: " + GameMaster.inst.turnManager.activePlayer.attackCount;
-        shopText.text = "цена: " + GameMaster.inst.turnManager.activePlayer.shopPrice + "¢    кол-во покупок: " + GameMaster.inst.turnManager.activePlayer.buyCount;
+        attackText.text = "кол-во атак: " + G.Players.activePlayer.attackCount;
+        shopText.text = "цена: " + G.Players.activePlayer.shopPrice + "¢    кол-во покупок: " + G.Players.activePlayer.buyCount;
     }
     public void ChangeButtonsActive()
     {
@@ -72,8 +75,8 @@ public class UIOnDeck : MonoBehaviour
             bool a = StackSystem.inst.stack.Count == 0;
             bool b = !SubSystems.inst.isSelectingSomething;
             bool c = GameMaster.inst.phaseSystem.currentPhase == Phase.Action && GameMaster.inst.phaseSystem.subphases == 0;
-            bool d = GameMaster.inst.turnManager.activePlayer.buyCount != 0;
-            bool e = GameMaster.inst.turnManager.activePlayer.attackCount != 0;
+            bool d = G.Players.activePlayer.buyCount != 0;
+            bool e = G.Players.activePlayer.attackCount != 0;
             buttons[i].SetActive(a && b && c && (d || i != 0) && (e || i != 1));
         }
     }

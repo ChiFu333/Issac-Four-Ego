@@ -8,36 +8,35 @@ using UnityEngine.TextCore.Text;
 
 public class Player : MonoBehaviour
 {
-    public Card GetMyCard() => characterCard;
+    public Entity GetMyCard() => characterCard;
 
     #region [ Init & Turns ]
-    public CharacterCard characterCard { get; private set; }
+    public Entity characterCard { get; private set; }
     public Hand hand { get; private set; }
     public async Task Init(Hand hand)
     {
-        //bool t = false;
-        characterCard = (CharacterCard)GameMaster.inst.characterDeck.TakeOneCard();
-        characterCard.MoveTo(CardPlaces.inst.playersPos[GameMaster.inst.turnManager.GetMyId(this)][0], transform);
-        characterCard.Flip();
+        characterCard = G.Decks.characterDeck.TakeOneCard();
+        characterCard.MoveTo(G.CardPlaces.playersPos[G.Players.GetPlayerId(this)][0], transform);
+        characterCard.GetTag<Tappable>().Tap();
 
-        ItemCard it = Card.CreateCard<ItemCard>(characterCard.GetData<CharacterCardData>().characterItemData); 
+        Entity it = Entity.CreateEntity(characterCard.GetTag<CharacterItemPrefab>().itemPrefab); 
         it.SetActive(true);
         AddItem(it);
-        it.Flip();
+        if(it.HasTag<Tappable>()) it.GetTag<Tappable>().Tap();
         
         this.hand = hand;
 
-        HpMax = characterCard.GetData<CharacterCardData>().hp;
-        attack = characterCard.GetData<CharacterCardData>().attack;
+        hpMax = characterCard.GetTag<Characteristics>().health;
+        attack = characterCard.GetTag<Characteristics>().attack;
         coins = 0;
         lootPlayCount = 0;
-        souls = characterCard.GetData<CharacterCardData>().startSouls;
+        souls = 0;
         await Task.Delay(100);
     }
     public void SetBaseStats()
     {
-        HpMax = characterCard.GetData<CharacterCardData>().hp;
-        attack = characterCard.GetData<CharacterCardData>().attack;
+        HpMax = characterCard.GetTag<Characteristics>().health;
+        attack = characterCard.GetTag<Characteristics>().attack;
         preventHp = 0;
         shopPrice = 10;
         cubeModificator = 0;
@@ -66,6 +65,7 @@ public class Player : MonoBehaviour
             {
                 hp = hpMax < hp ? hpMax : hp;
             }
+            
             UIOnDeck.inst.UpdateTexts();
         }
     }
@@ -92,7 +92,7 @@ public class Player : MonoBehaviour
         {
             preventHp -= damageCount;
         }
-
+        GetMyCard().GetTag<Characteristics>().ChangeHp(hp);
         if(hp <= 0) 
         {
             hp = 0;
@@ -136,7 +136,7 @@ public class Player : MonoBehaviour
     {
         coins += count;
         if(coins < 0) coins = 0;
-        UIOnDeck.inst.UpdateTexts();
+        UIOnDeck.inst.UpdateTexts(G.Players.GetPlayerId(this));
     }
     public void StealMoney(int count, Player victim)
     {
@@ -150,11 +150,11 @@ public class Player : MonoBehaviour
     public int lootCount { get => hand.cards.Count;}
     [field: SerializeField, HorizontalGroup("Loot")] public int lootPlayCount { get; set; }
     [field: SerializeField, HorizontalGroup("Loot")] public int lootPlayMax { get; set; } = 1;
-    public void TakeOneLootCard(LootCard card)
+    public void TakeOneLootCard(Entity card)
     {
         hand.AddCard(card);
     }
-    public void PlayLootCard(LootCard c)
+    public void PlayLootCard(Entity c)
     {
         if(lootPlayCount > 0) 
         {
@@ -166,7 +166,7 @@ public class Player : MonoBehaviour
             Console.WriteText("Ты не можешь играть лут");
         }
     }
-    public async Task DiscardCard(LootCard c) 
+    public async Task DiscardCard(Entity c) 
     { 
         await hand.DiscardCard(c); 
     }
@@ -201,36 +201,36 @@ public class Player : MonoBehaviour
     #endregion
     
     #region [ Items ]
-    public List<Card> Items = new List<Card>();
+    public List<Entity> Items = new List<Entity>();
     public void ChangeAllPlayerItemCharge(bool charge)
     {
-        if(charge) characterCard.Recharge();
-        else characterCard.Flip();
+        if(charge) characterCard.GetTag<Tappable>().Recharge();
+        else characterCard.GetTag<Tappable>().Tap();
         for(int i = 0; i < Items.Count; i++)
         {
-            if(Items[i] is ItemCard it && it.IsFlippable)
+            if(Items[i].HasTag<Tappable>())
             {
                 if(charge)
-                    it.Recharge();
+                    Items[i].GetTag<Tappable>().Recharge();
                 else
-                    it.Flip();
+                    Items[i].GetTag<Tappable>().Tap();
             }
         }
     }
-    public void AddItem(Card c)
+    public void AddItem(Entity c)
     {
         for(int i = 0; i < Items.Count; i++)
         {
             if(Items[i] == null) 
             {
                 Items[i] = c;
-                c.MoveTo(CardPlaces.inst.playersPos[GameMaster.inst.turnManager.GetMyId(this)][i+1], transform);
+                c.MoveTo(G.CardPlaces.playersPos[G.Players.GetPlayerId(this)][i+1], transform);
                 PutCardTrigger(c);
                 return;
             }
         }
         Items.Add(c);
-        c.MoveTo(CardPlaces.inst.playersPos[GameMaster.inst.turnManager.GetMyId(this)][Items.Count], transform);
+        c.MoveTo(G.CardPlaces.playersPos[G.Players.GetPlayerId(this)][Items.Count], transform);
         PutCardTrigger(c);
     }
     public void SetPassiveItems()
@@ -244,9 +244,10 @@ public class Player : MonoBehaviour
             if(Curses[i] != null) PutCardTrigger(Curses[i]);
         }
     }
-    private void PutCardTrigger(Card c)
+    private void PutCardTrigger(Entity c)
     {
         StackEffect triggeredEffect = null;
+        /*
         if(c is LootCard lootItem)
         {
             triggeredEffect = new CardStackEffect(lootItem.GetData<LootCardData>().GetTrinketEffect(), c);
@@ -259,29 +260,30 @@ public class Player : MonoBehaviour
         {
             triggeredEffect = new CardStackEffect(eventCard.GetData<EventCardData>().GetPassiveEffect(), c);
         }
-        TriggersSystem.PutTrigger(triggeredEffect, GameMaster.inst.turnManager.GetMyId(this) + 1);
+        */
+        TriggersSystem.PutTrigger(triggeredEffect, G.Players.GetPlayerId(this) + 1);
     }
     #endregion
     
     #region [ Curses ]
-    public List<Card> Curses = new List<Card>();
-    public void AddCurse(Card c)
+    public List<Entity> Curses = new List<Entity>();
+    public void AddCurse(Entity c)
     {
         for(int i = 0; i < Curses.Count; i++)
         {
             if(Curses[i] == null) 
             {
                 Curses[i] = c;
-                c.MoveTo(CardPlaces.inst.playersCurses[GameMaster.inst.turnManager.GetMyId(this)][i], transform);
+                c.MoveTo(G.CardPlaces.playersCurses[G.Players.GetPlayerId(this)][i], transform);
                 PutCardTrigger(c);
                 return;
             }
         }
         Curses.Add(c);
-        c.MoveTo(CardPlaces.inst.playersCurses[GameMaster.inst.turnManager.GetMyId(this)][Curses.Count-1], transform);
+        c.MoveTo(G.CardPlaces.playersCurses[G.Players.GetPlayerId(this)][Curses.Count-1], transform);
         PutCardTrigger(c);
     }
-    public async Task<bool> DestroyCurse(Card c)
+    public async Task<bool> DestroyCurse(Entity c)
     {
         bool t = false;
         for(int i = 0; i < Curses.Count; i++)
@@ -295,7 +297,7 @@ public class Player : MonoBehaviour
         }
         if(t)
         {
-            await (c as EventCard).DiscardCard();
+            await c.DiscardEntity();
             return true;
         }
         return false;

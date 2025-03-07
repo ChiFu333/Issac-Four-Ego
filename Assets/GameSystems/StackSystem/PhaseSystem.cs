@@ -14,13 +14,13 @@ public class PhaseSystem : MonoBehaviour
         UIOnDeck.inst.ChangeButtonsActive();
 
         TriggersSystem.CleanAll();
-        for(int i = 0; i < GameMaster.PLAYERCOUNT; i++) GameMaster.inst.turnManager.players[i].SetPassiveItems();
+        for(int i = 0; i < GameMaster.PLAYERCOUNT; i++) G.Players.players[i].SetPassiveItems();
 
         #region Step1
         Console.WriteText("Перезаряди всё");
         UIOnDeck.inst.UpdatePhase("Фаза: начало хода (шаг 1)");
         await Task.Delay(500);
-        GameMaster.inst.turnManager.activePlayer.ChangeAllPlayerItemCharge(true);
+        G.Players.activePlayer.ChangeAllPlayerItemCharge(true);
         await Task.Delay(500);
         #endregion Step1
 
@@ -28,7 +28,7 @@ public class PhaseSystem : MonoBehaviour
         Console.WriteText("Эффекты начала хода");
         UIOnDeck.inst.UpdatePhase("Фаза: начало хода (шаг 2)");
         await TriggersSystem.withStartTurn[0]?.PlayTriggeredEffects();
-        await TriggersSystem.withStartTurn[1 + GameMaster.inst.turnManager.id]?.PlayTriggeredEffects();
+        await TriggersSystem.withStartTurn[1 + G.Players.playerTurnId]?.PlayTriggeredEffects();
         
         StackSystem.inst.GivePrior();
         while(subphases != 0 || StackSystem.inst.stack.Count != 0 || StackSystem.inst.prioreNow) 
@@ -41,7 +41,7 @@ public class PhaseSystem : MonoBehaviour
         #region Step3
         Console.WriteText("Эффекты после взятия лута");
         UIOnDeck.inst.UpdatePhase("Фаза: начало хода (шаг 3)");
-        GameMaster.inst.turnManager.activePlayer.TakeOneLootCard((LootCard)GameMaster.inst.lootDeck.TakeOneCard());
+        G.Players.activePlayer.TakeOneLootCard(G.Decks.lootDeck.TakeOneCard());
 
         StackSystem.inst.GivePrior();
         while(subphases != 0 || StackSystem.inst.stack.Count != 0 || StackSystem.inst.prioreNow) 
@@ -59,9 +59,9 @@ public class PhaseSystem : MonoBehaviour
 
         Console.WriteText("Фаза действий!");
         UIOnDeck.inst.UpdatePhase("Фаза: действия");
-        GameMaster.inst.turnManager.activePlayer.lootPlayCount++;
-        GameMaster.inst.turnManager.activePlayer.buyCount++;
-        GameMaster.inst.turnManager.activePlayer.attackCount++;
+        G.Players.activePlayer.lootPlayCount++;
+        G.Players.activePlayer.buyCount++;
+        G.Players.activePlayer.attackCount++;
         UIOnDeck.inst.UpdateTexts();
         UIOnDeck.inst.ChangeButtonsActive();
     }
@@ -79,7 +79,7 @@ public class PhaseSystem : MonoBehaviour
         Console.WriteText("Эффекты конца хода");
         UIOnDeck.inst.ChangeButtonsActive();
         await TriggersSystem.withEndTurn[0]?.PlayTriggeredEffects();
-        await TriggersSystem.withEndTurn[1 + GameMaster.inst.turnManager.GetMyId(GameMaster.inst.turnManager.activePlayer)]?.PlayTriggeredEffects();
+        await TriggersSystem.withEndTurn[1 + G.Players.GetPlayerId(G.Players.activePlayer)]?.PlayTriggeredEffects();
 
         StackSystem.inst.GivePrior();
         while(subphases != 0 || StackSystem.inst.stack.Count != 0 || StackSystem.inst.prioreNow) await Task.Yield();
@@ -87,12 +87,12 @@ public class PhaseSystem : MonoBehaviour
 
         #region Step2
         UIOnDeck.inst.UpdatePhase("Фаза: конец хода (шаг 2)");
-        int count = GameMaster.inst.turnManager.activePlayer.lootCount - 10;
+        int count = G.Players.activePlayer.lootCount - 10;
         for(int i = 0; i < count; i++) 
         {
             Console.WriteText("Сбрось до 10 карт лута");
-            LootCard c = await SubSystems.inst.SelectCardByType<LootCard>("MyHand"); 
-            await GameMaster.inst.turnManager.activePlayer.DiscardCard(c);
+            Entity c = await SubSystems.inst.SelectCardByType("MyHand"); 
+            await G.Players.activePlayer.DiscardCard(c);
         }
         #endregion Step2
 
@@ -100,12 +100,12 @@ public class PhaseSystem : MonoBehaviour
         Console.WriteText("Передаю ход");
         UIOnDeck.inst.UpdatePhase("Фаза: конец хода (шаг 3)");
         await Task.Delay(500);
-        GameMaster.inst.turnManager.HealEveryone();
-        GameMaster.inst.monsterZone.RestoreAllStats();
+        GameMaster.inst.HealEveryone();
+        G.monsterZone.RestoreAllStats();
         
         #endregion Step3
 
-        GameMaster.inst.turnManager.SwitchTurn();
+        GameMaster.inst.SwitchTurn();
     }
     private bool isBuying = false;
     public async Task StartBuying()
@@ -133,12 +133,12 @@ public class PhaseSystem : MonoBehaviour
             return;
         }
         Console.WriteText("Выбери предмет на покупку");        
-        Card c = await SubSystems.inst.SelectCardByType<ItemCard>("Shop");
+        Entity c = await SubSystems.inst.SelectCardByType("Shop");
         //здесь эффекты после выбора цели
-        if(GameMaster.inst.turnManager.activePlayer.PermitBuy())
+        if(G.Players.activePlayer.PermitBuy())
         {
             UIOnDeck.inst.UpdateAddInfo();
-            GameMaster.inst.shop.InstBuy(c);
+            G.shop.InstBuy(c);
         }
         else
         {
@@ -166,12 +166,12 @@ public class PhaseSystem : MonoBehaviour
 
         #region Step2
         Console.WriteText("Выбери цель атаки");
-        GameMaster.inst.monsterZone.currentEnemy = await SubSystems.inst.SelectCardByType<MonsterCard>("MonsterZone");
+        G.monsterZone.currentEnemy = await SubSystems.inst.SelectCardByType("MonsterZone");
         Console.WriteText("Атака начата!");
         #endregion Step2
 
         #region StepRepeat
-        while(GameMaster.inst.monsterZone.currentEnemy != null && GameMaster.inst.monsterZone.currentEnemy.hp != 0 && GameMaster.inst.turnManager.activePlayer.hp != 0)
+        while(G.monsterZone.currentEnemy != null && G.monsterZone.currentEnemy.GetTag<Characteristics>().health != 0 && G.Players.activePlayer.hp != 0)
         {
             if(currentPhase != Phase.Action) { await EndAttack(); subphases--; UIOnDeck.inst.ChangeButtonsActive(); return; }
             
@@ -179,13 +179,13 @@ public class PhaseSystem : MonoBehaviour
             for(int i = 0; i < 6; i++)
             {
                 StackEffect eff = null;
-                if(i+1 >= GameMaster.inst.monsterZone.currentEnemy.dodge)
+                if(i+1 >= G.monsterZone.currentEnemy.GetTag<Characteristics>().dodge)
                 {
-                    eff = new PrimalStackEffect(PrimalEffect.Damage, GameMaster.inst.monsterZone.currentEnemy, GameMaster.inst.turnManager.activePlayer.attack, true);
+                    eff = new PrimalStackEffect(PrimalEffect.Damage, G.monsterZone.currentEnemy, G.Players.activePlayer.attack, true);
                 }
                 else
                 {
-                    eff = new PrimalStackEffect(PrimalEffect.Damage, GameMaster.inst.turnManager.activePlayer.GetMyCard(), GameMaster.inst.monsterZone.currentEnemy.attack, true);
+                    eff = new PrimalStackEffect(PrimalEffect.Damage, G.Players.activePlayer.GetMyCard(), G.monsterZone.currentEnemy.GetTag<Characteristics>().attack, true);
                 }
                 additionTrigger.Add(eff); 
             }
@@ -219,7 +219,7 @@ public class PhaseSystem : MonoBehaviour
                 await pse.RemoveMeFromStack();
             }
         }
-        GameMaster.inst.monsterZone.currentEnemy = null;
+        G.monsterZone.currentEnemy = null;
         //if(currentPhase == Phase.End) await StartEndPhase();   
     }
     public void EndBuying()
@@ -238,7 +238,7 @@ public class PhaseSystem : MonoBehaviour
         Debug.Log("After2:" + tempSubphase);
         
         p.isDead = true;
-        if(GameMaster.inst.turnManager.activePlayer == p) await GameMaster.inst.monsterZone.EndAttack();
+        if(G.Players.activePlayer == p) await G.monsterZone.EndAttack();
         UIOnDeck.inst.ChangeButtonsActive();
         Console.WriteText("Игрок умер");
         await Task.Delay(500);
@@ -264,17 +264,16 @@ public class PhaseSystem : MonoBehaviour
         if(p.lootCount != 0)
         {
             Console.WriteText("Сбрось лут");
-            GameMaster.inst.turnManager.SetPrior(p);
-            await p.DiscardCard(await SubSystems.inst.SelectCardByType<LootCard>("MyHand"));
-            GameMaster.inst.turnManager.RestorePrior();
+            G.Players.SetPrior(p);
+            await p.DiscardCard(await SubSystems.inst.SelectCardByType("MyHand"));
+            G.Players.RestorePrior();
         }
         p.AddMoney(-1);
-        p.characterCard.Flip();
         p.ChangeAllPlayerItemCharge(false);
         #endregion Step2
         
         subphases -= 1;
-        if(GameMaster.inst.turnManager.activePlayer != p) return;
+        if(G.Players.activePlayer != p) return;
 
         #region Step3
         Console.WriteText("Фаза очистки");
@@ -286,20 +285,20 @@ public class PhaseSystem : MonoBehaviour
         await Task.Delay(500);
         _ = StartEndPhase();
     }
-    public async Task StartEnemyDie(MonsterCard c)
+    public async Task StartEnemyDie(Entity c)
     {
         subphases += 1;
         int tempSubphase = subphases;
         int tempStackCount = StackSystem.inst.stack.Count;
         //p.isDead = true;
-        if(GameMaster.inst.monsterZone.currentEnemy == c) await GameMaster.inst.monsterZone.EndAttack();
+        if(G.monsterZone.currentEnemy == c) await G.monsterZone.EndAttack();
         UIOnDeck.inst.ChangeButtonsActive();
         Console.WriteText("Монстер умер");
         await Task.Delay(500);
 
         #region Step1
-        GameMaster.inst.monsterZone.RemoveMonster(c);
-        await c.PutCardNearHand(GameMaster.inst.turnManager.activePlayer.hand);
+        G.monsterZone.RemoveMonster(c);
+        await c.PutCardNearHand(G.Players.activePlayer.hand);
         #endregion Step1
 
         #region Step2
@@ -311,7 +310,7 @@ public class PhaseSystem : MonoBehaviour
 
         #region Step3
         await c.Shake();
-        await StackSystem.inst.PushAndAgree(new CardStackEffect(c.GetData<MonsterCardData>().GetRewardEffect(), c));
+        //await StackSystem.inst.PushAndAgree(new CardStackEffect(c.GetData<MonsterCardData>().GetRewardEffect(), c));
         #endregion Step3
 
         #region Step4
@@ -326,12 +325,12 @@ public class PhaseSystem : MonoBehaviour
         tempStackCount = StackSystem.inst.stack.Count;
         #endregion Step4
         
-        await c.DiscardCard();
-        await GameMaster.inst.monsterZone.RestockSlots();
+        await c.DiscardEntity();
+        await G.monsterZone.RestockSlots();
         CheckEventsAndPlay();
         UIOnDeck.inst.ChangeButtonsActive();
     }
-    public async Task StartEventPlay(EventCard c, bool smoothGo)
+    public async Task StartEventPlay(Entity c, bool smoothGo)
     {
         if(!smoothGo) subphases += 1;
         int tempSubphase = subphases;
@@ -342,11 +341,11 @@ public class PhaseSystem : MonoBehaviour
         //#region Step1
         Console.WriteText("Событие!");
         
-        CardStackEffect eff = new CardStackEffect(c.GetData<EventCardData>().GetPlayEffect(), c);
+        /*CardStackEffect eff = new CardStackEffect(c.GetData<EventCardData>().GetPlayEffect(), c);
         await eff.Init();
         await StackSystem.inst.PushEffect(eff);
         
-        StackSystem.inst.GivePrior();
+        StackSystem.inst.GivePrior();*/
         while(tempSubphase > subphases || StackSystem.inst.stack.Count > tempStackCount /*|| StackSystem.inst.prioreNow*/) 
         {
             await Task.Yield();
@@ -356,13 +355,13 @@ public class PhaseSystem : MonoBehaviour
         }
         //#endregion Step1
 
-        await GameMaster.inst.monsterZone.RestockSlots();
+        await G.monsterZone.RestockSlots();
         CheckEventsAndPlay();
         UIOnDeck.inst.ChangeButtonsActive();
     }
     private void CheckEventsAndPlay()
     {
-        List<EventCard> events = GameMaster.inst.monsterZone.CheckEvents();
+        List<Entity> events = G.monsterZone.CheckEvents();
         if(events.Count == 0) subphases -= 1;
         else
         {
@@ -370,4 +369,8 @@ public class PhaseSystem : MonoBehaviour
             _ = StartEventPlay(events[0], true);
         }
     }
+}
+public enum Phase 
+{
+    Start, Action, End
 }

@@ -8,13 +8,13 @@ using UnityEngine.Timeline;
 public class MonsterZone : MonoBehaviour
 {
     [field: SerializeField] public int activeSlotsCount { get; private set; } = 2;
-    [field: SerializeField] public List<Card> monstersInSlots { get; private set; } = new List<Card>();
-    public MonsterCard currentEnemy { get; set; }
+    [field: SerializeField] public List<Entity> monstersInSlots { get; private set; } = new List<Entity>();
+    public Entity currentEnemy { get; set; }
     public void Init()
     {
         for(int j = 0; j < activeSlotsCount; j++)
         {
-            MonsterCard c = (MonsterCard)GameMaster.inst.monsterDeck.TakeOneCard();
+            Entity c = G.Decks.monsterDeck.TakeOneCard();
             monstersInSlots.Add(c);
         }
         _ = RestockSlots(); 
@@ -25,7 +25,7 @@ public class MonsterZone : MonoBehaviour
         {
             if(monstersInSlots[i] == null)
             {
-                Card c = GameMaster.inst.monsterDeck.TakeOneCard();
+                Entity c = G.Decks.monsterDeck.TakeOneCard();
                 monstersInSlots[i] = c;
             }
         }
@@ -34,27 +34,29 @@ public class MonsterZone : MonoBehaviour
         {
             if(j + 1 == activeSlotsCount)
             {
-                monstersInSlots[j].MoveTo(CardPlaces.inst.monsterSlots[j], transform, () => trigger = true);
+                monstersInSlots[j].MoveTo(G.CardPlaces.monsterSlots[j], transform, () => trigger = true);
             }
             else
             {
-                monstersInSlots[j].MoveTo(CardPlaces.inst.monsterSlots[j], transform);
+                monstersInSlots[j].MoveTo(G.CardPlaces.monsterSlots[j], transform);
             }
         }
         while(!trigger) await Task.Yield();
         RestoreAllStats();
         UIOnDeck.inst.UpdateMonsterUI();
     }
-    public List<EventCard> CheckEvents()
+    public List<Entity> CheckEvents()
     {
-        List<EventCard> events = new List<EventCard>();
-        foreach(Card c in monstersInSlots) if(c is EventCard eventC) events.Add(eventC); 
+        List<Entity> events = new List<Entity>();
+        foreach(Entity c in monstersInSlots) 
+            if(c.GetTag<CardTypeTag>().cardType == CardType.eventCard) 
+                events.Add(c); 
         return events;
     }
     public async void StartAttackSubPhase()
     {
-        if(GameMaster.inst.turnManager.activePlayer.attackCount <= 0) return;
-        GameMaster.inst.turnManager.activePlayer.attackCount -= 1;
+        if(G.Players.activePlayer.attackCount <= 0) return;
+        G.Players.activePlayer.attackCount -= 1;
         await GameMaster.inst.phaseSystem.StartFighting();
     }
     public async Task EndAttack()
@@ -66,18 +68,19 @@ public class MonsterZone : MonoBehaviour
         activeSlotsCount = math.min(activeSlotsCount + count, 4); 
         _ = RestockSlots();
     }
-    public void RemoveMonster(Card c)
+    public void RemoveMonster(Entity c)
     {
         if(monstersInSlots.IndexOf(c) != -1) monstersInSlots[monstersInSlots.IndexOf(c)] = null;
     }
     public void RestoreAllStats()
     {
-        foreach(MonsterCard c in monstersInSlots) c.SetBaseStats();
+        //foreach(Entity c in monstersInSlots) 
+        //c.SetBaseStats();
         UIOnDeck.inst.UpdateMonsterUI();
     }
-    public async Task StashSlot(Card c, bool canStashAttackedMonster = false)
+    public async Task StashSlot(Entity c, bool canStashAttackedMonster = false)
     {
         RemoveMonster(c);
-        await c.DiscardCard();
+        await c.DiscardEntity();
     }
 }

@@ -13,9 +13,9 @@ public class SubSystems : MonoBehaviour
     {
         inst = this;
     }
-    public async Task<T> SelectCardByType<T>(string zoneName) where T : Card
+    public async Task<Entity> SelectCardByType(string zoneName)
     {
-        Player initiator = GameMaster.inst.turnManager.priorPlayer();
+        Player initiator = G.Players.priorPlayer;
         isSelectingSomething = true;
         UIOnDeck.inst.ChangeButtonsActive();
         while (true)
@@ -34,30 +34,30 @@ public class SubSystems : MonoBehaviour
                 RaycastHit2D hit = Physics2D.Raycast(mousePos2D, Vector2.zero);
                 if (hit.collider != null)
                 {
-                    if(hit.collider.GetComponent<T>() != null)
+                    if(hit.collider.GetComponent<Entity>() != null)
                     {
                         Dictionary<string, bool> rightBool = new Dictionary<string, bool>()
                         {
                             {"InPlay", true},
                             {"MyHand", hit.collider.transform.parent.parent == initiator?.transform},
-                            {"Shop", hit.collider.transform.parent == GameMaster.inst.shop.transform},
-                            {"MonsterZone", hit.collider.transform.parent == GameMaster.inst.monsterZone.transform}
+                            {"Shop", hit.collider.transform.parent == G.shop.transform},
+                            {"MonsterZone", hit.collider.transform.parent == G.monsterZone.transform}
                         };
 
                         if(rightBool[zoneName])
                         {
                             QuitSelecting();
                             UIOnDeck.inst.ChangeButtonsActive();
-                            return hit.collider.GetComponent<T>();
+                            return hit.collider.GetComponent<Entity>();
                         }
                     }
                 }
             }
         }
     }
-    public async Task<Card> SelectCardByTypes<T1,T2>(string zoneName) where T1 : Card where T2 : Card
+    public async Task<Entity> SelectCardByTypes<T1,T2>(string zoneName) where T1 : Card where T2 : Card
     {
-        Player initiator = GameMaster.inst.turnManager.priorPlayer();
+        Player initiator = G.Players.priorPlayer;
         isSelectingSomething = true;
         UIOnDeck.inst.ChangeButtonsActive();
         while (true)
@@ -76,21 +76,21 @@ public class SubSystems : MonoBehaviour
                 RaycastHit2D hit = Physics2D.Raycast(mousePos2D, Vector2.zero);
                 if (hit.collider != null)
                 {
-                    if(hit.collider.GetComponent<T1>() != null || hit.collider.GetComponent<T2>() != null)
+                    if(hit.collider.GetComponent<Entity>() != null)
                     {
                         Dictionary<string, bool> rightBool = new Dictionary<string, bool>()
                         {
                             {"InPlay", true},
                             {"MyHand", hit.collider.transform.parent.parent == initiator.transform},
-                            {"Shop", hit.collider.transform.parent == GameMaster.inst.shop.transform},
-                            {"MonsterZone", hit.collider.transform.parent == GameMaster.inst.monsterZone.transform}
+                            {"Shop", hit.collider.transform.parent == G.shop.transform},
+                            {"MonsterZone", hit.collider.transform.parent == G.monsterZone.transform}
                         };
 
                         if(rightBool[zoneName])
                         {
                             QuitSelecting();
                             UIOnDeck.inst.ChangeButtonsActive();
-                            return hit.collider.GetComponent<Card>();
+                            return hit.collider.GetComponent<Entity>();
                         }
                     }
                 }
@@ -101,7 +101,7 @@ public class SubSystems : MonoBehaviour
     {
         isSelectingSomething = false;
         ForceQuit = false;
-        GameMaster.inst.turnManager.RestorePrior();
+        G.Players.RestorePrior();
     }
     public void CancelSelecting()
     {

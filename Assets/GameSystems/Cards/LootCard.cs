@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class LootCard : Card
@@ -13,16 +12,9 @@ public class LootCard : Card
         base.Init(d, isFaceUp);
         MouseClicked += ClickToPlay;
     }
-    public async void PlayCard()
+    public void PlayCard()
     {
-        Effect e = GetData<LootCardData>().GetPlayEffect();
         
-        CardStackEffect eff = new CardStackEffect(e, this);
-    
-        await StackSystem.inst.PushEffect(eff);
-        GameMaster.inst.turnManager.RestorePrior();
-
-        Console.WriteText("Разыграна карта лута");
     }
     public void TurnIntoItem()
     {
@@ -43,7 +35,7 @@ public class LootCard : Card
     }
     private void ClickToPlay(Card c)
     {
-        GameMaster.inst.turnManager.SetPrior(GetMyPlayer());
-        GetMyPlayer().PlayLootCard(this);
+        G.Players.SetPrior(GetMyPlayer());
+        //GetMyPlayer().PlayLootCard(this);
     }
 }

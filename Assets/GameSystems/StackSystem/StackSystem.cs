@@ -13,7 +13,7 @@ public class StackSystem : MonoBehaviour
 {
     public static StackSystem inst;
     public Stack<StackEffect> stack = new Stack<StackEffect>();
-    public Card cardTarget;
+    public Entity cardTarget;
     public bool prioreNow = false;
     public List<PrimalCardData> primalCards; //заявка на покупку, заявка на атаку, получение урона, смерть
     public List<CubeCardData> cubeCards;
@@ -39,7 +39,7 @@ public class StackSystem : MonoBehaviour
     {
         UIOnDeck.inst.UpdateStack();
     }
-    public async Task PushPrimalEffect(PrimalEffect type, Card t, int effCount = 1, bool fight = false)
+    public async Task PushPrimalEffect(PrimalEffect type, Entity t, int effCount = 1, bool fight = false)
     {
         StackEffect eff = new PrimalStackEffect(type, t, effCount, fight);
         await PushEffect(eff);
@@ -73,10 +73,10 @@ public class StackSystem : MonoBehaviour
         UpdateUI();
         for(int i = 0; i < count; i++)
         {
-            if (sfl[i] is CardStackEffect cardEff && cardEff.source is LootCard lootCard && !lootCard.isItem) await lootCard.DiscardCard();
-            else if (sfl[i] is CardStackEffect cardEff2 && cardEff2.source is EventCard eventCard && !eventCard.isCurse) 
+            if (sfl[i] is CardStackEffect cardEff && cardEff.source.GetTag<CardTypeTag>().cardType == CardType.lootCard /*&& !lootCard.isItem*/) await cardEff.source.DiscardEntity();
+            else if (sfl[i] is CardStackEffect cardEff2 && cardEff2.source.GetTag<CardTypeTag>().cardType == CardType.eventCard /*&& !eventCard.isCurse*/) 
             {
-                await eventCard.DiscardCard();
+                await cardEff2.source.DiscardEntity();
             }
         }
         prioreNow = false;
@@ -118,11 +118,11 @@ public abstract class StackEffect
 }
 public class CardStackEffect : StackEffect
 {
-    public Card source { get; private set; }
+    public Entity source { get; private set; }
     public Effect effect { get; private set; }
     private int manageEffect = -1;
     public bool triggeredEffect { get; private set; } = false;
-    public CardStackEffect(Effect eff, Card s, bool trigge = false)
+    public CardStackEffect(Effect eff, Entity s, bool trigge = false)
     {
         effect = eff;
         source = s;
@@ -132,17 +132,17 @@ public class CardStackEffect : StackEffect
     {
         if (effect.type != EffectType.Roll)
         {
-            manageEffect = await EffectSelector.inst.SelectEffect(source.GetData<CardData>().face, effect.effectActions.Count);
+            manageEffect = await EffectSelector.inst.SelectEffect(source.GetTag<CardSpritesData>().front, effect.effectActions.Count);
         }
         await effect.SetTargets(source, manageEffect);
     }
     public async override Task PlayStackEffect()
     {
-        if (source is EventCard eve && !eve.isCurse && !triggeredEffect)
+        if (source.GetTag<CardTypeTag>().cardType == CardType.eventCard/* && !eve.isCurse && !triggeredEffect*/)
         {
-            GameMaster.inst.monsterZone.RemoveMonster(eve);
-            await eve.PutCardNearHand(GameMaster.inst.turnManager.activePlayer.hand);
-            if(eve.GetData<EventCardData>().isCurse) eve.TurnIntoCurse();
+            //G.monsterZone.RemoveMonster(eve);
+            await source.PutCardNearHand(G.Players.activePlayer.hand);
+            //if(eve.GetData<EventCardData>().isCurse) eve.TurnIntoCurse();
         }
         await RemoveMeFromStack();
         if (effect.type == EffectType.Roll)
@@ -163,23 +163,23 @@ public class CardStackEffect : StackEffect
             await effect.PlayEffect(manageEffect);
         }
         Debug.Log(source != null ? source.name : "NULL!!");
-        if (source is LootCard lootCard && !lootCard.isItem) await lootCard.DiscardCard();
-        if(source is EventCard eventCard && !eventCard.isCurse) await eventCard.DiscardCard();
+        if (source.GetTag<CardTypeTag>().cardType == CardType.lootCard/* && !lootCard.isItem*/) await source.DiscardEntity();
+        if(source.GetTag<CardTypeTag>().cardType == CardType.eventCard/* && !eventCard.isCurse*/) await source.DiscardEntity();
     }
     public override Sprite GetSprite(bool sourceSprite)
     {
-        return sourceSprite ? source.GetData<CardData>().face : effect.effectActions?[manageEffect == -1 ? 0 : manageEffect]?.subActions[0]?.targetCard?.GetData<CardData>().face;
+        return sourceSprite ? source.GetTag<CardSpritesData>().front : effect.effectActions?[manageEffect == -1 ? 0 : manageEffect]?.subActions[0]?.targetCard?.GetTag<CardSpritesData>().front;
     }
 }
 public class PrimalStackEffect : StackEffect
 {
     public bool fightDamage;
     public PrimalCardData data;
-    private Card target;
+    private Entity target;
     public Sprite effectSprite;
     public int count;
     public int type;
-    public PrimalStackEffect(PrimalEffect type, Card t, int c, bool fight = false)
+    public PrimalStackEffect(PrimalEffect type, Entity t, int c, bool fight = false)
     {
         this.type = (int)type;
         data = StackSystem.inst.primalCards[(int)type];

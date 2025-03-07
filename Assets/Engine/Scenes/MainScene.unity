@@ -3858,6 +3858,7 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3983,6 +3984,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56666c5a40171f54783dd416a44f42bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_MaxRayIntersections: 0
 --- !u!1 &531900442
 GameObject:
   m_ObjectHideFlags: 0
@@ -4641,7 +4658,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 619394802}
-  - component: {fileID: 619394801}
   m_Layer: 0
   m_Name: Global Light 2D
   m_TagString: Untagged
@@ -4649,58 +4665,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &619394801
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 619394800}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ComponentVersion: 2
-  m_LightType: 4
-  m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0.5
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
-  m_LightVolumeIntensity: 1
-  m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 00000000d55e89f99beb1e8f
-  m_LightCookieSprite: {fileID: 0}
-  m_DeprecatedPointLightCookieSprite: {fileID: 0}
-  m_LightOrder: 0
-  m_AlphaBlendOnOverlap: 0
-  m_OverlapOperation: 0
-  m_NormalMapDistance: 3
-  m_NormalMapQuality: 2
-  m_UseNormalMap: 0
-  m_ShadowsEnabled: 0
-  m_ShadowIntensity: 0.75
-  m_ShadowSoftness: 0
-  m_ShadowSoftnessFalloffIntensity: 0.5
-  m_ShadowVolumeIntensityEnabled: 0
-  m_ShadowVolumeIntensity: 0.75
-  m_LocalBounds:
-    m_Center: {x: 0, y: -0.00000011920929, z: 0}
-    m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
-  m_PointLightInnerAngle: 360
-  m_PointLightOuterAngle: 360
-  m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 1
-  m_ShapeLightParametricSides: 5
-  m_ShapeLightParametricAngleOffset: 0
-  m_ShapeLightParametricRadius: 1
-  m_ShapeLightFalloffSize: 0.5
-  m_ShapeLightFalloffOffset: {x: 0, y: 0}
-  m_ShapePath:
-  - {x: -0.5, y: -0.5, z: 0}
-  - {x: 0.5, y: -0.5, z: 0}
-  - {x: 0.5, y: 0.5, z: 0}
-  - {x: -0.5, y: 0.5, z: 0}
 --- !u!4 &619394802
 Transform:
   m_ObjectHideFlags: 0
@@ -6433,22 +6397,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09b3d66538c0510458a0cf3344449222, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <shop>k__BackingField: {fileID: 0}
-  <monsterZone>k__BackingField: {fileID: 0}
-  <turnManager>k__BackingField: {fileID: 1605422241}
+  cardPlaces: {fileID: 1432892978}
   <phaseSystem>k__BackingField: {fileID: 1605422242}
   <deckBuilder>k__BackingField: {fileID: 1068793897}
-  characterDeck: {fileID: 0}
-  lootDeck: {fileID: 0}
-  lootStash: {fileID: 0}
-  shopDeck: {fileID: 0}
-  shopStash: {fileID: 0}
-  monsterDeck: {fileID: 0}
-  monsterStash: {fileID: 0}
-  shopDeckList: {fileID: 11400000, guid: 9a84b3c944637744abe9d6d4e92e0b0d, type: 2}
-  characterList: {fileID: 11400000, guid: bbd4bc2d7c83240498c320e19ab5baeb, type: 2}
-  monsterList: {fileID: 11400000, guid: 1c1c8b08a1fc0e243810e96d9304f50b, type: 2}
-  eventList: {fileID: 11400000, guid: be978936d4c4b094d9c62313d72d0567, type: 2}
 --- !u!4 &891499301
 Transform:
   m_ObjectHideFlags: 0
@@ -6461,8 +6412,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1845270276}
+  m_Children:
+  - {fileID: 1432892977}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &896743442
 GameObject:
@@ -8085,9 +8037,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b48cc95623297df4db7bcfa257afff31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <characterDeck>k__BackingField: {fileID: 11400000, guid: e557b60979735694d90f5cbae20b12b5, type: 2}
   <lootDeck>k__BackingField: {fileID: 11400000, guid: e4647e682cacc124e9274b4c899fbff6, type: 2}
-  <monsterDeck>k__BackingField: {fileID: 0}
-  <treasureDeck>k__BackingField: {fileID: 0}
+  <monsterDeck>k__BackingField: {fileID: 11400000, guid: 566efe2cf2073134591b0d2956834619, type: 2}
+  <treasureDeck>k__BackingField: {fileID: 11400000, guid: e67381fd9875fd941be253538a8504de, type: 2}
+  <eventDeck>k__BackingField: {fileID: 11400000, guid: 6ba9bac6fbe08f34d949dbd1aebcd5b0, type: 2}
 --- !u!1 &1114666718
 GameObject:
   m_ObjectHideFlags: 0
@@ -9707,6 +9661,37 @@ MonoBehaviour:
   - {fileID: 163782055}
   - {fileID: 1288630973}
   PhaseText: {fileID: 1114666720}
+--- !u!1 &1274429012
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1274429013}
+  m_Layer: 0
+  m_Name: ===GAME UNDER ME===
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1274429013
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1274429012}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1281355780
 GameObject:
   m_ObjectHideFlags: 0
@@ -11152,7 +11137,7 @@ Transform:
   - {fileID: 1947511344}
   - {fileID: 1464607127}
   - {fileID: 282287437}
-  m_Father: {fileID: 1845270276}
+  m_Father: {fileID: 891499301}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1432892978
 MonoBehaviour:
@@ -11166,24 +11151,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3253aea8876cf644f90775ef845ceae5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <otherPos>k__BackingField: {x: -10, y: 0, z: 0}
-  <lootDeck>k__BackingField: {fileID: 404761538}
-  <lootStash>k__BackingField: {fileID: 1159531913}
-  <monsterDeck>k__BackingField: {fileID: 1677259792}
-  <monsterStash>k__BackingField: {fileID: 2089380187}
-  <monsterSlots>k__BackingField:
+  otherPos: {x: -10, y: 0, z: 0}
+  lootDeck: {fileID: 404761538}
+  lootStash: {fileID: 1159531913}
+  monsterDeck: {fileID: 1677259792}
+  monsterStash: {fileID: 2089380187}
+  monsterSlots:
   - {fileID: 1293260509}
   - {fileID: 2122953036}
   - {fileID: 2013340402}
   - {fileID: 2109379172}
-  <shopDeck>k__BackingField: {fileID: 751183034}
-  <shopStash>k__BackingField: {fileID: 1173167449}
+  shopDeck: {fileID: 751183034}
+  shopStash: {fileID: 1173167449}
   shopSlots:
   - {fileID: 1204851385}
   - {fileID: 491259145}
   - {fileID: 1968461175}
   - {fileID: 346576924}
-  <playersTransformToDeconstruct>k__BackingField:
+  playersTransformToDeconstruct:
   - {fileID: 1119712980}
   - {fileID: 1947511344}
   - {fileID: 1464607127}
@@ -12856,7 +12841,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1605422240}
-  - component: {fileID: 1605422241}
   - component: {fileID: 1605422242}
   m_Layer: 0
   m_Name: TurnManager
@@ -12880,20 +12864,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1845270276}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1605422241
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1605422239}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8bbcec5fbfdd56c4a9be1e7a5e92fe7f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <players>k__BackingField: []
-  <priorId>k__BackingField: 0
 --- !u!114 &1605422242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14367,9 +14337,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1068793896}
-  - {fileID: 891499301}
   - {fileID: 1605422240}
-  - {fileID: 1432892977}
   - {fileID: 685805182}
   - {fileID: 294827389}
   - {fileID: 550151344}
@@ -14940,7 +14908,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1605422241}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: TurnManager, Assembly-CSharp
         m_MethodName: EndTurn
         m_Mode: 1
@@ -17299,7 +17267,9 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 619394802}
   - {fileID: 86273066}
+  - {fileID: 891499301}
   - {fileID: 1845270276}
   - {fileID: 1937615119}
   - {fileID: 1272644037}
   - {fileID: 200255103}
+  - {fileID: 1274429013}
