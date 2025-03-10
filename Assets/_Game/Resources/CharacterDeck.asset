@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 897aabb98a58f7749afe3e3a450db906, type: 3}
+  m_Name: CharacterDeck
+  m_EditorClassIdentifier: 
+  <CardsList>k__BackingField:
+  - <data>k__BackingField: {fileID: 3122879388330601525, guid: cf3beb59023ce0a48a165c0fcca2ca55, type: 3}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 1216314725003974061, guid: 5b04c2ca2541f154bb0a42685cfe5e1d, type: 3}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 1845183474846263283, guid: a6687618083a35b409e797835a586147, type: 3}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 470197922330244490, guid: 683379c1f7b2bae48b4ab1700e05ddbd, type: 3}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 8511759878981669527, guid: 8944cb926e7f72e4484075eb5abc786c, type: 3}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 5025294248831980785, guid: 2fd7716ba29c1e245aa07d55d6c9606a, type: 3}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 2710720378592720827, guid: e7b8c6efd43693c479b754a460613c72, type: 3}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 7354732860474746863, guid: 918d946422bfece4f82985b60b7932ac, type: 3}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 1900059902133331029, guid: 5bee5f0384faf68439a9f510aafbeedb, type: 3}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 1743596893078088379, guid: 163276e3ec9b703409a1de7dbab2c77b, type: 3}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 7839207925620223373, guid: 0694f629b6a9ca14eba223351b43e860, type: 3}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
