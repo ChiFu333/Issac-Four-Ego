@@ -10,16 +10,19 @@ public class Hand : MonoBehaviour
     private const float MAXLENGTH =  6.5f;
     public const float UPMOVE = 0.4f;
     [field: SerializeField] public List<Entity> cards { get; private set; } = new List<Entity>();
-    public void AddCard(Entity card)
+    public async Task AddCard(Entity card)
     {
-        AudioManager.inst.Play(Sounds.CardTaked);
-        card.render.sortingLayerName = "HandCards"; //Слой для рук!!
+        card.AddTag(new PlayFromHand());
+        AudioManager.inst.Play(R.Audio.cardTaked);
+        card.visual.render.sortingLayerName = "HandCards"; //Слой для рук!!
         cards.Add(card);
         AddMoveUpAndDownTweens(card);
         card.transform.SetParent(transform);
         card.transform.localScale = Vector3.one * Card.CARDSIZE;
-        UpdateCardPositions();
-        UIOnDeck.inst.UpdateTexts(G.Players.GetPlayerId(GetComponentInParent<Player>()));
+
+        await UpdateCardPositions();
+        
+        //UIOnDeck.inst.UpdateTexts(G.Players.GetPlayerId(GetComponentInParent<Player>()));
     }
     public async Task PlayCard(Entity card)
     {
@@ -49,26 +52,40 @@ public class Hand : MonoBehaviour
         cards.Remove(card);
         
         UIOnDeck.inst.UpdateTexts();
-        UpdateCardPositions();
+        _ = UpdateCardPositions();
     }
-    private void UpdateCardPositions()
+    private async Task UpdateCardPositions()
     {
         for(int i = 0; i < cards.Count; i++)
         {
-            cards[i].render.sortingOrder = i;
+            cards[i].visual.render.sortingOrder = i;
         }
-
+        List<bool> triggers = new List<bool>();
         for(int i = 0; i < cards.Count; i++)
         {
-            float delCard = ((cards.Count - 1) * deltaCard / 2f) > MAXLENGTH/2 ? MAXLENGTH / (cards.Count - 1): deltaCard;
+            bool aLot = ((cards.Count - 1) * deltaCard / 2f) > MAXLENGTH/2;
+            float delCard = aLot ? MAXLENGTH / (cards.Count - 1): deltaCard;
             float dStart = -(cards.Count - 1) * delCard / 2f;
             float localXPos = dStart + i * delCard;
 
-            cards[i].MoveTo(transform.TransformPoint(new Vector3(localXPos, 0)), null, null, false);
+            triggers.Add(false);
+            int t = i;
+            _ = cards[i].MoveToForHand(transform.TransformPoint(new Vector3(localXPos, 0)), aLot ? cards[i].visual.GetAngleInHand() : 0, () => triggers[t] = true, false);
             
             cards[i].Collider.size = new Vector2(delCard/Card.CARDSIZE, Card.CARDPIXELSIZE.y + UPMOVE/Card.CARDSIZE);
             cards[i].Collider.offset = new Vector2(0, -UPMOVE/2 /Card.CARDSIZE);
         }
+        while(CheckTriggers(triggers))
+        {
+            await Task.Yield();
+        }
+    }
+    private bool CheckTriggers(List<bool> ts)
+    {
+        foreach (var b in ts)
+        if(!b) return false;
+
+        return true;
     }
     private void AddMoveUpAndDownTweens(Entity c)
     {
@@ -78,7 +95,7 @@ public class Hand : MonoBehaviour
     private void MoveUp(Entity c)
     {
         c.transform.DOLocalMoveY(UPMOVE, 0.3f);
-        c.render.sortingOrder = 1000;
+        c.visual.render.sortingOrder = 1000;
     }
     private void MoveDown(Entity c)
     {
@@ -87,7 +104,7 @@ public class Hand : MonoBehaviour
         {
             if(cards[i] == c) 
             {
-                c.render.sortingOrder = i;
+                c.visual.render.sortingOrder = i;
                 break;
             }
         }

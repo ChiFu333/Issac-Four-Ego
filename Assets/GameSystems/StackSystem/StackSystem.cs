@@ -6,8 +6,6 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using System;
 using System.Linq;
-using Microsoft.Win32.SafeHandles;
-using UnityEditor.XR;
 
 public class StackSystem : MonoBehaviour
 {
@@ -162,7 +160,6 @@ public class CardStackEffect : StackEffect
         {
             await effect.PlayEffect(manageEffect);
         }
-        Debug.Log(source != null ? source.name : "NULL!!");
         if (source.GetTag<CardTypeTag>().cardType == CardType.lootCard/* && !lootCard.isItem*/) await source.DiscardEntity();
         if(source.GetTag<CardTypeTag>().cardType == CardType.eventCard/* && !eventCard.isCurse*/) await source.DiscardEntity();
     }
@@ -199,7 +196,7 @@ public class PrimalStackEffect : StackEffect
     }
     public override Sprite GetSprite(bool sourceSprite)
     {
-        return sourceSprite ? data.face : target?.render.sprite;
+        return sourceSprite ? data.face : target?.visual.render.sprite;
     }
 }
 public enum PrimalEffect { Damage, Kill }

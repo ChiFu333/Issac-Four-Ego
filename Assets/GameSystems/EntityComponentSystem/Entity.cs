@@ -6,37 +6,40 @@ using System;
 using System.Threading.Tasks;
 using UnityEngine.EventSystems;
 using DG.Tweening;
+using JetBrains.Annotations;
+using Unity.IO.LowLevel.Unsafe;
 
-public class Entity : MonoBehaviour, IPointerClickHandler
+public class Entity : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     private const float CARDSIZE = 0.28f;
     [SerializeReference]
     public List<ITag> tags = new List<ITag>();
-    public SpriteRenderer render { get; private set; }
+    public EntityVisual visual { get; private set; }
     public BoxCollider2D Collider { get; private set; }
     protected float speed = GameMaster.CARDSPEED;
     public void Init(bool isFaceUp = true)
     {
-        render = GetComponent<SpriteRenderer>();
+        visual = GetComponentInChildren<EntityVisual>();
+        visual.Init(this);
         Collider = GetComponent<BoxCollider2D>();
 
         visualTags = new Dictionary<Type, GameObject>()
         {
-            { typeof(Characteristics), transform.GetChild(0).gameObject},
+            { typeof(Characteristics), visual.transform.GetChild(0).gameObject},
         };
         
         foreach (var tag in tags) tag.Init(this);
 
         gameObject.SetActive(false);
-        render.sortingOrder = 3;
-        render.sprite = GetTag<CardSpritesData>().isFlipped ? GetTag<CardSpritesData>().front : GetTag<CardSpritesData>().back;
+        visual.render.sortingOrder = 3;
+        visual.render.sprite = GetTag<CardSpritesData>().isFlipped ? GetTag<CardSpritesData>().front : GetTag<CardSpritesData>().back;
 
         SetActive(false);
         gameObject.SetActive(true);
     }
     public void SetActive(bool active)
     {
-        render.enabled = active;
+        visual.render.enabled = active;
         Collider.enabled = active;
         foreach(var tag in tags)
             if(tag is IHaveUI uiTag)
@@ -46,7 +49,9 @@ public class Entity : MonoBehaviour, IPointerClickHandler
     #region Tag and Flag
     public void AddTag(ITag t)
     {
+        t.Init(this);
         tags.Add(t);
+        
     }
     public bool HasTag<T>() where T : ITag
     {
@@ -74,10 +79,7 @@ public class Entity : MonoBehaviour, IPointerClickHandler
         return false;
     }
     #endregion
-    public async void OnPointerClick(PointerEventData eventData)
-    {
-        foreach(var tag in tags) if(tag is IOnMouseDown eve) await eve.OnMouseDown();
-    }
+    
     public static Entity CreateEntity(GameObject prefab, bool isFaceUp = true)
     {
         Dictionary<CardType, Vector3> posToSpawnCard = new Dictionary<CardType, Vector3>
@@ -117,32 +119,61 @@ public class Entity : MonoBehaviour, IPointerClickHandler
         while(!trigger) await Task.Yield();
     }
     public void MoveTo(Transform target, Transform parent, Action afterComplete = null, bool changeOrder = true)
-    {
+    {   
+        visual.transform.eulerAngles = new Vector3(0, 0, 0);
         Collider.enabled = false;
-        int order = render.sortingOrder;
-        if(changeOrder) render.sortingOrder = 1000;
+        int order = visual.render.sortingOrder;
+        if(changeOrder) visual.render.sortingOrder = 1000;
         transform.DOScale(target.lossyScale, speed);
         transform.DOMove(target.position, speed).onComplete += () => 
         {
-            render.sortingOrder = order;
+            visual.render.sortingOrder = order;
             Collider.enabled = true;
             afterComplete?.Invoke();
         };
         if(parent != null) transform.parent = parent;
     }
     public void MoveTo(Vector3 target, Transform parent, Action afterComplete = null, bool changeOrder = true)
-    {
+    {     
+        visual.transform.eulerAngles = new Vector3(0, 0, 0);   
         Collider.enabled = false;
-        int order = render.sortingOrder;
-        if(changeOrder) render.sortingOrder = 1000;
+        int order = visual.render.sortingOrder;
+        if(changeOrder) visual.render.sortingOrder = 1000;
         transform.DOMove(target, speed).onComplete += () => 
         {
-            
-            render.sortingOrder = order;
+            visual.render.sortingOrder = order;
             Collider.enabled = true;
             afterComplete?.Invoke();
         };
         if(parent != null) transform.parent = parent;
+    }
+    public async Task MoveToForHand(Vector3 target, float angle, Action afterComplete = null, bool changeOrder = true)
+    {
+        Collider.enabled = false;
+        int order = visual.render.sortingOrder;
+        if(changeOrder) visual.render.sortingOrder = 1000;
+        await visual.MoveTo(target, angle,() => 
+        {
+            visual.render.sortingOrder = order;
+            Collider.enabled = true;
+            afterComplete?.Invoke();
+        });
+    }
+    public async void OnPointerClick(PointerEventData eventData)
+    {
+        if(!SubSystems.inst.isSelectingSomething)
+        foreach(var tag in tags) if(tag is IOnMouseDown eve) await eve.OnMouseDown();
+    }
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        //PointerEnterEvent.Invoke(this);
+        isHovering = true;
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        //PointerExitEvent.Invoke(this);
+        isHovering = false;
     }
     public event Action<Entity> MouseDown; 
     public event Action<Entity> MouseExit;
@@ -157,12 +188,14 @@ public class Entity : MonoBehaviour, IPointerClickHandler
     public async Task PutCardNearHand(Hand h)
     {
         bool trigger = false;
+        transform.parent = null;
         if(GetTag<CardTypeTag>().cardType == CardType.lootCard) speed = GameMaster.CARDSPEED / 2.5f;
         MoveTo(h.transform.TransformPoint(new Vector3(0, Hand.UPMOVE * 3f)), null, () => 
         {
             trigger = true;
             speed = GameMaster.CARDSPEED;
         });
+        
         while(!trigger) await Task.Yield();
     }
     public Player GetMyPlayer()
@@ -178,5 +211,27 @@ public class Entity : MonoBehaviour, IPointerClickHandler
     }
     
     public Dictionary<Type, GameObject> visualTags = new Dictionary<Type, GameObject>();
+    public int SiblingAmount()
+    {
+        
+        return transform.CompareTag("Slot") ? transform.parent.childCount -1 : 0;
+    }
+    public int ParentIndex()
+    {
+        return transform.CompareTag("Slot") ? transform.GetSiblingIndex() : 0;
+    }
+    public float NormalizedPosition()
+    {
+        return transform.CompareTag("Slot") ? ExtensionMethods.Remap((float)ParentIndex(), 0, (float)(transform.parent.childCount - 1), 0, 1) : 0;
+    }
+    public bool isDragging = false;
+    public bool isHovering = false;
+}
+public static class ExtensionMethods
+{
+    public static float Remap(this float value, float from1, float to1, float from2, float to2)
+    {
+        return (value - from1) / (to1 - from1) * (to2 - from2) + from2;
+    }
 
 }

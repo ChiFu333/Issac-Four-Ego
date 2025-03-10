@@ -26,8 +26,8 @@ public class CardTweaks : ScriptableObject
     { 
         for(int i = 0; i < count; i++) 
         {
-            await Task.Delay(1000/count < 200 ? 1000/count : 200); 
-            StackSystem.inst.cardTarget.GetMyPlayer().hand.AddCard(G.Decks.lootDeck.TakeOneCard()); 
+            await Task.Delay(1000/count < 100 ? 1000/count : 100); 
+            await StackSystem.inst.cardTarget.GetMyPlayer().hand.AddCard(G.Decks.lootDeck.TakeOneCard()); 
         }
         return true;
     }
@@ -38,7 +38,7 @@ public class CardTweaks : ScriptableObject
         for(int i = 0; i < count; i++) 
         {
             if(StackSystem.inst.cardTarget.GetMyPlayer().lootCount == 0) break;
-            Entity c = await SubSystems.inst.SelectCardByType("MyHand"); 
+            Entity c = await SubSystems.inst.SelectCardByType<PlayFromHand>("MyHand"); 
             await StackSystem.inst.cardTarget.GetMyPlayer().DiscardCard(c);
         }
         return true;
@@ -98,23 +98,15 @@ public class CardTweaks : ScriptableObject
     }
     public static async Task<bool> Damage(int count)
     {
-        if(StackSystem.inst.cardTarget.GetTag<CardTypeTag>().cardType == CardType.characterCard)
-        {
-            await StackSystem.inst.cardTarget.GetMyPlayer().Damage(count);
-        }
-        else if(StackSystem.inst.cardTarget.GetTag<CardTypeTag>().cardType == CardType.monsterCard)
-        {
-            StackSystem.inst.cardTarget.GetTag<Characteristics>().ChangeHp(StackSystem.inst.cardTarget.GetTag<Characteristics>().health - count);
-        }
+        await StackSystem.inst.cardTarget.GetTag<Characteristics>().Damage(count);
         UIOnDeck.inst.UpdateTexts();
-        UIOnDeck.inst.UpdateMonsterUI();
         return (true);
     }
     public static async Task<bool> Kill(int count)
     {
         if(StackSystem.inst.cardTarget.GetTag<CardTypeTag>().cardType == CardType.characterCard)
         {
-            await StackSystem.inst.cardTarget.GetMyPlayer().PayHp(StackSystem.inst.cardTarget.GetMyPlayer().HpMax);
+            await StackSystem.inst.cardTarget.GetMyPlayer().StartDieSubphase();
         }
         else if(StackSystem.inst.cardTarget.GetTag<CardTypeTag>().cardType == CardType.monsterCard)
         {
@@ -147,10 +139,12 @@ public class CardTweaks : ScriptableObject
     {
         if(StackSystem.inst.cardTarget.GetTag<CardTypeTag>().cardType == CardType.characterCard)
         {
+            EntityEffects.TurnDead(StackSystem.inst.cardTarget);
             await StackSystem.inst.cardTarget.GetMyPlayer().StartDieSubphase();
         }
         else if(StackSystem.inst.cardTarget.GetTag<CardTypeTag>().cardType == CardType.monsterCard)
         {
+            EntityEffects.TurnDead(StackSystem.inst.cardTarget);
             //await StackSystem.inst.cardTarget.monster.StartMonsterDieSubphase();
         }
         return true;

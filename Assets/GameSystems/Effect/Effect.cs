@@ -124,19 +124,19 @@ using UnityEngine.InputSystem.Interactions;
             case Target.PlayerYouSelect:
             {
                 Console.WriteText("Выбери игрока");
-                t = await SubSystems.inst.SelectCardByType("InPlay");
+                t = await SubSystems.inst.SelectCardByType<CardTypeTag>("InPlay", CardType.characterCard);
                 Console.WriteText("Выбор сделан");
             } break;
             case Target.YouSelectMonster:
             {
                 Console.WriteText("Выбери монстра");
-                t = await SubSystems.inst.SelectCardByType("InPlay");
+                t = await SubSystems.inst.SelectCardByType<CardTypeTag>("InPlay", CardType.monsterCard);
                 Console.WriteText("Выбор сделан");
             } break;
             case Target.YouSelectDamagable:
             {
                 Console.WriteText("Выбери существо");
-                //t = await SubSystems.inst.SelectCardByTypes<CharacterCard, MonsterCard>("InPlay");
+                t = await SubSystems.inst.SelectCardByType<Characteristics>("InPlay");
                 Console.WriteText("Выбор сделан");
             } break;
             case Target.YouSelectActiveItem:
@@ -144,7 +144,7 @@ using UnityEngine.InputSystem.Interactions;
                 Console.WriteText("Выбери предмет");
                 while(true)
                 {
-                    Entity c = await SubSystems.inst.SelectCardByType("InPlay");
+                    Entity c = await SubSystems.inst.SelectCardByType<CardTypeTag>("InPlay", CardType.treasureCard);
                     if(/*c is not CharacterCard && c.IsFlippable*/true)
                     {
                         t = c;
@@ -158,7 +158,7 @@ using UnityEngine.InputSystem.Interactions;
                 Console.WriteText("Выбери проклятье");
                 while(true)
                 {
-                    Entity c = await SubSystems.inst.SelectCardByType("InPlay");
+                    Entity c = await SubSystems.inst.SelectCardByType<CardTypeTag>("InPlay");
                     if(/*c.GetData<EventCardData>().isCurse*/true)
                     {
                         t = c;

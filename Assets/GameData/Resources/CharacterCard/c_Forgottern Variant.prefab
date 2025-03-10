@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -385074891, guid: e70436442109f024faac0a9151a80679, type: 3}
+    - target: {fileID: -5045910603991610287, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 06eb2c3cf61243f47b7aeb139e09ef43, type: 2}
     - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
       propertyPath: tags.Array.size
       value: 5
@@ -89,9 +93,17 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
+      propertyPath: managedReferences[5388194282787045464].healthMax
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
       propertyPath: managedReferences[5388194267734999413].itemPrefab
       value: 
       objectReference: {fileID: 7187734327750734321, guid: a3eac7f02f6f4b940ad6f9f38fb269d0, type: 3}
+    - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
+      propertyPath: managedReferences[5388194282787045464].healthPrevent
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
       propertyPath: managedReferences[5388194264484675668].effect.<type>k__BackingField
       value: 0

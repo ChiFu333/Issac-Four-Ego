@@ -91,7 +91,7 @@ public class PhaseSystem : MonoBehaviour
         for(int i = 0; i < count; i++) 
         {
             Console.WriteText("Сбрось до 10 карт лута");
-            Entity c = await SubSystems.inst.SelectCardByType("MyHand"); 
+            Entity c = await SubSystems.inst.SelectCardByType<PlayFromHand>("MyHand"); 
             await G.Players.activePlayer.DiscardCard(c);
         }
         #endregion Step2
@@ -133,7 +133,7 @@ public class PhaseSystem : MonoBehaviour
             return;
         }
         Console.WriteText("Выбери предмет на покупку");        
-        Entity c = await SubSystems.inst.SelectCardByType("Shop");
+        Entity c = await SubSystems.inst.SelectCardByType<CardTypeTag>("Shop");
         //здесь эффекты после выбора цели
         if(G.Players.activePlayer.PermitBuy())
         {
@@ -166,12 +166,12 @@ public class PhaseSystem : MonoBehaviour
 
         #region Step2
         Console.WriteText("Выбери цель атаки");
-        G.monsterZone.currentEnemy = await SubSystems.inst.SelectCardByType("MonsterZone");
+        G.monsterZone.currentEnemy = await SubSystems.inst.SelectCardByType<CardTypeTag>("MonsterZone");
         Console.WriteText("Атака начата!");
         #endregion Step2
 
         #region StepRepeat
-        while(G.monsterZone.currentEnemy != null && G.monsterZone.currentEnemy.GetTag<Characteristics>().health != 0 && G.Players.activePlayer.hp != 0)
+        while(G.monsterZone.currentEnemy != null && G.monsterZone.currentEnemy.GetTag<Characteristics>().health != 0 && G.Players.activePlayer.characteristics.health != 0)
         {
             if(currentPhase != Phase.Action) { await EndAttack(); subphases--; UIOnDeck.inst.ChangeButtonsActive(); return; }
             
@@ -237,7 +237,7 @@ public class PhaseSystem : MonoBehaviour
         int tempSubphase = subphases;
         Debug.Log("After2:" + tempSubphase);
         
-        p.isDead = true;
+        p.characteristics.isDead = true;
         if(G.Players.activePlayer == p) await G.monsterZone.EndAttack();
         UIOnDeck.inst.ChangeButtonsActive();
         Console.WriteText("Игрок умер");
@@ -265,7 +265,7 @@ public class PhaseSystem : MonoBehaviour
         {
             Console.WriteText("Сбрось лут");
             G.Players.SetPrior(p);
-            await p.DiscardCard(await SubSystems.inst.SelectCardByType("MyHand"));
+            await p.DiscardCard(await SubSystems.inst.SelectCardByType<PlayFromHand>("MyHand"));
             G.Players.RestorePrior();
         }
         p.AddMoney(-1);

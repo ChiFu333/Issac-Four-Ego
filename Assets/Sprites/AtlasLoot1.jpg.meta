@@ -982,7 +982,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AtlasLoot1_69
+      name: LootCardBack
       rect:
         serializedVersion: 2
         x: 7254
@@ -1063,10 +1063,10 @@ TextureImporter:
       AtlasLoot1_62: 871842203
       AtlasLoot1_65: -2059395954
       AtlasLoot1_66: -1466101273
-      AtlasLoot1_69: -397962762
       AtlasLoot1_7: -1051724805
       AtlasLoot1_8: -1251807004
       AtlasLoot1_9: 346699520
+      LootCardBack: -397962762
       l-1: -1529079491
       l-2: 1408840116
       l-3: 168750856

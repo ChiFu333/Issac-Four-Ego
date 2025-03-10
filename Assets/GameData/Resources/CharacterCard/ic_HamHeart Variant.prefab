@@ -92,6 +92,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ic_HamHeart Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 8485582186474507046, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1882642627, guid: 091e7cebf2abdc344ac260aba1e86505, type: 3}
     - target: {fileID: 8659918965013061979, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6

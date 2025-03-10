@@ -28,6 +28,8 @@ public class GameMaster : MonoBehaviour
         deckHolder = new GameObject("Deck_Holder");
         //zoneHolder = new GameObject("Zone_Holder");
 
+        R.Init();
+
         characterList = deckBuilder.GetList(deckBuilder.characterDeck);
         lootDeckList = deckBuilder.GetList(deckBuilder.lootDeck);
         shopDeckList = deckBuilder.GetList(deckBuilder.treasureDeck);
@@ -65,11 +67,11 @@ public class GameMaster : MonoBehaviour
 
             G.Players.priorId = i;
             await player.Init(InitHand(player));
-            for(int j = 0; j < 3; j++)
+            for(int j = 0; j < 10; j++)
             {
                 Entity c = G.Decks.lootDeck.TakeOneCard();
                 player.TakeOneLootCard(c);
-                await Task.Delay(100);
+                await Task.Delay(20);
             }
             player.AddMoney(3);
         }

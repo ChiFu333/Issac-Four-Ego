@@ -750,27 +750,6 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: AtlasLoot3_69
-      rect:
-        serializedVersion: 2
-        x: 7254
-        y: 0
-        width: 806
-        height: 1124
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 232f3cae69c3282408a7f96f8422a3ac
-      internalID: -76599372
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     physicsShape: []
     bones: []

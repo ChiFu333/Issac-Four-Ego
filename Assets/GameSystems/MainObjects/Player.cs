@@ -25,8 +25,7 @@ public class Player : MonoBehaviour
         if(it.HasTag<Tappable>()) it.GetTag<Tappable>().Tap();
         
         this.hand = hand;
-
-        hpMax = characterCard.GetTag<Characteristics>().health;
+        characteristics = characterCard.GetTag<Characteristics>();
         attack = characterCard.GetTag<Characteristics>().attack;
         coins = 0;
         lootPlayCount = 0;
@@ -35,9 +34,6 @@ public class Player : MonoBehaviour
     }
     public void SetBaseStats()
     {
-        HpMax = characterCard.GetTag<Characteristics>().health;
-        attack = characterCard.GetTag<Characteristics>().attack;
-        preventHp = 0;
         shopPrice = 10;
         cubeModificator = 0;
 
@@ -49,79 +45,28 @@ public class Player : MonoBehaviour
     #endregion
     
     #region [ HP, heal, damage & death ]
-    [field: SerializeField, HorizontalGroup("HP")] public int hp { get; private set; }
-    public int HpMax
-    { 
-        get => hpMax;
-        set
-        {
-            int delta = value - hpMax;
-            hpMax += delta;
-            if(delta > 0)
-            {
-                HealHp(delta);
-            }
-            else if(delta < 0)
-            {
-                hp = hpMax < hp ? hpMax : hp;
-            }
-            
-            UIOnDeck.inst.UpdateTexts();
-        }
-    }
-    private int hpMax;
-    [field: SerializeField, HorizontalGroup("HP")] public int preventHp { get; private set; }
-    public bool isDead { get; set; } = false;
+    public Characteristics characteristics;
     public void AddHp(int count) 
     {
-        HpMax += count;
+        characteristics.AddHp(count);
         UIOnDeck.inst.UpdateTexts();
     }
     public async Task Damage(int count)
     {
-        int damageCount = count;
-        if(hp == 0) return;
-        
-        if(damageCount > preventHp)
-        {
-            damageCount -= preventHp;
-            preventHp = 0;
-            hp -= damageCount;
-        }
-        else
-        {
-            preventHp -= damageCount;
-        }
-        GetMyCard().GetTag<Characteristics>().ChangeHp(hp);
-        if(hp <= 0) 
-        {
-            hp = 0;
-            if(!isDead) await StackSystem.inst.PushPrimalEffect(PrimalEffect.Kill, GetMyCard());
-        }
-        return;
+        await characteristics.Damage(count);
     }
     public void HealHp(int count, bool throughDeath = false)
     {
-        if(hp == 0 && !throughDeath) return;
-        if(hp + count > HpMax)
-            hp = HpMax;
-        else
-            hp += count;
+        characteristics.HealHp(count, throughDeath);
         UIOnDeck.inst.UpdateTexts();
     }
     public async Task<bool> PayHp(int count)
     {
-        if(hp - count < 0)
-            return false;
-        else
-            hp -= count;
-        if(hp == 0 && !isDead) await StackSystem.inst.PushPrimalEffect(PrimalEffect.Kill, GetMyCard());;
-        UIOnDeck.inst.UpdateTexts();
-        return true;
+        return await characteristics.PayHp(count);
     }
     public void AddPreventHp(int count)
     {
-        preventHp += count;
+        characteristics.AddPreventHp(count);
         UIOnDeck.inst.UpdateTexts();
     }
     public async Task StartDieSubphase()

@@ -8,7 +8,6 @@ public class UIOnDeck : MonoBehaviour
 {
     public static UIOnDeck inst { get; private set; }
     [field: SerializeField] public List<TMP_Text> playerText { get; private set; }
-    [field: SerializeField] public List<TMP_Text> monstersHpCounters { get; private set; }
     [field: SerializeField] public TMP_Text attackText { get; private set; }
     [field: SerializeField] public TMP_Text shopText { get; private set; }
     [field: SerializeField] public List<GameObject> buttons;
@@ -23,18 +22,20 @@ public class UIOnDeck : MonoBehaviour
     public void UpdateTexts(int id = -1)
     {
         List<Player> players = G.Players.players;
-        int count = id != -1 ? id : players.Count;
+        int count = id != -1 ? id+1 : players.Count;
         for(int i = 0; i < count; i++)
         {
-            string hp = "<color=#E34444>☻: " + players[i].hp;
-            string addHp = players[i].preventHp == 0 ? "" : "<color=#94EEEE>("+players[i].preventHp+")</color>";
-            string endHp = "/" + players[i].HpMax+ "</color>";
+            /*
+            string hp = "<color=#E34444>☻: " + players[i].characteristics.health;
+            string addHp = players[i].characteristics.healthPrevent == 0 ? "" : "<color=#94EEEE>("+players[i].characteristics.healthPrevent+")</color>";
+            string endHp = "/" + players[i].characteristics.HealthMax+ "</color>";
 
-            string power = players[i].preventHp == 0 ? "  <color=#969696>♥: " + players[i].attack + "</color>" : " <color=#969696>♥: " + players[i].attack + "</color>";
-            string money = "  <color=#E3C034>кеш: " + players[i].coins +"¢</color>";
-            string loots = "  <color=#94EEEE>карт лута: " + players[i].lootCount + "</color>";
+            string power = players[i].characteristics.healthPrevent == 0 ? "  <color=#969696>♥: " + players[i].attack + "</color>" : " <color=#969696>♥: " + players[i].attack + "</color>";
+            */
+            //string money = "  <color=#E3C034>кеш: " + players[i].coins +"¢</color>";
+            //string loots = "  <color=#94EEEE>карт лута: " + players[i].lootCount + "</color>";
 
-            playerText[i].text = hp  + endHp + addHp + power + money + loots + "  души: " + players[i].souls + (players[i] == G.Players.activePlayer ? " (!)" : "");
+            //playerText[i].text = money + loots + "  души: " + players[i].souls + (players[i] == G.Players.activePlayer ? " (!)" : "");
         }
         UpdateAddInfo();
     }
@@ -52,15 +53,6 @@ public class UIOnDeck : MonoBehaviour
                 monstersHpCounters[i].text = hp + endHp + addHp;
                 */
             }
-            else
-            {
-                monstersHpCounters[i].text = "";
-            }
-            
-        }
-        for(int i = G.monsterZone.monstersInSlots.Count; i < 4; i++)
-        {
-            monstersHpCounters[i].text = "";
         }
     }
     public void UpdateAddInfo()

@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 897aabb98a58f7749afe3e3a450db906, type: 3}
+  m_Name: LootDeck
+  m_EditorClassIdentifier: 
+  <cardsList>k__BackingField:
+  - <data>k__BackingField: {fileID: 2389598897035583221, guid: 8cf1f48561720c540b423076ef2bcc8d, type: 3}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 2389598897035583221, guid: 9ff335912e4943c44a94ba4d716ca5d6, type: 3}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 2389598897035583221, guid: 4a97653c4ca38464c862f44025e5afee, type: 3}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 2389598897035583221, guid: 27b79f0c6eb4eec42bdee8f722c6690c, type: 3}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 2389598897035583221, guid: f214097c6d6bf254d9b8fb09338e8d64, type: 3}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 10
+  - <data>k__BackingField: {fileID: 2389598897035583221, guid: 4f1dbc241b4125a41b1cdde7adce3721, type: 3}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 10
+  - <data>k__BackingField: {fileID: 8872885031692940742, guid: 6bc9b7e5c554f5a48940eb1ffb042c2e, type: 3}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 10
+  - <data>k__BackingField: {fileID: 1658483476597858794, guid: c23ebee30d09965429487bd912e6a64c, type: 3}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 10
+  - <data>k__BackingField: {fileID: 40307980560356786, guid: e54f0a143823fe94eac4f317d889706e, type: 3}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 10
+  - <data>k__BackingField: {fileID: 3100360562240820112, guid: 96dc864c2c3b4bf42b27d13e3e31d9bc, type: 3}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 10
+  - <data>k__BackingField: {fileID: 1621284212780327505, guid: 910d20c410d737f4189b1e8f56b3c192, type: 3}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 10
+  - <data>k__BackingField: {fileID: 8582449009376025974, guid: 2820734868bc364468ab0e447ed86120, type: 3}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 10
+  - <data>k__BackingField: {fileID: 4544297539098087535, guid: f953bbe23785cea44b1d474aa85bf225, type: 3}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 10
