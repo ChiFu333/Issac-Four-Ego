@@ -5,6 +5,10 @@ using System;
 using DG.Tweening;
 using Cysharp.Threading.Tasks;
 using TMPro;
+using UnityEditor.Rendering.LookDev;
+using Random = UnityEngine.Random;
+
+public enum CardType {none, characterCard, lootCard, monsterCard, treasureCard, eventCard, soulCard};
 
 public interface ITag 
 {
@@ -15,7 +19,8 @@ public interface IHaveUI
     public void ShowUI();
     public void HideUI();
 }
-[Serializable] public class CardSpritesData : ITag  //isTapped
+
+[Serializable] public class CardSpritesData : ITag 
 {
     private Entity entity;
     [SerializeField] public bool isFlipped = false;
@@ -25,21 +30,38 @@ public interface IHaveUI
     {
         this.entity = entity;
     }
-    public void Flip(bool Flip)
+    public async UniTaskVoid Flip(bool Flip)
     {
+        float timeToSwap = 0.3f;
+        bool trigger = false;
+        entity.transform.DORotate(new Vector3(0, 90, 0), timeToSwap).onComplete = () => trigger = true;
+        while(!trigger) await UniTask.Yield();
+        
         entity.GetComponent<SpriteRenderer>().sprite = Flip ? entity.GetTag<CardSpritesData>().front : entity.GetTag<CardSpritesData>().back;
+        
+        trigger = false;
+        entity.transform.DORotate(new Vector3(0, 90, 0), timeToSwap).onComplete = () => trigger = true;
+        while(!trigger) await UniTask.Yield();
+
     }
 }
+
 [Serializable] public class CardTypeTag : ITag
 {
     public CardType cardType = CardType.none;
     public void Init(Entity entity) {}
 }
-public enum CardType {none, characterCard, lootCard, monsterCard, treasureCard, eventCard, soulCard};
+
 [Serializable] public class Characteristics : ITag, IHaveUI
 {
     private Entity entity;
     private GameObject textWithDodge, textWithoutDodge;
+    
+    [SerializeField] private int healthMax;
+    public int healthPrevent  = 0;
+    public int dodge = 0;
+    public int attack = 0;
+    
     public int HealthMax 
     { 
         get => healthMax;
@@ -49,7 +71,7 @@ public enum CardType {none, characterCard, lootCard, monsterCard, treasureCard, 
             healthMax += delta;
             if(delta > 0)
             {
-                HealHp(delta);
+                health += delta;
             }
             else if(delta < 0)
             {
@@ -57,12 +79,10 @@ public enum CardType {none, characterCard, lootCard, monsterCard, treasureCard, 
             }
         }
     }
-    [SerializeField] private int healthMax;
     public int health { get; private set; }  = 0;
-    [HideInInspector] public int healthPrevent  = 0;
-    public int dodge = 0;
-    public int attack = 0;
+    
     public bool isDead { get; set; } = false;
+    
     public void Init(Entity entity) {
         this.entity = entity;
         health = healthMax;
@@ -71,6 +91,7 @@ public enum CardType {none, characterCard, lootCard, monsterCard, treasureCard, 
         textWithoutDodge = entity.visualTags[typeof(Characteristics)].transform.GetChild(0).gameObject;
         UpdateUI();
     }
+    
     private void UpdateUI()
     {
         textWithDodge.SetActive(dodge != 0);
@@ -87,17 +108,18 @@ public enum CardType {none, characterCard, lootCard, monsterCard, treasureCard, 
             textWithDodge.transform.GetChild(2).GetComponent<TMP_Text>().text = attack.ToString();
         }    
     }
+    
     public async UniTask Damage(int count)
     {
         int damageCount = count;
         if(health == 0) return;
         
-        EntityEffects.HitEntity(entity);
         if(damageCount > healthPrevent)
         {
             damageCount -= healthPrevent;
             healthPrevent = 0;
             health -= damageCount;
+            await EntityEffects.HitEntity(entity);
         }
         else
         {
@@ -109,21 +131,23 @@ public enum CardType {none, characterCard, lootCard, monsterCard, treasureCard, 
             if(!isDead) await StackSystem.inst.PushPrimalEffect(PrimalEffect.Kill, entity);
         }
         UpdateUI();
-        return;
     }
-    public void AddHp(int count) 
+    public async UniTask AddHp(int count) 
     {
         HealthMax += count;
         UpdateUI();
+        
+        await EntityEffects.CreateParcicle(entity, R.EffectSprites.healthUp, R.Audio.statUp);
     }
-    public void HealHp(int count, bool throughDeath = false)
+    public async UniTask HealHp(int count, bool throughDeath = false)
     {
-        if(health == 0 && !throughDeath) return;
+        if((health == 0 && !throughDeath) || health == HealthMax) return;
         if(health + count > healthMax)
             health = healthMax;
         else
             health += count;
         UpdateUI();
+        await EntityEffects.CreateParcicle(entity, R.EffectSprites.heal, R.Audio.heal);
     }
     public async UniTask<bool> PayHp(int count)
     {
@@ -131,7 +155,7 @@ public enum CardType {none, characterCard, lootCard, monsterCard, treasureCard, 
             return false;
         else
             health -= count;
-            UpdateUI();
+        UpdateUI();
         if(health == 0 && !isDead) await StackSystem.inst.PushPrimalEffect(PrimalEffect.Kill, entity);
         return true;
     }
@@ -140,17 +164,22 @@ public enum CardType {none, characterCard, lootCard, monsterCard, treasureCard, 
         healthPrevent += count;
         UpdateUI();
     }
-    public void ChangeAttack(int to)
+    public async UniTask ChangeAttack(int to)
     {
+        int t = attack;
         attack = to;
         UpdateUI();
+        if (attack - t > 0)
+        {
+            await EntityEffects.CreateParcicle(entity, R.EffectSprites.attackUp, R.Audio.statUp);
+        }
     }
+    
     public void ShowUI()
     {
         textWithDodge.SetActive(dodge != 0);
         textWithoutDodge.SetActive(dodge == 0);
     }
-
     public void HideUI()
     {
         textWithDodge.SetActive(false);
@@ -162,8 +191,15 @@ public enum CardType {none, characterCard, lootCard, monsterCard, treasureCard, 
     public GameObject itemPrefab;
     public void Init(Entity entity) {}
 }
+
 public interface IOnMouseDown {
     UniTask OnMouseDown();
+}
+public interface IOnMouseEnter {
+    UniTask OnMouseEnter();
+}
+public interface IOnMouseExit {
+    UniTask OnMouseExit();
 }
 [Serializable] public class Tappable : ITag
 {
@@ -192,26 +228,49 @@ public interface IOnMouseDown {
     public Effect effect;
     public void Init(Entity entity) {}
 }
-[Serializable]
-public class PlayFromHand : ITag, IOnMouseDown
+[Serializable] public class PlayFromHand : ITag, IOnMouseDown, IOnMouseEnter, IOnMouseExit
 {
     private Entity entity;
     public void Init(Entity entity) {
         this.entity = entity;
     }
-
+    
     public UniTask OnMouseDown()
     {
+        
+        //entity.visual.render.sortingOrder = 500;
+        
         entity.GetMyPlayer().PlayLootCard(entity);
+        return UniTask.CompletedTask;
+    }
+
+    public UniTask OnMouseEnter()
+    {
+        AudioManager.inst.Play(R.Audio.cardMouseOnLootInHands[Random.Range(0, R.Audio.cardMouseOnLootInHands.Count)]);
+        entity.visual.transform.DOLocalMoveY(0.4f + entity.GetMyPlayer().hand.GetDeltaYInHand(entity), 0.3f);
+        entity.visual.render.sortingOrder = 1000;
+        
+        entity.visual.transform.DOScale(1.15f, .15f).SetEase(Ease.OutBack);
+
+        DOTween.Kill(2, true);
+        entity.visual.transform.DOPunchRotation(Vector3.forward * 5, .15f, 20, 1).SetId(2);
+        
+        return UniTask.CompletedTask;
+    }
+
+    public UniTask OnMouseExit()
+    {
+        entity.visual.transform.DOLocalMoveY(0 + entity.GetMyPlayer().hand.GetDeltaYInHand(entity), 0.3f);
+        entity.visual.render.sortingOrder = entity.GetMyPlayer().hand.GetMySortingOrder(entity);
+        entity.visual.transform.DOScale(1, .15f).SetEase(Ease.OutBack);
         return UniTask.CompletedTask;
     }
 }
 
-public interface IFlag { }
-[Serializable] public class IsItem : ITag, IFlag
+[Serializable] public class IsItem : ITag
 {
     public void Init(Entity entity)
     {
-        EntityEffects.MakeShine(entity);
+        
     }
 }

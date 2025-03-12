@@ -18,9 +18,9 @@ public class PhaseSystem : MonoBehaviour
         #region Step1
         Console.WriteText("Перезаряди всё");
         UIOnDeck.inst.UpdatePhase("Фаза: начало хода (шаг 1)");
-        await UniTask.Delay(500);
+        await UniTask.Delay(100);
         G.Players.activePlayer.ChangeAllPlayerItemCharge(true);
-        await UniTask.Delay(500);
+        await UniTask.Delay(100);
         #endregion Step1
 
         #region Step2

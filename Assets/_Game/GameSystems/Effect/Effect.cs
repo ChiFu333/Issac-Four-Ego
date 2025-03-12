@@ -207,16 +207,13 @@ using Cysharp.Threading.Tasks;
                 await PlayAction();
             }
         }
-        /*
         else if(targetCard != null)
         {
             StackSystem.inst.cardTarget = targetCard;
             return await PlayAction();
         }
         return false;
-        */
-        StackSystem.inst.cardTarget = targetCard;
-        return await PlayAction();
+        
     }
     private async UniTask<bool> PlayAction() => await actionDelegate.Invoke(count);
 }

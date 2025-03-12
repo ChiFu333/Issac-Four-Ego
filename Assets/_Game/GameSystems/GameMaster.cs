@@ -67,13 +67,13 @@ public class GameMaster : MonoBehaviour
             {
                 Entity c = G.Decks.lootDeck.TakeOneCard();
                 player.TakeOneLootCard(c);
-                await UniTask.Delay(20);
+                await UniTask.Delay(50);
             }
             player.AddMoney(3);
         }
 
         UIOnDeck.inst.UpdateTexts();
-        HealEveryone();
+        await HealEveryone();
         
         phaseSystem.StartStartTurn();
     }
@@ -174,13 +174,22 @@ public class GameMaster : MonoBehaviour
         return ha;
     }
     
-    public void HealEveryone()
+    public async UniTask HealEveryone()
     {
+        foreach (var t in G.monsterZone.monstersInSlots)
+        {
+            _ = t.GetTag<Characteristics>().HealHp(100, true);
+            await UniTask.Delay(200);
+        }
+        UniTask task = UniTask.CompletedTask;
         foreach (var t in G.Players.players)
         {
-            t.HealHp(100, true);
+            task = t.HealHp(100, true);
             t.SetBaseStats();
+            await UniTask.Delay(200);
         }
+
+        await task;
     }
 }
 public static partial class G
@@ -200,7 +209,7 @@ public static partial class G
         public static int playerTurnId;
         public static int priorId;
         public static Player activePlayer => players[playerTurnId];
-        public static Player priorPlayer => players[playerTurnId]; 
+        public static Player priorPlayer => players[priorId]; 
         public static int GetPlayerId(Player p)
         {
             for(int i = 0; i < players.Count; i++)

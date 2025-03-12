@@ -5748,8 +5748,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 9370dbb7973ed7240b796fd6beb3d5e6, type: 2}
-        m_TargetAssemblyTypeName: CardTweaks, Assembly-CSharp
+      - m_Target: {fileID: 1272644038}
+        m_TargetAssemblyTypeName: UIOnDeck, Assembly-CSharp
         m_MethodName: RequestAttack
         m_Mode: 1
         m_Arguments:
@@ -10661,8 +10661,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 9370dbb7973ed7240b796fd6beb3d5e6, type: 2}
-        m_TargetAssemblyTypeName: CardTweaks, Assembly-CSharp
+      - m_Target: {fileID: 1272644038}
+        m_TargetAssemblyTypeName: UIOnDeck, Assembly-CSharp
         m_MethodName: Agree
         m_Mode: 1
         m_Arguments:
@@ -14273,9 +14273,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1272644033}
         m_TargetAssemblyTypeName: TurnManager, Assembly-CSharp
-        m_MethodName: EndTurn
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -16625,6 +16625,63 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &2647213535751052661
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1535341404456206688, guid: 8f9c1957356ea744bb4ff07bebe841a0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 1535341404456206688, guid: 8f9c1957356ea744bb4ff07bebe841a0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -8.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 1535341404456206688, guid: 8f9c1957356ea744bb4ff07bebe841a0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1535341404456206688, guid: 8f9c1957356ea744bb4ff07bebe841a0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1535341404456206688, guid: 8f9c1957356ea744bb4ff07bebe841a0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1535341404456206688, guid: 8f9c1957356ea744bb4ff07bebe841a0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1535341404456206688, guid: 8f9c1957356ea744bb4ff07bebe841a0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1535341404456206688, guid: 8f9c1957356ea744bb4ff07bebe841a0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1535341404456206688, guid: 8f9c1957356ea744bb4ff07bebe841a0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1535341404456206688, guid: 8f9c1957356ea744bb4ff07bebe841a0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3290918394273194045, guid: 8f9c1957356ea744bb4ff07bebe841a0, type: 3}
+      propertyPath: m_Name
+      value: l_Pill3
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8f9c1957356ea744bb4ff07bebe841a0, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -16638,3 +16695,4 @@ SceneRoots:
   - {fileID: 1272644037}
   - {fileID: 200255103}
   - {fileID: 1274429013}
+  - {fileID: 2647213535751052661}

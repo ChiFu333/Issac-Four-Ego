@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.Serialization;
 using System;
+using System.Linq;
 using Cysharp.Threading.Tasks;
 using UnityEngine.EventSystems;
 using DG.Tweening;
 
 public class Entity : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    private const float CARDSIZE = 0.28f;
+    public const float CARDSIZE = 0.28f;
     
     public EntityVisual visual { get; private set; }
     public BoxCollider2D Collider { get; private set; }
@@ -48,6 +49,7 @@ public class Entity : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
                 if(active) uiTag.ShowUI();
                 else uiTag.HideUI();
     }
+    
     #region Tag and Flag
     public void AddTag(ITag t)
     {
@@ -57,28 +59,33 @@ public class Entity : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
     }
     public bool HasTag<T>() where T : ITag
     {
-        for(int i = 0; i < tags.Count; i++)
+        foreach (var t in tags.ToList())
         {
-            if(tags[i] is T) return true;
+            if(t is T) return true;
         }
+
         return false;
     }
     public T GetTag<T>() where T : ITag
     {
-        for(int i = 0; i < tags.Count; i++)
+        foreach (var t1 in tags.ToList())
         {
-            if(tags[i] is T t) return t;
+            if(t1 is T t) return t;
         }
+
         throw new Exception("Нет такого тега!");
     }
-    public void AddFlag(ITag flag)
+
+    public void RemoveTag(ITag t)
     {
-        AddTag(flag);
-    }
-    public bool Is<T>() where T : IFlag
-    {
-        foreach (var tag in tags) if(tag is T) return true;
-        return false;
+        foreach (var t1 in tags.ToList())
+        {
+            if (t1 == t)
+            {
+                tags.Remove(t1);
+                break;
+            }
+        }
     }
     #endregion
     
@@ -120,6 +127,7 @@ public class Entity : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
         });
         while(!trigger) await UniTask.Yield();
     }
+    
     public void MoveTo(Transform target, Transform parent, Action afterComplete = null, bool changeOrder = true)
     {   
         visual.transform.eulerAngles = new Vector3(0, 0, 0);
@@ -149,6 +157,7 @@ public class Entity : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
         };
         if(parent != null) transform.parent = parent;
     }
+    
     public async UniTask MoveToForHand(Vector3 target, float angle, Action afterComplete = null, bool changeOrder = true)
     {
         Collider.enabled = false;
@@ -161,32 +170,28 @@ public class Entity : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
             afterComplete?.Invoke();
         });
     }
-    public async void OnPointerClick(PointerEventData eventData)
-    {
-        if(!G.CardSelector.isSelectingSomething)
-        foreach(var tag in tags) if(tag is IOnMouseDown eve) await eve.OnMouseDown();
-    }
-    public void OnPointerEnter(PointerEventData eventData)
+    
+    
+    public async void OnPointerEnter(PointerEventData eventData)
     {
         //PointerEnterEvent.Invoke(this);
         isHovering = true;
+        if(!G.CardSelector.isSelectingSomething)
+            foreach(var tag in tags.ToList()) if(tag is IOnMouseEnter eve) await eve.OnMouseEnter();
     }
 
-    public void OnPointerExit(PointerEventData eventData)
+    public async void OnPointerExit(PointerEventData eventData)
     {
-        //PointerExitEvent.Invoke(this);
         isHovering = false;
+        if(!G.CardSelector.isSelectingSomething)
+            foreach(var tag in tags.ToList()) if(tag is IOnMouseExit eve) await eve.OnMouseExit();
     }
-    public event Action<Entity> MouseDown; 
-    public event Action<Entity> MouseExit;
-    public void OnMouseEnter()
+    public async void OnPointerClick(PointerEventData eventData)
     {
-        MouseDown?.Invoke(this);
+        if(!G.CardSelector.isSelectingSomething)
+             foreach(var tag in tags.ToList()) if(tag is IOnMouseDown eve) await eve.OnMouseDown();
     }
-    public void OnMouseExit()
-    {
-        MouseExit?.Invoke(this);
-    }
+    
     public async UniTask PutCardNearHand(Hand h)
     {
         bool trigger = false;
@@ -213,26 +218,7 @@ public class Entity : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
     }
     
     public Dictionary<Type, GameObject> visualTags = new Dictionary<Type, GameObject>();
-    public int SiblingAmount()
-    {
-        
-        return transform.CompareTag("Slot") ? transform.parent.childCount -1 : 0;
-    }
-    public int ParentIndex()
-    {
-        return transform.CompareTag("Slot") ? transform.GetSiblingIndex() : 0;
-    }
-    public float NormalizedPosition()
-    {
-        return transform.CompareTag("Slot") ? ExtensionMethods.Remap((float)ParentIndex(), 0, (float)(transform.parent.childCount - 1), 0, 1) : 0;
-    }
+
     public bool isDragging = false;
     public bool isHovering = false;
-}
-public static class ExtensionMethods
-{
-    public static float Remap(this float value, float from1, float to1, float from2, float to2)
-    {
-        return (value - from1) / (to1 - from1) * (to2 - from2) + from2;
-    }
 }

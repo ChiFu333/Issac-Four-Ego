@@ -100,6 +100,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: l_LittleBattery Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 8485582186474507046, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1548675805, guid: a26ea1b6b13008d48991820ee1754e54, type: 3}
     - target: {fileID: 8659918965013061979, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.5

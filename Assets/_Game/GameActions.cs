@@ -37,17 +37,10 @@ public static class GameActions
         }
         return true;
     }
-    public static UniTask<bool> AddAttack(int count)
+    public async static UniTask<bool> AddAttack(int count)
     {
-        if(StackSystem.inst.cardTarget.GetTag<CardTypeTag>().cardType == CardType.characterCard)
-        {
-            StackSystem.inst.cardTarget.GetMyPlayer().AddAttack(count);
-        }
-        else if(StackSystem.inst.cardTarget.GetTag<CardTypeTag>().cardType == CardType.monsterCard)
-        {
-           //StackSystem.inst.cardTarget.AddAttack(count);
-        }
-        return UniTask.FromResult(true);
+        await StackSystem.inst.cardTarget.GetTag<Characteristics>().ChangeAttack(StackSystem.inst.cardTarget.GetTag<Characteristics>().attack + count);
+        return true;
     }
     public static UniTask<bool> AddTreasure(int count)
     {
@@ -133,12 +126,12 @@ public static class GameActions
     {
         if(StackSystem.inst.cardTarget.GetTag<CardTypeTag>().cardType == CardType.characterCard)
         {
-            EntityEffects.TurnDead(StackSystem.inst.cardTarget);
+            await EntityEffects.TurnDead(StackSystem.inst.cardTarget);
             await StackSystem.inst.cardTarget.GetMyPlayer().StartDieSubphase();
         }
         else if(StackSystem.inst.cardTarget.GetTag<CardTypeTag>().cardType == CardType.monsterCard)
         {
-            EntityEffects.TurnDead(StackSystem.inst.cardTarget);
+            await EntityEffects.TurnDead(StackSystem.inst.cardTarget);
             //await StackSystem.inst.cardTarget.monster.StartMonsterDieSubphase();
         }
         return true;

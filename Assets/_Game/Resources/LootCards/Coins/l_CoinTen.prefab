@@ -100,6 +100,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: l_CoinTen
       objectReference: {fileID: 0}
+    - target: {fileID: 8485582186474507046, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 209588062, guid: 387f31fd93282dd4eacb94f6ce9d5a8b, type: 3}
     - target: {fileID: 8659918965013061979, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

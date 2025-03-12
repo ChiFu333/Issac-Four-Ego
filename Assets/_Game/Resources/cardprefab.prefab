@@ -539,10 +539,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5a07bdbfc2a77842a0145a856c06f6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entity: {fileID: 0}
-  targetPosition: {x: 0, y: 0, z: 0}
-  smoothTime: 0.5
-  maxVelocity: 40
 --- !u!114 &5008165851854275549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -991,6 +987,8 @@ MonoBehaviour:
   tags:
   - rid: 5388194264484675666
   - rid: 5388194264484675667
+  isDragging: 0
+  isHovering: 0
   references:
     version: 2
     RefIds:

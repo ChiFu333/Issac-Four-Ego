@@ -96,4 +96,19 @@ public class UIOnDeck : MonoBehaviour
         if(one != null) firstWordPhrase = one;
         PhaseText.text = firstWordPhrase;
     }
+
+    public void Agree()
+    {
+        GameActions.Agree();
+    }
+
+    public void RequestAttack()
+    {
+        GameActions.RequestAttack();
+    }
+
+    public void EndTurn()
+    {
+        GameMaster.inst.EndTurn();
+    }
 }

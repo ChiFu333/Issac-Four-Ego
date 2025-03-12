@@ -3,7 +3,7 @@ using UnityEngine;
 using System;
 using DG.Tweening;
 using Sirenix.OdinInspector;
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using UnityEngine.TextCore.Text;
 
 public class Player : MonoBehaviour
@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
     #region [ Init & Turns ]
     public Entity characterCard { get; private set; }
     public Hand hand { get; private set; }
-    public async Task Init(Hand hand)
+    public async UniTask Init(Hand hand)
     {
         characterCard = G.Decks.characterDeck.TakeOneCard();
         characterCard.MoveTo(G.CardPlaces.playersPos[G.Players.GetPlayerId(this)][0], transform);
@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
         coins = 0;
         lootPlayCount = 0;
         souls = 0;
-        await Task.Delay(100);
+        await UniTask.Delay(100);
     }
     public void SetBaseStats()
     {
@@ -51,16 +51,16 @@ public class Player : MonoBehaviour
         characteristics.AddHp(count);
         UIOnDeck.inst.UpdateTexts();
     }
-    public async Task Damage(int count)
+    public async UniTask Damage(int count)
     {
         await characteristics.Damage(count);
     }
-    public void HealHp(int count, bool throughDeath = false)
+    public async UniTask HealHp(int count, bool throughDeath = false)
     {
-        characteristics.HealHp(count, throughDeath);
+        await characteristics.HealHp(count, throughDeath);
         UIOnDeck.inst.UpdateTexts();
     }
-    public async Task<bool> PayHp(int count)
+    public async UniTask<bool> PayHp(int count)
     {
         return await characteristics.PayHp(count);
     }
@@ -69,7 +69,7 @@ public class Player : MonoBehaviour
         characteristics.AddPreventHp(count);
         UIOnDeck.inst.UpdateTexts();
     }
-    public async Task StartDieSubphase()
+    public async UniTask StartDieSubphase()
     {
         await GameMaster.inst.phaseSystem.StartPlayerDie(this);
     }
@@ -111,7 +111,7 @@ public class Player : MonoBehaviour
             Console.WriteText("Ты не можешь играть лут");
         }
     }
-    public async Task DiscardCard(Entity c) 
+    public async UniTask DiscardCard(Entity c) 
     { 
         await hand.DiscardCard(c); 
     }
@@ -228,7 +228,7 @@ public class Player : MonoBehaviour
         c.MoveTo(G.CardPlaces.playersCurses[G.Players.GetPlayerId(this)][Curses.Count-1], transform);
         PutCardTrigger(c);
     }
-    public async Task<bool> DestroyCurse(Entity c)
+    public async UniTask<bool> DestroyCurse(Entity c)
     {
         bool t = false;
         for(int i = 0; i < Curses.Count; i++)
