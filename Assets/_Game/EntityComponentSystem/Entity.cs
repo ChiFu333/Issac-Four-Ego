@@ -11,6 +11,7 @@ using DG.Tweening;
 public class Entity : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public const float CARDSIZE = 0.28f;
+    public static Vector2 CARDPIXELSIZE = new Vector2(4.03f, 5.62f);
     
     public EntityVisual visual { get; private set; }
     public BoxCollider2D Collider { get; private set; }
@@ -19,13 +20,13 @@ public class Entity : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
     public List<ITag> tags = new List<ITag>();
     
     private float _speed = GameMaster.CARD_SPEED;
-
+    public bool isMoving = false;
     private void Init(bool isFaceUp = true)
     {
         visual = GetComponentInChildren<EntityVisual>();
         visual.Init(this);
         Collider = GetComponent<BoxCollider2D>();
-
+        gameObject.layer = 6;
         visualTags = new Dictionary<Type, GameObject>()
         {
             { typeof(Characteristics), visual.transform.GetChild(0).gameObject},
@@ -55,7 +56,6 @@ public class Entity : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
     {
         t.Init(this);
         tags.Add(t);
-        
     }
     public bool HasTag<T>() where T : ITag
     {
@@ -82,6 +82,7 @@ public class Entity : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
         {
             if (t1 == t)
             {
+                if (t is IRemovable remov) remov.Remove();
                 tags.Remove(t1);
                 break;
             }
@@ -146,13 +147,13 @@ public class Entity : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
     public void MoveTo(Vector3 target, Transform parent, Action afterComplete = null, bool changeOrder = true)
     {     
         visual.transform.eulerAngles = new Vector3(0, 0, 0);   
-        Collider.enabled = false;
+        isMoving = true;
         int order = visual.render.sortingOrder;
         if(changeOrder) visual.render.sortingOrder = 1000;
         transform.DOMove(target, _speed).onComplete += () => 
         {
             visual.render.sortingOrder = order;
-            Collider.enabled = true;
+            isMoving = false;
             afterComplete?.Invoke();
         };
         if(parent != null) transform.parent = parent;
@@ -160,15 +161,13 @@ public class Entity : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
     
     public async UniTask MoveToForHand(Vector3 target, float angle, Action afterComplete = null, bool changeOrder = true)
     {
-        Collider.enabled = false;
+        isMoving = true;
         int order = visual.render.sortingOrder;
         if(changeOrder) visual.render.sortingOrder = 1000;
-        await visual.MoveTo(target, angle,() => 
-        {
-            visual.render.sortingOrder = order;
-            Collider.enabled = true;
-            afterComplete?.Invoke();
-        });
+        await visual.MoveTo(target, angle);
+        if(changeOrder) visual.render.sortingOrder = order;
+        isMoving = false;
+        afterComplete?.Invoke();
     }
     
     
@@ -176,7 +175,7 @@ public class Entity : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
     {
         //PointerEnterEvent.Invoke(this);
         isHovering = true;
-        if(!G.CardSelector.isSelectingSomething)
+        if(!isMoving && !G.CardSelector.isSelectingSomething && !G.isGraggingCard)
             foreach(var tag in tags.ToList()) if(tag is IOnMouseEnter eve) await eve.OnMouseEnter();
     }
 
@@ -188,14 +187,16 @@ public class Entity : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
     }
     public async void OnPointerClick(PointerEventData eventData)
     {
-        if(!G.CardSelector.isSelectingSomething)
-             foreach(var tag in tags.ToList()) if(tag is IOnMouseDown eve) await eve.OnMouseDown();
+        if (!isMoving && !G.CardSelector.isSelectingSomething)
+        {
+            foreach(var tag in tags.ToList()) if(tag is IOnMouseDown eve) await eve.OnMouseDown();
+        }
+             
     }
     
     public async UniTask PutCardNearHand(Hand h)
     {
         bool trigger = false;
-        transform.parent = null;
         if(GetTag<CardTypeTag>().cardType == CardType.lootCard) _speed = GameMaster.CARD_SPEED / 2.5f;
         MoveTo(h.transform.TransformPoint(new Vector3(0, Hand.UPMOVE * 3f)), null, () => 
         {

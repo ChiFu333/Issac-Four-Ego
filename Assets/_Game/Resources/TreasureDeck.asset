@@ -15,4 +15,79 @@ MonoBehaviour:
   <CardsList>k__BackingField:
   - <data>k__BackingField: {fileID: 8328748003840292315, guid: 87bd31a7149d1b244ad1a74f94b272f4, type: 3}
     <willAdd>k__BackingField: 1
-    <count>k__BackingField: 20
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 8328748003840292315, guid: 95101f3fc6827ba44a778475c52313f6, type: 3}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 8328748003840292315, guid: 0de4ed32069aae04ba6f5cc808ce1109, type: 3}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 8328748003840292315, guid: de42cef24be3d104ab4adfce6a2a6b69, type: 3}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 8328748003840292315, guid: 64b0b1376ddb28d4bb9054dec553d471, type: 3}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 8328748003840292315, guid: fce96a5fe438afe4caf1551f79a1c66e, type: 3}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 8328748003840292315, guid: 803def6624590da46b1b8174a362e6c3, type: 3}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 8328748003840292315, guid: 6ca22dda0ce747c49a9b862c2463ec21, type: 3}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 8328748003840292315, guid: e9b76e42e74245148a6cde1c0047d4b7, type: 3}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 8328748003840292315, guid: e6f4921fe9c54bb4ea6b142e9f2b595b, type: 3}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 8328748003840292315, guid: e7ecdbcc51e739d4282658cfa1c7210e, type: 3}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 8328748003840292315, guid: beef40442b91b49428fd5c800c734409, type: 3}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 8328748003840292315, guid: ffe657ac88f9bba4eb7f265508007f88, type: 3}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 8328748003840292315, guid: 7d15005adadb59a428a06ad39b60e821, type: 3}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 8328748003840292315, guid: dbd57203890e43e4e8765fcd846454dc, type: 3}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 8328748003840292315, guid: 5e362d0b80ee2de4aa45acb5d56a8efd, type: 3}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 8328748003840292315, guid: e0e9c2ec82435fd40863a2a6983afd1e, type: 3}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 8328748003840292315, guid: 11065035a0a22834f821605d2311416c, type: 3}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 8328748003840292315, guid: bd90635671e6e4f4594ac7e7f492a0e4, type: 3}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 8328748003840292315, guid: c1b1386f1d8c58d4b9eee89228dccf32, type: 3}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 8328748003840292315, guid: d58a20057b3d5804d8a13f33cfd52577, type: 3}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 8328748003840292315, guid: c60abac7a3d713e4fa1d7b12c0f84521, type: 3}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 8328748003840292315, guid: 0bdf6fe7db5d6b64696d3cbe050a3c39, type: 3}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 30
+  - <data>k__BackingField: {fileID: 8328748003840292315, guid: d671242e6d4062d49a5707c5db67d4dd, type: 3}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 8328748003840292315, guid: 2f37120c909888b49884009ab236483f, type: 3}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1
+  - <data>k__BackingField: {fileID: 8328748003840292315, guid: e72ce675854979b448fde6d1f367df74, type: 3}
+    <willAdd>k__BackingField: 1
+    <count>k__BackingField: 1

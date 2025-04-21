@@ -7,12 +7,11 @@ public class Card : MonoBehaviour
 {
     public const float CARDSIZE = 0.28f;
     public static Vector2 CARDPIXELSIZE = new Vector2(4.03f, 5.62f);
+    
     [field: SerializeField] private CardData data;
     [field: SerializeField] public SpriteRenderer render { get; private set; }
     [field: SerializeField] public BoxCollider2D Collider { get; private set; }
     public event Action<Card> MouseClicked;
-    public event Action<Card> MouseDown; 
-    public event Action<Card> MouseExit;
     public virtual void Init(CardData d, bool isFaceUp = true)
     {
         data = d;

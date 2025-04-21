@@ -6,8 +6,9 @@ public class GameMaster : MonoBehaviour
 {
     //Удалить эту штуку
     public static GameMaster inst { get; private set; }
-    
+
     [Header("StartValues")]
+    [SerializeField] private bool doStartAnim;
     [SerializeField] private int startLootCount;
     [SerializeField] private int playerCount;
     
@@ -37,6 +38,8 @@ public class GameMaster : MonoBehaviour
     public async UniTaskVoid Start()
     {
         cardPlaces.Init();
+
+        G.isGraggingCard = false;
         
         G.Decks.characterDeck = InitDeck(characterDeck.GetList(), new Vector3(-10, 0, 0), "CharacterDeck", false);
         G.Decks.lootDeck = InitDeck(lootDeck.GetList(), G.CardPlaces.lootDeck.position, "LootDeck", false);
@@ -67,11 +70,11 @@ public class GameMaster : MonoBehaviour
             {
                 Entity c = G.Decks.lootDeck.TakeOneCard();
                 player.TakeOneLootCard(c);
-                await UniTask.Delay(50);
+                if(doStartAnim) UniTask.Delay(50);
             }
             player.AddMoney(3);
         }
-
+        G.Players.RestorePrior();
         UIOnDeck.inst.UpdateTexts();
         await HealEveryone();
         
@@ -170,7 +173,7 @@ public class GameMaster : MonoBehaviour
         ha.transform.position = G.CardPlaces.hands[i].position;
         ha.transform.parent = player.transform;
         ha.transform.localScale = G.CardPlaces.hands[i].lossyScale;
-
+        ha.Init(6.5f * ha.transform.lossyScale.x);
         return ha;
     }
     
@@ -194,6 +197,7 @@ public class GameMaster : MonoBehaviour
 }
 public static partial class G
 {
+    public static bool isGraggingCard;
     public static class Decks
     {
         public static CardDeck characterDeck;

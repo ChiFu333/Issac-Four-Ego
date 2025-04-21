@@ -1,9 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Runtime.CompilerServices;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using Cysharp.Threading.Tasks;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.TextCore.Text;
 
 public class Player : MonoBehaviour
@@ -27,9 +29,11 @@ public class Player : MonoBehaviour
         this.hand = hand;
         characteristics = characterCard.GetTag<Characteristics>();
         attack = characterCard.GetTag<Characteristics>().attack;
-        coins = 0;
+        coins = 10;
         lootPlayCount = 0;
         souls = 0;
+        addDamageToBattleThrow = new List<int> { 0, 0, 0, 0, 0 };
+        AddHp(10);
         await UniTask.Delay(100);
     }
     public void SetBaseStats()
@@ -37,11 +41,18 @@ public class Player : MonoBehaviour
         shopPrice = 10;
         cubeModificator = 0;
 
-        lootPlayCount = 0;
+        attackThrowCount = 0;
+        
         buyCount = 0;
         attackCount = 0;
+        
+        SetStartStatics();
     }
-    
+
+    private void SetStartStatics()
+    {
+        return;
+    }
     #endregion
     
     #region [ HP, heal, damage & death ]
@@ -79,7 +90,7 @@ public class Player : MonoBehaviour
     [field: SerializeField, HorizontalGroup("Money")] public int coins { get; private set; }
     public void AddMoney(int count)
     {
-        coins += count;
+        coins += count + (GetMyCard().HasTag<PlusOneCoinGain>() ? 1 : 0);
         if(coins < 0) coins = 0;
         UIOnDeck.inst.UpdateTexts(G.Players.GetPlayerId(this));
     }
@@ -92,9 +103,10 @@ public class Player : MonoBehaviour
     #endregion
     
     #region [ LootCards ]
-    public int lootCount { get => hand.cards.Count;}
+    public int lootCount { get => hand.GetCount();}
     [field: SerializeField, HorizontalGroup("Loot")] public int lootPlayCount { get; set; }
     [field: SerializeField, HorizontalGroup("Loot")] public int lootPlayMax { get; set; } = 1;
+    public int lootTakeCount { get; set; } = 1;
     public void TakeOneLootCard(Entity card)
     {
         hand.AddCard(card);
@@ -123,8 +135,7 @@ public class Player : MonoBehaviour
     [field: SerializeField, HorizontalGroup("Shop")] public int buyMax { get; set; } = 1;
     public bool PermitBuy()
     {
-        
-        if(buyCount <= 0 || coins < shopPrice) return false;
+        if(coins < shopPrice) return false;
         else
         {
             coins -= shopPrice;
@@ -138,10 +149,17 @@ public class Player : MonoBehaviour
     [field: SerializeField, HorizontalGroup("Attack")] public int attackCount { get; set; }
     [field: SerializeField, HorizontalGroup("Attack")] public int attackMax { get; set; } = 1;
     public int attackCubeModificator { get; set; } = 0;
+    public int attackThrowCount = 0;
+    public List<int> addDamageToBattleThrow;
     public void AddAttack(int count)  
     {
         attack += count;
         UIOnDeck.inst.UpdateTexts();
+    }
+
+    public int GetDamageCount()
+    {
+        return attack + (attackThrowCount < 5 ? addDamageToBattleThrow[attackThrowCount] : 0);
     }
     #endregion
     
@@ -171,11 +189,13 @@ public class Player : MonoBehaviour
                 Items[i] = c;
                 c.MoveTo(G.CardPlaces.playersPos[G.Players.GetPlayerId(this)][i+1], transform);
                 PutCardTrigger(c);
+                CheckStaticEffects(c);
                 return;
             }
         }
         Items.Add(c);
         c.MoveTo(G.CardPlaces.playersPos[G.Players.GetPlayerId(this)][Items.Count], transform);
+        CheckStaticEffects(c);
         PutCardTrigger(c);
     }
     public void SetPassiveItems()
@@ -189,18 +209,38 @@ public class Player : MonoBehaviour
             if(Curses[i] != null) PutCardTrigger(Curses[i]);
         }
     }
+
+    public void CheckStaticEffects(Entity c)
+    {
+        if(c.HasTag<PassiveTrinketEffect>())
+        {
+            if(c.GetTag<PassiveTrinketEffect>().effect.when == When.Always)
+            {
+                c.GetTag<PassiveTrinketEffect>().effect.SetTargets(GetMyCard());
+                c.GetTag<PassiveTrinketEffect>().effect.PlayEffect();
+            }
+        }
+        else if(c.HasTag<ItemPassiveEffect>())
+        {
+            if(c.GetTag<ItemPassiveEffect>().effect.when == When.Always)
+            {
+                c.GetTag<ItemPassiveEffect>().effect.SetTargets(GetMyCard());
+                c.GetTag<ItemPassiveEffect>().effect.PlayEffect();
+            }
+        }
+    }
     private void PutCardTrigger(Entity c)
     {
         StackEffect triggeredEffect = null;
+        if(c.HasTag<PassiveTrinketEffect>())
+        {
+            triggeredEffect = new CardStackEffect(c.GetTag<PassiveTrinketEffect>().effect, c);
+        }
+        else if(c.HasTag<ItemPassiveEffect>())
+        {
+            triggeredEffect = new CardStackEffect(c.GetTag<ItemPassiveEffect>().effect, c);
+        }
         /*
-        if(c is LootCard lootItem)
-        {
-            triggeredEffect = new CardStackEffect(lootItem.GetData<LootCardData>().GetTrinketEffect(), c);
-        }
-        else if(c is ItemCard itemCard && itemCard.GetData<ItemCardData>().GetPassiveEffect() != null)
-        {
-            triggeredEffect = new CardStackEffect(itemCard.GetData<ItemCardData>().GetPassiveEffect(), c);
-        }
         else if(c is EventCard eventCard && eventCard.GetData<EventCardData>().GetPassiveEffect() != null)
         {
             triggeredEffect = new CardStackEffect(eventCard.GetData<EventCardData>().GetPassiveEffect(), c);

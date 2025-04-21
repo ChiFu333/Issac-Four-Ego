@@ -113,13 +113,17 @@ public interface IHaveUI
     {
         int damageCount = count;
         if(health == 0) return;
-        
         if(damageCount > healthPrevent)
         {
             damageCount -= healthPrevent;
             healthPrevent = 0;
             health -= damageCount;
             await EntityEffects.HitEntity(entity);
+            if (entity.GetTag<CardTypeTag>().cardType == CardType.characterCard)
+            {
+                await TriggersSystem.takeDamage[0]?.PlayTriggeredEffects()!;
+                await TriggersSystem.takeDamage[1 + G.Players.GetPlayerId(entity.GetMyPlayer())]?.PlayTriggeredEffects()!;
+            }
         }
         else
         {
@@ -137,7 +141,7 @@ public interface IHaveUI
         HealthMax += count;
         UpdateUI();
         
-        await EntityEffects.CreateParcicle(entity, R.EffectSprites.healthUp, R.Audio.statUp);
+        if(count > 0) await EntityEffects.CreateParcicle(entity, R.EffectSprites.healthUp, R.Audio.statUp);
     }
     public async UniTask HealHp(int count, bool throughDeath = false)
     {
@@ -164,12 +168,11 @@ public interface IHaveUI
         healthPrevent += count;
         UpdateUI();
     }
-    public async UniTask ChangeAttack(int to)
+    public async UniTask AddAttack(int to)
     {
-        int t = attack;
-        attack = to;
+        attack += to;
         UpdateUI();
-        if (attack - t > 0)
+        if (to > 0)
         {
             await EntityEffects.CreateParcicle(entity, R.EffectSprites.attackUp, R.Audio.statUp);
         }
@@ -201,6 +204,11 @@ public interface IOnMouseEnter {
 public interface IOnMouseExit {
     UniTask OnMouseExit();
 }
+
+public interface IRemovable {
+    void Remove();
+}
+
 [Serializable] public class Tappable : ITag
 {
     private Entity entity;
@@ -228,8 +236,19 @@ public interface IOnMouseExit {
     public Effect effect;
     public void Init(Entity entity) {}
 }
-[Serializable] public class PlayFromHand : ITag, IOnMouseDown, IOnMouseEnter, IOnMouseExit
+[Serializable] public class ItemPassiveEffect : ITag
 {
+    public Effect effect;
+    public void Init(Entity entity) {}
+}
+[Serializable] public class PassiveTrinketEffect : ITag
+{
+    public bool turnedIntoTrinket = false;
+    public Effect effect;
+    public void Init(Entity entity) {}
+}
+[Serializable] public class PlayFromHand : ITag, IOnMouseDown, IOnMouseEnter, IOnMouseExit, IRemovable
+{   
     private Entity entity;
     public void Init(Entity entity) {
         this.entity = entity;
@@ -237,9 +256,6 @@ public interface IOnMouseExit {
     
     public UniTask OnMouseDown()
     {
-        
-        //entity.visual.render.sortingOrder = 500;
-        
         entity.GetMyPlayer().PlayLootCard(entity);
         return UniTask.CompletedTask;
     }
@@ -265,6 +281,13 @@ public interface IOnMouseExit {
         entity.visual.transform.DOScale(1, .15f).SetEase(Ease.OutBack);
         return UniTask.CompletedTask;
     }
+
+    public void Remove()
+    {
+        entity.visual.transform.DOLocalMoveY(0, 0.1f);
+        entity.visual.render.sortingOrder = 1000;
+        entity.visual.transform.DOScale(1, .15f).SetEase(Ease.OutBack);
+    }
 }
 
 [Serializable] public class IsItem : ITag
@@ -272,5 +295,22 @@ public interface IOnMouseExit {
     public void Init(Entity entity)
     {
         
+    }
+}
+[Serializable] public class TapBalatro : ITag, IOnMouseDown
+{
+    private Entity entity;
+    public bool isTapped;
+    public void Init(Entity entity) {
+        this.entity = entity;
+        isTapped = false;
+    }
+    
+    public UniTask OnMouseDown()
+    {
+        isTapped = !isTapped;
+        entity.visual.transform.DOLocalMoveY(isTapped ? 1f : 0, 0.1f);
+        
+        return UniTask.CompletedTask;
     }
 }

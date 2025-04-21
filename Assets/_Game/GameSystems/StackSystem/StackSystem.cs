@@ -12,15 +12,31 @@ public class StackSystem : MonoBehaviour
     public static StackSystem inst;
     public Stack<StackEffect> stack = new Stack<StackEffect>();
     public Entity cardTarget;
+    public CardDeck deckTarget;
     public bool prioreNow = false;
     public List<PrimalCardData> primalCards; //заявка на покупку, заявка на атаку, получение урона, смерть
     public List<CubeCardData> cubeCards;
     public void Awake() { inst = this; }
+    
     public async UniTask PushEffect(StackEffect effect)
     {
+        if (effect is CardStackEffect cse && (cse.effect.type == EffectType.Common) && cse.effect.effectActions[0].subActions[0].actionType == ActionType.none) return;
+        //Debug.Log("First: " + (effect is CardStackEffect ce && (ce.effect.type == EffectType.Common)));
+        //Debug.Log("Second: " + (effect is CardStackEffect cs && cs.effect.effectActions == null));
         await effect.Init();    
         stack.Push(effect);
         UpdateUI();
+        
+        if (effect is PrimalStackEffect pse && pse.type == (int)PrimalEffect.Damage && pse.target.GetTag<CardTypeTag>().cardType == CardType.characterCard)
+        {
+            await TriggersSystem.wouldTakeDamage[0]?.PlayTriggeredEffects()!;
+            await TriggersSystem.wouldTakeDamage[1 + G.Players.GetPlayerId(pse.target.GetMyPlayer())]?.PlayTriggeredEffects()!;
+        }
+        if (effect is PrimalStackEffect pse2 && pse2.type == (int)PrimalEffect.Kill && pse2.target.GetTag<CardTypeTag>().cardType == CardType.characterCard)
+        {
+            await TriggersSystem.playerWouldDie[0]?.PlayTriggeredEffects()!;
+            await TriggersSystem.playerWouldDie[1 + G.Players.GetPlayerId(pse2.target.GetMyPlayer())]?.PlayTriggeredEffects()!;
+        }
     }
     public async UniTask AgreeEffect()
     {
@@ -85,6 +101,34 @@ public class StackSystem : MonoBehaviour
         await effect.Init();
         await effect.PlayStackEffect();
     }
+
+    public PrimalStackEffect GetTopDamage()
+    {
+        StackEffect[] st = StackSystem.inst.stack.ToArray();
+        for(int i = st.Length - 1; i >= 0; i--)
+        {
+            if(st[i] is PrimalStackEffect pse && pse.type == (int)PrimalEffect.Damage)
+            {
+                return pse;
+            }
+        }
+
+        return null;
+    }
+
+    public PrimalStackEffect GetTopDeath()
+    {
+        StackEffect[] st = StackSystem.inst.stack.ToArray();
+        for(int i = st.Length - 1; i >= 0; i--)
+        {
+            if(st[i] is PrimalStackEffect pse && pse.type == (int)PrimalEffect.Kill)
+            {
+                return pse;
+            }
+        }
+
+        return null;
+    }
 }
 
 public abstract class StackEffect
@@ -128,11 +172,14 @@ public class CardStackEffect : StackEffect
     }
     public override async UniTask Init()
     {
-        if (effect.type != EffectType.Roll)
+        if (effect.type != EffectType.Roll && effect.type != EffectType.RollEffectCount)
         {
             manageEffect = await EffectSelector.inst.SelectEffect(source.GetTag<CardSpritesData>().front, effect.effectActions.Count);
         }
-        await effect.SetTargets(source, manageEffect);
+
+        if (effect.type == EffectType.RollEffectCount) manageEffect = -2;
+        if(effect.effectActions[0].subActions[0].targetCard == null && effect.type != EffectType.Roll)
+            await effect.SetTargets(source, manageEffect);
     }
     public override async UniTask PlayStackEffect()
     {
@@ -156,23 +203,38 @@ public class CardStackEffect : StackEffect
             }
             await StackSystem.inst.PushCubeEffect(UnityEngine.Random.Range(1, 7), false, false, effs);
         }
+        else if (effect.type == EffectType.RollEffectCount)
+        {
+            List<StackEffect> effs = new List<StackEffect>();
+            for (int i = 0; i < 6; i++)
+            {
+                List<EffectAction> temp = new List<EffectAction>
+                {
+                    effect.effectActions[i]
+                };
+                effs.Add(new CardStackEffect(new Effect(When.Now, 0, EffectType.Common, temp), source, true));
+            }
+            await StackSystem.inst.PushCubeEffect(UnityEngine.Random.Range(1, 7), false, false, effs);
+        }
         else if (effect.type == EffectType.YouSelectOne || effect.type == EffectType.Common)
         {
             await effect.PlayEffect(manageEffect);
         }
-        if (source.GetTag<CardTypeTag>().cardType == CardType.lootCard/* && !lootCard.isItem*/) await source.DiscardEntity();
+        if (source.GetTag<CardTypeTag>().cardType == CardType.lootCard)
+            if(!source.HasTag<PassiveTrinketEffect>() || !source.GetTag<PassiveTrinketEffect>().turnedIntoTrinket) 
+                await source.DiscardEntity();
         if(source.GetTag<CardTypeTag>().cardType == CardType.eventCard/* && !eventCard.isCurse*/) await source.DiscardEntity();
     }
     public override Sprite GetSprite(bool sourceSprite)
     {
-        return sourceSprite ? source.GetTag<CardSpritesData>().front : effect.effectActions?[manageEffect == -1 ? 0 : manageEffect]?.subActions[0]?.targetCard?.GetTag<CardSpritesData>().front;
+        return sourceSprite ? source.GetTag<CardSpritesData>().front : effect.effectActions?[manageEffect <= -1 ? 0 : manageEffect]?.subActions[0]?.targetCard?.GetTag<CardSpritesData>().front;
     }
 }
 public class PrimalStackEffect : StackEffect
 {
     public bool fightDamage;
     public PrimalCardData data;
-    private Entity target;
+    public Entity target { get; private set; }
     public Sprite effectSprite;
     public int count;
     public int type;
@@ -222,7 +284,7 @@ public class CubeStackEffect : StackEffect
             if (isNewValue)
             {
                 isNewValue = false;
-                await TriggersSystem.diceWouldRoll[data.value - 1]?.PlayTriggeredEffects();
+                await TriggersSystem.diceWouldRoll[data.value - 1]?.PlayTriggeredEffects()!;
                 if (TriggersSystem.diceWouldRoll[data.value - 1].triggeredStackEffects.Count != 0) return;
             }
 
@@ -231,7 +293,7 @@ public class CubeStackEffect : StackEffect
         else
         {
             if (myDiceTrigger != null) TriggersSystem.diceRolls[data.value - 1].AddStackEffect(myDiceTrigger[data.value - 1]);
-            await TriggersSystem.diceRolls[data.value - 1]?.PlayTriggeredEffects();
+            await TriggersSystem.diceRolls[data.value - 1]?.PlayTriggeredEffects()!;
             if (myDiceTrigger != null) TriggersSystem.diceRolls[data.value - 1].RemoveEffect(myDiceTrigger[data.value - 1]);
             await RemoveMeFromStack();
         }
@@ -240,7 +302,8 @@ public class CubeStackEffect : StackEffect
     {
         if (!endedValue)
         {
-            data = StackSystem.inst.cubeCards[UnityEngine.Random.Range(1, 7) - 1];
+            int val = UnityEngine.Random.Range(1, 7) - 1;
+            data = StackSystem.inst.cubeCards[val];
             isNewValue = true;
             StackSystem.inst.UpdateUI();
         }

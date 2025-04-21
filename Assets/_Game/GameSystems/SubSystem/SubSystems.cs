@@ -15,7 +15,7 @@ public class CardSelector
 
     public async UniTask<Entity> SelectCardByType<T>(string zoneName, CardType cardType = CardType.none) where T : ITag
     {
-        Player initiator = G.Players.priorPlayer;
+        //Player initiator = G.Players.priorPlayer;
         isSelectingSomething = true;
         UIOnDeck.inst.ChangeButtonsActive();
         while (true)
@@ -34,12 +34,15 @@ public class CardSelector
                 RaycastHit2D hit = Physics2D.Raycast(mousePos2D, Vector2.zero);
                 if (hit.collider != null && hit.collider.GetComponent<Entity>() != null && hit.collider.GetComponent<Entity>().HasTag<T>())
                 {
+                    
                     if(cardType == CardType.none || hit.collider.GetComponent<Entity>().GetTag<CardTypeTag>().cardType == cardType)
                     {
+                        //Debug.Log("CardPlayer: " + hit.collider.GetComponent<Entity>().GetMyPlayer().name);
+                        //Debug.Log("Initiator: " + initiator.name);
                         Dictionary<string, bool> rightBool = new Dictionary<string, bool>()
                         {
                             {"InPlay", true},
-                            {"MyHand", hit.collider.transform.parent.parent == initiator?.transform},
+                            {"MyHand", hit.collider.GetComponent<Entity>().GetMyPlayer() == G.Players.priorPlayer},
                             {"Shop", hit.collider.transform.parent == G.shop.transform},
                             {"MonsterZone", hit.collider.transform.parent == G.monsterZone.transform}
                         };

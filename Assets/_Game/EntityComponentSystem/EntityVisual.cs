@@ -59,7 +59,7 @@ public class EntityVisual : MonoBehaviour
             await UniTask.Yield();
         }
         _moveEngine.SetToTargetPos();
-        afterComplete.Invoke();
+        afterComplete?.Invoke();
         isMoving = false;
     }
 
@@ -71,7 +71,7 @@ public class EntityVisual : MonoBehaviour
         private Vector2 targetPosition;
         private float targetRotation;
         private Vector2 velocity; 
-        private float smoothTime = 0.2f; 
+        private float smoothTime = 0.17f; 
         private float maxVelocity = 8.5f; 
         private Vector2 currentVelocity;
         private Vector3 movementDelta;
@@ -96,7 +96,7 @@ public class EntityVisual : MonoBehaviour
             
         public void SmoothFollow()
         {
-            float speed = 3f;
+            float speed = 5f;
             Vector2 newPosition = Vector2.SmoothDamp(_cardTransform.position, targetPosition, ref currentVelocity, smoothTime, maxVelocity, Time.deltaTime);
             //currentVelocity *= 0.945f;
             velocity = (newPosition - (Vector2)_cardTransform.position) / Time.deltaTime;
@@ -105,7 +105,9 @@ public class EntityVisual : MonoBehaviour
             {
                 velocity = velocity.normalized * maxVelocity;
             }
-            _cardTransform.position = newPosition + velocity * Time.deltaTime * speed;
+
+            Vector2 newPos = newPosition + velocity * (Time.deltaTime * speed);
+            _cardTransform.position = new Vector3(newPos.x, newPos.y, _cardTransform.position.z);
         } 
         public void SmoothFollow2()
         {

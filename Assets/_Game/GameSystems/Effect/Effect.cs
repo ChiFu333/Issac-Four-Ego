@@ -44,6 +44,14 @@ using Cysharp.Threading.Tasks;
                 await t.SetTargets(source);
             }
         }
+        else if (id == -2)
+        {
+            await effectActions[0].SetTargets(source);
+            for (int i = 1; i < 6; i++)
+            {
+                effectActions[i].subActions[0].SetTargetPrimal(effectActions[0].subActions[0].targetCard);
+            }
+        }
         else
         {
             await effectActions[id].SetTargets(source);
@@ -97,12 +105,14 @@ using Cysharp.Threading.Tasks;
     
     public Func<int, UniTask<bool>> actionDelegate {get; private set;}
     public Entity targetCard {get; private set;}    
+    public CardDeck targetDeck {get; private set;}
     
     [field: HideInInspector] public Entity targetCardBefore;
-    public async UniTask SetTarget(Entity source)
+    public async UniTask SetTarget(Entity s)
     {
         actionDelegate = GameActions.GetDelegate[actionType];
         Entity t = null;
+        CardDeck d = null;
         switch(target)
         {
             case Target.None:
@@ -123,7 +133,19 @@ using Cysharp.Threading.Tasks;
             } break;
             case Target.It:
             {
-                t = source;
+                t = s;
+            } break;
+            case Target.MonsterDeck:
+            {
+                d = G.Decks.monsterDeck;
+            } break;
+            case Target.LootDeck:
+            {
+                d = G.Decks.lootDeck;
+            } break;
+            case Target.TreasureDeck:
+            {
+                d = G.Decks.treasureDeck;
             } break;
             case Target.PlayerYouSelect:
             {
@@ -185,6 +207,12 @@ using Cysharp.Threading.Tasks;
             } break;
         }
         targetCard = t;
+        targetDeck = d;
+    }
+
+    public void SetTargetPrimal(Entity source)
+    {
+        targetCard = source;
     }
     public async UniTask<bool> InvokePlayAction()
     {
@@ -198,6 +226,17 @@ using Cysharp.Threading.Tasks;
                 await PlayAction();
                 G.Players.SetPrior(G.Players.players[(G.Players.priorId + 1) % G.Players.players.Count]);
             }
+            
+        }
+        else if(target == Target.EveryPlayerExceptMe)
+        {
+            for(int i = 0; i < G.Players.players.Count; i++)
+            {
+                StackSystem.inst.cardTarget = G.Players.priorPlayer.GetMyCard();
+                if (i != 0) await PlayAction();
+                G.Players.SetPrior(G.Players.players[(G.Players.priorId + 1) % G.Players.players.Count]);
+            }
+            
         }
         else if(target == Target.EveryMonster)
         {
@@ -212,12 +251,17 @@ using Cysharp.Threading.Tasks;
             StackSystem.inst.cardTarget = targetCard;
             return await PlayAction();
         }
+        else if(targetDeck != null)
+        {
+            StackSystem.inst.deckTarget = targetDeck;
+            return await PlayAction();
+        }
         return false;
         
     }
     private async UniTask<bool> PlayAction() => await actionDelegate.Invoke(count);
 }
-public enum EffectType { Common, YouSelectOne, Roll}
+public enum EffectType { Common, YouSelectOne, Roll, RollEffectCount}
 public enum SubActionConnection { Start, And, Then, IfYouDo }
 
 [Serializable] public class MyUnityEvent : UnityEvent<int> {}
@@ -267,7 +311,18 @@ public enum When
     AtTheEndOfMyTurn = 9,
     AtDicePuttedInStack = 10,
     AtDiceWouldRoll = 11,
-    AtDiceRolls = 12
+    AtDiceRolls = 12,
+    AtDamageWouldTaken = 13,
+    AtDamageWouldTakenByMe = 14,
+    AtDamageTaken = 15,
+    AtDamageTakenByMe = 16,
+    AtPlayerWouldDie = 17,
+    AtPlayerWouldDieMe = 18,
+    AtPlayerDie = 19,
+    AtPlayerDieMe = 20,
+    AtFirstBattleThrow = 21,
+    AtAttackDeclare = 22,
+    AtAttackDeclareMe = 23
 }
 public enum Target 
 { 
@@ -279,5 +334,10 @@ public enum Target
     SelectedTarget,
     YouSelectCurse = 12,
     StackLootOrActiveOrBuy = 13,
-    It = 14
+    It = 14,
+    LootDeck = 15,
+    MonsterDeck = 16,
+    TreasureDeck = 17,
+    YouSelectDeck = 18,
+    EveryPlayerExceptMe = 19
 }

@@ -48,6 +48,7 @@ public class CardDeck : MonoBehaviour
     {
         c.SetActive(false);
         c.transform.parent = transform;
+        c.transform.position = transform.position;
         List<Entity> templ = new List<Entity>();
         for(int i = 0; i < cards.Count+1; i++)
         {
@@ -61,6 +62,15 @@ public class CardDeck : MonoBehaviour
             }
         }
         cards = templ;
+        UpdateFace();
+    }
+
+    public void PutOneCardUnder(Entity c)
+    {
+        c.SetActive(false);
+        c.transform.parent = transform;
+        c.transform.position = transform.position;
+        cards.Add(c);
         UpdateFace();
     }
     

@@ -1,6 +1,7 @@
 using System;
 using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
+using UnityEngine;
 
 public static class GameActions
 {
@@ -18,11 +19,14 @@ public static class GameActions
     }
     public static async UniTask<bool> AddLootCard(int count) 
     { 
+        UniTask t = UniTask.CompletedTask;
         for(int i = 0; i < count; i++) 
         {
-            await UniTask.Delay(1000/count < 100 ? 1000/count : 100); 
-            await StackSystem.inst.cardTarget.GetMyPlayer().hand.AddCard(G.Decks.lootDeck.TakeOneCard()); 
+            await UniTask.Delay(100); 
+            t = StackSystem.inst.cardTarget.GetMyPlayer().hand.AddCard(G.Decks.lootDeck.TakeOneCard()); 
         }
+
+        await t;
         return true;
     }
     public static async UniTask<bool> DiscardLootCard(int count)
@@ -39,7 +43,7 @@ public static class GameActions
     }
     public async static UniTask<bool> AddAttack(int count)
     {
-        await StackSystem.inst.cardTarget.GetTag<Characteristics>().ChangeAttack(StackSystem.inst.cardTarget.GetTag<Characteristics>().attack + count);
+        await StackSystem.inst.cardTarget.GetTag<Characteristics>().AddAttack(count);
         return true;
     }
     public static UniTask<bool> AddTreasure(int count)
@@ -179,7 +183,7 @@ public static class GameActions
     //Кубики
     public static UniTask<bool> RethrowDice(int count)
     {
-        StackSystem.inst.GetCubeInStack(false)?.RethrowDice();
+        StackSystem.inst.GetCubeInStack(false).RethrowDice();
         return UniTask.FromResult(true);
     }
     public static UniTask<bool> RechargeItem(int count)
@@ -219,11 +223,12 @@ public static class GameActions
         await eff.RemoveMeFromStack();
         return true;
     }
-    public static UniTask<bool> TurnIntoItem(int no)
+    public static UniTask<bool> TurnIntoItem(int no) //Тринкет
     {
+        Player p = StackSystem.inst.cardTarget.GetMyPlayer();
         Entity loot = StackSystem.inst.cardTarget;
-        //loot.TurnIntoItem();
-        StackSystem.inst.cardTarget.GetMyPlayer().AddItem(StackSystem.inst.cardTarget);
+        loot.GetTag<PassiveTrinketEffect>().turnedIntoTrinket = true;
+        p.AddItem(StackSystem.inst.cardTarget);
         return UniTask.FromResult(true);
     }
     public async static UniTask<bool> TurnAndGiveCurse(int no)
@@ -257,8 +262,92 @@ public static class GameActions
         await StackSystem.inst.CancelEverythingInStack();
         return true;
     }
+
+    public static async UniTask<bool> WatchFivePutOne(int no)
+    {
+        await CardWatcher.inst.WatchFivePutOneUp(StackSystem.inst.deckTarget);
+        return true;
+    }
+    public static async UniTask<bool> WatchCardReturnInAnyOrder(int count)
+    {
+        await CardWatcher.inst.WatchCardsAndPutInAnyOrder(StackSystem.inst.deckTarget, count);
+        return true;
+    }
+    public static async UniTask<bool> WatchTopAndCanDiscard(int no)
+    {
+        await CardWatcher.inst.WatchTopAndCanDiscard(StackSystem.inst.deckTarget);
+        return true;
+    }
+
+    public static async UniTask<bool> WatchHand(int no)
+    {
+        await CardWatcher.inst.WatchHand(StackSystem.inst.cardTarget.GetMyPlayer());
+        return true;
+    }
+
+    public static async UniTask<bool> ReduceTopDamage(int c)
+    {
+        PrimalStackEffect eff = StackSystem.inst.GetTopDamage();
+        if (eff == null) return false;
+        eff.count -= c;
+        if(eff.count <= 0) await eff.RemoveMeFromStack();
+        return true;
+    }
+    public static async UniTask<bool> PreventDeath(int c)
+    {
+        PrimalStackEffect eff = StackSystem.inst.GetTopDeath();
+        if (eff == null) return false;
+        await eff.target.GetTag<Characteristics>().HealHp(1, true);
+        await eff.RemoveMeFromStack();
+        return true;
+    }
+
+    public static async UniTask<bool> AddAttackToBattleThrow(int por)
+    {
+        StackSystem.inst.cardTarget.GetMyPlayer().GetMyCard().AddTag(new AddDamageToBattleThrow(por));
+        return true;
+    }
+    public static async UniTask<bool> AddPlusCoinStatic(int por)
+    {
+        StackSystem.inst.cardTarget.GetMyPlayer().GetMyCard().AddTag(new PlusOneCoinGain());
+        return true;
+    }
+    public static async UniTask<bool> GetLootPlayStatic(int count)
+    {
+        StackSystem.inst.cardTarget.GetMyPlayer().GetMyCard().AddTag(new AddLootPlayThisTurn());
+        return true;
+    }
+    public static async UniTask<bool> AddHpStatic(int count)
+    {
+        StackSystem.inst.cardTarget.GetMyPlayer().GetMyCard().AddTag(new HpStatic(count));
+        return true;
+    }
+
+    public static async UniTask<bool> AddAttackStatic(int count)
+    {
+        StackSystem.inst.cardTarget.GetMyPlayer().GetMyCard().AddTag(new AttackStatic(count));
+        return true;
+    }
+    public static async UniTask<bool> AddAttackCountStatic(int count)
+    {
+        StackSystem.inst.cardTarget.GetMyPlayer().GetMyCard().AddTag(new AttackCountStatic(count));
+        return true;
+    }
+
+    public static async UniTask<bool> CheckZeroMoney(int count)
+    {
+        return StackSystem.inst.cardTarget.GetMyPlayer().coins == 0;
+    }
+
+    public static async UniTask<bool> AddStartLootTake(int count)
+    {
+        StackSystem.inst.cardTarget.GetMyPlayer().GetMyCard().AddTag(new StartLootTake(count));
+        return true;
+    }
+
     public static Dictionary<ActionType, Func<int, UniTask<bool>>> GetDelegate = new Dictionary<ActionType, Func<int,UniTask<bool>>>()
     {
+        {ActionType.none, null},
         {ActionType.AddCoins, AddCoins},
         {ActionType.StealCoinsFromPrior, StealFromHim},
         {ActionType.AddLootCard, AddLootCard},
@@ -292,6 +381,20 @@ public static class GameActions
         {ActionType.EndTurn, EndTurn},
         {ActionType.CancelEverythingInStack, CancelEverythingInStack},
         {ActionType.TurnIntoCurseAndGive, TurnAndGiveCurse},
+        {ActionType.WatchFivePutOneUp, WatchFivePutOne},
+        {ActionType.WatchTopAndCanDiscard, WatchTopAndCanDiscard},
+        {ActionType.WatchHand, WatchHand},
+        {ActionType.ReduceTopDamage, ReduceTopDamage},
+        {ActionType.PreventDeath ,PreventDeath},
+        {ActionType.AddAttackToBattleThrow ,AddAttackToBattleThrow},
+        {ActionType.AddPlusCoinStatic ,AddPlusCoinStatic},
+        {ActionType.GetLootPlayStatic, GetLootPlayStatic},
+        {ActionType.AddHpStatic, AddHpStatic},
+        {ActionType.AddAttackStatic, AddAttackStatic},
+        {ActionType.AddAttackCountStatic, AddAttackCountStatic},
+        {ActionType.CheckZeroMoney, CheckZeroMoney},
+        {ActionType.AddStartLootTake, AddStartLootTake},
+        {ActionType.WatchCardReturnInAnyOrder, WatchCardReturnInAnyOrder}
     };
 }
 public enum ActionType
@@ -330,4 +433,19 @@ public enum ActionType
     EndTurn = 32,
     CancelEverythingInStack = 33,
     TurnIntoCurseAndGive = 34,
+    WatchFivePutOneUp = 35,
+    WatchTopAndCanDiscard = 36,
+    WatchHand = 37,
+    ReduceTopDamage = 38,
+    none = 39,
+    PreventDeath = 40,
+    AddAttackToBattleThrow = 41,
+    AddPlusCoinStatic = 42,
+    GetLootPlayStatic = 43,
+    AddHpStatic = 44,
+    AddAttackStatic = 45,
+    AddAttackCountStatic = 46,
+    CheckZeroMoney = 47,
+    AddStartLootTake = 48,
+    WatchCardReturnInAnyOrder = 49
 }

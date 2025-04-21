@@ -40,7 +40,12 @@ public class PhaseSystem : MonoBehaviour
         #region Step3
         Console.WriteText("Эффекты после взятия лута");
         UIOnDeck.inst.UpdatePhase("Фаза: начало хода (шаг 3)");
-        G.Players.activePlayer.TakeOneLootCard(G.Decks.lootDeck.TakeOneCard());
+        for (int i = 0; i < G.Players.activePlayer.lootTakeCount; i++)
+        {
+            G.Players.activePlayer.TakeOneLootCard(G.Decks.lootDeck.TakeOneCard());
+            await UniTask.Delay(100);
+        }
+            
 
         StackSystem.inst.GivePrior();
         while(subphases != 0 || StackSystem.inst.stack.Count != 0 || StackSystem.inst.prioreNow) 
@@ -155,10 +160,11 @@ public class PhaseSystem : MonoBehaviour
         #region Step1
         Console.WriteText("Приоритет перед атакой");
         StackSystem.inst.GivePrior();
+        await TriggersSystem.atAttackDeclaration[0]?.PlayTriggeredEffects()!;
+        await TriggersSystem.atAttackDeclaration[1 + G.Players.playerTurnId]?.PlayTriggeredEffects()!;
         while(subphases != 1 || StackSystem.inst.stack.Count != 0 || StackSystem.inst.prioreNow) 
         {
             await UniTask.Yield();
-            Debug.Log("Halo");
             if(currentPhase != Phase.Action) { await EndAttack(); subphases--; UIOnDeck.inst.ChangeButtonsActive(); return; }
         }
         #endregion Step1
@@ -180,7 +186,7 @@ public class PhaseSystem : MonoBehaviour
                 StackEffect eff = null;
                 if(i+1 >= G.monsterZone.currentEnemy.GetTag<Characteristics>().dodge)
                 {
-                    eff = new PrimalStackEffect(PrimalEffect.Damage, G.monsterZone.currentEnemy, G.Players.activePlayer.attack, true);
+                    eff = new PrimalStackEffect(PrimalEffect.Damage, G.monsterZone.currentEnemy, G.Players.activePlayer.GetDamageCount(), true);
                 }
                 else
                 {
@@ -188,7 +194,7 @@ public class PhaseSystem : MonoBehaviour
                 }
                 additionTrigger.Add(eff); 
             }
-            
+            G.Players.activePlayer.attackThrowCount += 1;
             await StackSystem.inst.PushCubeEffect(UnityEngine.Random.Range(1, 7), false, true, additionTrigger);
             
             if(currentPhase != Phase.Action) { await EndAttack(); subphases--; UIOnDeck.inst.ChangeButtonsActive(); return; }
@@ -197,6 +203,7 @@ public class PhaseSystem : MonoBehaviour
                 await UniTask.Yield();
                 if(currentPhase != Phase.Action) { await EndAttack(); subphases--; UIOnDeck.inst.ChangeButtonsActive(); return; }
             }
+            
         }
         #endregion StepRepeat
         
@@ -244,8 +251,11 @@ public class PhaseSystem : MonoBehaviour
         int tempStackCount = StackSystem.inst.stack.Count;
 
         #region Step1
-        Console.WriteText("Эффекты перед смертью");
-        //здесь положить эффекты когда кто-то "должен" умереть
+        Console.WriteText("Эффекты перед оплатой");
+        
+        await TriggersSystem.playerDie[0]?.PlayTriggeredEffects()!;
+        await TriggersSystem.playerDie[1 + G.Players.playerTurnId]?.PlayTriggeredEffects()!;
+        
         StackSystem.inst.GivePrior();
         
         while(tempSubphase != subphases || StackSystem.inst.stack.Count > tempStackCount) 

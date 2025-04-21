@@ -106,6 +106,10 @@ public class UIOnDeck : MonoBehaviour
     {
         GameActions.RequestAttack();
     }
+    public void RequestBuy()
+    {
+        GameActions.RequestBuy();
+    }
 
     public void EndTurn()
     {

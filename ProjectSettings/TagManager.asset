@@ -12,9 +12,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - CardLayer
+  - BlockLayer
+  - ExternalCardLayer
   - 
   - 
   - 
@@ -44,6 +44,9 @@ TagManager:
     locked: 0
   - name: HandCards
     uniqueID: 4186529493
+    locked: 0
+  - name: CardWatcher
+    uniqueID: 2327144879
     locked: 0
   - name: UI
     uniqueID: 2401168283
