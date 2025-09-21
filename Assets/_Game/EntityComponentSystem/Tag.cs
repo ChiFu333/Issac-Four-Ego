@@ -2,55 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
 using DG.Tweening;
 using Cysharp.Threading.Tasks;
 using TMPro;
-using UnityEditor.Rendering.LookDev;
-using Random = UnityEngine.Random;
 
-public enum CardType {none, characterCard, lootCard, monsterCard, treasureCard, eventCard, soulCard};
 
-public interface ITag 
-{
-    public void Init(Entity entity);
-}
+public interface ITag { public void Init(Entity entity); }
+
+public interface IOnMouseDown { UniTask OnMouseDown(); }
+public interface IOnMouseEnter { UniTask OnMouseEnter(); }
+public interface IOnMouseExit { UniTask OnMouseExit(); }
+
+public interface IRemovable { void Remove(); }
+
 public interface IHaveUI
 {
     public void ShowUI();
     public void HideUI();
 }
-
-[Serializable] public class CardSpritesData : ITag 
-{
-    private Entity entity;
-    [SerializeField] public bool isFlipped = false;
-    [SerializeField] public Sprite front;
-    [SerializeField] public Sprite back;
-    public void Init(Entity entity)
-    {
-        this.entity = entity;
-    }
-    public async UniTaskVoid Flip(bool Flip)
-    {
-        float timeToSwap = 0.3f;
-        bool trigger = false;
-        entity.transform.DORotate(new Vector3(0, 90, 0), timeToSwap).onComplete = () => trigger = true;
-        while(!trigger) await UniTask.Yield();
-        
-        entity.GetComponent<SpriteRenderer>().sprite = Flip ? entity.GetTag<CardSpritesData>().front : entity.GetTag<CardSpritesData>().back;
-        
-        trigger = false;
-        entity.transform.DORotate(new Vector3(0, 90, 0), timeToSwap).onComplete = () => trigger = true;
-        while(!trigger) await UniTask.Yield();
-
-    }
-}
-
-[Serializable] public class CardTypeTag : ITag
-{
-    public CardType cardType = CardType.none;
-    public void Init(Entity entity) {}
-}
+public interface ITapEffect { UniTask OnTap(); }
 
 [Serializable] public class Characteristics : ITag, IHaveUI
 {
@@ -189,27 +160,8 @@ public interface IHaveUI
         textWithoutDodge.SetActive(false);
     }
 }
-[Serializable] public class CharacterItemPrefab : ITag
-{
-    public GameObject itemPrefab;
-    public void Init(Entity entity) {}
-}
 
-public interface IOnMouseDown {
-    UniTask OnMouseDown();
-}
-public interface IOnMouseEnter {
-    UniTask OnMouseEnter();
-}
-public interface IOnMouseExit {
-    UniTask OnMouseExit();
-}
-
-public interface IRemovable {
-    void Remove();
-}
-
-[Serializable] public class Tappable : ITag
+[Serializable] public class Tappable : ITag, IOnMouseDown
 {
     private Entity entity;
     public bool tapped = false;
@@ -219,18 +171,27 @@ public interface IRemovable {
     public void Tap()
     {
         tapped = true;
+        entity.transform.DORotate(new Vector3(0,0,-90), 0.3f);
     }
     public void Recharge()
     {
         tapped = false;
+        entity.transform.DORotate(new Vector3(0,0,0), 0.3f);
     }
-    /*
-    public void OnMouseDown()
+    public async UniTask OnMouseDown()
     {
-        entity.transform.DORotate(new Vector3(0,0,-90), 0.3f);
-    }*/
+        if (entity.HasTag<InShop>()) return;
+        if (!tapped)
+        {
+            Tap();
+            foreach (var tag in entity.tags.ToList())
+            {
+                if(tag is ITapEffect tapEffect) await tapEffect.OnTap();
+            }
+        }
+        return;
+    }
 }
-
 [Serializable] public class PlayEffect : ITag
 {
     public Effect effect;
@@ -247,49 +208,26 @@ public interface IRemovable {
     public Effect effect;
     public void Init(Entity entity) {}
 }
-[Serializable] public class PlayFromHand : ITag, IOnMouseDown, IOnMouseEnter, IOnMouseExit, IRemovable
-{   
+
+[Serializable] public class TapEffect : ITag, ITapEffect
+{
     private Entity entity;
-    public void Init(Entity entity) {
-        this.entity = entity;
-    }
-    
-    public UniTask OnMouseDown()
-    {
-        entity.GetMyPlayer().PlayLootCard(entity);
-        return UniTask.CompletedTask;
-    }
+    public Effect effect;
 
-    public UniTask OnMouseEnter()
+    public void Init(Entity ent)
     {
-        AudioManager.inst.Play(R.Audio.cardMouseOnLootInHands[Random.Range(0, R.Audio.cardMouseOnLootInHands.Count)]);
-        entity.visual.transform.DOLocalMoveY(0.4f + entity.GetMyPlayer().hand.GetDeltaYInHand(entity), 0.3f);
-        entity.visual.render.sortingOrder = 1000;
+        entity = ent;
+    }
+    public async UniTask OnTap()
+    {
+        G.Players.SetPrior(entity.GetMyPlayer());
         
-        entity.visual.transform.DOScale(1.15f, .15f).SetEase(Ease.OutBack);
-
-        DOTween.Kill(2, true);
-        entity.visual.transform.DOPunchRotation(Vector3.forward * 5, .15f, 20, 1).SetId(2);
-        
-        return UniTask.CompletedTask;
-    }
-
-    public UniTask OnMouseExit()
-    {
-        entity.visual.transform.DOLocalMoveY(0 + entity.GetMyPlayer().hand.GetDeltaYInHand(entity), 0.3f);
-        entity.visual.render.sortingOrder = entity.GetMyPlayer().hand.GetMySortingOrder(entity);
-        entity.visual.transform.DOScale(1, .15f).SetEase(Ease.OutBack);
-        return UniTask.CompletedTask;
-    }
-
-    public void Remove()
-    {
-        entity.visual.transform.DOLocalMoveY(0, 0.1f);
-        entity.visual.render.sortingOrder = 1000;
-        entity.visual.transform.DOScale(1, .15f).SetEase(Ease.OutBack);
+        CardStackEffect csf = new CardStackEffect(effect, entity);
+        await StackSystem.inst.PushEffect(csf);
+        G.Players.RestorePrior();
+        Console.WriteText("Использован предмет");
     }
 }
-
 [Serializable] public class IsItem : ITag
 {
     public void Init(Entity entity)
@@ -297,20 +235,12 @@ public interface IRemovable {
         
     }
 }
-[Serializable] public class TapBalatro : ITag, IOnMouseDown
+
+[Serializable]
+public class InShop : ITag
 {
-    private Entity entity;
-    public bool isTapped;
-    public void Init(Entity entity) {
-        this.entity = entity;
-        isTapped = false;
-    }
-    
-    public UniTask OnMouseDown()
+    public void Init(Entity entity)
     {
-        isTapped = !isTapped;
-        entity.visual.transform.DOLocalMoveY(isTapped ? 1f : 0, 0.1f);
         
-        return UniTask.CompletedTask;
     }
 }

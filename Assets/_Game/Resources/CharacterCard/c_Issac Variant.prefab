@@ -18,7 +18,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 06eb2c3cf61243f47b7aeb139e09ef43, type: 2}
     - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
       propertyPath: tags.Array.size
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
       propertyPath: 'tags.Array.data[2]'
@@ -31,6 +31,14 @@ PrefabInstance:
     - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
       propertyPath: 'tags.Array.data[4]'
       value: 5388194267734999412
+      objectReference: {fileID: 0}
+    - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
+      propertyPath: 'tags.Array.data[5]'
+      value: 4690679872338526214
+      objectReference: {fileID: 0}
+    - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
+      propertyPath: 'managedReferences[4690679872338526214]'
+      value: Assembly-CSharp TapEffect
       objectReference: {fileID: 0}
     - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
       propertyPath: 'managedReferences[5388194264484675668]'
@@ -105,6 +113,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
+      propertyPath: managedReferences[4690679872338526214].effect.<type>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
+      propertyPath: managedReferences[4690679872338526214].effect.<when>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
       propertyPath: managedReferences[5388194264484675668].effect.<type>k__BackingField
       value: 0
       objectReference: {fileID: 0}
@@ -113,11 +129,23 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
+      propertyPath: managedReferences[4690679872338526214].effect.<diceValue>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
       propertyPath: managedReferences[5388194264484675668].effect.<diceValue>k__BackingField
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
+      propertyPath: managedReferences[4690679872338526214].effect.<effectActions>k__BackingField.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
       propertyPath: managedReferences[5388194264484675668].effect.<effectActions>k__BackingField.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
+      propertyPath: managedReferences[4690679872338526214].effect.<effectActions>k__BackingField.Array.data[0].<subActions>k__BackingField.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
@@ -125,16 +153,36 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
+      propertyPath: managedReferences[4690679872338526214].effect.<effectActions>k__BackingField.Array.data[0].<subActions>k__BackingField.Array.data[0].count
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
       propertyPath: managedReferences[5388194264484675668].effect.<effectActions>k__BackingField.Array.data[0].<subActions>k__BackingField.Array.data[0].count
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
+      propertyPath: managedReferences[4690679872338526214].effect.<effectActions>k__BackingField.Array.data[0].<subActions>k__BackingField.Array.data[0].targetCardBefore
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
       propertyPath: managedReferences[5388194264484675668].effect.<effectActions>k__BackingField.Array.data[0].<subActions>k__BackingField.Array.data[0].targetCardBefore
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
+      propertyPath: managedReferences[4690679872338526214].effect.<effectActions>k__BackingField.Array.data[0].<subActions>k__BackingField.Array.data[0].<target>k__BackingField
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
       propertyPath: managedReferences[5388194264484675668].effect.<effectActions>k__BackingField.Array.data[0].<subActions>k__BackingField.Array.data[0].<target>k__BackingField
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
+      propertyPath: managedReferences[4690679872338526214].effect.<effectActions>k__BackingField.Array.data[0].<subActions>k__BackingField.Array.data[0].<actionType>k__BackingField
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
+      propertyPath: managedReferences[4690679872338526214].effect.<effectActions>k__BackingField.Array.data[0].<subActions>k__BackingField.Array.data[0].<connection>k__BackingField
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
       propertyPath: managedReferences[5388194264484675668].effect.<effectActions>k__BackingField.Array.data[0].<subActions>k__BackingField.Array.data[0].<actionType>k__BackingField

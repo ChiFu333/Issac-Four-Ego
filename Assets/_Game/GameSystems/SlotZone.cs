@@ -81,7 +81,7 @@ public class SlotZone : MonoBehaviour
             else
             {
                 cards[index].transform.position = new Vector3(position.x, 0, -1) + transform.position;
-                cards[index].transform.localEulerAngles = new Vector3(0, 0, rotation);
+                //cards[index].transform.localEulerAngles = new Vector3(0, 0, rotation);
                 cards[index].transform.localScale = scale;
                 completionFlags[index] = true;
             }

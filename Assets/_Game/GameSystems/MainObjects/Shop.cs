@@ -13,6 +13,7 @@ public class Shop : MonoBehaviour
         for(int j = 0; j < activeSlotsCount; j++)
         {
             Entity c = G.Decks.treasureDeck.TakeOneCard();
+            c.AddTag(new InShop());
             itemsInSlots.Add(c);
         }
 
@@ -22,7 +23,12 @@ public class Shop : MonoBehaviour
     {
         for(int i = 0; i < activeSlotsCount; i++)
         {
-            if(itemsInSlots[i] == null) itemsInSlots[i] = G.Decks.treasureDeck.TakeOneCard();
+            if (itemsInSlots[i] == null)
+            {
+                Entity t = G.Decks.treasureDeck.TakeOneCard();
+                t.AddTag(new InShop());
+                itemsInSlots[i] = t;
+            }
         }
         for(int i = itemsInSlots.Count-1; i >= 0; i--)
         {
@@ -43,6 +49,8 @@ public class Shop : MonoBehaviour
     public void InstBuy(Entity itemToBuy)
     {
         Console.WriteText("Куплен предмет");
+        if (itemToBuy.HasTag<InShop>()) 
+            itemToBuy.RemoveTag(itemToBuy.GetTag<InShop>());
         itemsInSlots[itemsInSlots.IndexOf(itemToBuy)] = null;
         G.Players.activePlayer.AddItem(itemToBuy);
         RestockSlots();

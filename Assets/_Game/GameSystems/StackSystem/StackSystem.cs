@@ -227,7 +227,9 @@ public class CardStackEffect : StackEffect
     }
     public override Sprite GetSprite(bool sourceSprite)
     {
-        return sourceSprite ? source.GetTag<CardSpritesData>().front : effect.effectActions?[manageEffect <= -1 ? 0 : manageEffect]?.subActions[0]?.targetCard?.GetTag<CardSpritesData>().front;
+        return sourceSprite ? 
+            source.GetTag<CardSpritesData>().front :
+            effect.effectActions?[manageEffect <= -1 ? 0 : manageEffect]?.subActions[0]?.targetCard?.GetTag<CardSpritesData>().front;
     }
 }
 public class PrimalStackEffect : StackEffect

@@ -14,7 +14,7 @@ PrefabInstance:
       objectReference: {fileID: -1850489010, guid: 091e7cebf2abdc344ac260aba1e86505, type: 3}
     - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
       propertyPath: tags.Array.size
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
       propertyPath: 'tags.Array.data[2]'
@@ -22,7 +22,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
       propertyPath: 'tags.Array.data[3]'
-      value: 5388194264484675669
+      value: 4690679872338526302
+      objectReference: {fileID: 0}
+    - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
+      propertyPath: 'tags.Array.data[4]'
+      value: 4690679872338526303
+      objectReference: {fileID: 0}
+    - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
+      propertyPath: 'tags.Array.data[5]'
+      value: 4690679872338526304
+      objectReference: {fileID: 0}
+    - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
+      propertyPath: 'managedReferences[4690679872338526302]'
+      value: Assembly-CSharp Tappable
+      objectReference: {fileID: 0}
+    - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
+      propertyPath: 'managedReferences[4690679872338526303]'
+      value: Assembly-CSharp TapEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
+      propertyPath: 'managedReferences[4690679872338526304]'
+      value: Assembly-CSharp ItemPassiveEffect
       objectReference: {fileID: 0}
     - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
       propertyPath: 'managedReferences[5388194264484675668]'
@@ -45,8 +65,28 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -1850489010, guid: 091e7cebf2abdc344ac260aba1e86505, type: 3}
     - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
+      propertyPath: managedReferences[4690679872338526302].tapped
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
       propertyPath: managedReferences[5388194264484675666].cardType
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
+      propertyPath: managedReferences[4690679872338526303].effect.<type>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
+      propertyPath: managedReferences[4690679872338526303].effect.<when>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
+      propertyPath: managedReferences[4690679872338526304].effect.<type>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
+      propertyPath: managedReferences[4690679872338526304].effect.<when>k__BackingField
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
       propertyPath: managedReferences[5388194264484675668].effect.<type>k__BackingField
@@ -57,11 +97,35 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
+      propertyPath: managedReferences[4690679872338526303].effect.<diceValue>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
+      propertyPath: managedReferences[4690679872338526304].effect.<diceValue>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
       propertyPath: managedReferences[5388194264484675668].effect.<diceValue>k__BackingField
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
+      propertyPath: managedReferences[4690679872338526303].effect.<effectActions>k__BackingField.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
+      propertyPath: managedReferences[4690679872338526304].effect.<effectActions>k__BackingField.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
       propertyPath: managedReferences[5388194264484675668].effect.<effectActions>k__BackingField.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
+      propertyPath: managedReferences[4690679872338526303].effect.<effectActions>k__BackingField.Array.data[0].<subActions>k__BackingField.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
+      propertyPath: managedReferences[4690679872338526304].effect.<effectActions>k__BackingField.Array.data[0].<subActions>k__BackingField.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
@@ -69,16 +133,56 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
+      propertyPath: managedReferences[4690679872338526303].effect.<effectActions>k__BackingField.Array.data[0].<subActions>k__BackingField.Array.data[0].count
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
+      propertyPath: managedReferences[4690679872338526304].effect.<effectActions>k__BackingField.Array.data[0].<subActions>k__BackingField.Array.data[0].count
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
       propertyPath: managedReferences[5388194264484675668].effect.<effectActions>k__BackingField.Array.data[0].<subActions>k__BackingField.Array.data[0].count
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
+      propertyPath: managedReferences[4690679872338526303].effect.<effectActions>k__BackingField.Array.data[0].<subActions>k__BackingField.Array.data[0].targetCardBefore
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
+      propertyPath: managedReferences[4690679872338526304].effect.<effectActions>k__BackingField.Array.data[0].<subActions>k__BackingField.Array.data[0].targetCardBefore
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
       propertyPath: managedReferences[5388194264484675668].effect.<effectActions>k__BackingField.Array.data[0].<subActions>k__BackingField.Array.data[0].targetCardBefore
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
+      propertyPath: managedReferences[4690679872338526303].effect.<effectActions>k__BackingField.Array.data[0].<subActions>k__BackingField.Array.data[0].<target>k__BackingField
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
+      propertyPath: managedReferences[4690679872338526304].effect.<effectActions>k__BackingField.Array.data[0].<subActions>k__BackingField.Array.data[0].<target>k__BackingField
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
       propertyPath: managedReferences[5388194264484675668].effect.<effectActions>k__BackingField.Array.data[0].<subActions>k__BackingField.Array.data[0].<target>k__BackingField
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
+      propertyPath: managedReferences[4690679872338526303].effect.<effectActions>k__BackingField.Array.data[0].<subActions>k__BackingField.Array.data[0].<actionType>k__BackingField
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
+      propertyPath: managedReferences[4690679872338526303].effect.<effectActions>k__BackingField.Array.data[0].<subActions>k__BackingField.Array.data[0].<connection>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
+      propertyPath: managedReferences[4690679872338526304].effect.<effectActions>k__BackingField.Array.data[0].<subActions>k__BackingField.Array.data[0].<actionType>k__BackingField
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
+      propertyPath: managedReferences[4690679872338526304].effect.<effectActions>k__BackingField.Array.data[0].<subActions>k__BackingField.Array.data[0].<connection>k__BackingField
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 334529330305721733, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
       propertyPath: managedReferences[5388194264484675668].effect.<effectActions>k__BackingField.Array.data[0].<subActions>k__BackingField.Array.data[0].<actionType>k__BackingField
@@ -92,6 +196,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ic_DSix Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 8485582186474507046, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1850489010, guid: 091e7cebf2abdc344ac260aba1e86505, type: 3}
     - target: {fileID: 8659918965013061979, guid: 3032197aa2d39754c91448d808e91ae3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
