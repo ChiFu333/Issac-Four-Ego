@@ -1,0 +1,819 @@
+fileFormatVersion: 2
+guid: 5fb4496151545174ebae3231f26a2175
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3481593743920452463
+    second: AtlasMonster1_0
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 200
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: AtlasMonster1_42
+      rect:
+        serializedVersion: 2
+        x: 1612
+        y: 2248
+        width: 806
+        height: 1124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a0ebb78ddcc01a4986f6e569d34b4eb
+      internalID: 733015317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AtlasMonster1_43
+      rect:
+        serializedVersion: 2
+        x: 2418
+        y: 2248
+        width: 806
+        height: 1124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32cec95455bfea54ca5486f1773981c5
+      internalID: -391713031
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AtlasMonster1_44
+      rect:
+        serializedVersion: 2
+        x: 3224
+        y: 2248
+        width: 806
+        height: 1124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a00c90554901b84ca679d29a02d1df3
+      internalID: -41883381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AtlasMonster1_45
+      rect:
+        serializedVersion: 2
+        x: 4030
+        y: 2248
+        width: 806
+        height: 1124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a35d670cfb8824418b373d34a70fae3
+      internalID: -595537147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AtlasMonster1_46
+      rect:
+        serializedVersion: 2
+        x: 4836
+        y: 2248
+        width: 806
+        height: 1124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55e26b27eb4855f479faec15b8b0a875
+      internalID: -284962129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AtlasMonster1_47
+      rect:
+        serializedVersion: 2
+        x: 5642
+        y: 2248
+        width: 806
+        height: 1124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a00cc850fc2ae194f811022e066d163b
+      internalID: 181114830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AtlasMonster1_48
+      rect:
+        serializedVersion: 2
+        x: 6448
+        y: 2248
+        width: 806
+        height: 1124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b49915362584e24aa53782ff57f7596
+      internalID: 238626869
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AtlasMonster1_49
+      rect:
+        serializedVersion: 2
+        x: 7254
+        y: 2248
+        width: 806
+        height: 1124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5edbd6e467161374ea7b44d07ed3de37
+      internalID: -408113434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AtlasMonster1_50
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1124
+        width: 806
+        height: 1124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef00ab48d7f23b54fa60e85cef58bfc2
+      internalID: 2090756558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AtlasMonster1_51
+      rect:
+        serializedVersion: 2
+        x: 806
+        y: 1124
+        width: 806
+        height: 1124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8393011861e9ede4fa25c574a7c122f8
+      internalID: 1915651839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AtlasMonster1_52
+      rect:
+        serializedVersion: 2
+        x: 1612
+        y: 1124
+        width: 806
+        height: 1124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f03f2c684daa9ca42ac1ffdd072c1c45
+      internalID: 2145709061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AtlasMonster1_53
+      rect:
+        serializedVersion: 2
+        x: 2418
+        y: 1124
+        width: 806
+        height: 1124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19fec60e10bc7cd4b97d6e1f21bf4d68
+      internalID: -308492583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AtlasMonster1_54
+      rect:
+        serializedVersion: 2
+        x: 3224
+        y: 1124
+        width: 806
+        height: 1124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f3d09c9ee4b5054db1749cc0f9437d5
+      internalID: -187984632
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AtlasMonster1_55
+      rect:
+        serializedVersion: 2
+        x: 4030
+        y: 1124
+        width: 806
+        height: 1124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5c891eb4546d5d408b8ed0529f49f33
+      internalID: -393598489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AtlasMonster1_56
+      rect:
+        serializedVersion: 2
+        x: 4836
+        y: 1124
+        width: 806
+        height: 1124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d4d014c0275b508469856794c0f0d640
+      internalID: 1784013881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AtlasMonster1_57
+      rect:
+        serializedVersion: 2
+        x: 5642
+        y: 1124
+        width: 806
+        height: 1124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: afd6ff6ad3f6bf44aa9b670c6709cdb4
+      internalID: 1567902627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AtlasMonster1_58
+      rect:
+        serializedVersion: 2
+        x: 6448
+        y: 1124
+        width: 806
+        height: 1124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd721c712ed11ab4eb3c8183b6072fde
+      internalID: -551955133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AtlasMonster1_59
+      rect:
+        serializedVersion: 2
+        x: 7254
+        y: 1124
+        width: 806
+        height: 1124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 73de14b01c4712c4481516a5782d90a4
+      internalID: 2733641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AtlasMonster1_60
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 806
+        height: 1124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 151e72edfa5ee344daef0d50170702d0
+      internalID: 1547510282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AtlasMonster1_61
+      rect:
+        serializedVersion: 2
+        x: 806
+        y: 0
+        width: 806
+        height: 1124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8a39e4532caa524f859c4b30e0a4c46
+      internalID: 1838177603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AtlasMonster1_62
+      rect:
+        serializedVersion: 2
+        x: 1612
+        y: 0
+        width: 806
+        height: 1124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 316db8941d98953449ac992d77ee2e71
+      internalID: -869073211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AtlasMonster1_63
+      rect:
+        serializedVersion: 2
+        x: 2418
+        y: 0
+        width: 806
+        height: 1124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e57379946e10df34cb373becc24a8164
+      internalID: -641608640
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AtlasMonster1_64
+      rect:
+        serializedVersion: 2
+        x: 3224
+        y: 0
+        width: 806
+        height: 1124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77395625fd857c64c82da11bf98f1bdb
+      internalID: 306868663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AtlasMonster1_65
+      rect:
+        serializedVersion: 2
+        x: 4030
+        y: 0
+        width: 806
+        height: 1124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51718409a2e7f104085aa3823efab908
+      internalID: 1785716752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AtlasMonster1_66
+      rect:
+        serializedVersion: 2
+        x: 4836
+        y: 0
+        width: 806
+        height: 1124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ab36b23b8b816f4ea2883efe81eee02
+      internalID: 195524614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AtlasMonster1_67
+      rect:
+        serializedVersion: 2
+        x: 5642
+        y: 0
+        width: 806
+        height: 1124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ac3e5ebbbdeb9b48b17bcf9e1cf9037
+      internalID: -686803334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AtlasMonster1_68
+      rect:
+        serializedVersion: 2
+        x: 6448
+        y: 0
+        width: 806
+        height: 1124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9c509016841ea34a97864011ecb45cc
+      internalID: 1811491566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MonsterBack
+      rect:
+        serializedVersion: 2
+        x: 7254
+        y: 0
+        width: 806
+        height: 1124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e884b0862354f8408dbfd6981eb919b
+      internalID: 65614963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 8f21aebe2b961cb41a9dfaf600205b46
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      AtlasMonster1_0: -3481593743920452463
+      AtlasMonster1_1: -270785177
+      AtlasMonster1_10: -1771199420
+      AtlasMonster1_11: 1584180213
+      AtlasMonster1_12: 671703348
+      AtlasMonster1_13: 479303738
+      AtlasMonster1_14: 1231499386
+      AtlasMonster1_15: 1611209624
+      AtlasMonster1_16: -757622994
+      AtlasMonster1_17: -2081224545
+      AtlasMonster1_18: -1278255926
+      AtlasMonster1_19: 188831299
+      AtlasMonster1_2: 710480019
+      AtlasMonster1_20: 1740246816
+      AtlasMonster1_21: 1619492219
+      AtlasMonster1_22: 722889116
+      AtlasMonster1_23: 1872374107
+      AtlasMonster1_24: 1496169109
+      AtlasMonster1_25: 1410484886
+      AtlasMonster1_26: 1051828015
+      AtlasMonster1_27: -1590728327
+      AtlasMonster1_28: 1524306735
+      AtlasMonster1_29: -2050212357
+      AtlasMonster1_3: -546203216
+      AtlasMonster1_30: 1184614264
+      AtlasMonster1_31: -1376930864
+      AtlasMonster1_32: -220789407
+      AtlasMonster1_33: 570718379
+      AtlasMonster1_34: 873910990
+      AtlasMonster1_35: -1177860023
+      AtlasMonster1_36: -990844643
+      AtlasMonster1_37: 243063520
+      AtlasMonster1_38: -841322699
+      AtlasMonster1_39: 104947632
+      AtlasMonster1_4: -1586047923
+      AtlasMonster1_40: 1415298542
+      AtlasMonster1_41: 2065597827
+      AtlasMonster1_42: 733015317
+      AtlasMonster1_43: -391713031
+      AtlasMonster1_44: -41883381
+      AtlasMonster1_45: -595537147
+      AtlasMonster1_46: -284962129
+      AtlasMonster1_47: 181114830
+      AtlasMonster1_48: 238626869
+      AtlasMonster1_49: -408113434
+      AtlasMonster1_5: -1157705265
+      AtlasMonster1_50: 2090756558
+      AtlasMonster1_51: 1915651839
+      AtlasMonster1_52: 2145709061
+      AtlasMonster1_53: -308492583
+      AtlasMonster1_54: -187984632
+      AtlasMonster1_55: -393598489
+      AtlasMonster1_56: 1784013881
+      AtlasMonster1_57: 1567902627
+      AtlasMonster1_58: -551955133
+      AtlasMonster1_59: 2733641
+      AtlasMonster1_6: 1170769876
+      AtlasMonster1_60: 1547510282
+      AtlasMonster1_61: 1838177603
+      AtlasMonster1_62: -869073211
+      AtlasMonster1_63: -641608640
+      AtlasMonster1_64: 306868663
+      AtlasMonster1_65: 1785716752
+      AtlasMonster1_66: 195524614
+      AtlasMonster1_67: -686803334
+      AtlasMonster1_68: 1811491566
+      AtlasMonster1_7: 1845524766
+      AtlasMonster1_8: -100859038
+      AtlasMonster1_9: 315964423
+      MonsterBack: 65614963
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

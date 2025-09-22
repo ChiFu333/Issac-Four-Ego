@@ -1,0 +1,158 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4260901009538114545
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3741863930447419825}
+  - component: {fileID: 1954244057434360825}
+  m_Layer: 0
+  m_Name: DeckLists
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3741863930447419825
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4260901009538114545}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1954244057434360825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4260901009538114545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1729a46f79086449a991b5512530e60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idCMS: CMS/Configs/DeckLists
+  Components:
+  - rid: 7804580465730126037
+  references:
+    version: 2
+    RefIds:
+    - rid: 7804580465730126037
+      type: {class: DeckListConfig, ns: , asm: Assembly-CSharp}
+      data:
+        CardView: {fileID: 4668867641110790150, guid: 6e7784706442898448643bb1acdee54d, type: 3}
+        cardMaterial: {fileID: 2100000, guid: a114bfe162ec1224484626937f3dbb20, type: 2}
+        CubeView: {fileID: 1046360666012180210, guid: bdeffce15c8168641aaae0ca94967186, type: 3}
+        characterDeckData:
+        - entity: {fileID: 1954244057434360825, guid: 4d5f6be21fea8ce45a27c4f6b5a3d0f9, type: 3}
+          count: 1
+        - entity: {fileID: 1954244057434360825, guid: 85c3d53d9e5dc3046a126b3b7106eabf, type: 3}
+          count: 1
+        - entity: {fileID: 1954244057434360825, guid: 57c9ec2fa574b2e40aa25c4afedd1cbb, type: 3}
+          count: 1
+        - entity: {fileID: 1954244057434360825, guid: 59a9c1e10be0ecc4c85488b927eca3b2, type: 3}
+          count: 1
+        lootDeckData:
+        - entity: {fileID: 1954244057434360825, guid: 3b5c51823b3579146a8c83c05fb2c42a, type: 3}
+          count: 3
+        - entity: {fileID: 1954244057434360825, guid: 04cb8719ddda49c4691234aaca8d0642, type: 3}
+          count: 3
+        - entity: {fileID: 4237582383653314767, guid: 602d50e1cb2fee74ca745df684121f11, type: 3}
+          count: 3
+        - entity: {fileID: 1954244057434360825, guid: 618435aab6cb29e4da601f7720cd5f47, type: 3}
+          count: 3
+        - entity: {fileID: 1954244057434360825, guid: 9d5e88dc1e2ada54b88d732f908c3c44, type: 3}
+          count: 3
+        - entity: {fileID: 1954244057434360825, guid: ccc838ac49b87c945a5bfcc3f363ba1d, type: 3}
+          count: 3
+        - entity: {fileID: 1954244057434360825, guid: 24fae94276338e54c9c17af734fd6328, type: 3}
+          count: 1
+        - entity: {fileID: 1954244057434360825, guid: 5895acc2af20ffb438f0e65a8f9928c0, type: 3}
+          count: 3
+        - entity: {fileID: 1954244057434360825, guid: 8b9423865205f0b48864f200810a22de, type: 3}
+          count: 10
+        - entity: {fileID: 1954244057434360825, guid: d681d506b34edad49953d647e0dc4c35, type: 3}
+          count: 3
+        - entity: {fileID: 1954244057434360825, guid: 05b1159a6c8fd6341907d891b2ef38f7, type: 3}
+          count: 3
+        - entity: {fileID: 1954244057434360825, guid: 5fbb8cd40d2feb64aa235d0dc21a76ce, type: 3}
+          count: 3
+        - entity: {fileID: 1954244057434360825, guid: 10c80502271e3724fb7fb3afd5306ca9, type: 3}
+          count: 3
+        - entity: {fileID: 1954244057434360825, guid: 453bb76dd50869c45bc2392c72e2d1dc, type: 3}
+          count: 3
+        - entity: {fileID: 1954244057434360825, guid: 98fb7eb3210c84d42a8ccdcdaef55d6f, type: 3}
+          count: 3
+        - entity: {fileID: 1954244057434360825, guid: 3a6b17f7babcd834cb7a7194745d116e, type: 3}
+          count: 7
+        - entity: {fileID: 1954244057434360825, guid: 2a15179b3f4994e45a7740dd99aad760, type: 3}
+          count: 3
+        - entity: {fileID: 1954244057434360825, guid: 27619f41cee6e1e46b54aaf478b0e1e2, type: 3}
+          count: 3
+        - entity: {fileID: 1954244057434360825, guid: eab96804daf94cd46a710fecf8e42974, type: 3}
+          count: 7
+        - entity: {fileID: 1954244057434360825, guid: 8cceffa959f25a74a87865948115becf, type: 3}
+          count: 100
+        - entity: {fileID: 1954244057434360825, guid: 213db4366a96c434087f497d20974149, type: 3}
+          count: 3
+        - entity: {fileID: 1954244057434360825, guid: e10e42584d6c3b84e8b8a8c73618f7c4, type: 3}
+          count: 25
+        - entity: {fileID: 1954244057434360825, guid: 13f49edd17e93f94fba33d3bb30497a9, type: 3}
+          count: 3
+        - entity: {fileID: 1954244057434360825, guid: 08ca875897c0ecf4398d2fb8b3dddecc, type: 3}
+          count: 3
+        - entity: {fileID: 1954244057434360825, guid: a4da77d08f8e71b46827ec66f6ba685c, type: 3}
+          count: 3
+        - entity: {fileID: 1954244057434360825, guid: 76a209092a3f1644e898310b39e6a4b7, type: 3}
+          count: 3
+        - entity: {fileID: 1954244057434360825, guid: 8aa93e9ca6ad68747a58e385e8951242, type: 3}
+          count: 3
+        - entity: {fileID: 1954244057434360825, guid: 3dc07d02e017b974688b36fb58ee3a0f, type: 3}
+          count: 3
+        - entity: {fileID: 1954244057434360825, guid: aedf484d46949424a8a803458c849169, type: 3}
+          count: 3
+        - entity: {fileID: 1954244057434360825, guid: 9fbe057409da6764a8dec93909edbcf3, type: 3}
+          count: 3
+        - entity: {fileID: 1954244057434360825, guid: ef6b9dd6c1c6019439f3b05c612ea39e, type: 3}
+          count: 30
+        - entity: {fileID: 1954244057434360825, guid: 69940a0594f94ea478e82b7d24f3c141, type: 3}
+          count: 3
+        - entity: {fileID: 1954244057434360825, guid: a39a409196fb3d548b05d82c34f31007, type: 3}
+          count: 3
+        - entity: {fileID: 1954244057434360825, guid: bfcd928a948135d4b9df8fbbabe27f24, type: 3}
+          count: 3
+        - entity: {fileID: 1954244057434360825, guid: 6f3074cb0b635ca439004d257f417c3e, type: 3}
+          count: 100
+        - entity: {fileID: 1954244057434360825, guid: fb670f29a6757ce41b9e59b3d78825e7, type: 3}
+          count: 200
+        treasureDeckData:
+        - entity: {fileID: 1954244057434360825, guid: ad6c2157140c7074fbe74cdb2b6dcf2e, type: 3}
+          count: 7
+        - entity: {fileID: 1954244057434360825, guid: d91b1197bf2865f4b9faf8d748600371, type: 3}
+          count: 7
+        - entity: {fileID: 1954244057434360825, guid: 2e8ac2306cd5f5743ad131878fd484a7, type: 3}
+          count: 7
+        - entity: {fileID: 1954244057434360825, guid: fad04494a866f3d46a75960a6b4bb6ed, type: 3}
+          count: 7
+        - entity: {fileID: 1954244057434360825, guid: 368f49df583957343891b1a4514008b2, type: 3}
+          count: 7
+        monsterDeckData:
+        - entity: {fileID: 1954244057434360825, guid: c5e064407623e3b45a83e8326af023d9, type: 3}
+          count: 7
+        - entity: {fileID: 1954244057434360825, guid: a1ab3073b171a5f4c9eff95f9c72a1af, type: 3}
+          count: 7
+        - entity: {fileID: 1954244057434360825, guid: e8e64896fa324a5448f4e1d31f62a63b, type: 3}
+          count: 7

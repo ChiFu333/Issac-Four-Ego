@@ -1,0 +1,1216 @@
+fileFormatVersion: 2
+guid: c71cd4616347c264f9d3707e482514d6
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4761462945667939559
+    second: All_Components_and_Symbols_0
+  - first:
+      213: -4844495852153441589
+    second: All_Components_and_Symbols_1
+  - first:
+      213: -5446861503311214308
+    second: All_Components_and_Symbols_2
+  - first:
+      213: -7014728609245177704
+    second: All_Components_and_Symbols_3
+  - first:
+      213: -6990981477522747307
+    second: All_Components_and_Symbols_4
+  - first:
+      213: -7164294360099017876
+    second: All_Components_and_Symbols_5
+  - first:
+      213: 5536486673866112273
+    second: All_Components_and_Symbols_6
+  - first:
+      213: -7350393030841787017
+    second: All_Components_and_Symbols_7
+  - first:
+      213: 124252804324824694
+    second: All_Components_and_Symbols_8
+  - first:
+      213: -1006344364601442391
+    second: All_Components_and_Symbols_9
+  - first:
+      213: 1795363873178030280
+    second: All_Components_and_Symbols_10
+  - first:
+      213: 6316967658460165209
+    second: All_Components_and_Symbols_11
+  - first:
+      213: 105390859112218073
+    second: All_Components_and_Symbols_12
+  - first:
+      213: 8398203118434670900
+    second: All_Components_and_Symbols_13
+  - first:
+      213: -4528581065620349911
+    second: All_Components_and_Symbols_14
+  - first:
+      213: -8534081086573702051
+    second: All_Components_and_Symbols_15
+  - first:
+      213: 6306899040318227372
+    second: All_Components_and_Symbols_16
+  - first:
+      213: 1109069223003382955
+    second: All_Components_and_Symbols_17
+  - first:
+      213: -8680724567119767433
+    second: All_Components_and_Symbols_18
+  - first:
+      213: -6870172802338674830
+    second: All_Components_and_Symbols_19
+  - first:
+      213: -4006633211229614399
+    second: All_Components_and_Symbols_20
+  - first:
+      213: 5001325273789617788
+    second: All_Components_and_Symbols_21
+  - first:
+      213: 1253509087358916899
+    second: All_Components_and_Symbols_22
+  - first:
+      213: 7888790750239023984
+    second: All_Components_and_Symbols_23
+  - first:
+      213: -4421305940627258135
+    second: All_Components_and_Symbols_24
+  - first:
+      213: -1479634152556516631
+    second: All_Components_and_Symbols_25
+  - first:
+      213: -6102502183152503801
+    second: All_Components_and_Symbols_26
+  - first:
+      213: 292263984095385461
+    second: All_Components_and_Symbols_27
+  - first:
+      213: 4385031893619899020
+    second: All_Components_and_Symbols_28
+  - first:
+      213: -3633163787743303849
+    second: All_Components_and_Symbols_29
+  - first:
+      213: -1279020106792727393
+    second: All_Components_and_Symbols_30
+  - first:
+      213: -3399982144634342933
+    second: All_Components_and_Symbols_31
+  - first:
+      213: 5040967945886813315
+    second: All_Components_and_Symbols_32
+  - first:
+      213: -1652835436974584017
+    second: All_Components_and_Symbols_33
+  - first:
+      213: 8298758757196009255
+    second: All_Components_and_Symbols_34
+  - first:
+      213: 4601225136071156315
+    second: All_Components_and_Symbols_35
+  - first:
+      213: -5980661190703973375
+    second: All_Components_and_Symbols_36
+  - first:
+      213: 1210592141785758375
+    second: All_Components_and_Symbols_37
+  - first:
+      213: -2451124161470498650
+    second: All_Components_and_Symbols_38
+  - first:
+      213: -6463653629436927055
+    second: All_Components_and_Symbols_39
+  - first:
+      213: 7940669504137596460
+    second: All_Components_and_Symbols_40
+  - first:
+      213: 5595011293180080347
+    second: All_Components_and_Symbols_41
+  - first:
+      213: 31814467801220458
+    second: All_Components_and_Symbols_42
+  - first:
+      213: 1648447264996997444
+    second: All_Components_and_Symbols_43
+  - first:
+      213: -6610612334149629837
+    second: All_Components_and_Symbols_44
+  - first:
+      213: 1912124349145549857
+    second: All_Components_and_Symbols_45
+  - first:
+      213: -81963751898027573
+    second: All_Components_and_Symbols_46
+  - first:
+      213: 2173366752765656405
+    second: All_Components_and_Symbols_47
+  - first:
+      213: -910430016701695246
+    second: All_Components_and_Symbols_48
+  - first:
+      213: 8881598819852253013
+    second: All_Components_and_Symbols_49
+  - first:
+      213: 6658430652669186784
+    second: All_Components_and_Symbols_50
+  - first:
+      213: -3973664614133419956
+    second: All_Components_and_Symbols_51
+  - first:
+      213: -7540969559740357628
+    second: All_Components_and_Symbols_52
+  - first:
+      213: -3698614449651798397
+    second: All_Components_and_Symbols_53
+  - first:
+      213: -3497506097275545322
+    second: All_Components_and_Symbols_54
+  - first:
+      213: 7983018949362056331
+    second: All_Components_and_Symbols_55
+  - first:
+      213: -75918609874662
+    second: All_Components_and_Symbols_56
+  - first:
+      213: 6062624493393545111
+    second: All_Components_and_Symbols_57
+  - first:
+      213: 8375198903096131587
+    second: All_Components_and_Symbols_58
+  - first:
+      213: 3038762061985303554
+    second: All_Components_and_Symbols_59
+  - first:
+      213: -8444010011505949013
+    second: All_Components_and_Symbols_60
+  - first:
+      213: -6804516149389825060
+    second: All_Components_and_Symbols_61
+  - first:
+      213: 2272595464865759348
+    second: All_Components_and_Symbols_62
+  - first:
+      213: -7732952533887749843
+    second: All_Components_and_Symbols_63
+  - first:
+      213: -7872981579662144461
+    second: All_Components_and_Symbols_64
+  - first:
+      213: 4259843560772867451
+    second: All_Components_and_Symbols_65
+  - first:
+      213: -2754930109839496467
+    second: All_Components_and_Symbols_66
+  - first:
+      213: -4122866605352665540
+    second: All_Components_and_Symbols_67
+  - first:
+      213: -4525118571442857896
+    second: All_Components_and_Symbols_68
+  - first:
+      213: 4880684963395106119
+    second: All_Components_and_Symbols_69
+  - first:
+      213: 5236886815160807164
+    second: All_Components_and_Symbols_70
+  - first:
+      213: 3172977125220134878
+    second: All_Components_and_Symbols_71
+  - first:
+      213: -6199843502170678846
+    second: All_Components_and_Symbols_72
+  - first:
+      213: -733969557755535863
+    second: All_Components_and_Symbols_73
+  - first:
+      213: -5915372812725396601
+    second: All_Components_and_Symbols_74
+  - first:
+      213: -6671579662103310212
+    second: All_Components_and_Symbols_75
+  - first:
+      213: 1131573301395428751
+    second: All_Components_and_Symbols_76
+  - first:
+      213: 5334339634642544456
+    second: All_Components_and_Symbols_77
+  - first:
+      213: -5056057094695176528
+    second: All_Components_and_Symbols_78
+  - first:
+      213: 6868138661871860801
+    second: All_Components_and_Symbols_79
+  - first:
+      213: -6034142460232714729
+    second: All_Components_and_Symbols_80
+  - first:
+      213: 4919380660407965171
+    second: All_Components_and_Symbols_81
+  - first:
+      213: -7562967537054023792
+    second: All_Components_and_Symbols_82
+  - first:
+      213: 3254696719557311990
+    second: All_Components_and_Symbols_83
+  - first:
+      213: 1617972100081607888
+    second: All_Components_and_Symbols_84
+  - first:
+      213: -1932446111963225047
+    second: All_Components_and_Symbols_85
+  - first:
+      213: 4575268001631743050
+    second: All_Components_and_Symbols_86
+  - first:
+      213: 491118848365582159
+    second: All_Components_and_Symbols_87
+  - first:
+      213: -252078705042807382
+    second: All_Components_and_Symbols_88
+  - first:
+      213: 6200622780134406839
+    second: All_Components_and_Symbols_89
+  - first:
+      213: 7218709157088985921
+    second: All_Components_and_Symbols_90
+  - first:
+      213: -3905248862412663229
+    second: All_Components_and_Symbols_91
+  - first:
+      213: 1214496902432908394
+    second: All_Components_and_Symbols_92
+  - first:
+      213: 5507716674368402096
+    second: All_Components_and_Symbols_93
+  - first:
+      213: -5009055463156658556
+    second: All_Components_and_Symbols_94
+  - first:
+      213: -7214390704626633956
+    second: All_Components_and_Symbols_95
+  - first:
+      213: 5671437759966970981
+    second: All_Components_and_Symbols_96
+  - first:
+      213: -5024906718981946262
+    second: All_Components_and_Symbols_97
+  - first:
+      213: -1076554788763471961
+    second: All_Components_and_Symbols_98
+  - first:
+      213: -5911551136219543082
+    second: All_Components_and_Symbols_99
+  - first:
+      213: 7393392163540829009
+    second: All_Components_and_Symbols_100
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: All_Components_and_Symbols_0
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 1566
+        width: 431
+        height: 125
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9130740ada2ebedb0800000000000000
+      internalID: -4761462945667939559
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All_Components_and_Symbols_1
+      rect:
+        serializedVersion: 2
+        x: 473
+        y: 1636
+        width: 86
+        height: 75
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc27a8090b4e4ccb0800000000000000
+      internalID: -4844495852153441589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All_Components_and_Symbols_2
+      rect:
+        serializedVersion: 2
+        x: 586
+        y: 1633
+        width: 62
+        height: 84
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c19826a425cd864b0800000000000000
+      internalID: -5446861503311214308
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All_Components_and_Symbols_3
+      rect:
+        serializedVersion: 2
+        x: 686
+        y: 1655
+        width: 59
+        height: 59
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 898db2ade7da6ae90800000000000000
+      internalID: -7014728609245177704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All_Components_and_Symbols_4
+      rect:
+        serializedVersion: 2
+        x: 760
+        y: 1655
+        width: 59
+        height: 59
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 550dbe0d26b0bfe90800000000000000
+      internalID: -6990981477522747307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All_Components_and_Symbols_5
+      rect:
+        serializedVersion: 2
+        x: 835
+        y: 1655
+        width: 59
+        height: 59
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6ba6ffcc30539c90800000000000000
+      internalID: -7164294360099017876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All_Components_and_Symbols_6
+      rect:
+        serializedVersion: 2
+        x: 932
+        y: 1384
+        width: 323
+        height: 333
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11d397bdb4d85dc40800000000000000
+      internalID: 5536486673866112273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All_Components_and_Symbols_7
+      rect:
+        serializedVersion: 2
+        x: 524
+        y: 1634
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77d1b258b782ef990800000000000000
+      internalID: -7350393030841787017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All_Components_and_Symbols_8
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 1538
+        width: 67
+        height: 72
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6769028644f69b100800000000000000
+      internalID: 124252804324824694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All_Components_and_Symbols_9
+      rect:
+        serializedVersion: 2
+        x: 577
+        y: 1540
+        width: 80
+        height: 74
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9aff63ad12fb802f0800000000000000
+      internalID: -1006344364601442391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All_Components_and_Symbols_10
+      rect:
+        serializedVersion: 2
+        x: 686
+        y: 1572
+        width: 59
+        height: 59
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c0985f2ee96ae810800000000000000
+      internalID: 1795363873178030280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All_Components_and_Symbols_11
+      rect:
+        serializedVersion: 2
+        x: 760
+        y: 1572
+        width: 59
+        height: 59
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 954362cdd906aa750800000000000000
+      internalID: 6316967658460165209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All_Components_and_Symbols_12
+      rect:
+        serializedVersion: 2
+        x: 835
+        y: 1572
+        width: 59
+        height: 59
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ddf4ff8d6c667100800000000000000
+      internalID: 105390859112218073
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All_Components_and_Symbols_13
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 1395
+        width: 631
+        height: 132
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 43950e99d396c8470800000000000000
+      internalID: 8398203118434670900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All_Components_and_Symbols_14
+      rect:
+        serializedVersion: 2
+        x: 685
+        y: 1489
+        width: 61
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92c9327a38f3721c0800000000000000
+      internalID: -4528581065620349911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All_Components_and_Symbols_15
+      rect:
+        serializedVersion: 2
+        x: 759
+        y: 1489
+        width: 61
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d54156e977ad09980800000000000000
+      internalID: -8534081086573702051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All_Components_and_Symbols_16
+      rect:
+        serializedVersion: 2
+        x: 834
+        y: 1489
+        width: 61
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca38b64034b968750800000000000000
+      internalID: 6306899040318227372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All_Components_and_Symbols_17
+      rect:
+        serializedVersion: 2
+        x: 685
+        y: 1407
+        width: 61
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba46f6c0594346f00800000000000000
+      internalID: 1109069223003382955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All_Components_and_Symbols_18
+      rect:
+        serializedVersion: 2
+        x: 759
+        y: 1407
+        width: 61
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 778d1d7affed78780800000000000000
+      internalID: -8680724567119767433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All_Components_and_Symbols_19
+      rect:
+        serializedVersion: 2
+        x: 834
+        y: 1407
+        width: 61
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 277ad0b6c3e38a0a0800000000000000
+      internalID: -6870172802338674830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All_Components_and_Symbols_20
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 1301
+        width: 730
+        height: 86
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ce406b82549568c0800000000000000
+      internalID: -4006633211229614399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All_Components_and_Symbols_21
+      rect:
+        serializedVersion: 2
+        x: 763
+        y: 1307
+        width: 65
+        height: 65
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c76d96e96d6486540800000000000000
+      internalID: 5001325273789617788
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All_Components_and_Symbols_22
+      rect:
+        serializedVersion: 2
+        x: 874
+        y: 1203
+        width: 190
+        height: 162
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32990c2afdb556110800000000000000
+      internalID: 1253509087358916899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All_Components_and_Symbols_23
+      rect:
+        serializedVersion: 2
+        x: 1099
+        y: 1187
+        width: 221
+        height: 181
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0736267046d9a7d60800000000000000
+      internalID: 7888790750239023984
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All_Components_and_Symbols_24
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 1162
+        width: 135
+        height: 118
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e4869d0cad54a2c0800000000000000
+      internalID: -4421305940627258135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All_Components_and_Symbols_25
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 1165
+        width: 97
+        height: 102
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ea2553e398477be0800000000000000
+      internalID: -1479634152556516631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All_Components_and_Symbols_26
+      rect:
+        serializedVersion: 2
+        x: 292
+        y: 1213
+        width: 546
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 704362cc89e8f4ba0800000000000000
+      internalID: -6102502183152503801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All_Components_and_Symbols_38
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 972
+        width: 80
+        height: 72
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a87c2fcf8bdbfdd0800000000000000
+      internalID: -2451124161470498650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All_Components_and_Symbols_49
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 870
+        width: 44
+        height: 76
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55772d6e117c14b70800000000000000
+      internalID: 8881598819852253013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All_Components_and_Symbols_69
+      rect:
+        serializedVersion: 2
+        x: 371
+        y: 490
+        width: 33
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74571cf7d1dabb340800000000000000
+      internalID: 4880684963395106119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All_Components_and_Symbols_84
+      rect:
+        serializedVersion: 2
+        x: 1016
+        y: 425
+        width: 641
+        height: 134
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c4bfea9136ceb04daab52c4a04a6a8d
+      internalID: 1617972100081607888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: e6d838cf89a7b47498b924d069e705ba
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      All_Components_and_Symbols_0: -4761462945667939559
+      All_Components_and_Symbols_1: -4844495852153441589
+      All_Components_and_Symbols_10: 1795363873178030280
+      All_Components_and_Symbols_100: 7393392163540829009
+      All_Components_and_Symbols_11: 6316967658460165209
+      All_Components_and_Symbols_12: 105390859112218073
+      All_Components_and_Symbols_13: 8398203118434670900
+      All_Components_and_Symbols_14: -4528581065620349911
+      All_Components_and_Symbols_15: -8534081086573702051
+      All_Components_and_Symbols_16: 6306899040318227372
+      All_Components_and_Symbols_17: 1109069223003382955
+      All_Components_and_Symbols_18: -8680724567119767433
+      All_Components_and_Symbols_19: -6870172802338674830
+      All_Components_and_Symbols_2: -5446861503311214308
+      All_Components_and_Symbols_20: -4006633211229614399
+      All_Components_and_Symbols_21: 5001325273789617788
+      All_Components_and_Symbols_22: 1253509087358916899
+      All_Components_and_Symbols_23: 7888790750239023984
+      All_Components_and_Symbols_24: -4421305940627258135
+      All_Components_and_Symbols_25: -1479634152556516631
+      All_Components_and_Symbols_26: -6102502183152503801
+      All_Components_and_Symbols_27: 292263984095385461
+      All_Components_and_Symbols_28: 4385031893619899020
+      All_Components_and_Symbols_29: -3633163787743303849
+      All_Components_and_Symbols_3: -7014728609245177704
+      All_Components_and_Symbols_30: -1279020106792727393
+      All_Components_and_Symbols_31: -3399982144634342933
+      All_Components_and_Symbols_32: 5040967945886813315
+      All_Components_and_Symbols_33: -1652835436974584017
+      All_Components_and_Symbols_34: 8298758757196009255
+      All_Components_and_Symbols_35: 4601225136071156315
+      All_Components_and_Symbols_36: -5980661190703973375
+      All_Components_and_Symbols_37: 1210592141785758375
+      All_Components_and_Symbols_38: -2451124161470498650
+      All_Components_and_Symbols_39: -6463653629436927055
+      All_Components_and_Symbols_4: -6990981477522747307
+      All_Components_and_Symbols_40: 7940669504137596460
+      All_Components_and_Symbols_41: 5595011293180080347
+      All_Components_and_Symbols_42: 31814467801220458
+      All_Components_and_Symbols_43: 1648447264996997444
+      All_Components_and_Symbols_44: -6610612334149629837
+      All_Components_and_Symbols_45: 1912124349145549857
+      All_Components_and_Symbols_46: -81963751898027573
+      All_Components_and_Symbols_47: 2173366752765656405
+      All_Components_and_Symbols_48: -910430016701695246
+      All_Components_and_Symbols_49: 8881598819852253013
+      All_Components_and_Symbols_5: -7164294360099017876
+      All_Components_and_Symbols_50: 6658430652669186784
+      All_Components_and_Symbols_51: -3973664614133419956
+      All_Components_and_Symbols_52: -7540969559740357628
+      All_Components_and_Symbols_53: -3698614449651798397
+      All_Components_and_Symbols_54: -3497506097275545322
+      All_Components_and_Symbols_55: 7983018949362056331
+      All_Components_and_Symbols_56: -75918609874662
+      All_Components_and_Symbols_57: 6062624493393545111
+      All_Components_and_Symbols_58: 8375198903096131587
+      All_Components_and_Symbols_59: 3038762061985303554
+      All_Components_and_Symbols_6: 5536486673866112273
+      All_Components_and_Symbols_60: -8444010011505949013
+      All_Components_and_Symbols_61: -6804516149389825060
+      All_Components_and_Symbols_62: 2272595464865759348
+      All_Components_and_Symbols_63: -7732952533887749843
+      All_Components_and_Symbols_64: -7872981579662144461
+      All_Components_and_Symbols_65: 4259843560772867451
+      All_Components_and_Symbols_66: -2754930109839496467
+      All_Components_and_Symbols_67: -4122866605352665540
+      All_Components_and_Symbols_68: -4525118571442857896
+      All_Components_and_Symbols_69: 4880684963395106119
+      All_Components_and_Symbols_7: -7350393030841787017
+      All_Components_and_Symbols_70: 5236886815160807164
+      All_Components_and_Symbols_71: 3172977125220134878
+      All_Components_and_Symbols_72: -6199843502170678846
+      All_Components_and_Symbols_73: -733969557755535863
+      All_Components_and_Symbols_74: -5915372812725396601
+      All_Components_and_Symbols_75: -6671579662103310212
+      All_Components_and_Symbols_76: 1131573301395428751
+      All_Components_and_Symbols_77: 5334339634642544456
+      All_Components_and_Symbols_78: -5056057094695176528
+      All_Components_and_Symbols_79: 6868138661871860801
+      All_Components_and_Symbols_8: 124252804324824694
+      All_Components_and_Symbols_80: -6034142460232714729
+      All_Components_and_Symbols_81: 4919380660407965171
+      All_Components_and_Symbols_82: -7562967537054023792
+      All_Components_and_Symbols_83: 3254696719557311990
+      All_Components_and_Symbols_84: 1617972100081607888
+      All_Components_and_Symbols_85: -1932446111963225047
+      All_Components_and_Symbols_86: 4575268001631743050
+      All_Components_and_Symbols_87: 491118848365582159
+      All_Components_and_Symbols_88: -252078705042807382
+      All_Components_and_Symbols_89: 6200622780134406839
+      All_Components_and_Symbols_9: -1006344364601442391
+      All_Components_and_Symbols_90: 7218709157088985921
+      All_Components_and_Symbols_91: -3905248862412663229
+      All_Components_and_Symbols_92: 1214496902432908394
+      All_Components_and_Symbols_93: 5507716674368402096
+      All_Components_and_Symbols_94: -5009055463156658556
+      All_Components_and_Symbols_95: -7214390704626633956
+      All_Components_and_Symbols_96: 5671437759966970981
+      All_Components_and_Symbols_97: -5024906718981946262
+      All_Components_and_Symbols_98: -1076554788763471961
+      All_Components_and_Symbols_99: -5911551136219543082
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

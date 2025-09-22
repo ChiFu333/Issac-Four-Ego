@@ -1,0 +1,196 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4260901009538114545
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3741863930447419825}
+  - component: {fileID: 1954244057434360825}
+  m_Layer: 0
+  m_Name: RuneBlank
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3741863930447419825
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4260901009538114545}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1954244057434360825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4260901009538114545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1729a46f79086449a991b5512530e60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idCMS: CMS/CardsData/LootCard/Pills/RuneBlank
+  Components:
+  - rid: 7804580465730126032
+  - rid: 7804580465730126033
+  - rid: 3978474141250224975
+  references:
+    version: 2
+    RefIds:
+    - rid: 3978474141250224975
+      type: {class: TagPlayEffect, ns: , asm: Assembly-CSharp}
+      data:
+        effect:
+          effectPlayerSource: {fileID: 0}
+          effectCardSource: {fileID: 0}
+          actionSelectorNum: -1
+          globalStorage:
+          - rid: 3978474457976799323
+          effectLines:
+          - rid: 3978474457976799324
+    - rid: 3978474457976799323
+      type: {class: OneGameAction, ns: , asm: Assembly-CSharp}
+      data:
+        targetId: 0
+        isTargetLocal: 0
+        canRefuse: 0
+        action:
+          rid: 3978474457976799325
+    - rid: 3978474457976799324
+      type: {class: LineThrowCube, ns: , asm: Assembly-CSharp}
+      data:
+        actions:
+        - rid: 3978474457976799326
+        - rid: 3978474457976799329
+        - rid: 3978474457976799332
+        - rid: 3978474457976799335
+        - rid: 3978474457976799338
+        - rid: 3978474457976799341
+    - rid: 3978474457976799325
+      type: {class: PlayersAll, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 3978474457976799326
+      type: {class: LineAction, ns: , asm: Assembly-CSharp}
+      data:
+        actions:
+        - rid: 3978474457976799327
+    - rid: 3978474457976799327
+      type: {class: OneGameAction, ns: , asm: Assembly-CSharp}
+      data:
+        targetId: 0
+        isTargetLocal: 0
+        canRefuse: 0
+        action:
+          rid: 3978474457976799328
+    - rid: 3978474457976799328
+      type: {class: GainCoins, ns: , asm: Assembly-CSharp}
+      data:
+        count: 1
+    - rid: 3978474457976799329
+      type: {class: LineAction, ns: , asm: Assembly-CSharp}
+      data:
+        actions:
+        - rid: 3978474457976799330
+    - rid: 3978474457976799330
+      type: {class: OneGameAction, ns: , asm: Assembly-CSharp}
+      data:
+        targetId: 0
+        isTargetLocal: 0
+        canRefuse: 0
+        action:
+          rid: 3978474525979050056
+    - rid: 3978474457976799332
+      type: {class: LineAction, ns: , asm: Assembly-CSharp}
+      data:
+        actions:
+        - rid: 3978474457976799333
+    - rid: 3978474457976799333
+      type: {class: OneGameAction, ns: , asm: Assembly-CSharp}
+      data:
+        targetId: 0
+        isTargetLocal: 0
+        canRefuse: 0
+        action:
+          rid: 3978474457976799334
+    - rid: 3978474457976799334
+      type: {class: RequestDamage, ns: , asm: Assembly-CSharp}
+      data:
+        count: 3
+    - rid: 3978474457976799335
+      type: {class: LineAction, ns: , asm: Assembly-CSharp}
+      data:
+        actions:
+        - rid: 3978474457976799336
+    - rid: 3978474457976799336
+      type: {class: OneGameAction, ns: , asm: Assembly-CSharp}
+      data:
+        targetId: 0
+        isTargetLocal: 0
+        canRefuse: 0
+        action:
+          rid: 3978474457976799337
+    - rid: 3978474457976799337
+      type: {class: GainCoins, ns: , asm: Assembly-CSharp}
+      data:
+        count: 4
+    - rid: 3978474457976799338
+      type: {class: LineAction, ns: , asm: Assembly-CSharp}
+      data:
+        actions:
+        - rid: 3978474457976799339
+    - rid: 3978474457976799339
+      type: {class: OneGameAction, ns: , asm: Assembly-CSharp}
+      data:
+        targetId: 0
+        isTargetLocal: 0
+        canRefuse: 0
+        action:
+          rid: 3978474525979050055
+    - rid: 3978474457976799341
+      type: {class: LineAction, ns: , asm: Assembly-CSharp}
+      data:
+        actions:
+        - rid: 3978474457976799342
+    - rid: 3978474457976799342
+      type: {class: OneGameAction, ns: , asm: Assembly-CSharp}
+      data:
+        targetId: 0
+        isTargetLocal: 0
+        canRefuse: 0
+        action:
+          rid: 3978474457976799343
+    - rid: 3978474457976799343
+      type: {class: GainCoins, ns: , asm: Assembly-CSharp}
+      data:
+        count: 6
+    - rid: 3978474525979050055
+      type: {class: GainLootCardsAction, ns: , asm: Assembly-CSharp}
+      data:
+        count: 5
+    - rid: 3978474525979050056
+      type: {class: GainLootCardsAction, ns: , asm: Assembly-CSharp}
+      data:
+        count: 2
+    - rid: 7804580465730126032
+      type: {class: TagSprite, ns: Runtime, asm: CMS}
+      data:
+        sprite: {fileID: 21300000, guid: f016e8ec4ea7e0345b2abedbec8ddb07, type: 3}
+    - rid: 7804580465730126033
+      type: {class: TagCardType, ns: , asm: Assembly-CSharp}
+      data:
+        cardType: 2

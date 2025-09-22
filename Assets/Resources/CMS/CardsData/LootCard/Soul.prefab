@@ -1,0 +1,140 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4260901009538114545
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3741863930447419825}
+  - component: {fileID: 1954244057434360825}
+  m_Layer: 0
+  m_Name: Soul
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3741863930447419825
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4260901009538114545}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1954244057434360825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4260901009538114545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1729a46f79086449a991b5512530e60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idCMS: CMS/CardsData/LootCard/Soul
+  Components:
+  - rid: 7804580465730126032
+  - rid: 7804580465730126033
+  - rid: 3978474141250224975
+  - rid: 4770333712894918732
+  references:
+    version: 2
+    RefIds:
+    - rid: 3978474141250224975
+      type: {class: TagPlayEffect, ns: , asm: Assembly-CSharp}
+      data:
+        effect:
+          effectPlayerSource: {fileID: 0}
+          effectCardSource: {fileID: 0}
+          actionSelectorNum: -1
+          globalStorage:
+          - rid: 4770333712894918656
+          effectLines:
+          - rid: 4770333712894918729
+    - rid: 4770333712894918656
+      type: {class: OneGameAction, ns: , asm: Assembly-CSharp}
+      data:
+        targetId: 0
+        isTargetLocal: 0
+        canRefuse: 0
+        action:
+          rid: 4770333712894918728
+    - rid: 4770333712894918728
+      type: {class: ITTarget, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 4770333712894918729
+      type: {class: LineAction, ns: , asm: Assembly-CSharp}
+      data:
+        actions:
+        - rid: 4770333712894918730
+    - rid: 4770333712894918730
+      type: {class: OneGameAction, ns: , asm: Assembly-CSharp}
+      data:
+        targetId: 0
+        isTargetLocal: 0
+        canRefuse: 0
+        action:
+          rid: 4770333712894918731
+    - rid: 4770333712894918731
+      type: {class: TurnIntoItemAndGainIt, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 4770333712894918732
+      type: {class: TagOnEnterGameEffect, ns: , asm: Assembly-CSharp}
+      data:
+        effect:
+          effectPlayerSource: {fileID: 0}
+          effectCardSource: {fileID: 0}
+          actionSelectorNum: -1
+          globalStorage:
+          - rid: 4770333712894918733
+          effectLines:
+          - rid: 4770333712894918736
+    - rid: 4770333712894918733
+      type: {class: OneGameAction, ns: , asm: Assembly-CSharp}
+      data:
+        targetId: 0
+        isTargetLocal: 0
+        canRefuse: 0
+        action:
+          rid: 4770333712894918735
+    - rid: 4770333712894918735
+      type: {class: ITTarget, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 4770333712894918736
+      type: {class: LineAction, ns: , asm: Assembly-CSharp}
+      data:
+        actions:
+        - rid: 4770333712894918737
+    - rid: 4770333712894918737
+      type: {class: OneGameAction, ns: , asm: Assembly-CSharp}
+      data:
+        targetId: 0
+        isTargetLocal: 0
+        canRefuse: 0
+        action:
+          rid: 4770333712894918738
+    - rid: 4770333712894918738
+      type: {class: TurnIntoSoulAndGainIt, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 7804580465730126032
+      type: {class: TagSprite, ns: Runtime, asm: CMS}
+      data:
+        sprite: {fileID: 21300000, guid: e85726f21fee09a4081151e2157bef75, type: 3}
+    - rid: 7804580465730126033
+      type: {class: TagCardType, ns: , asm: Assembly-CSharp}
+      data:
+        cardType: 2
+        cloneType: 0

@@ -1,0 +1,134 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4260901009538114545
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3741863930447419825}
+  - component: {fileID: 1954244057434360825}
+  m_Layer: 0
+  m_Name: CardBackConfig
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3741863930447419825
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4260901009538114545}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1954244057434360825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4260901009538114545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1729a46f79086449a991b5512530e60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idCMS: CMS/Configs/CardBackConfig
+  Components:
+  - rid: 7804580465730126034
+  - rid: 3978474279812202694
+  - rid: 3238232570319601752
+  references:
+    version: 2
+    RefIds:
+    - rid: 3238232570319601752
+      type: {class: TagStackUnitIcons, ns: , asm: Assembly-CSharp}
+      data:
+        lootplayEffect:
+          offset: {x: 2.5, y: -1.8}
+          localScale: 0.69
+          icon: {fileID: 6919201525759833747, guid: df7eb6d0f58063a41884033eb97d057a, type: 3}
+          color: {r: 0.11635202, g: 0.98436034, b: 1, a: 1}
+          subColor: {r: 0.09789954, g: 0.41509432, b: 0.40312466, a: 1}
+        activateEffect:
+          offset: {x: 2.5, y: -1.8}
+          localScale: 0.95
+          icon: {fileID: 21300000, guid: f9c9b734e5f9c8a44aa259a2eb858d45, type: 3}
+          color: {r: 0, g: 0, b: 0, a: 1}
+          subColor: {r: 1, g: 0.6156863, b: 0, a: 1}
+        payEffect:
+          offset: {x: 0, y: 0}
+          localScale: 0
+          icon: {fileID: 0}
+          color: {r: 0, g: 0, b: 0, a: 0}
+          subColor: {r: 0, g: 0, b: 0, a: 0}
+        triggeredEffect:
+          offset: {x: 2.5, y: -1.8}
+          localScale: 0.65
+          icon: {fileID: 5634614760868700341, guid: df7eb6d0f58063a41884033eb97d057a, type: 3}
+          color: {r: 0.32941177, g: 0.50980395, b: 1, a: 1}
+          subColor: {r: 0, g: 0.11372549, b: 0.57254905, a: 1}
+        cubeEffects:
+        - offset: {x: 2.5, y: -1.8}
+          localScale: 1.63
+          icon: {fileID: -4528581065620349911, guid: c71cd4616347c264f9d3707e482514d6, type: 3}
+          color: {r: 1, g: 0.24962734, b: 0.19811308, a: 1}
+          subColor: {r: 0, g: 0, b: 0, a: 0}
+        - offset: {x: 2.5, y: -1.8}
+          localScale: 1.63
+          icon: {fileID: -8534081086573702051, guid: c71cd4616347c264f9d3707e482514d6, type: 3}
+          color: {r: 1, g: 0.2509804, b: 0.2, a: 1}
+          subColor: {r: 0, g: 0, b: 0, a: 0}
+        - offset: {x: 2.5, y: -1.8}
+          localScale: 1.63
+          icon: {fileID: 6306899040318227372, guid: c71cd4616347c264f9d3707e482514d6, type: 3}
+          color: {r: 1, g: 0.2509804, b: 0.2, a: 1}
+          subColor: {r: 0, g: 0, b: 0, a: 0}
+        - offset: {x: 2.5, y: -1.8}
+          localScale: 1.63
+          icon: {fileID: 1109069223003382955, guid: c71cd4616347c264f9d3707e482514d6, type: 3}
+          color: {r: 1, g: 0.2509804, b: 0.2, a: 1}
+          subColor: {r: 0, g: 0, b: 0, a: 0}
+        - offset: {x: 2.5, y: -1.8}
+          localScale: 1.63
+          icon: {fileID: -8680724567119767433, guid: c71cd4616347c264f9d3707e482514d6, type: 3}
+          color: {r: 1, g: 0.2509804, b: 0.2, a: 1}
+          subColor: {r: 0, g: 0, b: 0, a: 0}
+        - offset: {x: 2.5, y: -1.8}
+          localScale: 1.63
+          icon: {fileID: -6870172802338674830, guid: c71cd4616347c264f9d3707e482514d6, type: 3}
+          color: {r: 1, g: 0.2509804, b: 0.2, a: 1}
+          subColor: {r: 0, g: 0, b: 0, a: 0}
+    - rid: 3978474279812202694
+      type: {class: VFXConfig, ns: , asm: Assembly-CSharp}
+      data:
+        hitEffect: {fileID: 16377569744273721, guid: f33e67186354de342a816408fbc6c3a5, type: 3}
+        coinVFX: {fileID: 6267943928550555227, guid: 1fc23f4e19e80b542bf76d7ee25c5a8d, type: 3}
+        boomVFX: {fileID: 8194992990867289339, guid: 8acc0ccecaa3b9943a507aa3938d3b3b, type: 3}
+        smokeVFX: {fileID: 4425129568585013132, guid: 5f901025879b7464f8b596e631cbc14e, type: 3}
+        upgradeVFX: {fileID: 1429954232896169633, guid: 5b83dd069a193d34e926dccd36cd05a8, type: 3}
+    - rid: 7804580465730126034
+      type: {class: CardBackConfig, ns: , asm: Assembly-CSharp}
+      data:
+        data:
+        - type: 1
+          backSprite: {fileID: 21300000, guid: 808d3eed5bdace248a38f43e36e78cd3, type: 3}
+        - type: 2
+          backSprite: {fileID: 21300000, guid: 1723738a4ae54d8469cb16a2be07a709, type: 3}
+        - type: 3
+          backSprite: {fileID: 65614963, guid: 5fb4496151545174ebae3231f26a2175, type: 3}
+        - type: 5
+          backSprite: {fileID: 65614963, guid: 5fb4496151545174ebae3231f26a2175, type: 3}
+        - type: 4
+          backSprite: {fileID: 21300000, guid: 7fcd64457ad076c4ba8772a80c2b5edf, type: 3}

@@ -1,0 +1,152 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4260901009538114545
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3741863930447419825}
+  - component: {fileID: 1954244057434360825}
+  m_Layer: 0
+  m_Name: D6
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3741863930447419825
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4260901009538114545}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1954244057434360825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4260901009538114545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1729a46f79086449a991b5512530e60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idCMS: CMS/CardsData/CharacterCard/Items/D6
+  Components:
+  - rid: 7804580465730126032
+  - rid: 7804580465730126033
+  - rid: 3978474101698986054
+  - rid: 3978474279812203065
+  - rid: 4770333674896359543
+  - rid: 3238232249436995654
+  references:
+    version: 2
+    RefIds:
+    - rid: 3238232249436995654
+      type: {class: TagOnTurnStartEffect, ns: , asm: Assembly-CSharp}
+      data:
+        onMyTurnStart: 1
+        effect:
+          effectPlayerSource: {fileID: 0}
+          effectCardSource: {fileID: 0}
+          actionSelectorNum: -1
+          globalStorage:
+          - rid: 3238232249436995655
+          effectLines:
+          - rid: 3238232249436995656
+    - rid: 3238232249436995655
+      type: {class: OneGameAction, ns: , asm: Assembly-CSharp}
+      data:
+        targetId: 0
+        isTargetLocal: 0
+        canRefuse: 0
+        action:
+          rid: 3238232249436995660
+    - rid: 3238232249436995656
+      type: {class: LineAction, ns: , asm: Assembly-CSharp}
+      data:
+        actions:
+        - rid: 3238232249436995658
+    - rid: 3238232249436995658
+      type: {class: OneGameAction, ns: , asm: Assembly-CSharp}
+      data:
+        targetId: 0
+        isTargetLocal: 0
+        canRefuse: 0
+        action:
+          rid: 3238232249436995661
+    - rid: 3238232249436995660
+      type: {class: PlayerYouSelect, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 3238232249436995661
+      type: {class: GainCoins, ns: , asm: Assembly-CSharp}
+      data:
+        count: 3
+    - rid: 3978474101698986054
+      type: {class: TagTappable, ns: , asm: Assembly-CSharp}
+      data:
+        tapped: 0
+    - rid: 3978474279812203065
+      type: {class: TagTappableEffect, ns: , asm: Assembly-CSharp}
+      data:
+        effect:
+          effectPlayerSource: {fileID: 0}
+          effectCardSource: {fileID: 0}
+          actionSelectorNum: -1
+          globalStorage:
+          - rid: 3978474349609615642
+          effectLines:
+          - rid: 3978474349609615644
+    - rid: 3978474349609615642
+      type: {class: OneGameAction, ns: , asm: Assembly-CSharp}
+      data:
+        targetId: 0
+        isTargetLocal: 0
+        canRefuse: 0
+        action:
+          rid: 3978474349609615643
+    - rid: 3978474349609615643
+      type: {class: PlayerYouSelect, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 3978474349609615644
+      type: {class: LineAction, ns: , asm: Assembly-CSharp}
+      data:
+        actions:
+        - rid: 3978474349609615645
+    - rid: 3978474349609615645
+      type: {class: OneGameAction, ns: , asm: Assembly-CSharp}
+      data:
+        targetId: 0
+        isTargetLocal: 0
+        canRefuse: 0
+        action:
+          rid: 3978474481583915042
+    - rid: 3978474481583915042
+      type: {class: PlusMaxHP, ns: , asm: Assembly-CSharp}
+      data:
+        duration: 0
+        count: 1
+    - rid: 4770333674896359543
+      type: {class: TagIsEternal, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 7804580465730126032
+      type: {class: TagSprite, ns: Runtime, asm: CMS}
+      data:
+        sprite: {fileID: 21300000, guid: 10c4d9c2a5c202249a6bd9e7355f5385, type: 3}
+    - rid: 7804580465730126033
+      type: {class: TagCardType, ns: , asm: Assembly-CSharp}
+      data:
+        cardType: 4
